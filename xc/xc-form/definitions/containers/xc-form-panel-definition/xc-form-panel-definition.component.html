@@ -1,0 +1,5 @@
+<xc-form-generic-panel *ngIf="!hidden"
+    [xc-definition]="panelDefinition"
+    [xc-definition-data]="definitionData"
+    (closed)="closed.emit(panelDefinition)"
+></xc-form-generic-panel>

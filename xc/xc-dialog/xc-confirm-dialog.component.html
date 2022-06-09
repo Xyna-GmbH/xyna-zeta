@@ -1,0 +1,10 @@
+<xc-dialog-wrapper [draggable]="draggable" [resizable]="resizable" [xc-dialog-options]="dialogOptions" xc-i18n-context="zeta.xc-dialog.confirm-dialog">
+    <ng-container header>{{title}}</ng-container>
+    <ng-container content>
+        <div id="xc-confirm-dialog-message-container">{{message}}</div>
+    </ng-container>
+    <ng-container footer>
+        <xc-button (click)="dismiss(false)" xc-i18n>no-button</xc-button>
+        <xc-button (click)="dismiss(true)" xc-i18n>yes-button</xc-button>
+    </ng-container>
+</xc-dialog-wrapper>

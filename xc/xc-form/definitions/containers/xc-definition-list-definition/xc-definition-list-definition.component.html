@@ -1,0 +1,8 @@
+<dl>
+    <xc-definition-proxy *ngFor="let child of definitionListDefinition?.children"
+        [xc-base-definition]="child"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit($event)"
+        xc-dl-unwrap
+    ></xc-definition-proxy>
+</dl>

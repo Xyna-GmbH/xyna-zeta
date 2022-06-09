@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "./i18n_zeta_schema.json",
+    "title": "Translations",
+    "description": "Key/Value pairs for translations",
+    "type": "object",
+    "properties": {
+        "translations": {
+            "description": "An Array of Key/Value pairs",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "Key/Value pair with an optional comment field",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "a string for which will be searched by the GUI"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "if the GUI finds the respective key it will receive this string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Optional notation for the better representation of the type of the key. Results to the key '<this.type>:<this.context>.<this.key>'"
+                    },
+                    "context": {
+                        "type": "string",
+                        "description": "Optional notation for the better representation of the context of the key. Results to the key '<this.type>:<this.context>.<this.key>'"
+                    },
+                    "comment": {
+                        "type": "string",
+                        "description": "an optional comment for this specific pair or a way to set a marker for better orientation"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "an optional comment array for this specific pair or a way to set a marker for better orientation"
+                    }
+                },
+                "required": ["key", "value"]
+            }
+        }
+    },
+    "required": ["translations"]
+  }

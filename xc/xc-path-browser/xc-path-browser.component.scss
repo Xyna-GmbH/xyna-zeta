@@ -1,0 +1,71 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+@import 'const';
+
+:host {
+    .path-row {
+        display: flex;
+
+        *:not(:first-child) {
+            margin-left: 4px;
+        }
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-top: 12px;
+        position: relative;
+
+        .label-wrapper {
+            position: absolute;
+            top: -10px;
+            width: 100%;
+            text-align: center;
+
+            .label {
+                margin: 0 auto -1px auto;
+                padding: 2px 4px;
+                font-size: $font-size-tiny;
+                font-weight: bold;
+                color: $color-normal;
+                background-color: $color-background-text-area-disabled;
+                border: 1px solid $color-gray-2;
+                border-radius: 4px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+        }
+
+        .path-options {
+            display: flex;
+            flex-direction: column;
+
+            background-color: $color-background-text-area;
+            border: 1px solid $color-gray-2;
+            border-radius: 4px;
+            padding: 12px;
+
+            font-size: $font-size-small;
+
+            .option:hover {
+                background-color: $color-background-text-area-hover;
+            }
+        }
+    }
+}

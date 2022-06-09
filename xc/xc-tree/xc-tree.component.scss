@@ -1,0 +1,219 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-tree-label-color: unset !default;
+$xc-tree-label-color-disabled: unset !default;
+
+
+@import 'const';
+
+
+$template-width: 256px;
+
+
+:host {
+
+    *:focus {
+        outline: 1px solid $color-primary;
+    }
+
+    display: block;
+
+    &.allowselect .mat-tree-node {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        &.selected {
+            background-color: rgba(255, 255, 255, 0.10);
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    ::ng-deep .child {
+        display: flex;
+        align-items: center;
+        padding: 2px;
+
+        & > label {
+            pointer-events: none;
+            padding-right: 6px;
+            word-break: break-word;
+            text-overflow: ellipsis;
+            flex: 1 1 auto;
+            color: $xc-tree-label-color;
+            &.disabled {
+                color: $xc-tree-label-color-disabled;
+            }
+            &.truncated {
+                width: 146px;
+            }
+        }
+
+        .padding {
+            width: 24px;
+            flex: 0;
+        }
+
+        ::ng-deep xc-icon-button.tooltip {
+            pointer-events: initial;
+            touch-action: auto;
+            button {
+                cursor: help;
+            }
+        }
+
+        xc-template {
+            display: flex;
+            align-self: stretch;
+            position: relative;
+            color: $color-normal;
+            align-items: center;
+
+            ::ng-deep {
+                xc-form-autocomplete, xc-form-input {
+                    width: $template-width;
+                }
+                xc-checkbox {
+                    display: flex;
+                    position: absolute;
+                    z-index: 1;
+                    height: 100%;
+                    top: 0;
+                    padding: 0 8px;
+
+                    .mat-checkbox {
+                        display: flex;
+                    }
+
+                    label {
+                        color: transparent;
+                        user-select: none;
+                    }
+                }
+                xc-icon-button {
+                    margin-left: 8px;
+                }
+            }
+
+            &.non-template {
+                width: $template-width;
+                height: 34px;
+            }
+        }
+
+        xc-template + xc-template {
+            ::ng-deep input {
+                padding-left: 34px;
+            }
+        }
+    }
+
+    ::ng-deep :not(.fixed) {
+        &.child, &.parent {
+            margin-left: 24px;
+        }
+    }
+
+    xc-icon-button + .child {
+        margin-left: 0;
+    }
+
+    ::ng-deep xc-icon-button.toggle {
+        xc-icon {
+            transition: transform $transition-time-fast ease-in-out;
+        }
+
+        &.rotated xc-icon {
+            transform: rotate(90deg);
+        }
+    }
+
+    ::ng-deep .mat-tree-node {
+        min-height: unset; // 60px
+        overflow: unset;
+        line-height: 18px;
+    }
+
+    // ---------------------------------------------------------------
+
+    &.readonly-mode {
+
+        &.allowselect .mat-tree-node {
+            &:hover {
+                background-color: #fff;
+            }
+            &.selected {
+                background-color: $color-primary;
+            }
+            &.fixed:hover {
+                background-color: $color-gray-3;
+            }
+            &.fixed.selected {
+                background-color: #000;
+            }
+        }
+
+        .mat-tree-node {
+            overflow-x: hidden;
+            border-bottom: 1px solid $color-gray-2;
+            background-color: $color-gray-5;
+            ::ng-deep {
+                label {
+                    color: #000;
+                }
+                xc-icon i {
+                    color: $color-gray-3;
+                }
+            }
+        }
+
+        ::ng-deep .mat-tree-node.fixed {
+            background-color: $color-gray-3;
+            ::ng-deep {
+                label {
+                    padding-left: 6px;
+                    color: $color-gray-5;
+                }
+            }
+        }
+
+        ::ng-deep .child {
+            font-size: 13px;
+            flex: 1 1 auto;
+            padding: 0;
+
+            label {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+
+            xc-template {
+                background-color: rgba(0, 0, 0, 0.15);
+                white-space: pre-wrap;
+                color: #000;
+                padding: 3px 6px;
+
+                &.non-template {
+                    height: unset;
+                }
+            }
+        }
+    }
+}

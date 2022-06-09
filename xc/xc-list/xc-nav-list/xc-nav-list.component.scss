@@ -1,0 +1,102 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-nav-list-background-bar-color: unset !default;
+$xc-nav-list-item-separation-color: unset !default;
+$xc-nav-list-item-indentation: unset !default;
+
+$xc-nav-list-item-separation-space: unset !default;
+$xc-nav-list-item-horizontal-active-indicator-width: unset !default;
+$xc-nav-list-item-vertical-active-indicator-width: unset !default;
+
+@import 'const';
+
+@each $key, $value in $color-map {
+    :host[color="#{$key}"] a.active {
+        border-color: $value;
+        xc-icon {
+            color: $value;
+        }
+    }
+}
+
+
+:host {
+    display: flex;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: $xc-nav-list-background-bar-color;
+
+    .mat-nav-list {
+        padding: 0;
+        display: flex;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: $xc-nav-list-item-separation-color;
+    }
+
+    &[orientation="LEFT"], &[orientation="RIGHT"] {
+        mat-nav-list {
+            flex-direction: column;
+            margin-bottom: auto;
+        }
+        &::ng-deep a {
+            border-width: $xc-nav-list-item-vertical-active-indicator-width;
+            margin-bottom: $xc-nav-list-item-separation-space;
+        }
+    }
+
+    &[orientation="TOP"], &[orientation="BOTTOM"] {
+        mat-nav-list {
+            flex-direction: row;
+            margin-right: auto;
+        }
+        &::ng-deep a {
+            border-width: $xc-nav-list-item-horizontal-active-indicator-width;
+            margin-right: $xc-nav-list-item-separation-space;
+        }
+    }
+
+    &[orientation="LEFT"]::ng-deep a {
+        border-left-style: solid;
+    }
+
+    // the div-block next to the a-element
+    // -> the sub navigation
+    &[orientation="LEFT"]::ng-deep a + div {
+        margin-left: $xc-nav-list-item-indentation;
+    }
+
+    &[orientation="RIGHT"]::ng-deep a {
+        border-right-style: solid;
+    }
+
+    // the div-block next to the a-element
+    // -> the sub navigation
+    &[orientation="RIGHT"]::ng-deep a + div {
+        margin-right: $xc-nav-list-item-indentation;
+    }
+
+    &[orientation="TOP"]::ng-deep a {
+        border-top-style: solid;
+    }
+
+    &[orientation="BOTTOM"]::ng-deep a {
+        border-bottom-style: solid;
+    }
+}

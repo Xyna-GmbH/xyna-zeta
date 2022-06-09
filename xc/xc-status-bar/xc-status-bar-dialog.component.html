@@ -1,0 +1,12 @@
+<xc-dialog-wrapper xc-i18n-context="zeta.xc-status-bar">
+    <ng-container header><span xc-i18n>header</span></ng-container>
+    <ng-container aside>
+        <xc-button (click)="dismiss(true)"><xc-icon xc-icon-name="delete" xc-i18n>button-clear</xc-icon></xc-button>
+    </ng-container>
+    <section content>
+        <xc-table class="zeta-scrollbar scroll" [xc-table-datasource]="dataSource" xc-table-allowsort xc-table-allowfilter></xc-table>
+    </section>
+    <ng-container footer>
+        <xc-button (click)="dismiss()" xc-focus-initial xc-i18n>button-ok</xc-button>
+    </ng-container>
+</xc-dialog-wrapper>

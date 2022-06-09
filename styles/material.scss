@@ -1,0 +1,285 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-form-autocomplete-panel-margin-top: unset !default;
+$xc-form-autocomplete-panel-background-color: unset !default;
+$xc-form-autocomplete-panel-shadow-hidden: unset !default;
+
+$xc-form-autocomplete-panel-border-width: unset !default;
+$xc-form-autocomplete-panel-border-color: unset !default;
+$xc-form-autocomplete-panel-border-radius: unset !default;
+
+$xc-form-autocomplete-option-color: unset !default;
+$xc-form-autocomplete-option-color-focus: unset !default;
+$xc-form-autocomplete-option-color-disabled: unset !default;
+$xc-form-autocomplete-option-color-hover: unset !default;
+$xc-form-autocomplete-option-color-active: unset !default;
+$xc-form-autocomplete-option-background-color: unset !default;
+$xc-form-autocomplete-option-background-color-focus: unset !default;
+$xc-form-autocomplete-option-background-color-disabled: unset !default;
+$xc-form-autocomplete-option-background-color-hover: unset !default;
+$xc-form-autocomplete-option-background-color-active: unset !default;
+
+$xc-dialog-border: unset !default;
+$xc-dialog-border-radius: unset !default;
+$xc-dialog-box-shadow: unset !default;
+
+$xc-menu-item-background-color: unset !default;
+$xc-menu-item-highlight-background-color: unset !default;
+$xc-menu-item-arrow-color: unset !default;
+
+
+@import 'const';
+@import '~@angular/material/theming';
+
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+@include mat-core(mat-typography-config(
+    $font-family: $font-family-regular
+));
+
+$xyna-palette: mat-palette($mat-grey);
+$xyna-theme-dark: mat-dark-theme($xyna-palette, $xyna-palette, $xyna-palette);
+@include mat-core-theme($xyna-theme-dark);
+
+
+// globally overwrite material styles
+
+html.cdk-global-scrollblock {
+    overflow-y: unset;
+}
+
+mat-dialog-container.mat-dialog-container {
+    padding: 0 !important;
+    border: $xc-dialog-border;
+    border-radius: $xc-dialog-border-radius;
+    box-shadow: $xc-dialog-box-shadow;
+}
+
+.mat-autocomplete-panel {
+    margin-top: $xc-form-autocomplete-panel-margin-top;
+    background-color: $xc-form-autocomplete-panel-background-color;
+    border: $xc-form-autocomplete-panel-border-width solid $xc-form-autocomplete-panel-border-color;
+    border-radius: $xc-form-autocomplete-panel-border-radius;
+
+    @if $xc-form-autocomplete-panel-shadow-hidden {
+        &.mat-autocomplete-visible:not([class*=mat-elevation-z]) {
+                box-shadow: unset;
+        }
+    }
+
+    .mat-option {
+        color: $xc-form-autocomplete-option-color;
+        background-color: $xc-form-autocomplete-option-background-color;
+
+        /**
+         * It's not possible to set custom height due to misalignment when scrolling using cursor keys.
+         * See https://github.com/angular/material2/issues/7205 for reference.
+         */
+        // height: 40px;
+        // line-height: 40px;
+        font-size: $font-size-medium;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .mat-option-disabled {
+        color: $xc-form-autocomplete-option-color-disabled;
+        background-color: $xc-form-autocomplete-option-background-color-disabled;
+    }
+
+    .mat-option:not(.mat-option-disabled) {
+        &.mat-active {
+            color: $xc-form-autocomplete-option-color-active;
+            background-color: $xc-form-autocomplete-option-background-color-active;
+        }
+        &:hover {
+            color: $xc-form-autocomplete-option-color-hover;
+            background-color: $xc-form-autocomplete-option-background-color-hover;
+        }
+        &:focus {
+            color: $xc-form-autocomplete-option-color-focus;
+            background-color: $xc-form-autocomplete-option-background-color-focus;
+        }
+    }
+}
+
+.mat-menu-panel {
+    min-height: unset !important;
+    overflow: inherit !important;
+    background-color: #1A1A1B;
+    box-shadow: 0 0 16px #1A1A1B;
+
+    &.with-arrow-x, &.with-arrow-y {
+        .mat-menu-content .mat-menu-item {
+            &:first-child::before, &:last-child::before {
+                content: "";
+                background: $xc-menu-item-background-color;
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                border: 1px solid #000;
+                transform: rotate(-45deg);
+                pointer-events: none;
+            }
+        }
+        &.mat-menu-below {
+            .mat-menu-content .mat-menu-item {
+                &:last-child:not(:first-child)::before {
+                    content: none;
+                }
+            }
+        }
+        &.mat-menu-above {
+            .mat-menu-content .mat-menu-item {
+                &:first-child:not(:last-child)::before {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    &.with-arrow-x {
+        &.mat-menu-after {
+            .mat-menu-content .mat-menu-item {
+                &:first-child::before, &:last-child::before {
+                    border-right: none;
+                    border-bottom: none;
+                    left: -10px;
+                }
+            }
+        }
+        &.mat-menu-before {
+            .mat-menu-content .mat-menu-item {
+                &:first-child::before, &:last-child::before {
+                    border-left: none;
+                    border-top: none;
+                    right: -10px;
+                }
+            }
+        }
+        &.mat-menu-below .mat-menu-content .mat-menu-item {
+            &:first-child::before, &:last-child::before {
+                top: 15px;
+            }
+        }
+        &.mat-menu-above .mat-menu-content .mat-menu-item {
+            &:first-child::before, &:last-child::before {
+                bottom: 15px;
+            }
+        }
+    }
+
+    &.with-arrow-y {
+        &.mat-menu-below {
+            .mat-menu-content .mat-menu-item:first-child::before {
+                border-left: none;
+                border-bottom: none;
+                top: -10px;
+            }
+        }
+        &.mat-menu-above {
+            .mat-menu-content .mat-menu-item:last-child::before {
+                border-right: none;
+                border-top: none;
+                bottom: -10px;
+            }
+        }
+        &.mat-menu-after .mat-menu-content .mat-menu-item {
+            &:first-child::before, &:last-child::before {
+                left: 15px;
+            }
+        }
+        &.mat-menu-before .mat-menu-content .mat-menu-item {
+            &:first-child::before, &:last-child::before {
+                right: 15px;
+            }
+        }
+    }
+
+    .mat-menu-content:not(:empty) {
+        padding-top: 0;
+        padding-bottom: 0;
+        border: 1px solid #000;
+
+        .mat-menu-item {
+            display: flex;
+            overflow: inherit;
+            font-size: $font-size-medium;
+            background-color: $xc-menu-item-background-color;
+            color: #fff;
+            border-radius: 0;
+
+            &[disabled] {
+                color: $color-disabled;
+            }
+
+            & > xc-icon {
+                flex: 1 1 auto;
+            }
+            & > label {
+                flex: 0 0 auto;
+            }
+        }
+
+        :not([disabled]) {
+            &.mat-menu-item:hover,
+            &.mat-menu-item.cdk-program-focused,
+            &.mat-menu-item.cdk-keyboard-focused,
+            &.mat-menu-item-highlighted {
+                &, &:first-child::before, &:last-child::before {
+                    background: $xc-menu-item-highlight-background-color;
+                }
+            }
+        }
+    }
+
+    .mat-menu-item-submenu-trigger {
+        &::after {
+            border-color: transparent transparent transparent $xc-menu-item-arrow-color;
+        }
+    }
+}
+
+                 .mat-ripple .mat-ripple-element,
+[color="normal"] .mat-ripple .mat-ripple-element {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+[color="invert"] .mat-ripple .mat-ripple-element {
+    background-color: rgba(0, 0, 0, 0.1);
+}

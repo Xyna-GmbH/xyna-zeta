@@ -1,0 +1,84 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-master-detail-master-border-left: unset !default;
+$xc-master-detail-detail-border-left: unset !default;
+$xc-master-detail-detail-inactive-master-background: unset !default;
+
+@import 'const';
+
+
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+
+    mat-drawer-container {
+        display: flex;
+        flex: 1 1 auto;
+        overflow: hidden;
+        background-color: $color-background-area;
+
+        mat-drawer::ng-deep .mat-drawer-inner-container {
+            display: flex;
+        }
+
+        mat-drawer-content, mat-drawer {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            background-color: $color-background-area;
+        }
+
+        mat-drawer-content {
+            border-left: $xc-master-detail-master-border-left;
+        }
+
+        mat-drawer {
+            border-left: $xc-master-detail-master-border-left;
+        }
+    }
+
+    &[side-area-size="small"] mat-drawer {
+        width: 20%;
+        min-width: 300px;
+    }
+
+    &[side-area-size="golden"] mat-drawer {
+        width: 38%;
+        min-width: 500px;
+    }
+
+    &[side-area-size="half"] mat-drawer {
+        width: 50%;
+        min-width: 500px;
+    }
+
+    &[side-area-size="large"] mat-drawer {
+        width: 62%;
+        min-width: 500px;
+    }
+
+    &[side-area-size="full"] mat-drawer {
+        width: 100%;
+        min-width: 500px;
+    }
+
+    &[detail-mode="over"]::ng-deep .mat-drawer-backdrop {
+        background-color: $xc-master-detail-detail-inactive-master-background;
+    }
+}

@@ -1,0 +1,31 @@
+<xc-form-generic-panel *ngIf="!hidden"
+    [xc-definition]="panelDefinition"
+    [xc-definition-data]="definitionData"
+    (closed)="closed.emit(panelDefinition)"
+>
+    <ng-container additionalHeaderItems>
+        <xc-button
+            (click)="clearFilters()"
+        >{{'clear-filters' | xcI18n}}</xc-button>
+        <xc-icon-button
+            xc-icon-name="reload"
+            xc-icon-size="small"
+            color="invert"
+            (click)="refresh()"
+            xc-tooltip="{{'refresh' | xcI18n}}"
+            xc-button-aria-label="{{'refresh' | xcI18n}}"
+        ></xc-icon-button>
+    </ng-container>
+    <section additionalContentItems class="stretch-full-height scroll">
+        <xc-table
+            [xc-table-datasource]="dataSource"
+            xc-table-allowsort
+            xc-table-allowfilter
+            xc-table-allowselect
+            xc-table-multiselect
+            xc-table-lazyupdate
+            [attr.fqn]="tableInputFQN"
+        ></xc-table>
+    </section>
+    <label additionalFooterItems>{{dataSource?.footerLabelRight}}</label>
+</xc-form-generic-panel>

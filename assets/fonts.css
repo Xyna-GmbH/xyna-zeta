@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Open Sans Light';
+    font-style: normal;
+    font-weight: 300;
+    font-display: block;
+    src: local('OpenSans-Light'), url('opensans-light.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Open Sans Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: local('OpenSans-Regular'), url('opensans-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Code Pro Light';
+    font-style: normal;
+    font-weight: 300;
+    font-display: block;
+    src: local('SourceCodePro-Light'), url('sourcecodepro-light.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Code Pro Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: local('SourceCodePro-Regular'), url('sourcecodepro-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('materialicons.woff2') format('woff2');
+}

@@ -1,0 +1,12 @@
+<button #button
+    mat-icon-button mat-ripple
+    [disabled]="disabled"
+    [attr.type]="type"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-label]="ariaLabel"
+    [attr.tabindex]="tabDisabled ? '-1' : null"
+    [attr.cdkFocusInitial]="focusInitial || null"
+>
+    <xc-icon [xc-icon-material]="iconMaterial" [xc-icon-style]="iconStyle" [xc-icon-name]="iconName" [xc-icon-size]="iconSize" [color]="color"></xc-icon>
+    <xc-progress-bar *ngIf="busy"></xc-progress-bar>
+</button>

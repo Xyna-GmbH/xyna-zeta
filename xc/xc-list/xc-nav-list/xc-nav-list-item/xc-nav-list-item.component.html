@@ -1,0 +1,56 @@
+<!-- Case 1: There are children and sub navigation items -->
+<div *ngIf="item.children && item.children.length; else leaf">
+    <a
+        mat-list-item
+        role="button"
+        [ngClass]="getItemClassList()"
+        [attr.aria-expanded]="!collapsed"
+        [attr.aria-controls]="uniquePanelId"
+        [attr.aria-disabled]="item.disabled"
+        [attr.aria-label]="item.name"
+        [attr.tabindex]="item.disabled ? '-1' : '0'"
+        (click)="toggleChildren()"
+        (keyup.enter)="toggleChildren()"
+        (keyup.space)="toggleChildren()"
+        (keyup.arrowright)="expandChildren()"
+        (keyup.arrowleft)="collapseChildren()"
+        (focus)="focusChange.emit(item)"
+        (blur)="focusChange.emit()"
+    >
+        <xc-icon *ngIf="!shrink"
+            class="toggle"
+            [ngClass]="['disabled']"
+            [class.rotated]="!item.collapsed"
+            xc-icon-name="accordion"
+            xc-icon-size="small"
+        ></xc-icon>
+        <xc-icon [xc-icon-name]="item.icon" [xc-icon-style]="item.iconStyle" [xc-icon-size]="size">{{shrink ? '' : item.name}}</xc-icon>
+    </a>
+    <div *ngIf="!shrink" [@toggleAnimation]="toggleAnimation" [attr.id]="uniquePanelId">
+        <xc-nav-list-item *ngFor="let child of item.children; let i = index"
+            [attr.id]="'xc-nav-list-item-depth-' + (depth+1) + '-' + i"
+            [item]="child"
+            [size]="size"
+            [depth]="depth+1"
+            [orientation]="orientation"
+            [color]="color"
+            (focusChange)="focusChange.emit($event)"
+        ></xc-nav-list-item>
+    </div>
+</div>
+<!-- Case 2: It's a leaf -- ergo NO children and NO sub navigation items -->
+<ng-template #leaf>
+    <a mat-list-item routerLinkActive="active"
+        role="link"
+        [ngClass]="getItemClassList()"
+        [attr.tabindex]="item.disabled ? '-1' : null"
+        [attr.aria-label]="item.name"
+        [routerLink]="item.link"
+        [xc-tooltip]="item.tooltip ? item.tooltip : ''"
+        [xc-tooltip-position]="tooltipPosition"
+        (focus)="focusChange.emit(item)"
+        (blur)="focusChange.emit()"
+    >
+        <xc-icon [xc-icon-name]="item.icon" [xc-icon-style]="item.iconStyle" [xc-icon-size]="size">{{shrink ? '' : item.name}}</xc-icon>
+    </a>
+</ng-template>

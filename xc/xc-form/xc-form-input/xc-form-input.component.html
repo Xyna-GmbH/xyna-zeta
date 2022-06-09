@@ -1,0 +1,45 @@
+<mat-form-field [floatLabel]="floatLabel" xc-i18n-context="zeta.xc-form-input">
+    <mat-label>{{label}}</mat-label>
+    <input
+        matInput
+        autocomplete="off"
+        [type]="type"
+        [placeholder]="placeholder"
+        [formControl]="formControl"
+        (focus)="focus.emit($event)"
+        (blur)="blur.emit($event)"
+        (keydown)="onkeydown($event)"
+        [tabIndex]="(readonly || disabled) ? -1 : 0"
+        [attr.aria-label]="ariaLabel"
+        [readonly]="readonly"
+        [required]="required"
+    >
+    <ng-container *ngIf="readonly || disabled">
+        <input
+            [type]="type"
+            [ngModel]="value"
+            [ngClass]="'non-editable-input'"
+            [attr.tabIndex]="readonly ? 0 : -1"
+            [attr.aria-label]="ariaLabel"
+            (focus)="focus.emit($event)"
+            (blur)="blur.emit($event)"
+            [readonly]="readonly"
+            [disabled]="disabled"
+        >
+    </ng-container>
+
+    <mat-error
+        *ngIf="errorVisible"
+        align="end"
+    >{{errorContent}}</mat-error>
+
+    <mat-icon
+        matSuffix
+        *ngIf="suffixVisible"
+        (mousedown)="suffixMouseDown($event)"
+        (click)="suffixClick($event)"
+        [attr.alt]="suffixContent"
+        xc-tooltip="{{iconTooltip || (suffixContent | xcI18n)}}"
+        xc-i18n
+    >{{suffixContent}}</mat-icon>
+</mat-form-field>

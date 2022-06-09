@@ -1,0 +1,209 @@
+
+@font-face {
+    font-family: 'xyna-icons-modeller';
+    src: url('xyna-icons-modeller.eot?jshfzt');
+    src: url('xyna-icons-modeller.eot?jshfzt#iefix') format('embedded-opentype'), url('xyna-icons-modeller.ttf?jshfzt') format('truetype'), url('xyna-icons-modeller.woff?jshfzt') format('woff'), url('xyna-icons-modeller.svg?jshfzt#xyna-icons-xds') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-modeller-"],
+[class*=" icon-modeller-"] {
+    font-family: 'xyna-icons-modeller' !important;
+}
+
+[class^="icon-modeller-"],
+[class*=" icon-modeller-"] {
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+[class^="icon-modeller-"]:before,
+[class*=" icon-modeller-"]:before {
+    content: "¿?";
+}
+
+.icon-modeller-factorymanager:before {
+    content: "\e900";
+}
+
+.icon-modeller-mini-catch:before {
+    content: "\e901";
+}
+
+.icon-modeller-mini-compensation:before {
+    content: "\e902";
+}
+
+.icon-modeller-mini-datatype:before {
+    content: "\e903";
+}
+
+.icon-modeller-mini-list:before {
+    content: "\e904";
+}
+
+.icon-modeller-mini-toggledown:before {
+    content: "\e905";
+}
+
+.icon-modeller-mini-toggleup:before {
+    content: "\e906";
+}
+
+.icon-modeller-mini-workflow:before {
+    content: "\e907";
+}
+
+.icon-modeller-misc-collapse:before {
+    content: "\e908";
+}
+
+.icon-modeller-misc-contextmenu:before {
+    content: "\e909";
+}
+
+.icon-modeller-misc-splitview:before {
+    content: "\e90a";
+}
+
+.icon-modeller-misc-view:before {
+    content: "\e90b";
+}
+
+.icon-modeller-processmodeller:before {
+    content: "\e90c";
+}
+
+.icon-modeller-processmonitor:before {
+    content: "\e90d";
+}
+
+.icon-modeller-sp-helper:before {
+    content: "\e90e";
+}
+
+.icon-modeller-sp-launcher:before {
+    content: "\e90f";
+}
+
+.icon-modeller-sp-properties:before {
+    content: "\e910";
+}
+
+.icon-modeller-sp-search:before {
+    content: "\e911";
+}
+
+.icon-modeller-sp-xynanavigation:before {
+    content: "\e912";
+}
+
+.icon-modeller-tb-await:before {
+  content: "\e92a";
+}
+
+.icon-modeller-tb-choice:before {
+    content: "\e913";
+}
+
+.icon-modeller-tb-choiceconditional:before {
+    content: "\e914";
+}
+
+.icon-modeller-tb-database:before {
+    content: "\e915";
+}
+
+.icon-modeller-tb-datatype:before {
+    content: "\e916";
+}
+
+.icon-modeller-tb-deploy:before {
+    content: "\e917";
+}
+
+.icon-modeller-tb-documentretrieve:before {
+  content: "\e928";
+}
+
+.icon-modeller-tb-exception:before {
+    content: "\e918";
+}
+
+.icon-modeller-tb-manualinteraction:before {
+    content: "\e919";
+}
+
+.icon-modeller-tb-mapping:before {
+    content: "\e91a";
+}
+
+.icon-modeller-tb-newfile:before {
+    content: "\e91b";
+}
+
+.icon-modeller-tb-notify:before {
+  content: "\e929";
+}
+
+.icon-modeller-tb-pen:before {
+    content: "\e91c";
+}
+
+.icon-modeller-tb-print:before {
+    content: "\e91d";
+}
+
+.icon-modeller-tb-rollup:before {
+    content: "\e91e";
+}
+
+.icon-modeller-tb-save:before {
+    content: "\e91f";
+}
+
+.icon-modeller-tb-storabledelete:before {
+  content: "\e927";
+}
+
+.icon-modeller-tb-storablestore:before {
+  content: "\e926";
+}
+
+.icon-modeller-tb-template:before {
+    content: "\e920";
+}
+
+.icon-modeller-tb-templateend:before {
+    content: "\e921";
+}
+
+.icon-modeller-tb-templatestart:before {
+    content: "\e922";
+}
+
+.icon-modeller-tb-timecontrolled:before {
+    content: "\e923";
+}
+
+.icon-modeller-tb-wait:before {
+  content: "\e923";
+}
+
+.icon-modeller-tb-workflow:before {
+    content: "\e924";
+}
+
+.icon-modeller-testfactory:before {
+    content: "\e925";
+}

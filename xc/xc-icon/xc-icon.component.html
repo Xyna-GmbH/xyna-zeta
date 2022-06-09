@@ -1,0 +1,3 @@
+<i *ngIf="!iconMaterial && iconName" aria-hidden="true" [class]="iconClass"></i>
+<mat-icon *ngIf="iconMaterial && iconName" aria-hidden="true">{{iconName}}</mat-icon>
+<span><ng-content></ng-content></span>

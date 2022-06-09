@@ -1,0 +1,231 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-panel-header-min-height: unset !default;
+$xc-panel-footer-min-height: unset !default;
+$xc-panel-header-background-color: unset !default;
+$xc-panel-footer-background-color: unset !default;
+$xc-panel-header-padding: unset !default;
+$xc-panel-footer-padding: unset !default;
+$xc-panel-header-bottom-border-color: unset !default;
+$xc-panel-header-bottom-border-width: unset !default;
+$xc-panel-footer-top-border-color: unset !default;
+$xc-panel-footer-top-border-width: unset !default;
+
+$xc-panel-header-label-padding: unset !default;
+$xc-panel-header-label-color: unset !default;
+$xc-panel-header-label-font-size: unset !default;
+$xc-panel-header-label-font-weight: unset !default;
+$xc-panel-header-label-uppercase: unset !default;
+
+$xc-panel-color: unset !default;
+$xc-panel-background-color: unset !default;
+$xc-panel-padding: unset !default;
+$xc-panel-border: unset !default;
+$xc-panel-border-radius: unset !default;
+
+$xc-sub-panel-border-color: unset !default;
+$xc-sub-panel-border-width: unset !default;
+$xc-sub-panel-border-radius: unset !default;
+$xc-sub-panel-padding: unset !default;
+$xc-sub-panel-color: unset !default;
+$xc-sub-panel-background-color: unset !default;
+
+@import 'const';
+
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    overflow: hidden;
+    color: $xc-panel-color;
+    background-color: $xc-panel-background-color;
+    border-radius: $xc-panel-border-radius;
+    border: $xc-panel-border;
+
+    ::ng-deep {
+        header, footer {
+            user-select: none;
+            display: flex;
+            flex: 0 0 auto;
+            align-items: center;
+
+            // as header or footer itself
+            &.items-left, &.items-right, &.items-center {
+                > * {
+                    margin: auto 0;
+                    margin-right: 2px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+            &.items-left, &.items-center {
+                > :last-child {
+                    margin-right: auto;
+                }
+            }
+            &.items-right, &.items-center {
+                > :first-child {
+                    margin-left: auto;
+                }
+            }
+
+            // as child of header or footer
+            > .items-center,
+            > .items-left,
+            > .items-right {
+                display: flex;
+                margin: auto 0;
+                align-items: center;
+
+                > *:not(:last-child) {
+                    margin-right: 2px;
+                }
+            }
+            > .items-left, .items-center {
+                margin-right: auto;     // force items-box to the left
+
+                > *:last-child {
+                    margin-right: auto; // force last child to keep as much space as possible to the right
+                }
+            }
+            > .items-right, .items-center {
+                margin-left: auto;      // force items-box to the right
+
+                > *:first-child {
+                    margin-left: auto;  // force first child to keep as much space as possible to the left
+                }
+            }
+            .items-selectable {
+                user-select: text;
+                cursor: text;
+            }
+        }
+
+        header {
+            min-height: $xc-panel-header-min-height;
+            padding: $xc-panel-header-padding;
+            background-color: $xc-panel-header-background-color;
+            border-bottom: $xc-panel-header-bottom-border-width solid $xc-panel-header-bottom-border-color;
+
+            > label, > h1, > h2, > h3,
+            xc-form-text.nolabel > label.text {
+                padding: $xc-panel-header-label-padding;
+                color: $xc-panel-header-label-color;
+                font-size: $xc-panel-header-label-font-size;
+                font-weight: $xc-panel-header-label-font-weight;
+                @if $xc-panel-header-label-uppercase {
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        footer {
+            min-height: $xc-panel-footer-min-height;
+            padding: $xc-panel-footer-padding;
+            margin-top: auto;
+            background-color: $xc-panel-footer-background-color;
+            border-top: $xc-panel-footer-top-border-width solid $xc-panel-footer-top-border-color;
+            color: $xc-panel-header-label-color;
+        }
+
+        > section {
+            display: flex;
+            flex: 0 0 auto;
+            flex-direction: column;
+            padding: $xc-panel-padding;
+
+            > *:not(:last-child), .wrapper-component > *:not(:last-child) {
+                // direct children of a panel-section should have a uniform space in-between
+                margin-bottom: 8px;
+            }
+
+            xc-panel {
+                border: $xc-sub-panel-border-width solid $xc-sub-panel-border-color;
+                border-radius: $xc-sub-panel-border-radius;
+                color: $xc-sub-panel-color;
+                background-color: $xc-sub-panel-background-color;
+
+                > section {
+                    padding: $xc-sub-panel-padding;
+                }
+            }
+        }
+
+        section.stretch {
+            flex: 0 1 auto;
+        }
+
+        section.stretch-zero {
+            flex: 1 1 0;
+        }
+
+        section.stretch, section.stretch-zero {
+            & > xc-panel {
+                flex: 0 0 auto;
+            }
+        }
+
+        section.scroll {
+            overflow: auto;
+        }
+
+        .items-row {
+            display: flex;
+            flex: 0 0 auto;
+            flex-direction: row;
+            align-items: baseline;
+
+            > :not(:first-child) {
+                margin-left: 4px;
+            }
+        }
+    }
+
+    &.collapsable::ng-deep > header {
+        cursor: pointer;
+    }
+
+    .collapse-toggle {
+        transition: transform 0.3s;
+        transform: rotate(90deg);
+    }
+
+    &.collapsed {
+        .collapse-toggle {
+            transform: rotate(0);
+        }
+
+        ::ng-deep > *:not(header) {
+            display: none !important;
+        }
+    }
+}
+
+
+::ng-deep {
+    xc-panel xc-panel {
+        &.compact::ng-deep {
+            header, footer {
+                // allow header and footer of a compact sub-panel to shrink
+                min-height: 0;
+            }
+        }
+    }
+}

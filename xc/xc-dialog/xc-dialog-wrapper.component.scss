@@ -1,0 +1,156 @@
+$xc-dialog-title-color : unset !default;
+$xc-dialog-title-background-color: unset !default;
+
+$xc-dialog-content-color : unset !default;
+$xc-dialog-content-background-color: unset !default;
+$xc-dialog-content-border : unset !default;
+
+$xc-dialog-footer-color : unset !default;
+$xc-dialog-footer-background-color: unset !default;
+
+$xc-dialog-border-radius : unset !default;
+
+$resizable: var(--resizable);
+
+@import 'const';
+
+::ng-deep mat-dialog-container.mat-dialog-container {
+    border: none;
+}
+
+:host {
+    .resizable-dialog {
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 75%);
+        min-width: 200px;
+        min-height: 150px;
+
+        .header {
+            display: flex;
+            align-items: baseline;
+            background-color: $xc-dialog-title-background-color;
+            padding: 0 16px;
+            border-top-left-radius: $xc-dialog-border-radius;
+            border-top-right-radius: $xc-dialog-border-radius;
+
+            h1 {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1 1 auto;
+            }
+        }
+
+        .draggable {
+            cursor: move;
+        }
+
+        .mat-dialog-title {
+            margin: 0;
+            flex: 1 0 auto;
+            font-size: 14px;
+            line-height: 48px;
+            color: $xc-dialog-title-color;
+
+            &::ng-deep {
+                +* {
+                    margin-left: 16px;
+                }
+            }
+        }
+
+        mat-dialog-content {
+            margin: 0;
+            padding: 16px;
+            color: $xc-dialog-content-color;
+            background-color: $xc-dialog-content-background-color;
+            border: $xc-dialog-content-border;
+            border-left: none;
+            border-right: none;
+            display: flex;
+            height: 100%;
+            max-height: unset;
+        }
+
+
+        mat-dialog-actions {
+            margin-bottom: 0;
+            padding: 0 16px;
+            height: 48px;
+            display: flex;
+            justify-content: space-around;
+
+            color: $xc-dialog-footer-color;
+            background-color: $xc-dialog-footer-background-color;
+
+            border-bottom-left-radius: $xc-dialog-border-radius;
+            border-bottom-right-radius: $xc-dialog-border-radius;
+
+            &::ng-deep {
+                >* {
+                    margin: auto 0;
+                }
+            }
+        }
+    }
+
+    .dialog {
+        .header {
+            display: flex;
+            align-items: baseline;
+            background-color: $xc-dialog-title-background-color;
+            padding: 0 16px;
+        }
+
+        .draggable {
+            cursor: move;
+        }
+
+        .mat-dialog-title {
+            margin: 0;
+            flex: 1 0 auto;
+            font-size: 14px;
+            line-height: 48px;
+            color: $xc-dialog-title-color;
+
+            &::ng-deep {
+                +* {
+                    margin-left: 16px;
+                }
+            }
+        }
+
+        mat-dialog-content {
+            margin: 0;
+            padding: 16px;
+            min-width: 200px;
+            color: $xc-dialog-content-color;
+            background-color: $xc-dialog-content-background-color;
+            border: $xc-dialog-content-border;
+            border-left: none;
+            border-right: none;
+            display: flex;
+        }
+
+        mat-dialog-actions {
+            margin-bottom: 0;
+            padding: 0 6px;
+            height: 48px;
+            display: flex;
+            justify-content: space-around;
+
+            color: $xc-dialog-footer-color;
+            background-color: $xc-dialog-footer-background-color;
+
+            &::ng-deep {
+                >* {
+                    margin: auto 0;
+                }
+            }
+        }
+    }
+}

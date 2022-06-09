@@ -1,0 +1,15 @@
+<xc-dialog-wrapper [draggable]="injectedData.draggable" [resizable]="injectedData.resizable" [xc-dialog-options]="injectedData.dialogOptions" xc-i18n-context="zeta.xc-dialog.about-dialog">
+    <ng-container header>{{injectedData.title}}</ng-container>
+    <section content id="xc-about-dialog-message-container">
+        <pre>{{injectedData.copyright}}</pre>
+        <pre>{{injectedData.versions}}</pre>
+        <ng-container *ngIf="details">
+            <hr/>
+            <div class="license zeta-scrollbar">{{license}}</div>
+        </ng-container>
+    </section>
+    <ng-container footer>
+        <xc-button *ngIf="injectedData.detailsLink" [disabled]="!license" (click)="toggleDetails()">{{(details ? 'button-less' : 'button-more') | xcI18n}}</xc-button>
+        <xc-button xc-i18n (click)="dismiss()">ok-button</xc-button>
+    </ng-container>
+</xc-dialog-wrapper>

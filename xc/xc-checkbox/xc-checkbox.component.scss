@@ -1,0 +1,111 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-checkbox-color-disabled: unset !default;
+$xc-checkbox-color-disabled-invert: unset !default;
+
+$xc-checkbox-checkmark-color: unset !default;
+$xc-checkbox-checkmark-color-invert: unset !default;
+
+$xc-checkbox-checkmark-color-disabled: unset !default;
+$xc-checkbox-checkmark-color-disabled-invert: unset !default;
+$xc-checkbox-with-background: unset !default;
+
+@import 'const';
+
+@mixin base-color($value, $xc-checkbox-with-background: false) {
+    &.mat-checkbox-checked, &.mat-checkbox-indeterminate {
+        .mat-checkbox-background {
+            @if $xc-checkbox-with-background {
+                background-color: $value;
+            } @else {
+                background-color: unset;
+            }
+        }
+    }
+    .mat-checkbox-frame {
+        border-color: $value;
+        border-width: 1px;
+    }
+    .mat-checkbox-label {
+        color: $value;
+    }
+}
+
+@mixin mark-color($value) {
+    .mat-checkbox-checkmark-path {
+        stroke: $value;
+    }
+    .mat-checkbox-mixedmark {
+        background-color: $value;
+    }
+}
+
+:host > div {
+
+    display: inherit;
+
+    &:focus {
+        outline: $color-focus-outline solid 1px;
+        outline-offset: 2px;
+    }
+
+    &::ng-deep {
+        .mat-checkbox-background,
+        .mat-checkbox-mixedmark,
+        .mat-checkbox-checkmark,
+        .mat-checkbox-checkmark-path {
+            transition: none !important;
+            animation: none !important;
+        }
+        .mat-checkbox-mixedmark {
+            width: 4px;
+            height: 4px;
+        }
+        .mat-checkbox .mat-checkbox-ripple {
+            left: calc(50% - 20px);
+            top: calc(50% - 20px);
+            height: 40px;
+            width: 40px;
+        }
+    }
+}
+
+@each $key, $value in $color-map {
+    :host[color="#{$key}"]::ng-deep {
+        & { @include base-color($value, $xc-checkbox-with-background); }
+    }
+}
+
+:host[color]::ng-deep {
+    @include mark-color($xc-checkbox-checkmark-color);
+
+    .mat-checkbox-disabled {
+        @include base-color($xc-checkbox-color-disabled);
+        @include mark-color($xc-checkbox-checkmark-color-disabled);
+    }
+}
+
+:host::ng-deep,
+:host[color="invert"]::ng-deep {
+    @include mark-color($xc-checkbox-checkmark-color-invert);
+
+    .mat-checkbox-disabled {
+        @include base-color($xc-checkbox-color-disabled-invert);
+        @include mark-color($xc-checkbox-checkmark-color-disabled-invert);
+    }
+}

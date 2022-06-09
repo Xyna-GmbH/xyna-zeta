@@ -1,0 +1,17 @@
+<div [ngClass]="resizable ? 'resizable-dialog':'dialog'" #dialogRoot [xc-resize]="resizable"
+    [xc-resize-options]="dialogOptions.resizeOptions" [xc-drag]="draggable"
+    [xc-drag-options]="dialogOptions.dragOptions" [xc-drag-event-target]="dragEventTarget">
+    <div [ngClass]="{'draggable': draggable}" class="header" (mousedown)="initDrag($event)"
+        (touchstart)="initDrag($event)">
+        <h1 mat-dialog-title aria-modal="true">
+            <ng-content select="[header]"></ng-content>
+        </h1>
+        <ng-content select="[aside]"></ng-content>
+    </div>
+    <mat-dialog-content>
+        <ng-content select="[content]"></ng-content>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <ng-content select="[footer]"></ng-content>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,18 @@
+<mat-form-field [floatLabel]="floatLabel">
+    <mat-label>{{label}}</mat-label>
+    <textarea
+        matInput
+        autocomplete="off"
+        [placeholder]="placeholder"
+        [formControl]="formControl"
+        [matAutosizeMinRows]="minLines"
+        [matAutosizeMaxRows]="maxLines"
+        [matTextareaAutosize]="textareaAutosize"
+        [readonly]="readonly"
+        (keydown)="onkeydown($event)"
+        (focus)="focus.emit($event)"
+        (blur)="blur.emit($event)"
+        [attr.aria-label]="ariaLabel"
+    ></textarea>
+    <mat-error *ngIf="errorVisible" align="end">{{errorContent}}</mat-error>
+</mat-form-field>

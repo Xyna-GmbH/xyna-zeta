@@ -1,0 +1,12 @@
+//   instructions:
+//
+// - copy this file directly into the root project folder (next to package.json) and rename it to '.eslintrc.json'.
+// - uncomment one of the lines inside the 'extends' object to either enable base or strict linting of the project.
+// - replace the '[PROJECT]' string with the project's name to ensure the path to the .eslingrc.json file is valid.
+{
+    "root": true,
+    "extends": [
+        // "./projects/[PROJECT]/src/app/zeta/lint/config/base/.eslintrc.json"
+        // "./projects/[PROJECT]/src/app/zeta/lint/config/strict/.eslintrc.json"
+    ]
+}

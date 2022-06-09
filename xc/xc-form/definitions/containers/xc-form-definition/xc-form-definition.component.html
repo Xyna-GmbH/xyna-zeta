@@ -1,0 +1,5 @@
+<xc-definition-proxy *ngFor="let child of formDefinition?.children"
+    [xc-base-definition]="child"
+    [xc-base-definition-data]="definitionData"
+    (xc-definition-closed)="closed.emit($event)"
+></xc-definition-proxy>

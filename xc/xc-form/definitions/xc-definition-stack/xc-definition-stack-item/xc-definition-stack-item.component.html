@@ -1,0 +1,6 @@
+<xc-definition-proxy
+    [xc-base-definition]="injectedData.definition"
+    [xc-base-definition-data]="injectedData.data"
+    [xc-definition-observer]="this"
+    (xc-definition-closed)="close($event)"
+></xc-definition-proxy>

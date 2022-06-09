@@ -1,0 +1,55 @@
+<xc-panel
+    [xc-panel-collapsable]="definition?.collapsable"
+    [xc-panel-collapsed]="definition?.collapsed"
+    class="{{classList}}"
+    [ngClass]="{'maximize': areaValue}"
+>
+    <header>
+        <ng-container *ngIf="definition?.label">
+            <h1 *ngIf="!definition?.getParent()" class="items-left items-selectable">{{definition?.translate(definition?.label) | async}}</h1>
+            <h2 *ngIf="definition?.getParent()" class="items-left items-selectable">{{definition?.translate(definition?.label) | async}}</h2>
+        </ng-container>
+        <div class="items-left">
+            <xc-definition-proxy *ngFor="let child of definition?.header?.leftArea?.children"
+                [xc-base-definition]="child"
+                [xc-base-definition-data]="definitionData"
+                [xc-definition-observer]="definition.observer"
+            ></xc-definition-proxy>
+        </div>
+        <div class="items-right">
+            <xc-definition-proxy *ngFor="let child of definition?.header?.rightArea?.children"
+                [xc-base-definition]="child"
+                [xc-base-definition-data]="definitionData"
+                [xc-definition-observer]="definition.observer"
+            ></xc-definition-proxy>
+            <ng-content select="[additionalHeaderItems]"></ng-content>
+            <xc-icon-button *ngIf="!definition?.getParent()" [xc-icon-name]="areaValue ? 'minimize' : 'maximize'" xc-icon-size="small" color="invert" xc-icon-style="xds" (click)="resize()" xc-tooltip="{{toolTip | xcI18n}}" xc-button-aria-label="{{'resize' | xcI18n}}"></xc-icon-button>
+            <xc-icon-button *ngIf="definition.closable" xc-icon-name="close" xc-icon-size="small" color="invert" (click)="closed.emit()" xc-tooltip="{{'close' | xcI18n}}"></xc-icon-button>
+        </div>
+    </header>
+    <section *ngIf="definition?.children?.length > 0" class="stretch scroll">
+        <xc-definition-proxy *ngFor="let child of definition?.children"
+            [xc-base-definition]="child"
+            [xc-base-definition-data]="definitionData"
+            [xc-definition-observer]="definition.observer"
+        ></xc-definition-proxy>
+    </section>
+    <ng-content select="[additionalContentItems]"></ng-content>
+    <footer>
+        <div *ngIf="definition?.footer?.leftArea?.children" class="items-left">
+            <xc-definition-proxy *ngFor="let child of definition?.footer?.leftArea?.children"
+                [xc-base-definition]="child"
+                [xc-base-definition-data]="definitionData"
+                [xc-definition-observer]="definition.observer"
+            ></xc-definition-proxy>
+        </div>
+        <ng-content select="[additionalFooterItems]"></ng-content>
+        <div *ngIf="definition?.footer?.rightArea?.children" class="items-right">
+            <xc-definition-proxy *ngFor="let child of definition?.footer?.rightArea?.children"
+                [xc-base-definition]="child"
+                [xc-base-definition-data]="definitionData"
+                [xc-definition-observer]="definition.observer"
+            ></xc-definition-proxy>
+        </div>
+    </footer>
+</xc-panel>

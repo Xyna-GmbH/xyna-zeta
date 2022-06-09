@@ -1,0 +1,2 @@
+To install the eslint plugin, execute the following command from within the impl/ directory:
+npm install .\projects\xyna\src\app\zeta\lint\plugins\eslint-plugin-zeta

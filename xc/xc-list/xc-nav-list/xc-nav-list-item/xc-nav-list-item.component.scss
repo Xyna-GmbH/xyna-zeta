@@ -1,0 +1,138 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-nav-list-item-border-color-active: unset !default;
+$xc-nav-list-item-border-color-normal: unset !default;
+$xc-nav-list-item-border-color-hover: unset !default;
+$xc-nav-list-item-border-color-focus: unset !default;
+
+$xc-nav-list-item-color-normal: unset !default;
+$xc-nav-list-item-color-active: unset !default;
+$xc-nav-list-item-color-hover: unset !default;
+$xc-nav-list-item-color-focus: unset !default;
+
+$xc-nav-list-item-background-color-normal: unset !default;
+$xc-nav-list-item-background-color-active: unset !default;
+$xc-nav-list-item-background-color-hover: unset !default;
+$xc-nav-list-item-background-color-focus: unset !default;
+
+$xc-nav-list-item-margin: unset !default;
+$xc-nav-list-item-height: unset !default;
+
+@import 'const';
+
+@each $key, $value in $color-map {
+    :host[color="#{$key}"] a.active {
+        border-color: $value;
+        xc-icon {
+            color: $value;
+        }
+    }
+}
+
+:host {
+    flex-shrink: 0;
+    margin: $xc-nav-list-item-margin;
+
+    // the not-toggleable item (a) does not react on mouse nor touch events
+    &[toggleable="false"] > div > a {
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    .mat-nav-list {
+        padding: 0;
+        display: flex;
+    }
+
+    a {
+        transition: all $transition-time-normal ease;
+        border-color: $xc-nav-list-item-border-color-normal;
+        user-select: none;
+        font-size: unset;
+        height: $xc-nav-list-item-height;
+
+        &::ng-deep .mat-list-item-content {
+            background-color: $xc-nav-list-item-background-color-normal;
+            height: 100%;
+        }
+
+        &:not(.disabled) {
+            border-color: $xc-nav-list-item-border-color-normal;
+            xc-icon {
+                color: $xc-nav-list-item-color-normal;
+            }
+        }
+        &:hover {
+            border-color: $xc-nav-list-item-border-color-hover;
+            xc-icon {
+                color: $xc-nav-list-item-color-hover;
+            }
+            &::ng-deep .mat-list-item-content {
+                background-color: $xc-nav-list-item-background-color-hover;
+            }
+        }
+        &:focus {
+            border-color: $xc-nav-list-item-border-color-focus;
+            xc-icon {
+                color: $xc-nav-list-item-color-focus;
+            }
+            &::ng-deep .mat-list-item-content {
+                background-color: $xc-nav-list-item-background-color-focus;
+            }
+        }
+        &.active {
+            border-color: $xc-nav-list-item-border-color-active;
+            xc-icon {
+                color: $xc-nav-list-item-color-active;
+            }
+            &::ng-deep .mat-list-item-content {
+                background-color: $xc-nav-list-item-background-color-active;
+            }
+        }
+        &.disabled, &.active {
+            pointer-events: none;
+            touch-action: none;
+        }
+        // if it is disabled and a parent (usecase - purpose of grouping/structuring)
+        // style it as normal
+        &.disabled.parent ::ng-deep xc-icon {
+            color: $xc-nav-list-item-color-normal;
+        }
+
+        &::ng-deep .toggle {
+            margin-right: 10px;
+            transition: transform $transition-time-fast ease-in-out;
+
+            // the accordion icon should have the same color as the text
+            & {
+                color: $xc-nav-list-item-color-normal;
+            }
+
+            &.rotated {
+                transform: rotate(90deg);
+            }
+
+            // TODO
+            // &.disabled {
+            //     visibility: hidden;
+            // }
+        }
+    }
+
+
+}

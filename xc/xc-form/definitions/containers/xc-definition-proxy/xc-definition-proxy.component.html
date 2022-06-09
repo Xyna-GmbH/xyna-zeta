@@ -1,0 +1,51 @@
+<ng-container *ngIf="!hidden" [ngSwitch]="true">
+    <xc-predefined-table-panel-definition *ngSwitchCase="isType(PredefinedTablePanelDefinition)"
+        [xc-table-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-predefined-table-panel-definition>
+    <xc-table-panel-definition *ngSwitchCase="isType(TablePanelDefinition)"
+        [xc-table-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-table-panel-definition>
+    <xc-tree-panel-definition *ngSwitchCase="isType(TreePanelDefinition)"
+        [xc-tree-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-tree-panel-definition>
+    <xc-form-panel-definition *ngSwitchCase="isType(PanelDefinition)"
+        [xc-panel-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-form-panel-definition>
+    <xc-definition-list-definition *ngSwitchCase="isType(DefinitionListDefinition)"
+        [xc-definition-list-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-definition-list-definition>
+    <xc-form-definition *ngSwitchCase="isType(FormDefinition)"
+        [xc-form-definition]="baseDefinition"
+        [xc-base-definition-data]="definitionData"
+        (xc-definition-closed)="closed.emit()"
+        [class]="baseDefinition.style"
+        class="container"
+    ></xc-form-definition>
+    <xc-template *ngSwitchCase="isTemplate()"
+        [xc-template-instance]="template"
+        xc-unwrap
+    ></xc-template>
+    <span *ngSwitchDefault>
+        <ng-container *ngIf="baseDefinition">{{baseDefinition.translate('Cannot resolve definition') | async}}</ng-container>
+    </span>
+</ng-container>

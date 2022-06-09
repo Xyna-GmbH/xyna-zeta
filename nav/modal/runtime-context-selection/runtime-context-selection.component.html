@@ -1,0 +1,22 @@
+<xc-dialog-wrapper xc-i18n-context="zeta.nav.runtime-context-selection">
+    <ng-container header><span xc-i18n>header-choose-runtime-context</span></ng-container>
+    <section content>
+        <xc-form-autocomplete
+            #rtcAutocomplete
+            label="label-runtime-context"
+            placeholder="placeholder-choose"
+            xc-i18n
+            [(xc-form-autocomplete-option)]="runtimeContextDataWrapper.value"
+            [xc-form-autocomplete-options]="runtimeContextDataWrapper.values"
+            xc-form-autocomplete-sortdirection="asc"
+            xc-form-autocomplete-fulltextsearch
+            xc-form-field-suffix="clear"
+            xc-form-validator-required
+            (keyup.enter)="onEnter()"
+        ></xc-form-autocomplete>
+    </section>
+    <ng-container footer>
+        <xc-button (click)="dismiss()" xc-focus-initial xc-i18n>button-cancel</xc-button>
+        <xc-button (click)="select()" [disabled]="!valid" xc-i18n>button-ok</xc-button>
+    </ng-container>
+</xc-dialog-wrapper>

@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-0" #col0 [ngStyle]="{'min-width.px': firstColumnWidth, 'padding-left.px': indentation}">
+        <xc-icon-button
+            *ngIf="node.expandable"
+            class="toggle"
+            color="color-black"
+            [class.rotated]="expanded"
+            xc-icon-name="accordion"
+            xc-icon-size="small"
+            [xc-button-aria-label]="i18n.translate('zeta.xc.tree.expand-collapse-arialabel') + ' ' + i18n.translate(node.name)"
+            [xc-tooltip]="i18n.translate('zeta.xc.tree.expand-collapse-tooltip')"
+            xc-tooltip-showdelay="500"
+            (click)="toggle($event)"
+        ></xc-icon-button>
+        <label class="label">{{node.name}}</label>
+    </div>
+    <div class="col-1">
+        <label class="value" [class.undefined]="node.value == undefined" [class.keep-breaks]="keepBreaks">{{value}}</label>
+    </div>
+</div>
+<ng-container *ngIf="expanded">
+    <xc-tree-item *ngFor="let childNode of (node.children | async)"
+        [node]="childNode"
+        (expand)="expand.emit($event)"
+        [xc-tree-item-keep-breaks]="keepBreaks"
+        [firstColumnWidth]="firstColumnWidth"
+        (widthChange)="childWidthChange($event)"
+    ></xc-tree-item>
+</ng-container>

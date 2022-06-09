@@ -1,0 +1,118 @@
+<ng-container [ngSwitch]="true">
+    <!-- for performance reasons the non-template case is checked first -->
+    <span
+        *ngSwitchCase="!Type.XcTemplate.of(instance)"
+        [attr.aria-label]="ariaLabel + ' : ' + instance"
+        tabindex="0"
+        contenteditable="false"
+        aria-readonly="true"
+    >{{instance}}</span>
+    <xc-form-text
+        *ngSwitchCase="Type.XcFormTextTemplate.of(instance)"
+        [label]="instance.label"
+        [class]="instance.stylename"
+        [value]="instance.dataWrapper.value"
+        [xc-form-field-aria-label]="ariaLabel"
+        [xc-form-field-compact]="instance.compact"
+        [xc-form-field-floatlabel]="instance.floatLabel"
+        xc-tooltip="{{instance.tooltip}}"
+    ></xc-form-text>
+    <!-- must always be unwrapped because a dl must directly contain dt and dd elements -->
+    <xc-definition-list-entry
+        *ngSwitchCase="Type.XcDefinitionListEntryTemplate.of(instance)"
+        [definitionType]="instance.label"
+        [definitionData]="instance.data"
+        xc-unwrap
+    ></xc-definition-list-entry>
+    <xc-form-autocomplete
+        *ngSwitchCase="Type.XcFormAutocompleteTemplate.of(instance)"
+        [label]="instance.label"
+        [placeholder]="instance.placeholder"
+        [disabled]="instance.disabled || disabled"
+        [class]="instance.stylename"
+        [xc-form-validators]="instance.validators"
+        [(xc-form-autocomplete-option)]="instance.dataWrapper.value"
+        [xc-form-autocomplete-options]="instance.dataWrapper.values"
+        [xc-form-autocomplete-asinput]="instance.asInput"
+        [xc-form-autocomplete-asdropdown]="instance.asDropdown"
+        [xc-form-field-aria-label]="ariaLabel"
+        [xc-form-field-compact]="instance.compact"
+        [xc-form-field-suffix]="instance.suffix"
+        [xc-form-field-floatlabel]="instance.floatLabel"
+        [xc-form-field-indicatechanges]="instance.indicateChanges"
+        [xc-form-field-callback]="instance.callback"
+        xc-tooltip="{{instance.tooltip}}"
+    ></xc-form-autocomplete>
+    <xc-form-input
+        *ngSwitchCase="Type.XcFormInputTemplate.of(instance)"
+        [label]="instance.label"
+        [placeholder]="instance.placeholder"
+        [disabled]="instance.disabled || disabled"
+        [class]="instance.stylename"
+        [(value)]="instance.dataWrapper.value"
+        [type]="instance.type"
+        [xc-form-validators]="instance.validators"
+        [xc-form-field-aria-label]="ariaLabel"
+        [xc-form-field-compact]="instance.compact"
+        [xc-form-field-suffix]="instance.suffix"
+        [xc-form-field-floatlabel]="instance.floatLabel"
+        [xc-form-field-indicatechanges]="instance.indicateChanges"
+        [xc-form-field-callback]="instance.callback"
+        xc-tooltip="{{instance.tooltip}}"
+        [iconTooltip]="toolTip"
+    ></xc-form-input>
+    <xc-form-textarea
+        *ngSwitchCase="Type.XcFormTextAreaTemplate.of(instance)"
+        [label]="instance.label"
+        [placeholder]="instance.placeholder"
+        [disabled]="instance.disabled || disabled"
+        [class]="instance.stylename"
+        [(value)]="instance.dataWrapper.value"
+        [xc-form-validators]="instance.validators"
+        [xc-form-field-aria-label]="ariaLabel"
+        [xc-form-field-compact]="instance.compact"
+        [xc-form-field-floatlabel]="instance.floatLabel"
+        [xc-form-field-indicatechanges]="instance.indicateChanges"
+        [xc-form-field-callback]="instance.callback"
+        [xc-form-textarea-lines]="instance.lines"
+        xc-tooltip="{{instance.tooltip}}"
+    ></xc-form-textarea>
+    <xc-checkbox
+        *ngSwitchCase="Type.XcCheckboxTemplate.of(instance)"
+        [label]="instance.label"
+        [color]="instance.color"
+        [disabled]="instance.disabled || disabled"
+        [class]="instance.stylename"
+        [(checked)]="instance.dataWrapper.value"
+        [indeterminate]="instance.indeterminate"
+        xc-tooltip="{{instance.tooltip}}"
+        [attr.aria-label]="ariaLabel"
+    ></xc-checkbox>
+    <xc-button
+        *ngSwitchCase="Type.XcButtonTemplate.of(instance)"
+        [color]="instance.color"
+        [disabled]="instance.disabled || disabled || instance.busy"
+        [busy]="instance.busy"
+        [class]="instance.stylename"
+        xc-tooltip="{{instance.tooltip}}"
+        [xc-button-aria-label]="ariaLabel"
+        (click)="instance.action()"
+    ><xc-icon [color]="instance.color" [xc-icon-name]="instance.iconName" [xc-icon-style]="instance.iconStyle">{{instance.label}}</xc-icon></xc-button>
+    <xc-icon-button
+        *ngSwitchCase="Type.XcIconButtonTemplate.of(instance)"
+        [color]="instance.color"
+        [disabled]="instance.disabled || disabled || instance.busy"
+        [busy]="instance.busy"
+        [class]="instance.stylename"
+        [xc-icon-name]="instance.iconName"
+        [xc-icon-style]="instance.iconStyle"
+        xc-tooltip="{{instance.tooltip}}"
+        xc-button-aria-label="{{ariaLabel + (instance.label ? ' - ' + instance.label : '')}}"
+        (click)="instance.action()"
+    ></xc-icon-button>
+    <ng-container
+        *ngSwitchCase="Type.XcComponentTemplate.of(instance)"
+        [ngComponentOutlet]="instance.component"
+        [ngComponentOutletInjector]="instance.getComponentInjector(injector)"
+    ></ng-container>
+</ng-container>

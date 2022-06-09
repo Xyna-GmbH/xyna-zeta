@@ -1,0 +1,125 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$xc-title-bar-box-shadow-color: unset !default;
+$xc-title-bar-box-shadow-visible: unset !default; // boolean
+$xc-title-bar-background-color: unset !default;
+$xc-title-bar-logo-background: unset !default;
+$xc-title-bar-logo-hidden: unset !default; // boolean
+$xc-title-bar-title-color: unset !default;
+
+$xc-title-bar-border-bottom-width: unset !default;
+$xc-title-bar-border-bottom-color: unset !default;
+$xc-title-bar-border-top-width: unset !default;
+$xc-title-bar-border-top-color: unset !default;
+$xc-title-bar-border-left-width: unset !default;
+$xc-title-bar-border-left-color: unset !default;
+$xc-title-bar-border-right-width: unset !default;
+$xc-title-bar-border-right-color: unset !default;
+$xc-title-bar-height: unset !default;
+$xc-title-bar-wrapper-width: unset !default;
+$xc-title-bar-title-font-family: unset !default;
+$xc-title-bar-title-font-style: unset !default;
+$xc-title-bar-title-font-size: unset !default;
+$xc-title-bar-title-text-transform: unset !default;
+$xc-title-bar-title-margin: unset !default;
+$xc-title-bar-title-padding: unset !default;
+$xc-title-bar-content-margin: unset !default;
+$xc-title-bar-content-padding: unset !default;
+$xc-title-bar-meta-nav-margin: unset !default;
+$xc-title-bar-meta-nav-padding: unset !default;
+
+@import 'const';
+
+:host {
+    height: $xc-title-bar-height;
+    border-top: $xc-title-bar-border-top-color solid $xc-title-bar-border-top-width;
+    border-bottom: $xc-title-bar-border-bottom-color solid $xc-title-bar-border-bottom-width;
+    border-left: $xc-title-bar-border-left-color solid $xc-title-bar-border-left-width;
+    border-right: $xc-title-bar-border-right-color solid $xc-title-bar-border-right-width;
+    z-index: 128;
+
+    @if $xc-title-bar-box-shadow-visible {
+        box-shadow: 0 0 4px 2px $xc-title-bar-box-shadow-color;
+    }
+
+    .wrapper {
+        width: $xc-title-bar-wrapper-width;
+        margin: auto;
+        display: flex;
+        flex: 0 0 auto;
+        position: relative;
+        background-color: $xc-title-bar-background-color;
+
+        .title {
+            margin: $xc-title-bar-title-margin;
+            padding: $xc-title-bar-title-padding;
+            color: $xc-title-bar-title-color;
+            flex: 0 0 auto;
+        }
+
+        .content {
+            margin: $xc-title-bar-content-margin;
+            padding: $xc-title-bar-content-padding;
+            flex: 1 1 auto;
+            overflow-x: auto;
+            display: flex;
+        }
+
+        .meta-nav {
+            margin: $xc-title-bar-meta-nav-margin;
+            padding: $xc-title-bar-meta-nav-padding;
+            flex: 0 0 auto;
+        }
+
+        ::ng-deep .title {
+            span {
+                font-family: $xc-title-bar-title-font-family;
+                font-style: $xc-title-bar-title-font-style;
+                text-transform: $xc-title-bar-title-text-transform;
+                font-size: $xc-title-bar-title-font-size;
+            }
+        }
+
+        ::ng-deep [aside] {
+            display: flex;
+            flex-direction: row;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        .meta-nav {
+
+            svg {
+                display: none;
+            }
+
+            @if $theme == xyna {
+                svg {
+                    display: flex;
+                    flex: 0 0 auto;
+                    width: 64px;
+                    height: 48px;
+                    background-color: white;
+                    padding: 0 16px;
+                    cursor: pointer;
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+}

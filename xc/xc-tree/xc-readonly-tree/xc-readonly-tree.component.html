@@ -1,0 +1,7 @@
+<xc-tree-item *ngFor="let node of dataSource.structureTreeData"
+    [node]="node"
+    (expand)="expandNode($event)"
+    [xc-tree-item-keep-breaks]="keepBreaks"
+    [firstColumnWidth]="firstColumnWidth"
+    (widthChange)="widthChange($event)"
+></xc-tree-item>
