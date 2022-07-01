@@ -26,6 +26,7 @@ import { XcOptionItem, XcOptionItemValueType } from '../shared/xc-item';
 import { XcColor } from '../shared/xc-themeable.component';
 import { XcAutocompleteDataWrapper } from '../xc-form/xc-form-autocomplete/xc-form-autocomplete.component';
 import { FloatStyle, XcFormBaseComponent } from '../xc-form/xc-form-base/xc-form-base.component';
+import { XcFormValidatorRequired } from '../xc-form/xc-form-base/xc-form-validators.directive';
 
 
 export abstract class XcTemplate {
@@ -62,9 +63,12 @@ export abstract class XcFormTemplate<D, S, W extends XcDataWrapper<D, S> = XcDat
     suffix = '';
     tooltip = '';
     floatLabel: FloatStyle = FloatStyle.always;
+    required: boolean;
 
     constructor(dataWrapper: W, public validators: ValidatorFn[] = []) {
         super(dataWrapper);
+
+        this.required = validators.findIndex(v => v.name === XcFormValidatorRequired.name) >= 0;
     }
 }
 
