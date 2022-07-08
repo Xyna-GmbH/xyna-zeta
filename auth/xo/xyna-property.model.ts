@@ -87,6 +87,11 @@ export class XoXynaProperty extends XoObject {
         super.afterDecode();
         this.templates = XoXynaProperty.createTemplatesFn?.(this) ?? [];
     }
+
+
+    get valueOrDefault(): string {
+        return this.value ?? this.defaultValue;
+    }
 }
 
 @XoArrayClass(XoXynaProperty)
