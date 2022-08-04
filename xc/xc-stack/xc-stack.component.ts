@@ -20,7 +20,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, View
 import { coerceBoolean, retrieveFocusableElements } from '@zeta/base';
 import { I18nService } from '@zeta/i18n';
 
-import { BehaviorSubject, combineLatest, Observable, of, Subject, Subscription } from 'rxjs/';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, switchMapTo } from 'rxjs/operators';
 
 import { XcStackDataSource } from './xc-stack-data-source';

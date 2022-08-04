@@ -20,8 +20,8 @@ import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
 
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs/';
-import { filter, finalize, map, tap } from 'rxjs/operators/';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { filter, finalize, map, tap } from 'rxjs/operators';
 
 import { isNumber, pack, stringToUnboxedInteger } from '../base';
 import { XoKillOrdersResponse } from './xo/kill-orders-response.model';

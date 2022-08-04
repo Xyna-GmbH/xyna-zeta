@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { from, Observable, Subject } from 'rxjs/';
+import { from, Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 
@@ -502,7 +502,7 @@ export function isSymbol(arg: any): arg is symbol {
 }
 
 
-export function convertNan(value: number, to: null|undefined): number {
+export function convertNan(value: number, to: null | undefined): number {
     return isNaN(value) ? to : value;
 }
 
@@ -546,7 +546,7 @@ export function range(length: number, start = 0): number[] {
 }
 
 
-export function numberToString(value: number, nullRepresentation: null|undefined): string {
+export function numberToString(value: number, nullRepresentation: null | undefined): string {
     // x == null   equals   x === null || x === undefined
     return isNaN(value) || value == null ? nullRepresentation : '' + value;
 }
@@ -562,7 +562,7 @@ export function boxedNumberToString(value: number): string {
 }
 
 
-export function stringToInteger(value: string, nullRepresentation: null|undefined): number {
+export function stringToInteger(value: string, nullRepresentation: null | undefined): number {
     return convertNan(parseInt(value, 10), nullRepresentation);
 }
 
@@ -577,7 +577,7 @@ export function stringToBoxedInteger(value: string): number {
 }
 
 
-export function stringToFloat(value: string, nullRepresentation: null|undefined): number {
+export function stringToFloat(value: string, nullRepresentation: null | undefined): number {
     return convertNan(parseFloat(value), nullRepresentation);
 }
 
@@ -592,7 +592,7 @@ export function stringToBoxedFloat(value: string): number {
 }
 
 
-export function booleanToString(value: boolean, nullRepresentation: null|undefined): string {
+export function booleanToString(value: boolean, nullRepresentation: null | undefined): string {
     return value == null ? nullRepresentation : value.toString();
 }
 
@@ -607,7 +607,7 @@ export function boxedBooleanToString(value: boolean): string {
 }
 
 
-export function stringToBoolean(value: string, nullRepresentation: null|undefined): boolean {
+export function stringToBoolean(value: string, nullRepresentation: null | undefined): boolean {
     return value === 'false' ? false : (value === 'true' || nullRepresentation);
 }
 

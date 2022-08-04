@@ -17,7 +17,7 @@
  */
 import { I18nService } from '@zeta/i18n';
 
-import { Observable, Subject } from 'rxjs/';
+import { Observable, Subject } from 'rxjs';
 
 import { ApiService, FullQualifiedName, RuntimeContext, Xo, XoArray, XoDescriber, XoDescriberCache, XoObject, XoStructureArray, XoStructureField, XoStructureObject, XoStructurePrimitive, XoStructureType } from '../../api';
 import { Comparable, defineAccessorProperty } from '../../base/base';

@@ -18,7 +18,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy, ViewChild } from '@angular/core';
 
 import { RuntimeContext } from '@zeta/api';
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { map, tap } from 'rxjs/operators';
 

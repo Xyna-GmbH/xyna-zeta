@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { BehaviorSubject, Observable, Subject } from 'rxjs/';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { defineAccessorProperty, NativeArray } from '../../base';
 import { XoConsistencyCheck } from './xo-consistency';

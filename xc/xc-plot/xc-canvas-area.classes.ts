@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, Subscription } from 'rxjs/';
+import { Observable, Subscription } from 'rxjs';
 
 import { XcCanvasHelper } from '../xc-canvas/xc-canvas-helper.class';
 import { CartasianCoordinateSystem } from './classes/cartasian-coordinate-system.class';

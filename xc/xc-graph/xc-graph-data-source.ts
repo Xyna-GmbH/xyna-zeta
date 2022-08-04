@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Subject } from 'rxjs/';
+import { Subject } from 'rxjs';
 
 import { floorBase, seconds } from '../../base';
 import { XcDataSource } from '../shared/xc-data-source';

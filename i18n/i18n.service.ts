@@ -21,7 +21,7 @@ import { Injectable, Injector, Type } from '@angular/core';
 import { isString } from '@zeta/base';
 import escapeStringRegexp from 'escape-string-regexp';
 
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 

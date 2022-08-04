@@ -19,7 +19,7 @@ import { Component, Injector } from '@angular/core';
 
 import { ApiService, RuntimeContext } from '@zeta/api';
 
-import { throwError } from 'rxjs/';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { I18nService } from '../../i18n';

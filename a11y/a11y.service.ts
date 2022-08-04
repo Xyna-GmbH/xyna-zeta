@@ -18,7 +18,7 @@
 import { AriaLivePoliteness, LiveAnnouncer } from '@angular/cdk/a11y';
 import { Injectable, NgZone } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subject, Subscriber } from 'rxjs/';
+import { BehaviorSubject, Observable, Subject, Subscriber } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 

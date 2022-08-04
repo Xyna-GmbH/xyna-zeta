@@ -17,7 +17,7 @@
  */
 import { XcCanvasHelper } from '@zeta/xc/xc-canvas/xc-canvas-helper.class';
 
-import { Observable, Subscription } from 'rxjs/';
+import { Observable, Subscription } from 'rxjs';
 
 import { XcPlotPointConnection } from '../sub-classes/basics';
 import { BezierSplineHelper, CurveControlPoints } from '../sub-classes/bezier-spline-helper.class';

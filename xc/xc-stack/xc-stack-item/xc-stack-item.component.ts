@@ -17,7 +17,7 @@
  */
 import { InjectionToken, Injector } from '@angular/core';
 
-import { Observable, of } from 'rxjs/';
+import { Observable, of } from 'rxjs';
 
 import { XcDynamicComponent } from '../../shared/xc-dynamic.component';
 import { XC_COMPONENT_DATA } from '../../xc-template/xc-template';

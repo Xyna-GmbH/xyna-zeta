@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { BehaviorSubject } from 'rxjs/';
+import { BehaviorSubject } from 'rxjs';
 
 import { ApiService, RuntimeContext, XoArray, XoDescriber, XoDescriberCache, XoObject, XoStructureArray, XoStructureComplexField, XoStructureField, XoStructureMethod, XoStructureObject } from '../../api';
 import { I18nService } from '../../i18n';

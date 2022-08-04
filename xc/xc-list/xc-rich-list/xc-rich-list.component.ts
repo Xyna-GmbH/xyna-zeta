@@ -19,7 +19,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { NgComponentOutlet } from '@angular/common';
 import { Component, ComponentRef, Injector, Input, QueryList, ViewChildren } from '@angular/core';
 
-import { Subject } from 'rxjs/';
+import { Subject } from 'rxjs';
 
 import { XcThemeableComponent } from '../../shared/xc-themeable.component';
 import { XC_RICH_LIST_ITEM_DATA, XcRichListInterface, XcRichListItem, XcRichListItemComponent, XcRichListItemRef } from './xc-rich-list-item.component';

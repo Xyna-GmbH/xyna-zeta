@@ -19,7 +19,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { environment } from '@environments/environment';
 
-import { EMPTY, Observable } from 'rxjs/';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError, filter, finalize } from 'rxjs/operators';
 
 import { SelectableLanguage } from '../../api/zeta-environment.interfaces';

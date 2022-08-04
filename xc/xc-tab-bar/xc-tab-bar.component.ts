@@ -22,7 +22,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 
 import { coerceBoolean } from '@zeta/base';
 
-import { Observable, of, Subject } from 'rxjs/';
+import { Observable, of, Subject } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 import { XcThemeableComponent } from '../../xc/shared/xc-themeable.component';

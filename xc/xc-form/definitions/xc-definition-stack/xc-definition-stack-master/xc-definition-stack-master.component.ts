@@ -17,7 +17,7 @@
  */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';

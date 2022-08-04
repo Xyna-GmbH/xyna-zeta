@@ -17,7 +17,7 @@
  */
 import { Type } from '@angular/core';
 
-import { Observable, of, Subject } from 'rxjs/';
+import { Observable, of, Subject } from 'rxjs';
 import * as THREE from 'three';
 
 

@@ -20,7 +20,7 @@ import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
 
 import { coerceBoolean } from '@zeta/base';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { XcThemeableComponent } from '../../shared/xc-themeable.component';
 import { XcNavListItem } from './xc-nav-list-item/xc-nav-list-item.component';

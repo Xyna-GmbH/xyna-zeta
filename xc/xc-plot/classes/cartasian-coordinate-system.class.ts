@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, Subscription } from 'rxjs/';
+import { Observable, Subscription } from 'rxjs';
 
 import { CommonBorder, XcPlottableArea } from '../sub-classes/basics';
 import { XcPlotDataSource } from '../xc-plot-data-source';

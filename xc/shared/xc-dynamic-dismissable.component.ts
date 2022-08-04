@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, of } from 'rxjs/';
+import { Observable, of } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { XcDynamicComponent } from '../shared/xc-dynamic.component';

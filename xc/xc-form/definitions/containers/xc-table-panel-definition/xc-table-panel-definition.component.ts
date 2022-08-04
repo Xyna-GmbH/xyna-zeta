@@ -19,7 +19,7 @@ import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 
 import { pack } from '@zeta/base';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 
 import { ApiService, XynaMonitoringLevel, XynaPriority } from '../../../../../api';

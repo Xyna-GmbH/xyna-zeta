@@ -17,7 +17,7 @@
  */
 import { ChangeDetectorRef, Component, HostBinding, HostListener, Injector, Input } from '@angular/core';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { coerceBoolean, templateClassType } from '../../base';
 import { XcDataWrapper } from '../shared/xc-data-wrapper';

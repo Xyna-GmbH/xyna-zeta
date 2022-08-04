@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, Subject, throwError } from 'rxjs/';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
 
 import { boxedBooleanToString, boxedNumberToString, Comparable, Constructor, downloadFile, isArray, isObject, MimeTypes, Native, NativeArray, stringToBoxedBoolean, stringToBoxedFloat, stringToBoxedInteger, stringToUnboxedBoolean, stringToUnboxedFloat, stringToUnboxedInteger, TypeFilterOut, TypePropertiesOf, unboxedBooleanToString, unboxedNumberToString, uniquify, uploadFile, UploadResultStatus } from '../../base';

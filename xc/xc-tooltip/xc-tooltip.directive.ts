@@ -17,7 +17,7 @@
  */
 import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { A11yService, ScreenreaderPriority } from '../../a11y';
 import { coerceBoolean, isArray, isObject, isString, retrieveFocusableElements } from '../../base';

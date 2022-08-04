@@ -15,7 +15,6 @@
         "@angular-eslint/directive-class-suffix": "error",
         "@angular-eslint/no-output-on-prefix": "warn",
         "@angular-eslint/prefer-output-readonly": "warn",
-        "@angular-eslint/use-pipe-decorator": "error",
         "@angular-eslint/use-pipe-transform-interface": "error",
 
         // --------------------------------------------------------------------------------------------------------------------------------
@@ -233,7 +232,6 @@
         //"no-dupe-class-members": "error",                                                             // recommended  extended
         //"no-duplicate-imports": "warn",                                                               //              extended
         "no-new-symbol": "error",                                                                       // recommended
-        "no-restricted-imports": ["error", "rxjs", "rxjs/Rx"],
         "no-this-before-super": "error",                                                                // recommended
         "no-useless-rename": "error",
         "no-var": "error",

@@ -17,7 +17,7 @@
  */
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { coerceBoolean } from '../../../../base';

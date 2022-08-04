@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { merge, Observable, Subject } from 'rxjs/';
+import { merge, Observable, Subject } from 'rxjs';
 
 import { Comparable } from '../../base';
 import { XcDataSource } from './xc-data-source';

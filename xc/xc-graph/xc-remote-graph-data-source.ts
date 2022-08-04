@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { throwError } from 'rxjs/';
+import { throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 
 import { ApiService, RuntimeContext, StartOrderOptionsBuilder, Xo, XoArray, XoArrayClass, XoObject, XoObjectClass, XoObjectClassInterface, XoProperty } from '../../api';

@@ -17,7 +17,7 @@
  */
 import { CollectionViewer } from '@angular/cdk/collections';
 
-import { merge, Observable, Subject, Subscription } from 'rxjs/';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
 import { Xo, XoObject } from '../../api';
@@ -258,7 +258,7 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
         if (this._sortPath !== path || this._sortDirection !== direction) {
             this._sortPath = path;
             this._sortDirection = direction;
-            this._sortChange.next();
+            this._sortChange.next(false);
         }
     }
 
@@ -271,7 +271,7 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
     setSortPath(value: string) {
         if (this._sortPath !== value) {
             this._sortPath = value;
-            this._sortChange.next();
+            this._sortChange.next(false);
         }
     }
 
@@ -284,7 +284,7 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
     setSortDirection(value: XcSortDirection) {
         if (this._sortDirection !== value) {
             this._sortDirection = value;
-            this._sortChange.next();
+            this._sortChange.next(false);
         }
     }
 
@@ -307,11 +307,11 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
     setFilter(path: string, value: string) {
         if (value && value !== this.filters.get(path)) {
             this.filters.set(path, value);
-            this.filterChange.next();
+            this.filterChange.next(false);
         }
         if (!value && this.filters.get(path)) {
             this.filters.delete(path);
-            this.filterChange.next();
+            this.filterChange.next(false);
         }
         this.triggerMarkForChange();
     }
@@ -319,14 +319,14 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
 
     resetFilters() {
         this.filters.clear();
-        this.filtersReset.next();
-        this.filterChange.next();
+        this.filtersReset.next(false);
+        this.filterChange.next(false);
         this.triggerMarkForChange();
     }
 
 
     applyFilters() {
-        this.filterChange.next();
+        this.filterChange.next(false);
         if (!this.refreshOnFilterChange) {
             this.refresh();
         }

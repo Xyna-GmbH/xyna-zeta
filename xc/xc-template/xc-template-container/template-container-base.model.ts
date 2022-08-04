@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 
 import { XoObject, XoObjectClass, XoStructureObject } from '../../../api';
 import { XcComponentTemplate, XcTemplate } from '../xc-template';

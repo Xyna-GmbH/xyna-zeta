@@ -18,7 +18,7 @@
 import { ChangeDetectorRef, ContentChildren, Directive, EventEmitter, OnDestroy, Output, QueryList } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { merge, Observable, Subscription } from 'rxjs/';
+import { merge, Observable, Subscription } from 'rxjs';
 
 import { XcFormBaseComponent } from './xc-form-base.component';
 import { XcFormValidatorBaseDirective } from './xc-form-validator-base.directive';

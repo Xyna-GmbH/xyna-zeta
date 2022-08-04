@@ -19,7 +19,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 
 import { downloadFile, MimeTypes, NOP } from '@zeta/base';
 
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 import * as THREE from 'three';
 
 
