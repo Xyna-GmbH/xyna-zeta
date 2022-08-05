@@ -38,7 +38,7 @@ export abstract class XcDataWrapper<L, R> {
 
 export abstract class XcBoxableDataWrapper<L, R> extends XcDataWrapper<L, R> {
 
-    nullRepresentation: null|undefined;
+    nullRepresentation: null | undefined;
 
 
     constructor(getter: () => R, setter: (value: R) => void, boxed = false) {

@@ -32,55 +32,43 @@ export const ZetaScripts = {
 
 export const ZetaDependencies = {
     "dependencies": {
-        "hammerjs": "2.0.8",
-        "zone.js": "0.11.3",
-        "rxjs": "6.6.3",
-        "tslib": "2.1.0",
+        "@angular/animations": "14.1.0",
+        "@angular/cdk": "14.1.0",
+        "@angular/common": "14.1.0",
+        "@angular/compiler": "14.1.0",
+        "@angular/core": "14.1.0",
+        "@angular/forms": "14.1.0",
+        "@angular/localize": "14.1.0",
+        "@angular/material": "14.1.0",
+        "@angular/platform-browser": "14.1.0",
+        "@angular/platform-browser-dynamic": "14.1.0",
+        "@angular/router": "14.1.0",
+        "@angular/service-worker": "14.1.0",
+        "@types/resize-observer-browser": "^0.1.7",
         "escape-string-regexp": "^5.0.0",
-
-        // threejs
+        "hammerjs": "2.0.8",
+        "rxjs": "7.5.6",
         "three": "0.129.0",
-
-        // material
-        "@angular/material": "11.1.1",
-        "@angular/cdk": "11.1.1",
-
-        // angular
-        "@angular/animations": "11.1.1",
-        "@angular/common": "11.1.1",
-        "@angular/compiler": "11.1.1",
-        "@angular/core": "11.1.1",
-        "@angular/forms": "11.1.1",
-        "@angular/localize": "11.1.1",
-        "@angular/platform-browser": "11.1.1",
-        "@angular/platform-browser-dynamic": "11.1.1",
-        "@angular/router": "11.1.1",
-        "@angular/service-worker": "11.1.1",
-
-        // xliffmerge
-        "@ngx-i18nsupport/tooling": "^8.0.3"
+        "tslib": "2.4.0",
+        "zone.js": "0.11.7"
     },
     "devDependencies": {
-        "ts-node": "9.1.1",
-        "typescript": "4.1.3",
-        "@types/node": "14.14.22",
+        "@angular-devkit/build-angular": "14.1.0",
+        "@angular-eslint/eslint-plugin": "14.0.2",
+        "@angular/cli": "14.1.0",
+        "@angular/compiler-cli": "14.1.0",
+        "@angular/language-service": "14.1.0",
+        "@types/node": "18.0.6",
+        "@types/offscreencanvas": "^2019.7.0",
         "@types/three": "0.129.1",
-        "@typescript-eslint/eslint-plugin": "4.15.0",
-        "@typescript-eslint/parser": "4.15.0",
-        "eslint": "7.19.0",
-        "eslint-plugin-import": "2.22.1",
-        "eslint-plugin-jsdoc": "31.6.1",
+        "@typescript-eslint/eslint-plugin": "5.30.7",
+        "@typescript-eslint/parser": "5.30.7",
+        "eslint": "8.20.0",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-jsdoc": "39.3.3",
         "eslint-plugin-prefer-arrow": "1.2.3",
         "eslint-plugin-zeta": "file:projects/xyna/src/app/zeta/lint/plugins/eslint-plugin-zeta",
-
-        // angular
-        "@angular-eslint/eslint-plugin": "1.1.0",
-        "@angular-devkit/build-angular": "0.1101.2",
-        "@angular/cli": "11.1.2",
-        "@angular/compiler-cli": "11.1.1",
-        "@angular/language-service": "11.1.1",
-
-        // xliffmerge
-        "@ngx-i18nsupport/ngx-i18nsupport": "^1.1.6"
+        "ts-node": "10.9.1",
+        "typescript": "4.7.4"
     }
 };

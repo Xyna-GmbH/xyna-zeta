@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { BehaviorSubject, Observable, Subject } from 'rxjs/';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, finalize } from 'rxjs/operators';
 
 import { ApiService, RuntimeContext, StartOrderOptionsBuilder, StartOrderResult, Xo, XoAccessor, XoAccessorMapPropertySeparator, XoArray, XoArrayClass, XoArrayClassInterface, XoObject, XoObjectClass, XoObjectClassInterface, XoProperty, XynaMonitoringLevel, XynaPriority } from '../../api';

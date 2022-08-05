@@ -18,7 +18,7 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 
-import { BehaviorSubject, EMPTY, merge, Observable, Subject } from 'rxjs/';
+import { BehaviorSubject, EMPTY, merge, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 

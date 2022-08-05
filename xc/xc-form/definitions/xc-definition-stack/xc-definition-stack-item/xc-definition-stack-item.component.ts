@@ -19,7 +19,7 @@ import { AfterViewInit, Component, Injector, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 import { XcStackItemComponent, XcStackItemComponentData } from '../../../../xc-stack/xc-stack-item/xc-stack-item.component';
 
-import { Observable, of, Subject, Subscription } from 'rxjs/';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { XoFormDefinition } from '../../xo/containers.model';
 import { ApiService, StartOrderOptionsBuilder, Xo, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';

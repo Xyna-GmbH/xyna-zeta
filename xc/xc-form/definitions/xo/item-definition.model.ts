@@ -18,7 +18,7 @@
 import { ValidatorFn } from '@angular/forms';
 
 import { isArray } from '../../../../base';
-import { combineLatest, Observable, of } from 'rxjs/';
+import { combineLatest, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
 import { Xo, XoArray, XoArrayClass, XoObjectClass, XoProperty } from '../../../../api';

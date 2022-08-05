@@ -18,7 +18,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { A11yService, ScreenreaderPriority } from '../../a11y';
 import { XoObject } from '../../api';

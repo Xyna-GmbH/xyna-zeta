@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { ValidatorFn } from '@angular/forms';
-import { combineLatest, merge, Observable, of } from 'rxjs/';
+import { combineLatest, merge, Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 import { Xo, XoArray, XoArrayClass, XoObject, XoObjectClass, XoProperty, XoTransient } from '../../../../api';

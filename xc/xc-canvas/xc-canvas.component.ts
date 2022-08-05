@@ -17,7 +17,7 @@
  */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { Observable, Subject, Subscription } from 'rxjs/';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 import { coerceBoolean, isNumber, timeString } from '../../base';
 import { CanvasHelperRecording, MouseEventType, ScreenInfo, XcCanvasHelper, XcCanvasMouseEventsOption } from './xc-canvas-helper.class';
@@ -30,14 +30,6 @@ interface ResizeObserverEntry {
     readonly borderBoxSize?: Array<number>;
     readonly contentBoxSize?: Array<number>;
     readonly devicePixelContentBoxSize?: Array<number>;
-}
-
-enum ResizeObserverBoxOptions {
-    'border-box', 'content-box', 'device-pixel-content-box'
-}
-
-interface ResizeObserverOptions {
-    box: ResizeObserverBoxOptions;
 }
 
 /**

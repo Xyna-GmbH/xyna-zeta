@@ -17,7 +17,7 @@
  */
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs/';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { SessionInfo } from './auth-session';
 

@@ -17,7 +17,7 @@
  */
 import { Component, Input, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs/';
+import { Subscription } from 'rxjs';
 
 import { ApiService, RuntimeContext } from '../../../../../api';
 import { I18nService } from '../../../../../i18n';

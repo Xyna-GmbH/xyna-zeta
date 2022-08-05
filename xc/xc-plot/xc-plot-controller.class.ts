@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 
 import { XcCanvasComponent } from '../';
 import { getMouseButton, MouseButton } from '../xc-canvas/xc-canvas-helper.class';

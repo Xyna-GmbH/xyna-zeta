@@ -17,7 +17,7 @@
  */
 import { ValidatorFn } from '@angular/forms';
 
-import { BehaviorSubject, Observable, of, PartialObserver } from 'rxjs/';
+import { BehaviorSubject, Observable, of, PartialObserver } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { Xo, XoArray, XoArrayClass, XoObject, XoObjectClass, XoProperty } from '../../../../api';

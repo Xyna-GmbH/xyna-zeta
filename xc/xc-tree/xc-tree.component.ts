@@ -18,11 +18,11 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, NgZone, OnDestroy } from '@angular/core';
 
-import { I18nService } from '@zeta/i18n';
 
-import { Observable, of, Subscription } from 'rxjs/';
+import { Observable, of, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
+import { I18nService } from '../../i18n';
 import { coerceBoolean } from '../../base';
 import { xcTreeTranslations_deDE } from './locale/xc-translations.de-DE';
 import { xcTreeTranslations_enUS } from './locale/xc-translations.en-US';

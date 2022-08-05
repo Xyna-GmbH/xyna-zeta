@@ -148,6 +148,7 @@ mat-dialog-container.mat-dialog-container {
         .mat-menu-content .mat-menu-item {
             &:first-child::before, &:last-child::before {
                 content: "";
+                display: flex;
                 background: $xc-menu-item-background-color;
                 width: 18px;
                 height: 18px;

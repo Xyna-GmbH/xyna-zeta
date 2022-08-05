@@ -17,7 +17,7 @@
  */
 import { FlexibleConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 import { XcMenu, XcMenuComponent } from './xc-menu.component';
 
@@ -80,10 +80,10 @@ export class XcMenuTriggerDirective extends MatMenuTrigger {
 
 
     // override private function
-    [(() => '_setPosition')()](positionStrategy: FlexibleConnectedPositionStrategy) {
+    [(() => '_setPosition')()](menu: MatMenu, positionStrategy: FlexibleConnectedPositionStrategy) {
         // super call
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        super['_setPosition'].call(this, positionStrategy);
+        super['_setPosition'].call(this, menu, positionStrategy);
 
         if (this.triggersSubmenu()) {
             // affects nested menus only

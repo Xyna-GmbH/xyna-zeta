@@ -19,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable, of } from 'rxjs/';
+import { Observable, of } from 'rxjs';
 import { catchError, filter, mapTo, switchMap, tap } from 'rxjs/operators';
 
 import { A11yService } from '../a11y';

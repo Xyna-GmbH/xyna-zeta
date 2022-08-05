@@ -18,7 +18,7 @@
 import { InjectionToken, Injector } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
 
-import { Observable, Subject } from 'rxjs/';
+import { Observable, Subject } from 'rxjs';
 
 import { XcDataWrapper } from '../shared/xc-data-wrapper';
 import { XcDynamicComponentType } from '../shared/xc-dynamic.component';
@@ -38,7 +38,7 @@ export abstract class XcTemplate {
 
 
     triggerMarkForCheck() {
-        this._markForCheckSubject.next();
+        this._markForCheckSubject.next(null);
     }
 
 

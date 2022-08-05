@@ -17,7 +17,7 @@
  */
 import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs/';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { MouseEventType, XcCanvasMouseEventsOption } from '../xc-canvas/xc-canvas-helper.class';

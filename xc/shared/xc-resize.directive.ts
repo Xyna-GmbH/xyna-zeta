@@ -17,7 +17,7 @@
  */
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 
-import { fromEvent, Subscription } from 'rxjs/';
+import { fromEvent, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { coerceBoolean } from '../../base';

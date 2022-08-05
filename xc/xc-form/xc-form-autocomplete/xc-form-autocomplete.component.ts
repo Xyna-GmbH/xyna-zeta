@@ -19,7 +19,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
 
-import { merge, Observable, OperatorFunction, Subject, Subscription } from 'rxjs/';
+import { merge, Observable, OperatorFunction, Subject, Subscription } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 
 import { A11yService } from '../../../a11y';
@@ -308,7 +308,7 @@ export class XcFormAutocompleteComponent extends XcFormBaseInputComponent implem
         this.suppressNextFocusEmit = unfocusedInput;
         super.suffixClickChangedValue(unfocusedInput);
         this.checkValue();
-        this.updateFilteredOptions.next();
+        this.updateFilteredOptions.next(this.selectedOption);
         this.trigger.openPanel();
     }
 

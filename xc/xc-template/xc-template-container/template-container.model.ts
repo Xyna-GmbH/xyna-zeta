@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, of } from 'rxjs/';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService, RuntimeContext, XoArray, XoDescriberCache, XoObjectClass, XoStructureField, XoStructureMethod, XoStructureObject, XoStructurePrimitive } from '../../../api';

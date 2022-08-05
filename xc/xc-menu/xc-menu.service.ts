@@ -17,7 +17,7 @@
  */
 import { Directive, Injectable, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { Subject, Subscription } from 'rxjs/';
+import { Subject, Subscription } from 'rxjs';
 
 import { XcMenuComponent, XcMenuItem, XcMenuOptions, XcMenuOptionsDefault } from './xc-menu.component';
 

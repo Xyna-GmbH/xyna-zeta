@@ -17,7 +17,7 @@
  */
 import { Injectable } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs/';
+import { Observable, Subject } from 'rxjs';
 
 import { OutsideListenerService } from './outside-listener.service';
 

@@ -19,7 +19,7 @@
 import { Component, HostListener, InjectionToken, Injector, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 
 import { XcDynamicDismissableComponent } from '../shared/xc-dynamic-dismissable.component';
 

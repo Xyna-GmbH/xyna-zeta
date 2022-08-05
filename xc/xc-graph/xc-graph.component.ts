@@ -17,7 +17,7 @@
  */
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Subscription } from 'rxjs/';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import * as THREE from 'three';
 
 import { AuthService } from '../../auth/auth.service';
@@ -37,8 +37,7 @@ interface Transform<S> {
 
 class XcShaderMaterial extends THREE.RawShaderMaterial {
 
-    private static readonly vertexShader =
-    `
+    private static readonly vertexShader = `
         precision highp float;
         uniform mat4 modelViewMatrix;
         uniform mat4 projectionMatrix;
@@ -49,8 +48,7 @@ class XcShaderMaterial extends THREE.RawShaderMaterial {
         }
     `;
 
-    private static readonly fragmentShader =
-    `
+    private static readonly fragmentShader = `
         precision highp float;
         uniform vec3 color;
         uniform int style;
@@ -1472,7 +1470,7 @@ export class XcGraphComponent {
                 graphScene.resize(x, y, colWidth, rowHeight);
             });
 
-            this.resizeEmitter.next();
+            this.resizeEmitter.emit();
         }
     }
 

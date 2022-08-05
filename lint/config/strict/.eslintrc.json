@@ -20,7 +20,15 @@
         // --------------------------------------------------------------------------------------------------------------------------------
         "@typescript-eslint/comma-dangle": "warn",
         "@typescript-eslint/comma-spacing": "warn",
-        "@typescript-eslint/indent": "warn",
+        "indent": "off",                            // switch off default indent
+        //"@typescript-eslint/indent": "warn",
+        // "@typescript-eslint/indent": ["warn", 4, { "ignoredNodes": ["[attr='foo']"] }],
+        "@typescript-eslint/indent": ["warn", 4, {
+            "ignoredNodes": ["Identifier"],
+            "SwitchCase": 1
+        }],
+        // "@typescript-eslint/indent": ["warn", 4, { "ignoredNodes": ["Decorator:matches([expression.callee.name='Input'])"] }],
+        // "@typescript-eslint/indent": ["warn", 4, { "": 2 }],
         "@typescript-eslint/keyword-spacing": "warn",
         "@typescript-eslint/space-before-function-paren": ["warn", "never"],
         "@typescript-eslint/space-infix-ops": "warn",
