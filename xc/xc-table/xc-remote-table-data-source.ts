@@ -83,6 +83,9 @@ export class XoTableColumnArray extends XoArray<XoTableColumn> {
 export class XoTableInfo extends XoObject {
 
     @XoProperty()
+    rootType: string;
+
+    @XoProperty()
     version: string;
 
     @XoProperty()
