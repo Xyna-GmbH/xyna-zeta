@@ -15,9 +15,9 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, InjectionToken } from '@angular/core';
+import { ChangeDetectorRef, Component, InjectionToken, Injector, OnDestroy, Optional } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { XcDynamicComponent } from '../../shared/xc-dynamic.component';
 import { XC_COMPONENT_DATA, XcTemplate } from '../xc-template';
@@ -29,7 +29,21 @@ import { XoTemplateDefinedBase } from './template-container-base.model';
     templateUrl: './xc-template-container.component.html',
     styleUrls: ['./xc-template-container.component.scss']
 })
-export class XcTemplateContainerComponent extends XcDynamicComponent<XoTemplateDefinedBase> {
+export class XcTemplateContainerComponent extends XcDynamicComponent<XoTemplateDefinedBase> implements OnDestroy {
+
+    private readonly subscription: Subscription;
+
+    constructor(@Optional() injector: Injector, protected readonly cdRef: ChangeDetectorRef) {
+        super(injector);
+
+        this.subscription = this.injectedData.getTemplate()?.childTemplatesChange().subscribe(() => {
+            cdRef.markForCheck();
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription?.unsubscribe();
+    }
 
     get templates(): Observable<XcTemplate[]> {
         return this.injectedData.getTemplate().getChildTemplates();

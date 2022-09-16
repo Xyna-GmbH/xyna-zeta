@@ -41,6 +41,16 @@ export class XoStructureType {
         this.typeDocu = typeObject.docu || '';
         return this;
     }
+
+
+    equals(other: this): boolean {
+        return !!other &&
+            (!this.typeRtc && !other.typeRtc || this.typeRtc.equals(other.typeRtc)) &&
+            (!this.typeFqn && !other.typeRtc || this.typeFqn.equals(other.typeFqn)) &&
+            this.typeLabel === other.typeLabel &&
+            this.typeAbstract === other.typeAbstract &&
+            this.typeDocu === other.typeDocu;
+    }
 }
 
 
@@ -91,6 +101,14 @@ export abstract class XoStructureField extends XoStructureType {
 
     isExpandable(): boolean {
         return false;
+    }
+
+    equals(other: this): boolean {
+        return super.equals(other) &&
+            this.name === other.name &&
+            this.label === other.label &&
+            this.docu === other.docu &&
+            (!this.parent && !other.parent || this.parent?.equals(other.parent));
     }
 }
 

@@ -23,6 +23,7 @@ import { XcComponentTemplate, XcTemplate } from '../xc-template';
 
 export abstract class XcContainerBaseTemplate<T extends XoTemplateDefinedBase> extends XcComponentTemplate<T> {
     abstract getChildTemplates(): Observable<XcTemplate[]>;
+    abstract childTemplatesChange(): Observable<void>;
 }
 
 
