@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService, RuntimeContext, XoArray, XoDescriberCache, XoObjectClass, XoStructureField, XoStructureMethod, XoStructureObject, XoStructurePrimitive } from '../../../api';
@@ -27,53 +27,55 @@ import { XcTemplateContainerComponent } from './xc-template-container.component'
 
 export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefinedBase> {
     /**
-     * Backed templates, access via getter
+     * Backed templates
      */
     private childTemplates: XcTemplate[];
 
     /**
-     * Backed structure, access via getter
+     * Backed structure
      */
-    private templateStructure: XoStructureObject;
+    private childStructures: XoStructureField[] = [];
     private readonly structureCache = new XoDescriberCache<XoStructureObject>();
     private retrievingStructure: Observable<XoStructureObject> = null;  // is set if request is pending
+
+    /**
+     * Acceleration Structure
+     * structure-field -> template
+     * (this.childStructures) :- (this.childTemplates)
+     */
+    private readonly structureTemplates = new Map<XoStructureField, XcTemplate[]>();
+
+    private invalidated = false;
+    private readonly childTemplatesChangeSubject = new Subject<void>();
 
 
     constructor(component: XcDynamicComponentType<XoTemplateDefinedBase>, data: XoTemplateDefinedBase, protected apiService: ApiService, protected rtc: RuntimeContext) {
         super(component, data);
-
-        this.getTemplateStructure().subscribe();
     }
 
 
     /**
-     * Retrieves the structure of this template
+     * Retrieves the structure fields of this template
      *
-     * @returns Structure if it could be retrieved, null otherwise
+     * @returns Structure fields
      */
-    private getTemplateStructure(): Observable<XoStructureObject> {
-        if (this.templateStructure) {
-            return of(this.templateStructure);
-        }
-        // retrieve new structure
+    private retrieveChildStructures(): Observable<XoStructureField[]> {
         const structure = this.data.getLocalStructure();
         if (structure) {
-            this.templateStructure = structure;
-            return of(this.templateStructure);
+            return of(structure.children);
         }
         if (this.apiService && this.rtc) {
+            // if retrieving is not pending, retrieve structure
             if (!this.retrievingStructure) {
-                // if retrieving is not pending, retrieve structure
                 this.retrievingStructure = this.apiService.getStructure(this.rtc, [this.data], this.structureCache).get(this.data).pipe(
                     map(structureObject => {
-                        this.templateStructure = structureObject;
-                        this.templateStructure.name = '';
+                        structureObject.name = '';
                         this.retrievingStructure = null;
-                        return this.templateStructure;
+                        return structure;
                     })
                 );
             }
-            return this.retrievingStructure;
+            return this.retrievingStructure.pipe(map(s => s?.children));
         }
         console.warn('XoTemplateDefinedObject: No ApiService or Runtime Context defined to retrieve structure of Xo!');
         return of(null);
@@ -83,29 +85,55 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
     /**
      * Returns templates created out of this container's structure
      *
+     * @remark When a Structure Field doesn't change, the template for it will also be reused.
+     *
      * @returns Backed templates or new ones if no backed templates are available (e. g. because of invalidation)
      */
     getChildTemplates(): Observable<XcTemplate[]> {
-        const createTemplatesFromStructure = (structure: XoStructureObject): XcTemplate[]  => {
+        const createTemplatesFromFields = (fields: XoStructureField[]): XcTemplate[]  => {
             const templates = [];
-            if (structure) {
-                structure.children
-                    .filter(childField => !(childField instanceof XoStructureMethod))
-                    .forEach(childField => {
-                        const childTemplates = this.createTemplatesForMember(childField);
-                        if (childTemplates.length === 0) {
-                            console.log(`no rule to build a template for field "${childField.path}"`);
-                        }
-                        templates.push(...childTemplates);
-                    });
-            }
+            fields
+                .filter(field => !(field instanceof XoStructureMethod))
+                .forEach(field => {
+                    let fieldTemplates = this.structureTemplates.get(field);
+                    if (!fieldTemplates) {
+                        fieldTemplates = this.createTemplatesForMember(field);
+                        this.structureTemplates.set(field, fieldTemplates);
+                    }
+                    if (fieldTemplates.length === 0) {
+                        console.log(`no rule to build a template for field "${field.path}"`);
+                    }
+                    templates.push(...fieldTemplates);
+                });
             return templates;
         };
 
-        if (!this.childTemplates) {
-            return this.getTemplateStructure().pipe(
-                map(structure => {
-                    this.childTemplates = createTemplatesFromStructure(structure);
+        if (!this.childTemplates || this.invalidated) {
+            return this.retrieveChildStructures().pipe(
+                map(fields => {
+                    // compare new fields with backed ones
+                    // only replace backed structure with new one, if it has changed
+                    // --
+                    // "fields" will be the new structure-list, so replace those instances by their matching backed ones
+                    for (let i = 0; i < fields.length; i++) {
+                        const backedIndex = this.childStructures.findIndex(backedStructure =>
+                            backedStructure.equals(fields[i])
+                        );
+                        if (backedIndex >= 0) {
+                            fields[i] = this.childStructures[backedIndex];
+                            this.childStructures.splice(backedIndex, 1);
+                        }
+                    }
+
+                    // fields left in "childStructures" are not used anymore, so remove from map
+                    this.childStructures.forEach(child => {
+                        this.structureTemplates.delete(child);
+                    });
+                    this.childStructures = fields;
+
+                    // build up new templates-list
+                    this.childTemplates = createTemplatesFromFields(this.childStructures);
+                    this.invalidated = false;
                     return this.childTemplates;
                 })
             );
@@ -120,8 +148,8 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
                 .filter(child => child instanceof XcContainerTemplate)
                 .forEach(child => (child as XcContainerTemplate).invalidateChildTemplates());
         }
-        this.childTemplates = null;
-        this.templateStructure = null;
+        this.invalidated = true;
+        this.childTemplatesChangeSubject.next();
     }
 
 
@@ -151,6 +179,11 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
         }
 
         return [];
+    }
+
+
+    childTemplatesChange(): Observable<void> {
+        return this.childTemplatesChangeSubject.asObservable();
     }
 }
 
