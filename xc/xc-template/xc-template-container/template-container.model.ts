@@ -206,6 +206,11 @@ export class XoTemplateDefinedObject extends XoTemplateDefinedBase {
     }
 
 
+    resetTemplate() {
+        this._template = null;
+    }
+
+
     /**
      * Instantiates the template that shall be used to display this Xo
      *
