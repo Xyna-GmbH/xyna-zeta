@@ -34,5 +34,6 @@ export * from './xo/xo-describer';
 export * from './xo/xo-managed-file-id';
 export * from './xo/xo-object';
 export * from './xo/xo-runtime-context';
+export * from './xo/xo-storable.model';
 export * from './xo/xo-structure';
 export * from './zeta-environment.interfaces';
