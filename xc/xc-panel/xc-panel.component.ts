@@ -32,17 +32,22 @@ import { xcPanelTranslations_enUS } from './locale/xc-panel-translations.en-US';
 export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private static readonly headerQuerySelector = 'header';
+    private static readonly headerLabelQuerySelector = XcPanelComponent.headerQuerySelector + ' > label';
     private static readonly toggleQuerySelector = 'xc-panel > .collapse-toggle';
+    private static readonly toggleButtonQuerySelector = XcPanelComponent.toggleQuerySelector + ' > button';
     private static readonly headerMouseDownEventName = 'mousedown';
     private static readonly headerMouseUpEventName = 'mouseup';
 
     private _headerElement: Element;
     private _toggleElement: Element;
+    private _toggleButtonElement: Element;
+    private _ariaLabel: string;
     private _collapsed = false;
     private _collapsable = false;
     private _mouseDown = false;
 
     tooltip: string;
+
 
     private readonly _targetIsSelectable = (target: EventTarget) =>
         target instanceof HTMLElement && target.classList.contains('items-selectable');
@@ -81,11 +86,20 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this._toggleElement = this.elementRef.nativeElement.querySelector(XcPanelComponent.toggleQuerySelector);
+        this._toggleButtonElement = this._toggleElement.querySelector(XcPanelComponent.toggleButtonQuerySelector);
         this._toggleElement?.parentElement?.removeChild(this._toggleElement);
+
+
+        // default: set aria-label to header label
+        if (this._ariaLabel === undefined) {
+            const headerLabelElement: Element = this.elementRef.nativeElement.querySelector(XcPanelComponent.headerLabelQuerySelector);
+            this._ariaLabel = headerLabelElement?.textContent;
+        }
 
         // configures header element
         // * adds event listeners, if collapsable
         // * sets aria-attributes
+        this.ariaLabel = this._ariaLabel;
         this.collapsable = this._collapsable;
         this.collapsed = this._collapsed;
     }
@@ -104,6 +118,20 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
+    @Input('xc-panel-aria-label')
+    set ariaLabel(ariaLabel: string) {
+        this._ariaLabel = ariaLabel;
+        if (ariaLabel) {
+            this._headerElement?.setAttribute('aria-label', ariaLabel);
+        } else {
+            this._headerElement?.removeAttribute('aria-label');
+        }
+    }
+
+    get ariaLabel(): string {
+        return this._ariaLabel;
+    }
+
     @HostBinding('class.collapsable')
     @Input('xc-panel-collapsable')
     set collapsable(value: boolean) {
@@ -113,10 +141,12 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._headerElement.prepend(this._toggleElement);
                 this._headerElement.addEventListener(XcPanelComponent.headerMouseDownEventName, this._headerMouseDownListener);
                 this._headerElement.addEventListener(XcPanelComponent.headerMouseUpEventName, this._headerMouseUpListener);
+                this._headerElement.removeAttribute('tabindex');
             } else {
                 this._toggleElement?.parentElement?.removeChild(this._toggleElement);
                 this._headerElement.removeEventListener(XcPanelComponent.headerMouseDownEventName, this._headerMouseDownListener);
                 this._headerElement.removeEventListener(XcPanelComponent.headerMouseUpEventName, this._headerMouseUpListener);
+                this._headerElement.setAttribute('tabindex', '0');
             }
         }
     }
@@ -131,8 +161,8 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input('xc-panel-collapsed')
     set collapsed(value: boolean) {
         this._collapsed = coerceBoolean(value);
-        if (this._headerElement && this.collapsable) {
-            this._headerElement.setAttribute('aria-expanded', this.collapsed ? 'false' : 'true');
+        if (this._toggleButtonElement && this.collapsable) {
+            this._toggleButtonElement.setAttribute('aria-expanded', this.collapsed ? 'false' : 'true');
         }
     }
 
