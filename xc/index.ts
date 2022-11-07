@@ -50,6 +50,7 @@ export * from './xc-form/definitions/xc-definition-stack/xc-definition-stack-ite
 export * from './xc-form/definitions/xc-definition-stack/xc-definition-stack-master/xc-definition-stack-master.component';
 export * from './xc-form/definitions/shared/xc-base-definition/xc-base-definition.component';
 export * from './xc-form/definitions/shared/xc-form-generic-panel/xc-form-generic-panel.component';
+export * from './xc-form/definitions/xo/plugin.model';
 export * from './xc-form/xc-form-autocomplete/xc-form-autocomplete.component';
 export * from './xc-form/xc-form-base/xc-form-base.component';
 export * from './xc-form/xc-form-base/xc-form-baseinput.component';

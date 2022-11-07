@@ -17,7 +17,7 @@
  */
 import { XoStorable } from '../../../../api/xo/xo-storable.model';
 
-import { XoArray, XoArrayClass, XoObjectClass, XoProperty, XoUnique } from '../../../../api';
+import { XoArray, XoArrayClass, XoObjectClass, XoProperty, XoUnique, XoXPRCRuntimeContext } from '../../../../api';
 
 
 @XoObjectClass(XoStorable, 'xmcp.forms.plugin', 'Plugin')
@@ -44,6 +44,8 @@ export class XoPlugin extends XoStorable {
     uniqueIdentifier: number;
 
 
+    @XoProperty(XoXPRCRuntimeContext)
+    pluginRTC: XoXPRCRuntimeContext = new XoXPRCRuntimeContext();
 }
 
 @XoArrayClass(XoPlugin)
