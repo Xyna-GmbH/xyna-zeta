@@ -39,13 +39,13 @@ export class XoPlugin extends XoStorable {
     definitionWorkflowFQN: string;
 
 
+    @XoProperty(XoXPRCRuntimeContext)
+    pluginRTC: XoXPRCRuntimeContext = new XoXPRCRuntimeContext();
+
+
     @XoProperty()
     @XoUnique()
     uniqueIdentifier: number;
-
-
-    @XoProperty(XoXPRCRuntimeContext)
-    pluginRTC: XoXPRCRuntimeContext = new XoXPRCRuntimeContext();
 }
 
 @XoArrayClass(XoPlugin)
