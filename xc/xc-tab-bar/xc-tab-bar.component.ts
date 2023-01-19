@@ -88,7 +88,7 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
 
     private resetSelectionIndex() {
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        this.tabGroup['_selectedIndex'] = -1;
+        this.tabGroup['_selectedIndex'] = undefined;
     }
 
 
