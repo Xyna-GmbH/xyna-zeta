@@ -17,7 +17,7 @@
  */
 import { ComponentType } from '@angular/cdk/portal';
 import { NgComponentOutlet } from '@angular/common';
-import { Component, ComponentRef, EventEmitter, Injector, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, EventEmitter, Injector, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 
 import { coerceBoolean } from '@zeta/base';
@@ -34,7 +34,7 @@ import { XC_TAB_DATA, XcTabBarInterface, XcTabBarItem, XcTabComponent, XcTabRef 
     templateUrl: './xc-tab-bar.component.html',
     styleUrls: ['./xc-tab-bar.component.scss']
 })
-export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarInterface {
+export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarInterface, AfterViewInit {
 
     private _tabGroup: MatTabGroup;
     private _componentOutlets: QueryList<NgComponentOutlet>;
@@ -56,6 +56,14 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
     constructor(private readonly injector: Injector) {
         super();
         this.color = 'primary';
+    }
+
+
+    ngAfterViewInit(): void {
+        // select first tab by default
+        if (this.items.length > 0) {
+            this.selection = this.items[0];
+        }
     }
 
 
@@ -120,7 +128,7 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
         }
         // select tab idx
         if (idx >= 0) {
-            const uninitialized = this.tabGroup.selectedIndex === null;
+            const uninitialized = !this._componentInitialized.has(value);
             this.tabGroup.selectedIndex = idx;
             if (uninitialized) {
                 this.activate(value, idx);
