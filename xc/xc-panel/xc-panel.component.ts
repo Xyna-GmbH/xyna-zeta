@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output } from '@angular/core';
 
 import { I18nService } from '@zeta/i18n';
 
@@ -29,20 +29,26 @@ import { xcPanelTranslations_enUS } from './locale/xc-panel-translations.en-US';
     templateUrl: './xc-panel.component.html',
     styleUrls: ['./xc-panel.component.scss']
 })
-export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
+export class XcPanelComponent implements AfterViewInit, AfterContentInit, OnDestroy {
 
     private static readonly headerQuerySelector = 'header';
+    private static readonly headerLabelQuerySelector = XcPanelComponent.headerQuerySelector + ' > label';
     private static readonly toggleQuerySelector = 'xc-panel > .collapse-toggle';
+    private static readonly toggleButtonQuerySelector = XcPanelComponent.toggleQuerySelector + ' > button';
     private static readonly headerMouseDownEventName = 'mousedown';
     private static readonly headerMouseUpEventName = 'mouseup';
 
     private _headerElement: Element;
+    private _headerLabelElement: Element;
     private _toggleElement: Element;
+    private _toggleButtonElement: Element;
+    private _ariaLabel: string;
     private _collapsed = false;
     private _collapsable = false;
     private _mouseDown = false;
 
     tooltip: string;
+
 
     private readonly _targetIsSelectable = (target: EventTarget) =>
         target instanceof HTMLElement && target.classList.contains('items-selectable');
@@ -73,15 +79,20 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tooltip = this.i18n.translate('zeta.xc-panel.collapse-toggle');
     }
 
-
-    ngOnInit(): void {
+    ngAfterContentInit(): void {
         this._headerElement = this.elementRef.nativeElement.querySelector(XcPanelComponent.headerQuerySelector);
+        this._headerLabelElement = this.elementRef.nativeElement.querySelector(XcPanelComponent.headerLabelQuerySelector);
     }
-
 
     ngAfterViewInit() {
         this._toggleElement = this.elementRef.nativeElement.querySelector(XcPanelComponent.toggleQuerySelector);
+        this._toggleButtonElement = this._toggleElement.querySelector(XcPanelComponent.toggleButtonQuerySelector);
         this._toggleElement?.parentElement?.removeChild(this._toggleElement);
+
+        // default: set aria-label to header label
+        if (this.ariaLabel === undefined && this._headerLabelElement?.textContent) {
+            this._toggleButtonElement?.setAttribute('aria-label', this._headerLabelElement.textContent);
+        }
 
         // configures header element
         // * adds event listeners, if collapsable
@@ -104,6 +115,22 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
+    @Input('xc-panel-aria-label')
+    set ariaLabel(ariaLabel: string) {
+        this._ariaLabel = ariaLabel;
+        if (ariaLabel) {
+            this._headerLabelElement?.setAttribute('aria-label', ariaLabel);
+            this._headerElement?.setAttribute('aria-label', ariaLabel);
+        } else {
+            this._headerLabelElement?.removeAttribute('aria-label');
+            this._headerElement?.removeAttribute('aria-label');
+        }
+    }
+
+    get ariaLabel(): string {
+        return this._ariaLabel;
+    }
+
     @HostBinding('class.collapsable')
     @Input('xc-panel-collapsable')
     set collapsable(value: boolean) {
@@ -113,10 +140,19 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._headerElement.prepend(this._toggleElement);
                 this._headerElement.addEventListener(XcPanelComponent.headerMouseDownEventName, this._headerMouseDownListener);
                 this._headerElement.addEventListener(XcPanelComponent.headerMouseUpEventName, this._headerMouseUpListener);
+                // aria-label is already applied to the toggle-button, header-label/header should not be selectable via keyboard
+                this._headerElement.removeAttribute('tabindex');
+                this._headerLabelElement?.removeAttribute('tabindex');
             } else {
                 this._toggleElement?.parentElement?.removeChild(this._toggleElement);
                 this._headerElement.removeEventListener(XcPanelComponent.headerMouseDownEventName, this._headerMouseDownListener);
                 this._headerElement.removeEventListener(XcPanelComponent.headerMouseUpEventName, this._headerMouseUpListener);
+                // make header-label/header selectable via keyboard to read its textContent/aria-label
+                if (this._headerLabelElement) {
+                    this._headerLabelElement.setAttribute('tabindex', '0');
+                } else if (this.ariaLabel) {
+                    this._headerElement.setAttribute('tabindex', '0');
+                }
             }
         }
     }
@@ -131,8 +167,8 @@ export class XcPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input('xc-panel-collapsed')
     set collapsed(value: boolean) {
         this._collapsed = coerceBoolean(value);
-        if (this._headerElement && this.collapsable) {
-            this._headerElement.setAttribute('aria-expanded', this.collapsed ? 'false' : 'true');
+        if (this._toggleButtonElement && this.collapsable) {
+            this._toggleButtonElement.setAttribute('aria-expanded', this.collapsed ? 'false' : 'true');
         }
     }
 
