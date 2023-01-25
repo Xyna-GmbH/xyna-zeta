@@ -133,6 +133,12 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
             if (uninitialized) {
                 this.activate(value, idx);
             }
+            // quirk fix - selectedIndexChange doesn't trigger if the current index is undefined
+            if (this.tabGroup.selectedIndex === undefined) {
+                setTimeout(() => {
+                    this.selectedIndexChange(idx);
+                }, 0);
+            }
         }
     }
 
@@ -173,18 +179,21 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
     set tabGroup(value: MatTabGroup) {
         this._tabGroup = value;
         this.resetSelectionIndex();
-        this.tabGroup.selectedIndexChange.subscribe((index: number) => {
-            // prevent selecting the busy tab and omit events not changing the index
-            if (!this.selectedBusyTab && this._focusedIndex !== index) {
-                // call after-deactivate handler
-                this.deactivate(this.focusedItem, this._focusedIndex);
-                // change focused index
-                this._focusedIndex = index;
-                this.selectionChange.emit(this.focusedItem);
-                // call after-activate handler
-                this.activate(this.focusedItem, this._focusedIndex);
-            }
-        });
+        this.tabGroup.selectedIndexChange.subscribe((index: number) => this.selectedIndexChange(index));
+    }
+
+
+    private selectedIndexChange(index: number) {
+        // prevent selecting the busy tab and omit events not changing the index
+        if (!this.selectedBusyTab && this._focusedIndex !== index) {
+            // call after-deactivate handler
+            this.deactivate(this.focusedItem, this._focusedIndex);
+            // change focused index
+            this._focusedIndex = index;
+            this.selectionChange.emit(this.focusedItem);
+            // call after-activate handler
+            this.activate(this.focusedItem, this._focusedIndex);
+        }
     }
 
 
