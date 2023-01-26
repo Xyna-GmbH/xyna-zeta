@@ -100,7 +100,7 @@
         xc-tooltip="{{instance.tooltip}}"
         [xc-button-aria-label]="ariaLabel"
         (click)="instance.action()"
-    ><xc-icon [color]="instance.color" [xc-icon-name]="instance.iconName" [xc-icon-style]="instance.iconStyle">{{instance.label}}</xc-icon></xc-button>
+    ><xc-icon [color]="instance.color" [xc-icon-name]="instance.iconName" [xc-icon-style]="instance.iconStyle" [xc-icon-size]="instance.iconSize">{{instance.label}}</xc-icon></xc-button>
     <xc-icon-button
         *ngSwitchCase="Type.XcIconButtonTemplate.of(instance)"
         [color]="instance.color"
@@ -109,6 +109,7 @@
         [class]="instance.stylename"
         [xc-icon-name]="instance.iconName"
         [xc-icon-style]="instance.iconStyle"
+        [xc-icon-size]="instance.iconSize"
         xc-tooltip="{{instance.tooltip}}"
         xc-button-aria-label="{{ariaLabel + (instance.label ? ' - ' + instance.label : '')}}"
         (click)="instance.action()"

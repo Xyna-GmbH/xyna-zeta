@@ -119,6 +119,7 @@ export class XcButtonBaseTemplate extends XcTemplate {
     color: XcColor = 'normal';
     iconName = '';
     iconStyle = '';
+    iconSize = 'medium';
     busy = false;
     action = () => {
         // no default implementation
