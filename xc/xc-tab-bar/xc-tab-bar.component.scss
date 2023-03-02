@@ -104,12 +104,16 @@ $xc-tab-bar-content-background-color: unset !default;
                             }
                         }
 
+                        // show tab-close button on hover and on focus
                         &:hover {
                             border-color: $color-gray-4;
 
                             .mat-tab-label-content xc-icon-button button {
                                 opacity: 1;
                             }
+                        }
+                        & > .mat-tab-label-content xc-icon-button button:focus {
+                            opacity: 1;
                         }
 
                         &.mat-tab-label-active {

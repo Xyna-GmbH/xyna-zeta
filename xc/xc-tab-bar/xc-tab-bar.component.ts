@@ -21,11 +21,14 @@ import { AfterViewInit, Component, ComponentRef, EventEmitter, Injector, Input, 
 import { MatTabGroup } from '@angular/material/tabs';
 
 import { coerceBoolean } from '@zeta/base';
+import { I18nService } from '@zeta/i18n';
 
 import { Observable, of, Subject } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 import { XcThemeableComponent } from '../../xc/shared/xc-themeable.component';
+import { xcTabBarTranslations_deDE } from './locale/xc-tab-bar-translations.de-DE';
+import { xcTabBarTranslations_enUS } from './locale/xc-tab-bar-translations.en-US';
 import { XC_TAB_DATA, XcTabBarInterface, XcTabBarItem, XcTabComponent, XcTabRef } from './xc-tab.component';
 
 
@@ -53,8 +56,10 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
     readonly selectionChange = new EventEmitter<XcTabBarItem>();
 
 
-    constructor(private readonly injector: Injector) {
+    constructor(private readonly injector: Injector, protected readonly i18n: I18nService) {
         super();
+        this.i18n.setTranslations(I18nService.DE_DE, xcTabBarTranslations_deDE);
+        this.i18n.setTranslations(I18nService.EN_US, xcTabBarTranslations_enUS);
         this.color = 'primary';
     }
 

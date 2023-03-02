@@ -2,7 +2,7 @@
     <mat-tab *ngFor="let item of items">
         <ng-template mat-tab-label>
             <xc-icon [xc-icon-name]="item.icon" [xc-icon-style]="item.iconStyle" xc-icon-size="small" [xc-tooltip]="getTooltip(item)" (mouseup)="mouseup($event, item)">{{item.name}}</xc-icon>
-            <xc-icon-button *ngIf="item.closable" [xc-tooltip]="item.closeTooltip" xc-icon-name="close" xc-icon-size="small" (click)="close(item).subscribe()" [tabDisabled]="true"></xc-icon-button>
+            <xc-icon-button *ngIf="item.closable" xc-tooltip="{{item.closeTooltip || ('zeta.xc-tab-bar.close' | xcI18n:item.name)}}" xc-icon-name="close" xc-icon-size="small" xc-button-aria-label=" " (click)="close(item).subscribe()"></xc-icon-button>
         </ng-template>
         <ng-container *ngIf="isComponentInitialized(item)" [ngComponentOutlet]="getComponent(item)" [ngComponentOutletInjector]="getComponentInjector(item)"></ng-container>
     </mat-tab>
