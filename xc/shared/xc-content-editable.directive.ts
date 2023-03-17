@@ -146,6 +146,14 @@ export class XcContentEditableDirective {
     }
 
 
+    @HostListener('keydown', ['$event'])
+    private keydown(event: KeyboardEvent) {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+            this.textChange.emit(this.text);
+        }
+    }
+
+
     @HostListener('keydown.enter')
     private enterKey() {
         if (!this.multiline) {
