@@ -40,7 +40,8 @@
 </div>
 <!-- Case 2: It's a leaf -- ergo NO children and NO sub navigation items -->
 <ng-template #leaf>
-    <a mat-list-item routerLinkActive="active"
+    <a mat-list-item
+        routerLinkActive="active" ariaCurrentWhenActive="page"
         role="link"
         [ngClass]="getItemClassList()"
         [attr.tabindex]="item.disabled ? '-1' : null"
