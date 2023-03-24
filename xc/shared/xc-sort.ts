@@ -44,13 +44,26 @@ export function XcSortPredicate<T>(sortDirection: XcSortDirection, accessor: (t:
     if (sortDirection === XcSortDirection.dsc) {
         direction = -1;
     }
+
     return (a: T, b: T) => {
         const acca = accessor(a);
         const accb = accessor(b);
-        const vala = Number.parseFloat(acca);
-        const valb = Number.parseFloat(accb);
-        return isNaN(vala) || isNaN(valb)
-            ? (acca < accb ? -1 : 1) * direction
-            : (vala < valb ? -1 : 1) * direction;
+
+        if (isNaN(acca) || isNaN(accb)) { // string comparison
+            if (acca === accb) {
+                return 0;
+            } else {
+                return (acca < accb ? -1 : 1) * direction;
+            }
+        } else { // compare numbers
+            const vala = Number.parseFloat(acca);
+            const valb = Number.parseFloat(accb);
+
+            if (vala === valb) {
+                return 0;
+            } else {
+                return (vala < valb ? -1 : 1) * direction;
+            }
+        }
     };
 }
