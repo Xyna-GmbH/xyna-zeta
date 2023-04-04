@@ -114,10 +114,26 @@ $xc-title-bar-meta-nav-padding: unset !default;
                     flex: 0 0 auto;
                     width: 64px;
                     height: 48px;
-                    background-color: white;
+                    background-color: transparent;
                     padding: 0 16px;
                     cursor: pointer;
                     margin-left: 8px;
+
+                    .st0{
+                        fill:#FFFFFF;
+                    }
+                    .st1{
+                        fill:#FABB00;
+                    }
+                    .st2{
+                        display:none;
+                        fill:#FABB00;
+                    }
+                    .st3{
+                        display:none;
+                        opacity:0.24;
+                        fill:#FC6060;
+                    }
                 }
             }
         }
