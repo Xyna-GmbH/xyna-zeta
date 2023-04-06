@@ -54,6 +54,15 @@ $xc-button-transition: unset !default;
         background-color: $xc-button-focus-overlay-invert;
     }
 
+    &[color="primary"] .mat-button:not([disabled="true"]) {
+        background-color: $color-primary;
+        color: $color-invert;
+
+        &:focus {
+            box-shadow: 0 0 0 1px $color-primary;
+        }
+    }
+
     ::ng-deep {
         .mat-button-wrapper {
             &,
