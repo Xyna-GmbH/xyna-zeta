@@ -37,7 +37,7 @@ $resizable: var(--resizable);
             border-top-left-radius: $xc-dialog-border-radius;
             border-top-right-radius: $xc-dialog-border-radius;
 
-            h1 {
+            h2 {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -51,10 +51,17 @@ $resizable: var(--resizable);
 
         .mat-dialog-title {
             margin: 0;
+            padding-left: 2px;
             flex: 1 0 auto;
             font-size: 14px;
             line-height: 48px;
             color: $xc-dialog-title-color;
+
+            &:focus-visible {
+                outline-width: 1px;
+                outline-color: $color-normal;
+                outline-style: ridge;
+            }
 
             &::ng-deep {
                 +* {
@@ -112,10 +119,17 @@ $resizable: var(--resizable);
 
         .mat-dialog-title {
             margin: 0;
+            padding-left: 2px;
             flex: 1 0 auto;
             font-size: 14px;
             line-height: 48px;
             color: $xc-dialog-title-color;
+
+            &:focus-visible {
+                outline-width: 1px;
+                outline-color: $color-normal;
+                outline-style: ridge;
+            }
 
             &::ng-deep {
                 +* {

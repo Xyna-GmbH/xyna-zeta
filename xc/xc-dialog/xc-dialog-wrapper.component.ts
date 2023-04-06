@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
 
 import { coerceBoolean } from '../../base';
 import { XcDragOptions } from '../shared/xc-drag.directive';
@@ -32,6 +32,7 @@ export class XcDialogWrapperComponent implements AfterViewInit {
     private _draggable = false;
     private _resizable = false;
     private _dialogOptions: XcDialogOptions = {};
+    private defaultButton: HTMLButtonElement;
 
     @Input()
     set draggable(value: boolean) {
@@ -97,6 +98,8 @@ export class XcDialogWrapperComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.center();
+
+        this.defaultButton = this.element.nativeElement.querySelector('[color="primary"] button') ?? this.element.nativeElement.querySelectorAll('.footer button').item(0);
     }
 
     center() {
@@ -148,5 +151,13 @@ export class XcDialogWrapperComponent implements AfterViewInit {
 
     initDrag(event: MouseEvent | TouchEvent) {
         this.dragEventTarget = event;
+    }
+
+    @HostListener('keydown.enter', ['$event'])
+    enterKey(event: KeyboardEvent) {
+        // trigger default button, as long as there is no other interactive element under focus
+        if (((event.target as HTMLElement).tabIndex === -1 || event.target === this.defaultButton) && !this.defaultButton.disabled) {
+            this.defaultButton?.click();
+        }
     }
 }
