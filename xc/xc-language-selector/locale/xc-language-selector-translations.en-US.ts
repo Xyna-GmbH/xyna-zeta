@@ -15,8 +15,9 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-export * from './i18n.directive';
-export * from './i18n.module';
-export * from './i18n.pipe';
-export * from './i18n.service';
-export * from './locale.service';
+import { I18nTranslation } from '@zeta/i18n';
+
+
+export const xcLanguageSelectorTranslations_enUS: I18nTranslation[] = [
+    { key: 'select-language-label', value: 'Select language' }
+];

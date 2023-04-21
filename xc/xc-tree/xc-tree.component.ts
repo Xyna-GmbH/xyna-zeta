@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inp
 import { Observable, of, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { I18nService } from '../../i18n';
+import { I18nService, LocaleService } from '../../i18n';
 import { coerceBoolean } from '../../base';
 import { xcTreeTranslations_deDE } from './locale/xc-translations.de-DE';
 import { xcTreeTranslations_enUS } from './locale/xc-translations.en-US';
@@ -103,8 +103,8 @@ export class XcTreeComponent implements OnDestroy {
         private readonly _i18n: I18nService,
         private readonly zone: NgZone
     ) {
-        _i18n.setTranslations(I18nService.EN_US, xcTreeTranslations_enUS);
-        _i18n.setTranslations(I18nService.DE_DE, xcTreeTranslations_deDE);
+        _i18n.setTranslations(LocaleService.EN_US, xcTreeTranslations_enUS);
+        _i18n.setTranslations(LocaleService.DE_DE, xcTreeTranslations_deDE);
 
         this.zone.runOutsideAngular(() => {
             document.body.addEventListener('keydown', this.keyCatcherOnKeydown);

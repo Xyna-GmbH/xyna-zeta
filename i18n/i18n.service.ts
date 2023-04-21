@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 GIP SmartMercial GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable, Injector, Type } from '@angular/core';
 
-import { isString } from '@zeta/base';
+import { isString } from '../base';
 import escapeStringRegexp from 'escape-string-regexp';
 
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { LocaleService } from './locale.service';
 
 
 export interface I18nTranslation {
@@ -85,9 +86,6 @@ export enum I18N_TYPES {
 @Injectable()
 export class I18nService {
 
-    static readonly DE_DE = 'de-DE';
-    static readonly EN_US = 'en-US';
-
     /** translation map: language -> (key -> value) */
     private readonly _translations = new Map<string, Map<string, I18nTranslation>>();
     private readonly _cache = new Map<string, Map<string, I18nCachedTranslation>>();
@@ -125,7 +123,10 @@ export class I18nService {
     };
 
 
-    constructor(private readonly injector: Injector) {}
+    constructor(private readonly injector: Injector) {
+        const localeService = injector.get(LocaleService);
+        localeService.languageChange.subscribe(lang => this.language = lang);
+    }
 
 
     /**

@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs';
 import { A11yService, ScreenreaderPriority } from '../../a11y';
 import { XoObject } from '../../api';
 import { coerceBoolean } from '../../base';
-import { I18nService } from '../../i18n';
+import { I18nService, LocaleService } from '../../i18n';
 import { XcIdentityDataWrapper } from '../shared/xc-data-wrapper';
 import { XcOptionItemString } from '../shared/xc-item';
 import { XcSortDirection, XcSortDirectionFromString } from '../shared/xc-sort';
@@ -70,8 +70,8 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
         private readonly _a11y: A11yService,
         private readonly _i18n: I18nService
     ) {
-        _i18n.setTranslations(I18nService.EN_US, xcTableTranslations_enUS);
-        _i18n.setTranslations(I18nService.DE_DE, xcTableTranslations_deDE);
+        _i18n.setTranslations(LocaleService.EN_US, xcTableTranslations_enUS);
+        _i18n.setTranslations(LocaleService.DE_DE, xcTableTranslations_deDE);
     }
 
 

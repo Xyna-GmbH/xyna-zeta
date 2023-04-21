@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
 
 import { XoDescriber, XoStructureArray, XoStructureObject } from '../../../api';
 import { coerceBoolean } from '../../../base';
-import { I18nService } from '../../../i18n';
+import { I18nService, LocaleService } from '../../../i18n';
 import { xcTreeTranslations_deDE } from '../locale/xc-translations.de-DE';
 import { xcTreeTranslations_enUS } from '../locale/xc-translations.en-US';
 import { XcReadonlyStructureTreeDataSource, XcStructureTreeNode } from '../xc-readonly-structure-tree-data-source';
@@ -53,8 +53,8 @@ export class XcReadonlyTreeComponent extends XcTreeNodeComponent implements OnDe
         private readonly cdRef: ChangeDetectorRef
     ) {
         super();
-        _i18n.setTranslations(I18nService.EN_US, xcTreeTranslations_enUS);
-        _i18n.setTranslations(I18nService.DE_DE, xcTreeTranslations_deDE);
+        _i18n.setTranslations(LocaleService.EN_US, xcTreeTranslations_enUS);
+        _i18n.setTranslations(LocaleService.DE_DE, xcTreeTranslations_deDE);
     }
 
 
