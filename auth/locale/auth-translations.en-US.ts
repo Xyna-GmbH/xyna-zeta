@@ -34,10 +34,6 @@ export const authTranslations_enUS: I18nTranslation[] = [
         value: 'Authenticate with credentials'
     },
     {
-        key: 'zeta.auth-login.select-language-label',
-        value: 'Select language'
-    },
-    {
         key: 'zeta.auth-login.login-button',
         value: 'Login'
     },

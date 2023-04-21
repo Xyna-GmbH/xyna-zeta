@@ -34,10 +34,6 @@ export const authTranslations_deDE: I18nTranslation[] = [
         value: 'Benutzeranmeldung'
     },
     {
-        key: 'zeta.auth-login.select-language-label',
-        value: 'Sprache auswählen'
-    },
-    {
         key: 'zeta.auth-login.login-button',
         value: 'Anmelden'
     },

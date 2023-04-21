@@ -6,17 +6,7 @@
             <div class="subtitle" *ngIf="smartCardMethodUsed" xc-i18n>subtitle1</div>
             <div class="subtitle" *ngIf="credentialsMethodUsed" xc-i18n>subtitle2</div>
         </div>
-        <xc-form-autocomplete
-            *ngIf="selectLanguage"
-            label="select-language-label"
-            class="language"
-            [(xc-form-autocomplete-option)]="selectLanguageDataWrapper.value"
-            [xc-form-autocomplete-options]="selectLanguageDataWrapper.values"
-            xc-form-autocomplete-asdropdown
-            xc-form-field-compact
-            [disabled]="pending"
-            xc-i18n
-        ></xc-form-autocomplete>
+        <xc-language-selector class="language-selector"></xc-language-selector>
     </header>
 
     <!-- Case 1 use a tab bar, from which the user can select the login method -->

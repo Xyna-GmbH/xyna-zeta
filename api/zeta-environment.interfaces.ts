@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 GIP SmartMercial GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,13 @@ export interface SelectableLanguage {
      */
     label: string;
     /**
-     * the base url of the respective index.html
+     * language key to uniquely identify this language (e.g. "en-US" or "de-DE")
      */
-    baseUrl: string;
+    languageKey: string;
+    /**
+     * the base url of the respective index.html (or undefined, if there is no different website for this language due to dynamic i18n)
+     */
+    baseUrl?: string;
 }
 
 

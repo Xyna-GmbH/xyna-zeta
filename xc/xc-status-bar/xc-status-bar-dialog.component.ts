@@ -17,7 +17,7 @@
  */
 import { Component, Injector } from '@angular/core';
 
-import { I18nService } from '../../i18n';
+import { I18nService, LocaleService } from '../../i18n';
 import { XcSortDirection } from '../shared/xc-sort';
 import { XcDialogComponent } from '../xc-dialog/xc-dialog.component';
 import { XcLocalTableDataSource } from '../xc-table/xc-local-table-data-source';
@@ -43,8 +43,8 @@ export class XcStatusBarDialogComponent extends XcDialogComponent<boolean, XcSta
     constructor(injector: Injector, i18n: I18nService) {
         super(injector);
 
-        i18n.setTranslations(I18nService.DE_DE, xcStatusBar_translations_de_DE);
-        i18n.setTranslations(I18nService.EN_US, xcStatusBar_translations_en_US);
+        i18n.setTranslations(LocaleService.DE_DE, xcStatusBar_translations_de_DE);
+        i18n.setTranslations(LocaleService.EN_US, xcStatusBar_translations_en_US);
 
         this.dataSource = new XcLocalTableDataSource(i18n);
         this.dataSource.localTableData = {
