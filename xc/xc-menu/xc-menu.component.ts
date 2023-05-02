@@ -28,6 +28,7 @@ export interface XcMenuItem extends XcItem {
     click?: (item: this) => void;
     visible?: (item: this) => boolean;
     aside?: string;
+    separator?: 'above' | 'below';
 }
 
 

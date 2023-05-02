@@ -15,3 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+@import 'const';
+
+.separator-below {
+    border-bottom: $color-gray-3 solid 1px;
+}
+
+.separator-above {
+    border-top: $color-gray-3 solid 1px;
+}
