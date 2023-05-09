@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 GIP SmartMercial GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import { ApiService, RuntimeContext, XoConsistencyCheck, XoObject } from '../api
 import { I18nService, LocaleId, LocaleService } from '../i18n';
 import { AuthEventService } from './auth-event.service';
 import { SessionInfo } from './auth-session';
+import { XoExternalCredentialsLoginRequest } from './xo/external-credentials-login-request.model';
 import { XoExternalUserLoginRequest } from './xo/external-user-login-request.model';
 import { XoLoginRequest } from './xo/login-request.model';
 import { XoLogoutRequest } from './xo/logout-request.model';
@@ -250,6 +251,11 @@ export class AuthService {
      */
     login(username: string, password: string, force = false): Observable<SessionInfo> {
         return this.customLogin('auth/login', XoLoginRequest.withCredentials(username, password, force));
+    }
+
+
+    workflowLogin(username: string, password: string, force = false): Observable<SessionInfo> {
+        return this.customLogin('auth/externalCredentialsLogin', XoExternalCredentialsLoginRequest.withDomain(username, password, 'WORKFLOW', force));
     }
 
 
