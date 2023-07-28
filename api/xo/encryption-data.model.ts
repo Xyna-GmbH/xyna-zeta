@@ -16,8 +16,8 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 
-import { XoObjectClass, XoProperty } from "./xo-decorators";
-import { XoObject } from "./xo-object";
+import { XoObjectClass, XoProperty } from './xo-decorators';
+import { XoObject } from './xo-object';
 
 
 @XoObjectClass(null, 'xmcp', 'EncryptionData')
