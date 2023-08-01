@@ -36,4 +36,5 @@ export * from './xo/xo-object';
 export * from './xo/xo-runtime-context';
 export * from './xo/xo-storable.model';
 export * from './xo/xo-structure';
+export * from './xo/encryption-data.model';
 export * from './zeta-environment.interfaces';
