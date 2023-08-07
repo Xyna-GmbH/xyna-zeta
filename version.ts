@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 /* eslint-disable @typescript-eslint/quotes */
-export const ZetaVersion = '14.0.1';
+export const ZetaVersion = '14.0.2';
 
 
 export const ZetaScripts = {
