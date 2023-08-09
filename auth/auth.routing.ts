@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { AuthGuard } from './auth.guard';
 import { AuthInterceptor } from './auth.interceptor';
+import { CsrfInterceptor } from './csrf.interceptor';
 
 
 const root = 'Authenticate';
@@ -38,5 +39,6 @@ export const AuthRoutingModules = [
 
 export const AuthRoutingProviders = [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true },
     AuthGuard
 ];
