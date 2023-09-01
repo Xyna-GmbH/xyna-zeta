@@ -30,8 +30,8 @@ export class XoEncryptionData extends XoObject {
     encrypted: boolean;
 
 
-    static withValues(values: string[], encrypted = false): XoEncryptionData {
-        const data = new XoEncryptionData();
+    static withValues(values: string[], encrypted: boolean = false): XoEncryptionData {
+        const data = new XoEncryptionData()
         data.values = values;
         data.encrypted = encrypted;
         return data;
