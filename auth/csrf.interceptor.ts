@@ -33,7 +33,7 @@ export class CsrfInterceptor implements HttpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.auth.sessionInfoSubject?.value?.sessionToken;
-        if (req.method !== 'GET' && token) {
+        if (token) {
             const headers = new HttpHeaders({'Xyna-CSRF-Token': token});
             req = req.clone({ headers: headers });
         }
