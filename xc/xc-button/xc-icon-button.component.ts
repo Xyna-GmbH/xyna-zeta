@@ -30,6 +30,7 @@ import { XcButtonBaseComponent } from './xc-button-base.component';
 export class XcIconButtonComponent extends XcButtonBaseComponent {
 
     private _iconMaterial = false;
+    private _iconSvg = false;
 
     @Input('xc-icon-name')
     iconName: string;
@@ -60,5 +61,16 @@ export class XcIconButtonComponent extends XcButtonBaseComponent {
 
     get iconMaterial(): boolean {
         return this._iconMaterial;
+    }
+
+
+    @Input('xc-icon-svg')
+    set iconSvg(value: boolean) {
+        this._iconSvg = coerceBoolean(value);
+    }
+
+
+    get iconSvg(): boolean {
+        return this._iconSvg;
     }
 }
