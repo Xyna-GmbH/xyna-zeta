@@ -52,18 +52,16 @@ export function XcSortPredicate<T>(sortDirection: XcSortDirection, accessor: (t:
         if (isNaN(acca) || isNaN(accb)) { // string comparison
             if (acca === accb) {
                 return 0;
-            } else {
-                return (acca < accb ? -1 : 1) * direction;
             }
-        } else { // compare numbers
-            const vala = Number.parseFloat(acca);
-            const valb = Number.parseFloat(accb);
-
-            if (vala === valb) {
-                return 0;
-            } else {
-                return (vala < valb ? -1 : 1) * direction;
-            }
+            return (acca < accb ? -1 : 1) * direction;
         }
+        // compare numbers
+        const vala = Number.parseFloat(acca);
+        const valb = Number.parseFloat(accb);
+
+        if (vala === valb) {
+            return 0;
+        }
+        return (vala < valb ? -1 : 1) * direction;
     };
 }
