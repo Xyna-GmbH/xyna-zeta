@@ -41,7 +41,7 @@ export class QueryParameterService {
     private readonly defaultConflictResolution = UrlQueryParamConflictResolutionMethod.Replace;
 
     has(key: string): boolean {
-		this.syncServiceWithUrl();
+        this.syncServiceWithUrl();
         return this.queries.has(key);
     }
 
