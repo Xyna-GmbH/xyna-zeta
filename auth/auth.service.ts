@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Injector, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, Injector, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
@@ -24,9 +24,10 @@ import { catchError, filter, mapTo, switchMap, tap } from 'rxjs/operators';
 
 import { A11yService } from '../a11y';
 import { ApiService, RuntimeContext, XoConsistencyCheck, XoObject } from '../api';
-import { I18nService } from '../i18n';
+import { I18nService, LocaleId, LocaleService } from '../i18n';
 import { AuthEventService } from './auth-event.service';
 import { SessionInfo } from './auth-session';
+import { XoExternalCredentialsLoginRequest } from './xo/external-credentials-login-request.model';
 import { XoExternalUserLoginRequest } from './xo/external-user-login-request.model';
 import { XoLoginRequest } from './xo/login-request.model';
 import { XoLogoutRequest } from './xo/logout-request.model';
@@ -104,10 +105,11 @@ export class AuthService {
         injector: Injector,
         apiService: ApiService,
         i18n: I18nService,
-        a11y: A11yService
+        a11y: A11yService,
+        @Inject(LOCALE_ID) localeId: LocaleId
     ) {
         // set i18n language from injected LOCALE_ID
-        i18n.language = injector.get(LOCALE_ID) ?? I18nService.EN_US;
+        i18n.language = localeId.toString() ?? LocaleService.EN_US;
 
         // refreshes sessionInfo every time when tab is set to active
         a11y.visibilityChange.pipe(
@@ -249,6 +251,11 @@ export class AuthService {
      */
     login(username: string, password: string, force = false): Observable<SessionInfo> {
         return this.customLogin('auth/login', XoLoginRequest.withCredentials(username, password, force));
+    }
+
+
+    workflowLogin(username: string, password: string, force = false): Observable<SessionInfo> {
+        return this.customLogin('auth/externalCredentialsLogin', XoExternalCredentialsLoginRequest.withDomain(username, password, 'WORKFLOW', force));
     }
 
 

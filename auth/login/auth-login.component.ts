@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,8 @@ import { environment } from '@environments/environment';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, filter, finalize } from 'rxjs/operators';
 
-import { SelectableLanguage } from '../../api/zeta-environment.interfaces';
-import { Comparable } from '../../base/base';
 import { I18nParam, I18nService } from '../../i18n/i18n.service';
-import { XcAutocompleteDataWrapper, XcDialogService, XcTabBarComponent } from '../../xc';
+import { XcDialogService, XcTabBarComponent } from '../../xc';
 import { H5FilterError, H5FilterErrorCodes } from '../auth.interfaces';
 import { AuthService } from '../auth.service';
 import { CredentialsLoginTabComponent } from '../forms/credentials-login-tab.component';
@@ -45,25 +43,6 @@ interface LoginTabItem {
     component: any;
     name: string;
     data: LoginComponentData;
-}
-
-
-class ComparableLanguage extends Comparable implements SelectableLanguage {
-
-    label: string;
-    baseUrl: string;
-
-
-    constructor(lang: SelectableLanguage) {
-        super();
-        this.label = lang.label;
-        this.baseUrl = lang.baseUrl;
-    }
-
-
-    equals(other?: this) {
-        return this.label === other.label;
-    }
 }
 
 
@@ -95,16 +74,11 @@ export class AuthLoginComponent {
         }
     };
 
-    private readonly _selectLanguage: boolean;
-
     @ViewChild(XcTabBarComponent, { static: false })
     tabBar: XcTabBarComponent;
 
     tabBarSelection = this.smartCardTabItem;
     smartCardDomain = '';
-
-    selectLanguageDataWrapper: XcAutocompleteDataWrapper;
-    selectedLanguage: ComparableLanguage;
 
     private _pending = false;
 
@@ -116,27 +90,6 @@ export class AuthLoginComponent {
     ) {
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
-        }
-
-        const langObj = environment.zeta.auth ? environment.zeta.auth.languages : null;
-        const base = document.head.querySelector('base');
-        const baseUrl = base ? base.getAttribute('href') : null;
-
-        if ((this._selectLanguage = langObj?.length > 0)) {
-            const found = langObj.find(lang => lang.baseUrl === baseUrl) || langObj[0];
-            this.selectedLanguage = new ComparableLanguage(found);
-            this.selectLanguageDataWrapper = new XcAutocompleteDataWrapper(
-                () => this.selectedLanguage,
-                (lang: ComparableLanguage) => {
-                    const url = window.location.origin + lang.baseUrl + 'Authenticate' + window.location.search;
-                    window.location.href = url;
-                }
-            );
-            const mapped = langObj.map(value => {
-                value.label = this.i18n.translate(value.label);
-                return { name: value.label, value: new ComparableLanguage(value) };
-            });
-            this.selectLanguageDataWrapper.values = mapped;
         }
     }
 
@@ -163,11 +116,6 @@ export class AuthLoginComponent {
 
     get useTabBar(): boolean {
         return this.useCredentialsLogin && this.useSmartCardLogin;
-    }
-
-
-    get selectLanguage(): boolean {
-        return this._selectLanguage;
     }
 
 

@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { ApiService, RuntimeContextSelectionSettings } from '../../../api/api.service';
 import { XoApplication, XoApplicationArray, XoWorkspace, XoWorkspaceArray } from '../../../api/xo/xo-runtime-context';
-import { I18nService } from '../../../i18n';
+import { I18nService, LocaleService } from '../../../i18n';
 import { XcOptionItem } from '../../../xc/shared/xc-item';
 import { XcDialogComponent } from '../../../xc/xc-dialog/xc-dialog.component';
 import { XcAutocompleteDataWrapper, XcFormAutocompleteComponent } from '../../../xc/xc-form/xc-form-autocomplete/xc-form-autocomplete.component';
@@ -53,8 +53,8 @@ export class RuntimeContextSelectionComponent extends XcDialogComponent<RuntimeC
     constructor(injector: Injector, private readonly apiService: ApiService, private readonly i18n: I18nService, private readonly cdr: ChangeDetectorRef) {
         super(injector);
 
-        this.i18n.setTranslations(I18nService.DE_DE, runtimeContextSelection_translations_de_DE);
-        this.i18n.setTranslations(I18nService.EN_US, runtimeContextSelection_translations_en_US);
+        this.i18n.setTranslations(LocaleService.DE_DE, runtimeContextSelection_translations_de_DE);
+        this.i18n.setTranslations(LocaleService.EN_US, runtimeContextSelection_translations_en_US);
 
         this.settings = this.injectedData || {
             setRuntimeContext: true,

@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import { AfterContentInit, Component, ElementRef, EventEmitter, HostBinding, Inp
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 import { coerceBoolean } from '../../../base';
-import { I18nService } from '../../../i18n';
+import { I18nService, LocaleService } from '../../../i18n';
 import { ATTRIBUTE_ARIALABEL, ATTRIBUTE_ICONTOOLTIP, ATTRIBUTE_LABEL, ATTRIBUTE_PLACEHOLDER } from '../../../xc/shared/xc-i18n-attributes';
 import { xcFormTranslations_deDE } from '../locale/xc-translations.de-DE';
 import { xcFormTranslations_enUS } from '../locale/xc-translations.en-US';
@@ -270,8 +270,8 @@ export class XcFormBaseComponent extends XcFormComponent implements AfterContent
     constructor(element: ElementRef<HTMLElement>, i18n: I18nService) {
         super(element, i18n);
 
-        i18n.setTranslations(I18nService.EN_US, xcFormTranslations_enUS);
-        i18n.setTranslations(I18nService.DE_DE, xcFormTranslations_deDE);
+        i18n.setTranslations(LocaleService.EN_US, xcFormTranslations_enUS);
+        i18n.setTranslations(LocaleService.DE_DE, xcFormTranslations_deDE);
     }
 
 

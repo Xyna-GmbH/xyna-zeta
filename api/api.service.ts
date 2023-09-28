@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { filter, finalize, map, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, map, tap } from 'rxjs/operators';
 
 import { isNumber, pack, stringToUnboxedInteger } from '../base';
 import { XoKillOrdersResponse } from './xo/kill-orders-response.model';
@@ -34,6 +34,7 @@ import { XoManagedFileID } from './xo/xo-managed-file-id';
 import { Xo, XoArray, XoArrayClassInterface, XoClassInterface, XoClassInterfaceFrom, XoDerivedClassInterfaceFrom, XoJson, XoObject } from './xo/xo-object';
 import { XoRuntimeContext, XoRuntimeContextArray } from './xo/xo-runtime-context';
 import { XoStructureObject, XoStructureType } from './xo/xo-structure';
+import { XoEncryptionData } from '@zeta/api/xo/encryption-data.model';
 
 
 export type XynaMonitoringLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
@@ -740,5 +741,42 @@ export class ApiService {
 
     download(managedFileId: XoManagedFileID, host?: string) {
         window.location.href = (host || '') + '/XynaBlackEditionWebServices/io/download?p0=' + managedFileId.iD;
+    }
+
+
+    // =================================================================================================================
+    // Encryption
+    // =================================================================================================================
+
+    protected crypt(data: XoEncryptionData, endpoint: string): Observable<XoEncryptionData> {
+        return this.http.post(endpoint, data.encode()).pipe(
+            map((result: XoJson) =>
+                new XoEncryptionData().decode(result)
+            ),
+            catchError(error => {
+                console.log(`Error during /${endpoint} of "${JSON.stringify(data.encode())}": ${error}`);
+                return of(XoEncryptionData.withValues([], false));
+            })
+        );
+    }
+
+
+    /**
+     * Encode/encrypt strings
+     * @param values strings to encode
+     * @returns encoded strings
+     */
+    encode(values: string[]): Observable<string[]> {
+        return this.crypt(XoEncryptionData.withValues(values, false), 'encode').pipe(map(encryptionData => encryptionData.values));
+    }
+
+
+    /**
+     * Decode/decrypt strings
+     * @param values strings to decode
+     * @returns decoded strings
+     */
+    decode(values: string[]): Observable<string[]> {
+        return this.crypt(XoEncryptionData.withValues(values, true), 'decode').pipe(map(encryptionData => encryptionData.values));
     }
 }

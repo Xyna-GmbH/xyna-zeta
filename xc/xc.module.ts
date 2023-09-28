@@ -65,6 +65,7 @@ import { XcFormTextareaComponent } from './xc-form/xc-form-textarea/xc-form-text
 import { XcGraphComponent } from './xc-graph/xc-graph.component';
 import { XcIconService } from './xc-icon/xc-icon-service';
 import { XcIconComponent } from './xc-icon/xc-icon.component';
+import { XcLanguageSelectorComponent } from './xc-language-selector/xc-language-selector.component';
 import { XcNavListItemComponent } from './xc-list/xc-nav-list/xc-nav-list-item/xc-nav-list-item.component';
 import { XcNavListComponent } from './xc-list/xc-nav-list/xc-nav-list.component';
 import { XcRichListComponent } from './xc-list/xc-rich-list/xc-rich-list.component';
@@ -162,6 +163,7 @@ import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
         XcIconButtonComponent,
         XcIconComponent,
         XcInfoDialogComponent,
+        XcLanguageSelectorComponent,
         XcMasterDetailComponent,
         XcMasterDetailFocusCandidateDirective,
         XcMenuComponent,
@@ -243,6 +245,7 @@ import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
         XcIconButtonComponent,
         XcIconComponent,
         XcInfoDialogComponent,
+        XcLanguageSelectorComponent,
         XcMasterDetailComponent,
         XcMasterDetailFocusCandidateDirective,
         XcMenuComponent,

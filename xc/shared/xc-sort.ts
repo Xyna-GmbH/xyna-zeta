@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,21 +49,19 @@ export function XcSortPredicate<T>(sortDirection: XcSortDirection, accessor: (t:
         const acca = accessor(a);
         const accb = accessor(b);
 
-        if (isNaN(acca) || isNaN(accb)) { // string comparison
-            if (acca === accb) {
-                return 0;
-            } else {
-                return (acca < accb ? -1 : 1) * direction;
-            }
-        } else { // compare numbers
-            const vala = Number.parseFloat(acca);
-            const valb = Number.parseFloat(accb);
-
-            if (vala === valb) {
-                return 0;
-            } else {
-                return (vala < valb ? -1 : 1) * direction;
-            }
+        // string comparison
+        if (isNaN(acca) || isNaN(accb)) {
+            return (acca === accb)
+                ? 0
+                : (acca < accb ? -1 : 1) * direction;
         }
+
+        // number comparison
+        const vala = Number.parseFloat(acca);
+        const valb = Number.parseFloat(accb);
+
+        return (vala === valb)
+            ? 0
+            : (vala < valb ? -1 : 1) * direction;
     };
 }
