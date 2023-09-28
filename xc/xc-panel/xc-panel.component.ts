@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output } from '@angular/core';
 
-import { I18nService } from '@zeta/i18n';
+import { I18nService, LocaleService } from '../../i18n';
 
 import { coerceBoolean } from '../../base';
 import { xcPanelTranslations_deDE } from './locale/xc-panel-translations.de-DE';
@@ -73,8 +73,8 @@ export class XcPanelComponent implements AfterViewInit, AfterContentInit, OnDest
 
 
     constructor(private readonly elementRef: ElementRef, private readonly cdr: ChangeDetectorRef, private readonly i18n: I18nService) {
-        this.i18n.setTranslations(I18nService.DE_DE, xcPanelTranslations_deDE);
-        this.i18n.setTranslations(I18nService.EN_US, xcPanelTranslations_enUS);
+        this.i18n.setTranslations(LocaleService.DE_DE, xcPanelTranslations_deDE);
+        this.i18n.setTranslations(LocaleService.EN_US, xcPanelTranslations_enUS);
 
         this.tooltip = this.i18n.translate('zeta.xc-panel.collapse-toggle');
     }

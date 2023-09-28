@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import { NgComponentOutlet } from '@angular/common';
 import { AfterViewInit, Component, ComponentRef, EventEmitter, Injector, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 
-import { coerceBoolean } from '@zeta/base';
-import { I18nService } from '@zeta/i18n';
+import { coerceBoolean } from '../../base';
+import { I18nService, LocaleService } from '../../i18n';
 
 import { Observable, of, Subject } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -58,8 +58,8 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
 
     constructor(private readonly injector: Injector, protected readonly i18n: I18nService) {
         super();
-        this.i18n.setTranslations(I18nService.DE_DE, xcTabBarTranslations_deDE);
-        this.i18n.setTranslations(I18nService.EN_US, xcTabBarTranslations_enUS);
+        this.i18n.setTranslations(LocaleService.DE_DE, xcTabBarTranslations_deDE);
+        this.i18n.setTranslations(LocaleService.EN_US, xcTabBarTranslations_enUS);
         this.color = 'primary';
     }
 

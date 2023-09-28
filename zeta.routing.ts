@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 
 import { ApiRoutes, ApiRoutingModules, ApiRoutingProviders } from './api';
 import { AuthRoutes, AuthRoutingModules, AuthRoutingProviders } from './auth';
+import { LocaleProvider } from './i18n';
 import { NavRoutes, NavRoutingModules, NavRoutingProviders, RouteComponentReuseStrategy } from './nav';
 
 
@@ -41,5 +42,6 @@ export const ZetaRoutingProviders = [
     ...ApiRoutingProviders,
     ...AuthRoutingProviders,
     ...NavRoutingProviders,
+    LocaleProvider,
     Title
 ];

@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,4 +36,5 @@ export * from './xo/xo-object';
 export * from './xo/xo-runtime-context';
 export * from './xo/xo-storable.model';
 export * from './xo/xo-structure';
+export * from './xo/encryption-data.model';
 export * from './zeta-environment.interfaces';

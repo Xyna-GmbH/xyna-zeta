@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,7 @@ export * from './xc-graph/xc-graph-data-source';
 export * from './xc-graph/xc-graph.component';
 export * from './xc-graph/xc-remote-graph-data-source';
 export * from './xc-icon/xc-icon.component';
+export * from './xc-language-selector/xc-language-selector.component';
 export * from './xc-list/xc-nav-list/xc-nav-list-item/xc-nav-list-item.component';
 export * from './xc-list/xc-nav-list/xc-nav-list.component';
 export * from './xc-list/xc-rich-list/xc-rich-list-item.component';

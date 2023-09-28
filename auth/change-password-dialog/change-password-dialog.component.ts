@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import { ApiService, RuntimeContext } from '@zeta/api';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { I18nService } from '../../i18n';
+import { I18nService, LocaleService } from '../../i18n';
 import { XcCustomValidatorFunction, XcDialogComponent } from '../../xc';
 import { AuthService } from '../auth.service';
 import { XoXynaProperty, XoXynaPropertyKey } from '../xo/xyna-property.model';
@@ -68,8 +68,8 @@ export class ChangePasswordDialogComponent extends XcDialogComponent {
     ) {
         super(injector);
 
-        this.i18n.setTranslations(I18nService.DE_DE, changePassword_translations_de_DE);
-        this.i18n.setTranslations(I18nService.EN_US, changePassword_translations_en_US);
+        this.i18n.setTranslations(LocaleService.DE_DE, changePassword_translations_de_DE);
+        this.i18n.setTranslations(LocaleService.EN_US, changePassword_translations_en_US);
 
         api.startOrderAssert<XoXynaProperty>(
             RuntimeContext.guiHttpApplication,

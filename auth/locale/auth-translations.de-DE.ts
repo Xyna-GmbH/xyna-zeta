@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,6 @@ export const authTranslations_deDE: I18nTranslation[] = [
     {
         key: 'zeta.auth-login.subtitle2',
         value: 'Benutzeranmeldung'
-    },
-    {
-        key: 'zeta.auth-login.select-language-label',
-        value: 'Sprache auswählen'
     },
     {
         key: 'zeta.auth-login.login-button',

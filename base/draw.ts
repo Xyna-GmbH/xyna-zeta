@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 Xyna GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -538,16 +538,15 @@ export function createSVGPieChart(parent: Element | undefined, x: number, y: num
 
 
 /**
-* Creates a pie chart
+* Creates a spider chart
 * @param parent Parent element
 * @param x Center x coordinate
 * @param y Center y coordinate
 * @param r Radius
 * @param off Initial offset angle in radians
+* @param textSize Text size of the labels
 * @param values Values at the respective axis between [0..1]
 * @param labels Labels of the respective axis
-* @param userAttributeName Common attribute name for the attribute values
-* @param userAttributeValues Attribute values of the slices in the dom
 * @returns SVG group element
 */
 export function createSVGSpiderChart(parent: Element | undefined, x: number, y: number, r: number, off: number, textSize: number, values: number[], labels: string[]): SVGElement {
