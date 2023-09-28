@@ -10,6 +10,6 @@
     </section>
     <ng-container footer>
         <xc-button *ngIf="injectedData.detailsLink" [disabled]="!license" (click)="toggleDetails()">{{(details ? 'button-less' : 'button-more') | xcI18n}}</xc-button>
-        <xc-button xc-i18n (click)="dismiss()">ok-button</xc-button>
+        <xc-button color="primary" xc-i18n (click)="dismiss()">ok-button</xc-button>
     </ng-container>
 </xc-dialog-wrapper>

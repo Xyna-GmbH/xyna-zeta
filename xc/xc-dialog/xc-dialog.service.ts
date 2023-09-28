@@ -65,7 +65,7 @@ export class XcDialogService {
             panelClass,
             role: 'dialog',
             disableClose: true,
-            autoFocus: true,
+            autoFocus: 'first-heading',
             ariaLabel: ariaLabel
             // width, height, ...
         };
