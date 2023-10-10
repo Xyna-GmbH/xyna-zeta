@@ -10,6 +10,7 @@
     "plugins": [
         "@angular-eslint",
         "@typescript-eslint",
+        "import",
         "zeta"
     ]
 }
