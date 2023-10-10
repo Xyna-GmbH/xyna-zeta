@@ -7,6 +7,6 @@
     "root": true,
     "extends": [
         // "./projects/[PROJECT]/src/app/zeta/lint/config/base/.eslintrc.json"
-        "./zeta/lint/config/strict/.eslintrc.json"
+        "./lint/config/strict/.eslintrc.json"
     ]
 }
