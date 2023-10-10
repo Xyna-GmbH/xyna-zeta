@@ -31,7 +31,7 @@ export class XcDialogWrapperComponent implements AfterViewInit {
 
     private _draggable = false;
     private _resizable = false;
-    private _dialogOptions: XcDialogOptions = {};
+    private readonly _dialogOptions: XcDialogOptions = {};
 
     @Input()
     set draggable(value: boolean) {

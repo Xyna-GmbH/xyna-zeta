@@ -126,9 +126,9 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
     private static _num = 0;
     private readonly _uid = 'xc_canvas_with_unique_num' + ++XcCanvasComponent._num;
     private readonly _keyCodeSet = new Set<string>();
-    private oldDimensions = {width: 0, height: 0};
+    private readonly oldDimensions = {width: 0, height: 0};
     private _frameCount = 0;
-    private _oldParentSize = {width: -1, height: -1};
+    private readonly _oldParentSize = {width: -1, height: -1};
 
     private _lastTimestamp: number;
     private _lastStepTimestamp: number;

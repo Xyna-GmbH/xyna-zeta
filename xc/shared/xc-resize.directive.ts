@@ -59,7 +59,7 @@ export class XcResizeDirective implements AfterViewInit, OnDestroy {
     @Input('xc-resize')
     enabled = true;
 
-    private _resizeOptions: XcResizeOptions = {};
+    private readonly _resizeOptions: XcResizeOptions = {};
 
     @Input('xc-resize-options')
     set resizeOptions(value: XcResizeOptions) {
