@@ -23,6 +23,7 @@ type EventHandler = (event: Event) => void;
 
 interface OutsideListenerTriple {
     handler: EventHandler;
+    // eslint-disable-next-line no-undef
     element: DocumentAndElementEventHandlers;
     eventType: string;
 }
@@ -33,6 +34,7 @@ export class OutsideListenerService {
     private static id = 0;
 
     private readonly handlerTriples = new Map<number, OutsideListenerTriple>();
+    // eslint-disable-next-line no-undef
     private readonly handlerIdArrays = new Map<DocumentAndElementEventHandlers, number[]>();
 
 
@@ -40,6 +42,7 @@ export class OutsideListenerService {
     }
 
 
+    // eslint-disable-next-line no-undef
     addOutsideListener(element: DocumentAndElementEventHandlers, eventType: string, listener: EventHandler): number {
         let handler: EventHandler;
         let handlerId: number;
@@ -72,6 +75,7 @@ export class OutsideListenerService {
     }
 
 
+    // eslint-disable-next-line no-undef
     removeAllOutsideListenerFromElement(element: DocumentAndElementEventHandlers) {
         (this.handlerIdArrays.get(element) ?? []).forEach(id => this.removeOutsideListener(id));
     }
