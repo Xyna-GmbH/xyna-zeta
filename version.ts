@@ -15,6 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+
+
+
+/** @deprecated use package.json */
+
+
 /* eslint-disable @typescript-eslint/quotes */
 export const ZetaVersion = '14.0.2';
 
