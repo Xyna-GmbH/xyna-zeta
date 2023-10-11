@@ -181,6 +181,7 @@ mat-dialog-container.mat-dialog-container {
                     border-right: none;
                     border-bottom: none;
                     left: -10px;
+                    right: unset;
                 }
             }
         }
@@ -189,6 +190,7 @@ mat-dialog-container.mat-dialog-container {
                 &:first-child::before, &:last-child::before {
                     border-left: none;
                     border-top: none;
+                    left: unset;
                     right: -10px;
                 }
             }
@@ -196,10 +198,12 @@ mat-dialog-container.mat-dialog-container {
         &.mat-menu-below .mat-menu-content .mat-menu-item {
             &:first-child::before, &:last-child::before {
                 top: 15px;
+                bottom: unset;
             }
         }
         &.mat-menu-above .mat-menu-content .mat-menu-item {
             &:first-child::before, &:last-child::before {
+                top: unset;
                 bottom: 15px;
             }
         }
@@ -211,22 +215,26 @@ mat-dialog-container.mat-dialog-container {
                 border-left: none;
                 border-bottom: none;
                 top: -10px;
+                bottom: unset;
             }
         }
         &.mat-menu-above {
             .mat-menu-content .mat-menu-item:last-child::before {
                 border-right: none;
                 border-top: none;
+                top: unset;
                 bottom: -10px;
             }
         }
         &.mat-menu-after .mat-menu-content .mat-menu-item {
             &:first-child::before, &:last-child::before {
                 left: 15px;
+                right: unset;
             }
         }
         &.mat-menu-before .mat-menu-content .mat-menu-item {
             &:first-child::before, &:last-child::before {
+                left: unset;
                 right: 15px;
             }
         }
