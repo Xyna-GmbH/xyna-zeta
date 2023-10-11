@@ -73,7 +73,6 @@
         //"@typescript-eslint/keyword-spacing": "warn",                                                 //              strict
         "@typescript-eslint/no-array-constructor": "error",                                             // recommended
         "@typescript-eslint/no-dupe-class-members": "error",
-        "@typescript-eslint/no-duplicate-imports": "warn",
         //"@typescript-eslint/no-empty-function": "error",                                              // recommended  impractical
         "@typescript-eslint/no-extra-semi": "error",                                                    // recommended
         "@typescript-eslint/no-implied-eval": "error",                                                  // recommended
@@ -87,7 +86,12 @@
         "@typescript-eslint/require-await": "error",                                                    // recommended
         "@typescript-eslint/semi": "error",
         //"@typescript-eslint/space-before-function-paren": ["warn", "never"],                          //              strict
-        //"@typescript-eslint/space-infix-ops": "warn",                                                 //              strict
+        //"@typescript-eslint/space-infix-ops": "warn",                                                 //              strict                                              //              strict
+
+        // --------------------------------------------------------------------------------------------------------------------------------
+        // import rules | https://github.com/import-js/eslint-plugin-import
+        // --------------------------------------------------------------------------------------------------------------------------------
+        "import/no-duplicates": ["error", {"considerQueryString": true}],
 
         // --------------------------------------------------------------------------------------------------------------------------------
         // possible errors | https://eslint.org/docs/rules/#possible-errors
