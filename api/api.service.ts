@@ -225,7 +225,7 @@ export class FileResult {
     constructor(
         public status: FileUploadStatus,
         public fileId: XoManagedFileID = null,
-        public fileName: string = ''
+        public fileName = ''
     ) {}
 }
 

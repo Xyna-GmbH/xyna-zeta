@@ -463,7 +463,7 @@ export function coerceBoolean(value: any): boolean | undefined | null {
 
 
 export function isType(arg: any, type: string): boolean {
-    return (<string>Object.prototype.toString.call(arg)).indexOf(type, 8) !== -1;
+    return Object.prototype.toString.call(arg).indexOf(type, 8) !== -1;
 }
 
 

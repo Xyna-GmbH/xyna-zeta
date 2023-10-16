@@ -39,7 +39,7 @@ export class XcDragDirective implements OnChanges, OnDestroy {
     @Input('xc-drag-event-target')
     dragEventTarget: MouseEvent | TouchEvent;
 
-    private _dragOptions: XcDragOptions = {};
+    private readonly _dragOptions: XcDragOptions = {};
 
     @Input('xc-drag-options')
     set dragOptions(value: XcDragOptions) {

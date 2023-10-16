@@ -28,8 +28,12 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Create temporary tsconfig.json
+        run: npm run create-tsconfig
+
       - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
+        run: npm run lint
+        # uses: wearerequired/lint-action@v2
+        # with:
+          # eslint: true
+          # prettier: true
