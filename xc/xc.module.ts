@@ -63,6 +63,7 @@ import { XcFormLabelComponent } from './xc-form/xc-form-label/xc-form-label.comp
 import { XcFormTextComponent } from './xc-form/xc-form-text/xc-form-text.component';
 import { XcFormTextareaComponent } from './xc-form/xc-form-textarea/xc-form-textarea.component';
 import { XcGraphComponent } from './xc-graph/xc-graph.component';
+import { XcIconService } from './xc-icon/xc-icon-service';
 import { XcIconComponent } from './xc-icon/xc-icon.component';
 import { XcLanguageSelectorComponent } from './xc-language-selector/xc-language-selector.component';
 import { XcNavListItemComponent } from './xc-list/xc-nav-list/xc-nav-list-item/xc-nav-list-item.component';
@@ -287,6 +288,7 @@ import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
     ],
     providers: [
         XcDialogService,
+        XcIconService,
         XcMenuService,
         XcStatusBarService
     ]

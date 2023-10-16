@@ -32,6 +32,7 @@ export class XcIconComponent extends XcThemeableComponent implements OnInit, Aft
 
     private _reverseDirection = false;
     private _iconMaterial = false;
+    private _iconSvg = false;
     private _iconStyle: string;
     private _iconName: string;
 
@@ -64,6 +65,17 @@ export class XcIconComponent extends XcThemeableComponent implements OnInit, Aft
 
     get iconMaterial(): boolean {
         return this._iconMaterial;
+    }
+
+
+    @Input('xc-icon-svg')
+    set iconSvg(value: boolean) {
+        this._iconSvg = coerceBoolean(value);
+    }
+
+
+    get iconSvg(): boolean {
+        return this._iconSvg;
     }
 
 
