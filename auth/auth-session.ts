@@ -24,6 +24,8 @@ export interface SessionInfo {
     rights: string[];
     /** session id */
     sessionId: string;
+    /** session token */
+    sessionToken: string;
     /** time in milliseconds since session start */
     startTime: number;
     /** time in milliseconds since last session interaction */

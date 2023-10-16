@@ -19,11 +19,12 @@ import { Injectable, NgZone } from '@angular/core';
 
 
 type EventHandler = (event: Event) => void;
+type DocumentElement = HTMLElement | SVGElement;
 
 
 interface OutsideListenerTriple {
     handler: EventHandler;
-    element: DocumentAndElementEventHandlers;
+    element: DocumentElement;
     eventType: string;
 }
 
@@ -33,14 +34,14 @@ export class OutsideListenerService {
     private static id = 0;
 
     private readonly handlerTriples = new Map<number, OutsideListenerTriple>();
-    private readonly handlerIdArrays = new Map<DocumentAndElementEventHandlers, number[]>();
+    private readonly handlerIdArrays = new Map<DocumentElement, number[]>();
 
 
     constructor(private readonly ngZone: NgZone) {
     }
 
 
-    addOutsideListener(element: DocumentAndElementEventHandlers, eventType: string, listener: EventHandler): number {
+    addOutsideListener(element: DocumentElement, eventType: string, listener: EventHandler): number {
         let handler: EventHandler;
         let handlerId: number;
         // add listener outside of angular
@@ -72,7 +73,7 @@ export class OutsideListenerService {
     }
 
 
-    removeAllOutsideListenerFromElement(element: DocumentAndElementEventHandlers) {
+    removeAllOutsideListenerFromElement(element: DocumentElement) {
         (this.handlerIdArrays.get(element) ?? []).forEach(id => this.removeOutsideListener(id));
     }
 
