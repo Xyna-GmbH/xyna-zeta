@@ -169,40 +169,6 @@ export function setHRef(element: Element, href: string) {
 
 
 /**
-* Creates a pie chart
-* @param parent Parent element
-* @param x Center x coordinate
-* @param y Center y coordinate
-* @param r Radius
-* @param off Initial offset angle in radians
-* @param radians Angles of the slices in radians between [0..2PI]
-* @param userAttributeName Common attribute name for the attribute values
-* @param userAttributeValues Attribute values of the slices in the dom
-* @returns SVG group element
-*/
-export function createSVGPieChart(parent: Element | undefined, x: number, y: number, r: number, off: number, radians: number[], userAttributeName?: string, userAttributeValues: string[] = []): SVGElement {
-    const element = createSVGGroup(parent);
-    let start = off;
-    let end: number;
-    for (let i = 0; i < radians.length; i++) {
-        end = start + radians[i];
-        const x1 = x + (r * Math.cos(start));
-        const y1 = y + (r * Math.sin(start));
-        const x2 = x + (r * Math.cos(end));
-        const y2 = y + (r * Math.sin(end));
-        const laf = radians[i] < Math.PI ? 0 : 1;
-        const path = createSVGElement(element, 'path');
-        path.setAttribute('d', 'M' + x + ',' + y + '  L' + x1 + ',' + y1 + '  A' + r + ',' + r + ' 0 ' + laf + ',1 ' + x2 + ',' + y2 + ' z');
-        if (userAttributeName) {
-            path.setAttribute(userAttributeName, userAttributeValues[i % userAttributeValues.length]);
-        }
-        start = end;
-    }
-    return element;
-}
-
-
-/**
 * Creates a rectangle path with individually rounded corners
 * @param parent Parent element
 * @param x Top left corner x coordinate
@@ -533,6 +499,97 @@ export function createSVGImage(parent: Element | undefined, x: number, y: number
     setPosition(element, x, y);
     setSize(element, w, h);
     setHRef(element, href);
+    return element;
+}
+
+
+/**
+* Creates a pie chart
+* @param parent Parent element
+* @param x Center x coordinate
+* @param y Center y coordinate
+* @param r Radius
+* @param off Initial offset angle in radians
+* @param radians Angles of the slices in radians between [0..2PI]
+* @param userAttributeName Common attribute name for the attribute values
+* @param userAttributeValues Attribute values of the slices in the dom
+* @returns SVG group element
+*/
+export function createSVGPieChart(parent: Element | undefined, x: number, y: number, r: number, off: number, radians: number[], userAttributeName?: string, userAttributeValues: string[] = []): SVGElement {
+    const element = createSVGGroup(parent);
+    let start = off;
+    let end: number;
+    for (let i = 0; i < radians.length; i++) {
+        end = start + radians[i];
+        const x1 = x + (r * Math.cos(start));
+        const y1 = y + (r * Math.sin(start));
+        const x2 = x + (r * Math.cos(end));
+        const y2 = y + (r * Math.sin(end));
+        const laf = radians[i] < Math.PI ? 0 : 1;
+        const path = createSVGElement(element, 'path');
+        path.setAttribute('d', 'M' + x + ',' + y + '  L' + x1 + ',' + y1 + '  A' + r + ',' + r + ' 0 ' + laf + ',1 ' + x2 + ',' + y2 + ' z');
+        if (userAttributeName) {
+            path.setAttribute(userAttributeName, userAttributeValues[i % userAttributeValues.length]);
+        }
+        start = end;
+    }
+    return element;
+}
+
+
+/**
+* Creates a spider chart
+* @param parent Parent element
+* @param x Center x coordinate
+* @param y Center y coordinate
+* @param r Radius
+* @param off Initial offset angle in radians
+* @param textSize Text size of the labels
+* @param values Values at the respective axis between [0..1]
+* @param labels Labels of the respective axis
+* @returns SVG group element
+*/
+export function createSVGSpiderChart(parent: Element | undefined, x: number, y: number, r: number, off: number, textSize: number, values: number[], labels: string[]): SVGElement {
+    const element = createSVGGroup(parent);
+    const back = createSVGGroup(element);
+    const front = createSVGGroup(element);
+    let start = off;
+    let end: number;
+    const step = 2 * Math.PI / values.length;
+    for (let i = 0; i < values.length; i++) {
+        end = start + step;
+        const xr1 = r * Math.cos(start);
+        const yr1 = r * Math.sin(start);
+        const xr2 = r * Math.cos(end);
+        const yr2 = r * Math.sin(end);
+        const v = values[i];
+        const w = values[(i + 1) % values.length];
+        const x1 = x + (v * xr1);
+        const y1 = y + (v * yr1);
+        const x2 = x + (w * xr2);
+        const y2 = y + (w * yr2);
+        const path = createSVGElement(back, 'path');
+        path.setAttribute('d', 'M' + x + ',' + y + '  L' + x1 + ',' + y1 + '  L' + x2 + ',' + y2 + ' z');
+        path.setAttribute('class', 'area');
+        const line = createSVGLine(back, x + xr1, y + yr1, x + xr2, y + yr2);
+        line.setAttribute('class', 'line');
+        const axis = createSVGGroup(front);
+        axis.setAttribute('class', 'axis');
+        createSVGLine(axis, x, y, x + xr1, y + yr1);
+        createSVGCircle(axis, x1, y1, 5);
+
+        const step2 = -step / 2;
+        const hx1 = Math.round(x + xr1 * Math.cos(step2) - yr1 * Math.sin(step2));
+        const hy1 = Math.round(y + xr1 * Math.sin(step2) + yr1 * Math.cos(step2));
+        const hx2 = Math.round(x + xr2 * Math.cos(step2) - yr2 * Math.sin(step2));
+        const hy2 = Math.round(y + xr2 * Math.sin(step2) + yr2 * Math.cos(step2));
+
+        const handle = createSVGElement(axis, 'path');
+        handle.setAttribute('d', 'M' + x + ',' + y + '  L' + hx2 + ',' + hy2 + '  A ' + r + ' ' + r + ' 0 0 0  ' + hx1 + ',' + hy1 + ' z');
+        handle.setAttribute('fill', 'transparent');
+        createSVGText(axis, x, textSize + 2, labels[i], textSize, 'middle');
+        start = end;
+    }
     return element;
 }
 
