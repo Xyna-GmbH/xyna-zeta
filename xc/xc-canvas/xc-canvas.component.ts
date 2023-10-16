@@ -126,9 +126,9 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
     private static _num = 0;
     private readonly _uid = 'xc_canvas_with_unique_num' + ++XcCanvasComponent._num;
     private readonly _keyCodeSet = new Set<string>();
-    private oldDimensions = {width: 0, height: 0};
+    private readonly _oldDimensions = {width: 0, height: 0};
     private _frameCount = 0;
-    private _oldParentSize = {width: -1, height: -1};
+    private readonly _oldParentSize = {width: -1, height: -1};
 
     private _lastTimestamp: number;
     private _lastStepTimestamp: number;
@@ -148,8 +148,8 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
     private _fps: number;
     private _canvas: HTMLCanvasElement;
     private _context: CanvasRenderingContext2D;
-    private fittingToParent = false;
-    private resizeObserverFallback = false;
+    private _fittingToParent = false;
+    private _resizeObserverFallback = false;
 
     private _keyboardEvent: KeyboardEvent;
     private keyboardEventSetter: (e: KeyboardEvent) => void;
@@ -201,7 +201,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
 
     @Input('xc-canvas-fitting')
     set fitting(value: boolean) {
-        this.fittingToParent = coerceBoolean(value);
+        this._fittingToParent = coerceBoolean(value);
     }
 
     /**
@@ -236,19 +236,19 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
         this._canvas = (this.elementRef.nativeElement as HTMLElement).children[0] as HTMLCanvasElement;
         this._canvas.setAttribute('id', this._uid);
         this._canvas.setAttribute('tabindex', '0');
-        this.oldDimensions.width = this._canvas.width;
-        this.oldDimensions.height = this._canvas.height;
+        this._oldDimensions.width = this._canvas.width;
+        this._oldDimensions.height = this._canvas.height;
         // it seems that the parent must not be an Angular component because if it is the fitting does not work correctly
         // hence a more dynamic approach is needed - @todo TODO
         this._parent = (this.elementRef.nativeElement as HTMLElement).parentElement;
 
         // Check if Browser supports ResizeObserver. It looks really good that it does
         // https://caniuse.com/#feat=resizeobserver
-        this.resizeObserverFallback = !ResizeObserver;
+        this._resizeObserverFallback = !ResizeObserver;
 
-        if (!this.resizeObserverFallback) {
+        if (!this._resizeObserverFallback) {
             this.resizeObserver = new ResizeObserver(() => {
-                if (this.fittingToParent) {
+                if (this._fittingToParent) {
                     this.resizeToParent();
                 }
             });
@@ -318,7 +318,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
 
         this._lastTimestamp = currentTimestamp;
 
-        if (this.fittingToParent && this.resizeObserverFallback) {
+        if (this._fittingToParent && this._resizeObserverFallback) {
             this.checkParent();
         }
 
@@ -599,7 +599,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
             this.canvas.addEventListener('blur', this.eventKiller);
             this.canvas.addEventListener('keyup', this.eventKiller);
 
-            if (!this.resizeObserverFallback) {
+            if (!this._resizeObserverFallback) {
                 this.resizeObserver.observe(this._parent);
             }
         });
@@ -616,7 +616,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
         window.removeEventListener('blur', this.eventKiller);
         this.canvas.removeEventListener('blur', this.eventKiller);
         this.canvas.removeEventListener('keyup', this.eventKiller);
-        if (!this.resizeObserverFallback) {
+        if (!this._resizeObserverFallback) {
             this.resizeObserver.unobserve(this._parent);
         }
     }

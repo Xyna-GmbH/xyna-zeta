@@ -35,7 +35,7 @@ type XcMasterDetailPosition     = 'start' | 'end';
 export class XcMasterDetailComponent {
 
     @ViewChild(MatDrawerContainer, {static: false})
-    private _drawerContainer: MatDrawerContainer;
+    private readonly _drawerContainer: MatDrawerContainer;
 
     private _opened = false;
     private _escapable = false;
