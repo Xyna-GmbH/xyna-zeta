@@ -16,7 +16,6 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 /* eslint-disable @typescript-eslint/quotes */
-//Roland Test 1 2
 export const ZetaVersion = '14.0.2';
 
 
