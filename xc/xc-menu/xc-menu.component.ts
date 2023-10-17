@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { MatMenu, MenuPositionX, MenuPositionY } from '@angular/material/menu';
+import { MatLegacyMenu as MatMenu, LegacyMenuPositionX as MenuPositionX, LegacyMenuPositionY as MenuPositionY } from '@angular/material/legacy-menu';
 
 import { coerceBoolean } from '../../base';
 import { XcItem } from '../shared/xc-item';

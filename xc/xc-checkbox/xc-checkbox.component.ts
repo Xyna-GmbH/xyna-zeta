@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { AfterContentInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatLegacyCheckbox as MatCheckbox, MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
 import { MatRipple } from '@angular/material/core';
 
 import { XcI18nTranslateDirective } from '@zeta/i18n/i18n.directive';
