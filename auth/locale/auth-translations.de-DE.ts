@@ -37,6 +37,10 @@ export const authTranslations_deDE: I18nTranslation[] = [
         key: 'zeta.auth-login.login-button',
         value: 'Anmelden'
     },
+    {
+        key: 'privacy-button',
+        value: 'Datenschutz'
+    },
 
     // typescript
     {

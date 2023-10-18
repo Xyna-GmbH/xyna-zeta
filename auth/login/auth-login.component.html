@@ -23,14 +23,19 @@
             <credentials-login [data]="credentialsTabItem.data"></credentials-login>
         </section>
     </ng-template>
-    <footer class="items-right">
+    <footer>
         <xc-button
-            class="login-button"
-            color="primary"
-            [busy]="pending"
-            [disabled]="pending"
-            (click)="login()"
-            xc-i18n
+                class="items-left" *ngIf="showPrivacyButton"
+                (click)= "openPrivacyLink()"
+                xc-i18n
+        >privacy-button</xc-button>
+        <xc-button
+                class="login-button items-right"
+                color="primary"
+                [busy]="pending"
+                [disabled]="pending"
+                (click)="login()"
+                xc-i18n
         >login-button</xc-button>
     </footer>
 </xc-panel>

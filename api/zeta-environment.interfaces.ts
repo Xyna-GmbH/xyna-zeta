@@ -88,6 +88,10 @@ export interface ZetaProjectOptions {
      * holds options about how the user is able to login to the GUI - default: only credentials login and no language change
      */
     auth?: AuthenticationOptions;
+    /**
+     * if the link is set, then the privacy button will be displayed inside the login mask
+     */
+    privacyLink?: string;
 }
 
 
