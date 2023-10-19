@@ -131,9 +131,13 @@ export class AuthLoginComponent {
 
 
     openPrivacyLink() {
-        window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
+        if(this.privacyLinkDefined) {
+            window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
+        }
+        else{
+            window.alert("PrivacyLink is not Defined");
+        }
     }
-
 
 
     smartCardInfo() {
