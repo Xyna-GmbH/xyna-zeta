@@ -43,6 +43,8 @@ $xc-menu-item-highlight-background-color: unset !default;
 $xc-menu-item-arrow-color: unset !default;
 
 
+@use '@angular/material' as mat;
+
 @import 'const';
 @import '@angular/material/theming';
 
@@ -68,13 +70,19 @@ $xc-menu-item-arrow-color: unset !default;
     font-feature-settings: 'liga';
 }
 
-@include mat-core(mat-typography-config(
-    $font-family: $font-family-regular
-));
+
+@include mat.core();
 
 $xyna-palette: mat-palette($mat-grey);
-$xyna-theme-dark: mat-dark-theme($xyna-palette, $xyna-palette, $xyna-palette);
-@include mat-core-theme($xyna-theme-dark);
+$xyna-theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $xyna-palette,
+        accent: $xyna-palette
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+));
+@include mat.all-component-themes($xyna-theme-dark);
 
 
 // globally overwrite material styles
