@@ -75,7 +75,6 @@ export class AuthLoginComponent {
     };
 
     showPrivacyButton = !!environment.zeta.privacyLink;
-    local_i18n :I18nService;
 
     @ViewChild(XcTabBarComponent, { static: false })
     tabBar: XcTabBarComponent;
@@ -91,7 +90,6 @@ export class AuthLoginComponent {
         private readonly dialogService: XcDialogService,
         private readonly i18n: I18nService
     ) {
-        this.local_i18n = i18n;
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
         }
@@ -131,8 +129,9 @@ export class AuthLoginComponent {
         }
     }
 
+
     openPrivacyLink() {
-        switch(this.local_i18n.language){
+        switch(this.i18n.language){
             case'de-DE':
                 window.open(environment.zeta.privacyLink, '_blank').focus();
                 break;
@@ -141,9 +140,11 @@ export class AuthLoginComponent {
                 break;
             default:
                 window.open(environment.zeta.privacyLink, '_blank').focus();
+                console.log('default');
                 break;
         }
     }
+
 
 
     smartCardInfo() {
