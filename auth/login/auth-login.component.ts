@@ -74,7 +74,7 @@ export class AuthLoginComponent {
         }
     };
 
-    showPrivacyButton = !!environment.zeta.privacyLink;
+    privacyLinkDefined = !!environment.zeta.privacyLink;
 
     @ViewChild(XcTabBarComponent, { static: false })
     tabBar: XcTabBarComponent;
