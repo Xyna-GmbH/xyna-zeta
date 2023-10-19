@@ -131,18 +131,7 @@ export class AuthLoginComponent {
 
 
     openPrivacyLink() {
-        switch(this.i18n.language){
-            case'de-DE':
-                window.open(environment.zeta.privacyLink, '_blank').focus();
-                break;
-            case'en-US':
-                window.open(environment.zeta.privacyLink+'&lang=en', '_blank').focus();
-                break;
-            default:
-                window.open(environment.zeta.privacyLink, '_blank').focus();
-                console.log('default');
-                break;
-        }
+        window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
     }
 
 
