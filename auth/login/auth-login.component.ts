@@ -135,7 +135,7 @@ export class AuthLoginComponent {
             window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
         }
         else{
-            window.alert("PrivacyLink is not Defined");
+            console.log("PrivacyLink is not Defined");
         }
     }
 
