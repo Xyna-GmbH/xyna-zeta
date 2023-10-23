@@ -16,14 +16,14 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { AuthService } from '../auth';
 import { XynaRoute } from './xyna-routes';
 
 
 @Injectable()
-export class RightGuard implements CanActivate {
+export class RightGuard  {
 
     constructor(private readonly authService: AuthService, private readonly router: Router) {
     }

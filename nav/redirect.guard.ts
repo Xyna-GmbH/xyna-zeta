@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, Injectable, InjectionToken } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 
 import { XynaRoute } from './';
 
@@ -25,7 +25,7 @@ export const RedirectGuardConfigToken = new InjectionToken<string>('RedirectGuar
 
 
 @Injectable()
-export class RedirectGuard implements CanActivate, CanDeactivate<Component> {
+export class RedirectGuard  {
 
     /**
      * maps the last visited url to a unique project key
