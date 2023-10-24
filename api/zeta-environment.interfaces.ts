@@ -92,10 +92,6 @@ export interface ZetaProjectOptions {
      * extend the Privacy Link with the language parameter
      */
     getPrivacyLink?(lang: string): string;
-    /**
-     * if the link is set, then the privacy button will be displayed inside the login mask
-     */
-    privacyLink?: string;
 }
 
 

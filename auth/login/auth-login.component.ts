@@ -83,7 +83,7 @@ export class AuthLoginComponent {
     smartCardDomain = '';
 
     private _pending = false;
-
+    public privacyLinkDefined: boolean;
 
     constructor(
         private readonly authService: AuthService,
@@ -93,6 +93,7 @@ export class AuthLoginComponent {
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
         }
+        this.privacyLinkDefined =!! environment.zeta.getPrivacyLink(this.i18n.language);
     }
 
 
