@@ -43,6 +43,8 @@ $xc-menu-item-highlight-background-color: unset !default;
 $xc-menu-item-arrow-color: unset !default;
 
 
+@use '@angular/material' as mat;
+
 @import 'const';
 @import '@angular/material/theming';
 
@@ -68,13 +70,28 @@ $xc-menu-item-arrow-color: unset !default;
     font-feature-settings: 'liga';
 }
 
-@include mat-core(mat-typography-config(
-    $font-family: $font-family-regular
-));
+
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
 
 $xyna-palette: mat-palette($mat-grey);
-$xyna-theme-dark: mat-dark-theme($xyna-palette, $xyna-palette, $xyna-palette);
-@include mat-core-theme($xyna-theme-dark);
+$xyna-theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $xyna-palette,
+        accent: $xyna-palette
+    ),
+    typography: mat.define-legacy-typography-config(),
+    density: 0
+));
+@include mat.all-legacy-component-themes($xyna-theme-dark);
 
 
 // globally overwrite material styles

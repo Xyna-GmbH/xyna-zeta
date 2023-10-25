@@ -55,9 +55,8 @@ export class AuthInterceptor implements HttpInterceptor {
                             redirectUrl = redirectUrl.substring(redirectUrl.indexOf('/'));
                         }
                         authService.requireAuthentication(redirectUrl);
-                    } else
-                    // forbidden
-                    if (error.status === 403) {
+                    } else if (error.status === 403) {
+                        // forbidden
                         console.log('AuthInterceptor Forbidden');
                     }
                 }
