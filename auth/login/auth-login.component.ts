@@ -92,7 +92,7 @@ export class AuthLoginComponent {
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
         }
-        this.privacyLinkDefined =!! environment.zeta.getPrivacyLink(this.i18n.language);
+        this.privacyLinkDefined = !!environment.zeta.getPrivacyLink(this.i18n.language);
     }
 
 
