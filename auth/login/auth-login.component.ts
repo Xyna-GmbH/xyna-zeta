@@ -82,7 +82,7 @@ export class AuthLoginComponent {
     smartCardDomain = '';
 
     private _pending = false;
-    public privacyLinkDefined: boolean;
+    private privacyLinkDefined: boolean;
 
     constructor(
         private readonly authService: AuthService,
