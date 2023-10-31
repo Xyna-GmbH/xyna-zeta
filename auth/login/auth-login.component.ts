@@ -74,7 +74,6 @@ export class AuthLoginComponent {
         }
     };
 
-
     @ViewChild(XcTabBarComponent, { static: false })
     tabBar: XcTabBarComponent;
 
@@ -82,7 +81,8 @@ export class AuthLoginComponent {
     smartCardDomain = '';
 
     private _pending = false;
-    private readonly privacyLinkDefined: boolean;
+    privacyLinkDefined = !!environment.zeta.getPrivacyLink;
+
 
     constructor(
         private readonly authService: AuthService,
@@ -92,7 +92,6 @@ export class AuthLoginComponent {
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
         }
-        this.privacyLinkDefined = !!environment.zeta.getPrivacyLink(this.i18n.language);
     }
 
 
@@ -132,6 +131,7 @@ export class AuthLoginComponent {
 
     openPrivacyLink() {
         if (this.privacyLinkDefined) {
+            console.log("PrivacyLink is not Defined");
             window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
         }
         else {

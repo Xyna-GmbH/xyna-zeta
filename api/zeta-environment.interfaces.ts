@@ -89,7 +89,7 @@ export interface ZetaProjectOptions {
      */
     auth?: AuthenticationOptions;
     /**
-     * extend the Privacy Link with the language parameter
+     * returns the Privacy Link with the language parameter
      */
     getPrivacyLink?(lang: string): string;
 }
