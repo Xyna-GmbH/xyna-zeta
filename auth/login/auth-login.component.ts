@@ -81,6 +81,7 @@ export class AuthLoginComponent {
     smartCardDomain = '';
 
     private _pending = false;
+    privacyLinkDefined = !!environment.zeta.getPrivacyLink;
 
 
     constructor(
@@ -124,6 +125,16 @@ export class AuthLoginComponent {
             this.smartCardLogin();
         } else if (this.credentialsMethodUsed) {
             this.credentialsLogin();
+        }
+    }
+
+
+    openPrivacyLink() {
+        if (this.privacyLinkDefined) {
+            window.open(environment.zeta.getPrivacyLink(this.i18n.language), '_blank').focus();
+        }
+        else {
+            console.log('PrivacyLink is not Defined');
         }
     }
 
