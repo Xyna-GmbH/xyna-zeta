@@ -166,10 +166,8 @@ export class AuthService {
             if (!this.authenticated) {
                 // logout occured, so require re-authentication with no redirect url
                 this.requireAuthentication();
-            }
-            // perform redirect as specified in route query params
-            else if (this.isRoutedToUrlFragment()) {
-                // call post authentication hook
+            } else if (this.isRoutedToUrlFragment()) {
+                // perform redirect as specified in route query params and call post authentication hook
                 this.postAuthenticationHook(sessionInfo).subscribe(() => {
                     const redirectUrl = route.snapshot.queryParams.redirect || '';
                     // allow dynamic route setup by first routing to base url

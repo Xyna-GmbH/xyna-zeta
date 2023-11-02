@@ -45,10 +45,8 @@ export class XcTemplateFactory {
             // is field enumerated?
             if (enumeratedDataWrapper) {
                 templates.push(new XcFormAutocompleteTemplate(enumeratedDataWrapper));
-            }
-            // boolean
-            else if (field.typeFqn.boolLike) {
-                // autocomplete data wrapper
+            } else if (field.typeFqn.boolLike) {
+                // --< BOOLEAN >--
                 const autocompleteDataWrapper = new XcAutocompleteDataWrapper(
                     getter,
                     setter,
@@ -74,17 +72,14 @@ export class XcTemplateFactory {
                 }
                 templates.push(checkboxTemplate);
                 templates.push(new XcFormAutocompleteTemplate(autocompleteDataWrapper));
-            }
-            // string
-            else if (field.typeFqn.stringLike) {
+            } else if (field.typeFqn.stringLike) {
+                // --< STRING >--
                 templates.push(new XcFormInputTemplate(new XcIdentityDataWrapper(getter, setter)));
-            }
-            // integer, long
-            else if (field.typeFqn.intLike) {
+            } else if (field.typeFqn.intLike) {
+                // --< INTEGER, LONG >--
                 templates.push(new XcFormInputTemplate(new XcStringIntegerDataWrapper(getter, setter, nullable), [XcFormValidatorNumber('decimal')]));
-            }
-            // float, double
-            else if (field.typeFqn.floatLike) {
+            } else if (field.typeFqn.floatLike) {
+                // --< FLOAT, DOUBLE >--
                 templates.push(new XcFormInputTemplate(new XcStringFloatDataWrapper(getter, setter, nullable), [XcFormValidatorNumber('float')]));
             }
             return templates;

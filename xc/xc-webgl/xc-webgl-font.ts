@@ -74,10 +74,12 @@ export class XcWebGLFont {
         const shapes = this.font.generateShapes(text, size);
         shapes.forEach(shape =>
             shape.getPoints().forEach(point => {
+                /* eslint-disable brace-style */
                 if (point.x < boundingBox.min.x) { boundingBox.min.x = point.x; }
                 if (point.x > boundingBox.max.x) { boundingBox.max.x = point.x; }
                 if (point.y < boundingBox.min.y) { boundingBox.min.y = point.y; }
                 if (point.y > boundingBox.max.y) { boundingBox.max.y = point.y; }
+                /* eslint-enable brace-style */
             })
         );
         return shapes;

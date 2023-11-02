@@ -60,7 +60,9 @@ export class XcNavListComponent extends XcThemeableComponent implements OnInit, 
      * If set, only the selected item (and its parents) are expanded, the rest will be collapsed automatically
      */
     @Input('xc-nav-list-autocollapse')
-    set autocollapse(value: boolean) { this._autocollapse = coerceBoolean(value); }
+    set autocollapse(value: boolean) {
+        this._autocollapse = coerceBoolean(value);
+    }
     private _autocollapse = false;
 
     /**
@@ -71,11 +73,17 @@ export class XcNavListComponent extends XcThemeableComponent implements OnInit, 
         this._shrinkable = coerceBoolean(value);
         this.shrink = this._shrinkable;
     }
-    get shrinkable(): boolean { return this._shrinkable; }
+    get shrinkable(): boolean {
+        return this._shrinkable;
+    }
     private _shrinkable = false;
 
-    set shrink(value: boolean) { this._shrink = value && this.shrinkable; }
-    get shrink(): boolean { return this._shrink; }
+    set shrink(value: boolean) {
+        this._shrink = value && this.shrinkable;
+    }
+    get shrink(): boolean {
+        return this._shrink;
+    }
     private _shrink = false;
 
 
@@ -171,7 +179,9 @@ export class XcNavListComponent extends XcThemeableComponent implements OnInit, 
             return null;
         };
 
-        if (!link) { return null; }
+        if (!link) {
+            return null;
+        }
 
         for (const rootItem of this.items) {
             const foundItem = recFunc({ item: rootItem, parent: null }, link);
