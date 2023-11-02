@@ -768,8 +768,12 @@ export class XoObject extends Xo {
                 const currentValue = propertyHost[propertyName];
                 const pendingValue = pendingValueCallback(currentValue);
                 const pendingPropertyValue: XoPendingPropertyValue<U> = {
-                    get currentValue() { return currentValue; },
-                    get pendingValue() { return pendingValue; },
+                    get currentValue() {
+                        return currentValue;
+                    },
+                    get pendingValue() {
+                        return pendingValue;
+                    },
                     assign: value => propertyHost[propertyName] = value,
                     drop: () => {
                         this.pendingPropertyValues.delete(pendingPropertyValue);

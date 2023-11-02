@@ -61,6 +61,8 @@
         "arrow-parens": ["warn", "as-needed"],
         "arrow-spacing": "warn",
         "rest-spread-spacing": "warn",
-        "template-curly-spacing": "warn"
+        "template-curly-spacing": "warn",
+
+        "brace-style": [2, "1tbs"]
     }
 }

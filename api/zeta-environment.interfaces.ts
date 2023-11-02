@@ -89,7 +89,7 @@ export interface ZetaProjectOptions {
      */
     auth?: AuthenticationOptions;
     /**
-     * returns the Privacy Link with the language parameter
+     * returns the URL to the privacy website depending on a language parameter. If defined, the auth-login mask shows a corresponding button
      */
     getPrivacyLink?(lang: string): string;
 }
