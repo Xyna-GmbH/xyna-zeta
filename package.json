@@ -3,6 +3,9 @@
     "title": "Zeta",
     "version": "14.1.0",
     "private": true,
+    "engines": {
+        "node": "^16.14.0 || ^18.10.0"
+    },
     "scripts": {
         "lint": "eslint --color -c .eslintrc.json --ext .ts --max-warnings 0 .",
         "create-tsconfig": "tsc --init"
