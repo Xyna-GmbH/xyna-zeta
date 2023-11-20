@@ -34,11 +34,9 @@ export class LocaleService {
 
     constructor(route: ActivatedRoute) {
 
-        const html = document.querySelector('html');
-        const lang = html?.getAttribute('lang') ?? null;
-        if (lang) {
+        if (navigator.language) {
             // TODO extend for multiple languages
-            this.languageSubject.next(LocaleService.DE_DE.startsWith(lang) ? LocaleService.DE_DE : LocaleService.EN_US);
+            this.language = LocaleService.DE_DE.startsWith(navigator.language) ? LocaleService.DE_DE : LocaleService.EN_US;
         }
     }
 
