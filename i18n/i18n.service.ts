@@ -98,7 +98,7 @@ export class I18nService {
     noTranslationFoundDefaultBehavior = NoI18nTranslationFoundBehavior.ReturnKey;
     cacheBehavior = I18nCacheBehavior.CacheAllKeys;
 
-    contextDismantlingSearch = false;
+    contextDismantlingSearch = true;
 
 
     BUTTON       = { translate: (key: string, ...params: I18nParam[]): string => this.translate(I18N_TYPES.button       + ':' + key, ...params) };
