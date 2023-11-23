@@ -155,7 +155,9 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
                                         this.detailsDefinition = definitionBundle.definition;
 
                                         // get notified when details close
-                                        const observerSubscription = this.detailsDefinition.observerChange
+                                        let observerSubscription: Subscription;
+                                        // eslint-disable-next-line prefer-const
+                                        observerSubscription = this.detailsDefinition.observerChange
                                             .pipe(filter(observer => !!observer))
                                             .subscribe(observer => {
                                                 observer.definitionClosed().pipe(first()).subscribe(data => {
