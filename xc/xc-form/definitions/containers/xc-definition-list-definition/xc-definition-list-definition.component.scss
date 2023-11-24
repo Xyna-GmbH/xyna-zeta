@@ -55,4 +55,12 @@ $dt-width: 38%;
             }
         }
     }
+
+    &.pre > dl {
+        &::ng-deep {
+            & > dd {
+                white-space: pre;
+            }
+        }
+    }
 }
