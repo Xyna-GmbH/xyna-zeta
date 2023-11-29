@@ -57,20 +57,16 @@ export interface IComparable {
 export abstract class Comparable implements IComparable {
 
     /**
-     * Returns the unique key which is used to compare this object with other objects.
      * Must be overridden by subclasses in order to enable the equals functionality.
      *
-     * @returns Unique key
+     * @inheritdoc
      */
     get uniqueKey(): string {
         return '';
     }
 
     /**
-     * Returns whether this object equals another object
-     *
-     * @param that Object to compare this object to
-     * @returns `true`, if this object equals the other object, `false` otherwise
+     * @inheritdoc
      */
     equals(that: IComparable): boolean {
         let uniqueKey: string;
