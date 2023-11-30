@@ -19,8 +19,8 @@ import { AfterViewInit, Component, Injector, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 import { XcStackItemComponent, XcStackItemComponentData } from '../../../../xc-stack/xc-stack-item/xc-stack-item.component';
 
-import { Observable, of, Subject, Subscription } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, Subject, Subscription, throwError } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { XoFormDefinition } from '../../xo/containers.model';
 import { ApiService, StartOrderOptionsBuilder, Xo, XoManagedFileID, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';
 import { XcStackItem, XcStackItemInterface, XcStackItemObserver } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
@@ -131,14 +131,33 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
 
 
     definitionClosed(): Observable<XoCloseDefinitionData> {
-        this.dialogs.info('Definition Closed', 'not implemented yet in DefinitionObserver');
-        return of();
+        return of(<XoCloseDefinitionData>{
+            definition: this.injectedData.definition,
+            data: this.injectedData.data
+        });
     }
 
 
     resolveDefinition(definitionWorkflowRTC: XoXPRCRuntimeContext, definitionWorkflowFQN: string, data: Xo[]): Observable<XoDefinitionBundle> {
-        this.dialogs.info('Resolve Definition from Workflow', 'not implemented yet in DefinitionObserver');
-        return of();
+        return this.api.startOrder(
+            definitionWorkflowRTC.toRuntimeContext(),
+            definitionWorkflowFQN,
+            data, null,
+            new StartOrderOptionsBuilder().withErrorMessage(true).options
+        ).pipe(
+            filter(result => {
+                if (result.errorMessage || result.output?.length === 0) {
+                    throwError(() => new Error('no definition found'));
+                    this.dialogs.error('No definition found in resolved definition-Workflow');
+                    return false;
+                }
+                return true;
+            }),
+            map(result => <XoDefinitionBundle>{
+                definition: result.output[0],
+                data: result.output.slice(1)
+            })
+        );
     }
 
 
