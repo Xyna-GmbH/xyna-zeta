@@ -33,28 +33,42 @@ export const CACHE = Symbol();
 export type CachedFunction<T> = (() => T) & {[CACHE]: T};
 
 
+export interface IComparable {
+    /**
+     * Returns the unique key which is used to compare this object with other objects.
+     *
+     * @returns Unique key
+     */
+    get uniqueKey(): string;
+
+    /**
+     * Returns whether this object equals another object
+     *
+     * @param that Object to compare this object to
+     * @returns `true`, if this object equals the other object, `false` otherwise
+     */
+    equals(that: this): boolean;
+}
+
+
 /**
  * Extend the comparable class to enable instances to be compared to each other
  */
-export abstract class Comparable {
+export abstract class Comparable implements IComparable {
 
     /**
-     * Returns the unique key which is used to compare this object with other objects.
      * Must be overridden by subclasses in order to enable the equals functionality.
      *
-     * @returns Unique key
+     * @inheritdoc
      */
     get uniqueKey(): string {
         return '';
     }
 
     /**
-     * Returns whether this object equals another object
-     *
-     * @param that Object to compare this object to
-     * @returns TRUE, if this object equals the other object, FALSE otherwise
+     * @inheritdoc
      */
-    equals(that: this): boolean {
+    equals(that: IComparable): boolean {
         let uniqueKey: string;
         return !!(that && (uniqueKey = that.uniqueKey)) && uniqueKey === this.uniqueKey;
     }
