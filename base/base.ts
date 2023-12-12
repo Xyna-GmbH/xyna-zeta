@@ -75,6 +75,19 @@ export abstract class Comparable implements IComparable {
 }
 
 
+/**
+ * @param T For HTML, `T` usually is a DOM element
+ */
+export interface GraphicallyRepresented<T = any> {
+    /**
+     * @return Graphical representation. In a HTML context, this is usually a DOM element
+     */
+    get graphicalRepresentation(): T;
+    set graphicalRepresentation(value: T);
+    graphicalRepresentationChange(): Observable<T>;
+}
+
+
 export function uniquify<T>(array: T[], serializer: (value: T) => string): T[] {
     const map = new Map<string, T>();
     array.forEach(value => map.set(serializer(value), value));

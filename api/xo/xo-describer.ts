@@ -191,7 +191,7 @@ export class FullQualifiedName extends Comparable {
         const anchorString = this.anchor && withAnchor
             ? FullQualifiedName.ANCHOR + this.anchor
             : '';
-        return this.path
+        return !this.isPrimitive()
             ? [this.path, this.name].join(FullQualifiedName.SEPARATOR) + anchorString
             : this.name + anchorString;
     }
