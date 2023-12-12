@@ -17,7 +17,11 @@
         [xc-form-field-floatlabel]="instance.floatLabel"
         xc-tooltip="{{instance.tooltip}}"
     ></xc-form-text>
-    <!-- must always be unwrapped because a dl must directly contain dt and dd elements -->
+    <!--
+        --< XcDefinitionListEntry >--
+        Must always be unwrapped because a dl must directly contain dt and dd elements.
+        This is why no class or tooltip is set here, because the element vanishes after unwrapping.
+    -->
     <xc-definition-list-entry
         *ngSwitchCase="Type.XcDefinitionListEntryTemplate.of(instance)"
         [definitionType]="instance.label"
