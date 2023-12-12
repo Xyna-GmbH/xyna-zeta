@@ -22,7 +22,7 @@ import { XcStackItemComponent, XcStackItemComponentData } from '../../../../xc-s
 import { Observable, of, Subject, Subscription, throwError } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { XoFormDefinition } from '../../xo/containers.model';
-import { ApiService, StartOrderOptionsBuilder, Xo, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';
+import { ApiService, StartOrderOptionsBuilder, Xo, XoManagedFileID, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';
 import { XcStackItem, XcStackItemInterface, XcStackItemObserver } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
 import { XoBaseDefinition, XoCloseDefinitionData, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
 import { XcDialogService } from '../../../../xc-dialog/xc-dialog.service';
@@ -179,5 +179,9 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
             input, null,
             new StartOrderOptionsBuilder().withErrorMessage(true).async(!definition.synchronously).options
         ).pipe(map(result => result.output));
+    }
+
+    uploadFile?(host?: string): Observable<XoManagedFileID> {
+        return this.api.upload(undefined, host);
     }
 }

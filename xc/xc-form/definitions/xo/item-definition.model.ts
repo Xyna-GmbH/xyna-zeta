@@ -475,6 +475,47 @@ export class XoStartOrderButtonDefinitionArray extends XoArray<XoStartOrderButto
 
 
 /***********************************************
+ * UPLOAD-BUTTON
+ **********************************************/
+
+@XoObjectClass(XoButtonDefinition, 'xmcp.forms.datatypes', 'UploadButtonDefinition')
+export class XoUploadButtonDefinition extends XoButtonDefinition {
+
+    @XoProperty()
+    host: string;
+
+
+    getTemplate(data: Xo[]): Observable<XcTemplate> {
+        return super.getTemplate(data).pipe(tap((template: XcButtonBaseTemplate) => {
+            if (template) {
+                template.action = () => {
+                    if (this.observer && this.observer.uploadFile) {
+                        this.observer.uploadFile(this.host).subscribe({
+                            next: managedFileId => {
+                                this.resolveAssignData(data, managedFileId.iD);
+                            },
+                            complete : () => {
+                                template.busy = false;
+                                template.triggerMarkForCheck();
+                            }
+                        });
+                        template.busy = true;
+                        template.triggerMarkForCheck();
+                    }
+                };
+            }
+        }));
+    }
+}
+
+
+@XoArrayClass(XoStartOrderButtonDefinition)
+export class XoUploadButtonDefinitionArray extends XoArray<XoUploadButtonDefinition> {
+}
+
+
+
+/***********************************************
  * COMPONENT
  **********************************************/
 

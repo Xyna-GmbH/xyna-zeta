@@ -613,7 +613,7 @@ export class ApiService {
     }
 
 
-    upload(file: File, host?: string): Observable<XoManagedFileID> {
+    upload(file?: File, host?: string): Observable<XoManagedFileID> {
         const subj = new Subject<XoManagedFileID>();
 
         this.uploadFileToXyna(file, host).subscribe(result => {
@@ -633,7 +633,7 @@ export class ApiService {
      * @param file - uploads the given file to the io end point of xyna blackedition
      * @returns Observable<FileResult> - returns the FileResult with the ManagedFileId via an Observable
      */
-    private uploadFileToXyna(file: File, host?: string): Observable<FileResult> {
+    private uploadFileToXyna(file?: File, host?: string): Observable<FileResult> {
 
         const uploadUrl: string = (host ? host + '/' : environment.zeta.url) + 'upload';
 

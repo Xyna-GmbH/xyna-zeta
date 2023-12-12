@@ -20,7 +20,7 @@ import { ValidatorFn } from '@angular/forms';
 import { BehaviorSubject, Observable, of, PartialObserver } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-import { Xo, XoArray, XoArrayClass, XoObject, XoObjectClass, XoProperty } from '../../../../api';
+import { Xo, XoArray, XoArrayClass, XoManagedFileID, XoObject, XoObjectClass, XoProperty } from '../../../../api';
 import { XoXPRCRuntimeContext } from '../../../../api/xo/runtime-context.model';
 import { XcStackItemInterface } from '../../../xc-stack/xc-stack-item/xc-stack-item';
 import { XcTableDataSource } from '../../../xc-table/xc-table-data-source';
@@ -74,6 +74,7 @@ export interface XoDefinitionObserver {
     resolveDefinition?(definitionWorkflowRTC: XoXPRCRuntimeContext, definitionWorkflowFQN: string, data: Xo[]): Observable<XoDefinitionBundle>;
     getDefaultRTC?(): XoXPRCRuntimeContext;
     startOrder?(definition: XoStartOrderButtonDefinition, input: Xo | Xo[]): Observable<Xo | Xo[]>;
+    uploadFile?(host?: string): Observable<XoManagedFileID>;
     translate?(value: string): string;
     afterSetObserver?(definition: XoDefinition);
 }
