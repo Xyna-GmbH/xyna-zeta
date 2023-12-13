@@ -189,8 +189,8 @@ export class I18nService {
                 let curKey: string;
                 let i = 0;
                 const typeparts = key.split(':');
-                const type = typeparts.length === 2 ? typeparts[0] : '';
-                const path = typeparts.length === 2 ? typeparts[1] : typeparts[0];
+                const type = typeparts.length >= 2 ? typeparts[0] : '';
+                const path = typeparts.length >= 2 ? typeparts.slice(1).join(':') : typeparts[0];
                 const parts: string[] = path.split('.');
                 let withType = !!type;
                 let looping = true;
@@ -235,7 +235,9 @@ export class I18nService {
         }
 
         if (this.noTranslationFoundDefaultBehavior === NoI18nTranslationFoundBehavior.ReturnLastPartOfKey) {
-            translation.value = key.split(':').pop().split('.').pop();
+            const typeparts = key.split(':');
+            const path = typeparts.length >= 2 ? typeparts.slice(1).join(':') : typeparts[0];
+            translation.value = path.split('.').pop();
         }
 
         // cache the not found key because user wants to cache all keys
