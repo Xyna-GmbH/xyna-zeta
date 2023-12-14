@@ -19,8 +19,9 @@ import { Component, Input } from '@angular/core';
 
 import { getBaseHref, isArray } from '@zeta/base';
 
-import { ZetaVersion } from '../../version';
 import { XcDialogService } from '../xc-dialog/xc-dialog.service';
+
+import packageInfo from '../../package.json';
 
 
 @Component({
@@ -64,7 +65,7 @@ export class XcTitleBarComponent {
 
 
     private get versions(): string {
-        return 'Xyna Zeta: ' + ZetaVersion +
+        return 'Xyna Zeta: ' + packageInfo.version +
                (isArray(this.applicationVersions) ? '\n\n' + this.applicationVersions.join('\n') : '');
     }
 
