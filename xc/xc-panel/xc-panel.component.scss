@@ -190,7 +190,7 @@ $xc-sub-panel-background-color: unset !default;
             display: flex;
             flex: 0 0 auto;
             flex-direction: row;
-            align-items: baseline;
+            align-items: center;
 
             > :not(:first-child) {
                 margin-left: 4px;
