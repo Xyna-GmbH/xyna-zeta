@@ -106,7 +106,10 @@ $xc-table-body-border-color-focus: unset !default;
 
             &.activated {
                 background-color: $xc-table-activated-entry-background-color;
-                color: $xc-table-activated-entry-color;
+
+                td {
+                    color: $xc-table-activated-entry-color;
+                }
 
                 .action-elements::ng-deep {
                     xc-icon-button {
