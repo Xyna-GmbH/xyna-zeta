@@ -68,6 +68,7 @@ $xc-table-body-border-color-focus: unset !default;
         width: 100%;
         border-collapse: collapse;
         position: relative;
+        background-color: $xc-table-background-color;
     }
 
     ::ng-deep tbody:focus {
@@ -166,6 +167,7 @@ $xc-table-body-border-color-focus: unset !default;
     .mat-cell {
         font-size: $font-size-medium;
         overflow: hidden;
+        color: $xc-table-entry-color;
 
         &:first-child {
             border-left: none;
@@ -200,6 +202,10 @@ $xc-table-body-border-color-focus: unset !default;
         &::ng-deep {
 
             .mat-sort-header {
+                .mat-sort-header-arrow {
+                    color: $xc-table-entry-color;
+                }
+                
                 > .mat-sort-header-container {
                     padding: $xc-table-header-padding;
                     border-bottom: 0;
