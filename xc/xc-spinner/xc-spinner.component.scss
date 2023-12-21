@@ -21,7 +21,9 @@
 :host {
     @each $key, $value in $color-map {
         &[color="#{$key}"] .mat-spinner {
-            stroke: $value;
+            ::ng-deep circle {
+                stroke: $value;
+            }
         }
     }
 
