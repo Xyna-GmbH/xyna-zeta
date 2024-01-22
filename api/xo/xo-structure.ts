@@ -327,6 +327,12 @@ export class XoStructureArray extends XoStructureComplexField {
     static empty(): XoStructureArray {
         return new XoStructureArray(null, emptyStructureName);
     }
+
+    static fromObject(object: XoStructureObject): XoStructureArray {
+        return new XoStructureArray(
+            object.parent, object.name, object.label, object.docu, object.typeRtc, object.typeFqn, object.typeLabel, object.typeAbstract, object.typeDocu
+        );
+    }
 }
 
 
