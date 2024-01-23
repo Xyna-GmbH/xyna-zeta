@@ -80,7 +80,7 @@ export abstract class Comparable implements IComparable {
  */
 export interface GraphicallyRepresented<T = any> {
     /**
-     * @return Graphical representation. In a HTML context, this is usually a DOM element
+     * @return Graphical representation. In an HTML context, this is usually a DOM element
      */
     get graphicalRepresentation(): T;
     set graphicalRepresentation(value: T);
