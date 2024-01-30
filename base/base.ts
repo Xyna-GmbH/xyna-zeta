@@ -695,6 +695,17 @@ export function getEnumKey(enumerable: object, value: string) {
 }
 
 
+/**
+ * Reads the subdirectory of a URL
+ * @remark Scheme has to be *http* or *https*
+ * @returns Subdirectory (without leading slash) or empty string if none
+ */
+export function getSubdirectory(url: string): string {
+    const regExp = /https?:\/\/[^/]*\/(.*)/gm;
+    return regExp.exec(url)[1] ?? '';
+}
+
+
 export function browseFile(mimeType = MimeTypes.txt): Observable<UploadResult> {
     const subject = new Subject<UploadResult>();
     const input = window.document.createElement('input');

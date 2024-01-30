@@ -23,7 +23,7 @@ import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, filter, finalize, map, tap } from 'rxjs/operators';
 
-import { isNumber, pack, stringToUnboxedInteger } from '../base';
+import { getSubdirectory, isNumber, pack, stringToUnboxedInteger } from '../base';
 import { XoKillOrdersResponse } from './xo/kill-orders-response.model';
 import { XoOrderIdArray } from './xo/order-id.model';
 import { XoXPRCApplication as XoApplication, XoXPRCWorkspace as XoWorkspace } from './xo/runtime-context.model';
@@ -740,7 +740,8 @@ export class ApiService {
 
 
     download(managedFileId: XoManagedFileID, host?: string) {
-        window.location.href = (host || '') + '/XynaBlackEditionWebServices/io/download?p0=' + managedFileId.iD;
+        const subdirectory = getSubdirectory(environment.zeta.url);
+        window.location.href = (host || '') + '/' + subdirectory + 'download?p0=' + managedFileId.iD;
     }
 
 
