@@ -698,11 +698,12 @@ export function getEnumKey(enumerable: object, value: string) {
 /**
  * Reads the subdirectory of a URL
  * @remark Scheme has to be *http* or *https*
- * @returns Subdirectory (without leading slash) or empty string if none
+ * @returns Subdirectory (without leading but with ending slash) or '/' if none
  */
 export function getSubdirectory(url: string): string {
     const regExp = /https?:\/\/[^/]*\/(.*)/gm;
-    return regExp.exec(url)[1] ?? '';
+    const subDirectory = regExp.exec(url)[1] ?? '';
+    return subDirectory.endsWith('/') ? subDirectory : subDirectory + '/';
 }
 
 
