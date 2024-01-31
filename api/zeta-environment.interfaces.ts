@@ -60,12 +60,12 @@ export interface AuthenticationOptions {
      */
     languages?: SelectableLanguage[];
     /**
-     * Token prepended to the request's URL (https://{ip}:{port}{token}/...)
+     * Token prepended to the request's URL (`https://{ip}:{port}{token}/...`)
      * Purpose:
      * 1. Helps the web server to identify which requests belong to which application
      * 2. Authentication Cookies set this token as their path such that they're only appended to requests matching that token
      *
-     * To run with Tomcat, this token has to be unset or '/XynaBlackEditionWebServices/io'
+     * To run with Tomcat (and the `XynaBlackEditionWebService`), this token has to be unset or `/XynaBlackEditionWebServices/io`
      */
     pathToken?: string;
     /**
