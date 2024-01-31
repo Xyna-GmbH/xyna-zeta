@@ -15,13 +15,11 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { XoStorable } from '../../../../api/xo/xo-storable.model';
-
-import { XoArray, XoArrayClass, XoObjectClass, XoProperty, XoUnique, XoXPRCRuntimeContext } from '../../../../api';
+import { XoArray, XoArrayClass, XoObject, XoObjectClass, XoProperty, XoXPRCRuntimeContext } from '../../../../api';
 
 
-@XoObjectClass(XoStorable, 'xmcp.forms.plugin', 'Plugin')
-export class XoPlugin extends XoStorable {
+@XoObjectClass(null, 'xmcp.forms.plugin', 'Plugin')
+export class XoPlugin extends XoObject {
 
     @XoProperty()
     navigationEntryLabel: string;
@@ -41,11 +39,6 @@ export class XoPlugin extends XoStorable {
 
     @XoProperty(XoXPRCRuntimeContext)
     pluginRTC: XoXPRCRuntimeContext = new XoXPRCRuntimeContext();
-
-
-    @XoProperty()
-    @XoUnique()
-    uniqueIdentifier: number;
 }
 
 @XoArrayClass(XoPlugin)
