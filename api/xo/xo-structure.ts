@@ -32,6 +32,10 @@ export class XoStructureType {
         return from;
     }
 
+    clone(shallow = false): XoStructureType {
+        return new XoStructureType(this.typeRtc, this.typeFqn, this.typeLabel, this.typeAbstract, this.typeDocu);
+    }
+
     decode(from: any): this {
         const typeObject = this.getTypeObject(from);
         this.typeRtc = RuntimeContext.decode(typeObject.rtc);
@@ -81,6 +85,10 @@ export abstract class XoStructureField extends XoStructureType {
         return super.decode(from);
     }
 
+    clone(shallow = false): XoStructureField {
+        return super.clone(shallow) as XoStructureField;
+    }
+
     get path(): string {
         const parentPath = this.parent ? this.parent.path : '';
         const parentPathDot = parentPath ? parentPath + '.' : parentPath;
@@ -123,6 +131,10 @@ export class XoStructurePrimitive extends XoStructureField {
             return <this>from;
         }
         return super.decode(from);
+    }
+
+    clone(shallow = false): XoStructurePrimitive {
+        return new XoStructurePrimitive(this.parent, this.name, this.label, this.docu, this.typeRtc, this.typeFqn, this.typeLabel, this.typeAbstract, this.typeDocu);
     }
 
     static empty(): XoStructurePrimitive {
@@ -181,6 +193,14 @@ export class XoStructureMethod extends XoStructureField {
         return super.decode(from);
     }
 
+
+    clone(shallow = false): XoStructureMethod {
+        const result = new XoStructureMethod(this.parent, this.name, this.label, this.docu, this.typeRtc, this.typeFqn, this.typeLabel, this.typeAbstract, this.typeDocu);
+        result.params.push(...this.params.map(field => field.clone()));
+        result.returns.push(...this.params.map(field => field.clone()));
+        return result;
+    }
+
     static empty(): XoStructureMethod {
         return new XoStructureMethod(null, emptyStructureName);
     }
@@ -199,6 +219,12 @@ export class XoStructureMethod extends XoStructureField {
 export abstract class XoStructureComplexField extends XoStructureField {
     protected _children = new Array<XoStructureField>();
 
+    clone(shallow = false): XoStructureComplexField {
+        const result = super.clone() as XoStructureComplexField;
+        result._children = shallow ? this.children : this.children.map(child => child.clone());
+        return result;
+    }
+
     get length(): number {
         return this.children.length;
     }
@@ -211,6 +237,11 @@ export abstract class XoStructureComplexField extends XoStructureField {
         this.children.forEach(child => child.parent = null);
         this._children = value;
         this.children.forEach(child => child.parent = this);
+    }
+
+    addChildren(...value: XoStructureField[]) {
+        this.children.push(...value);
+        value.forEach(child => child.parent = this);
     }
 
     isExpandable(): boolean {
@@ -244,6 +275,12 @@ export class XoStructureObject extends XoStructureComplexField {
         return super.decode(from);
     }
 
+    clone(shallow = false): XoStructureObject {
+        const result = new XoStructureObject(this.parent, this.name, this.label, this.docu, this.typeRtc, this.typeFqn, this.typeLabel, this.typeAbstract, this.typeDocu);
+        result._children = shallow ? this.children : this._children.map(child => child.clone());
+        return result;
+    }
+
     valueInstance(rtc: RuntimeContext, fqn: FullQualifiedName): XoObject {
         const xo = new XoObject();
         xo.rtc = rtc;
@@ -268,6 +305,12 @@ export class XoStructureArray extends XoStructureComplexField {
             return <this>from;
         }
         return super.decode(from);
+    }
+
+    clone(shallow = false): XoStructureArray {
+        const result = new XoStructureArray(this.parent, this.name, this.label, this.docu, this.typeRtc, this.typeFqn, this.typeLabel, this.typeAbstract, this.typeDocu);
+        result._children = shallow ? this._children : this._children.map(child => child.clone());
+        return result;
     }
 
     isPrimitive(): boolean {
