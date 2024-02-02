@@ -23,8 +23,8 @@
                 [xc-definition-observer]="definition.observer"
             ></xc-definition-proxy>
             <ng-content select="[additionalHeaderItems]"></ng-content>
-            <xc-icon-button *ngIf="!definition?.getParent()" [xc-icon-name]="areaValue ? 'minimize' : 'maximize'" xc-icon-size="small" color="invert" xc-icon-style="xds" (click)="resize()" xc-tooltip="{{toolTip | xcI18n}}" xc-button-aria-label="{{'resize' | xcI18n}}"></xc-icon-button>
-            <xc-icon-button *ngIf="definition.closable" xc-icon-name="close" xc-icon-size="small" color="invert" (click)="closed.emit()" xc-tooltip="{{'close' | xcI18n}}"></xc-icon-button>
+            <xc-icon-button *ngIf="!definition?.getParent()" [xc-icon-name]="areaValue ? 'minimize' : 'maximize'" xc-icon-size="small" xc-icon-style="xds" (click)="resize()" xc-tooltip="{{toolTip | xcI18n}}" xc-button-aria-label="{{'resize' | xcI18n}}"></xc-icon-button>
+            <xc-icon-button *ngIf="definition.closable" xc-icon-name="close" xc-icon-size="small" (click)="closed.emit()" xc-tooltip="{{'close' | xcI18n}}"></xc-icon-button>
         </div>
     </header>
     <section *ngIf="definition?.children?.length > 0" class="stretch scroll">

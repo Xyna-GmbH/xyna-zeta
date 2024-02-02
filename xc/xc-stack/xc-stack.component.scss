@@ -15,6 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+$xc-stack-background-color: unset !default;
 $xc-stack-breadcrumb-area-background-color: unset !default;
 $xc-stack-breadcrumb-max-width: unset !default;
 
@@ -27,6 +28,7 @@ $xc-stack-breadcrumb-max-width: unset !default;
     height: 100%;
     overflow: hidden;
     flex-direction: column;
+    background-color: $xc-stack-background-color;
 
     .stack-items {
         display: flex;
@@ -36,12 +38,20 @@ $xc-stack-breadcrumb-max-width: unset !default;
 
         .item {
             display: flex;
-            flex: 1 1 auto;
+            flex: 0 1 auto;
             flex-direction: column;
             margin-right: 8px;
 
             &:last-of-type {
                 margin-right: 0px;
+            }
+
+            &:not(:first-child) {
+                transition: flex-grow .5s ease-out;
+            }
+
+            &.new {
+                flex-grow: 1;
             }
         }
     }

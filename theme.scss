@@ -351,7 +351,8 @@
     $xc-menu-item-arrow-color: $color-white;
 
     // xc-stack
-    $xc-stack-breadcrumb-area-background-color: transparent;
+    $xc-stack-background-color: $color-gray-1;
+    $xc-stack-breadcrumb-area-background-color: $color-gray-1;
     $xc-stack-breadcrumb-max-width: 160px;
 
     $color-map: (
