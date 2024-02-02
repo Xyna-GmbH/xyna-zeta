@@ -174,7 +174,7 @@ export class XcStackComponent implements XcStackInterface, AfterViewInit, OnDest
             if (focusable.length > 0 && focusable[0]) {
                 focusable[0].focus();
             }
-        }
+        };
 
         if (elementToScrollInto) {
             scrollToElement(elementToScrollInto.nativeElement).subscribe(() => focusItem());
