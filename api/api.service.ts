@@ -274,9 +274,6 @@ export class ApiService {
     // =================================================================================================================
 
 
-    /**
-     * @see ZETA-361 for problems with DescriberCache
-     */
     private getXoDescriberCachedData<T>(
         rtc: RuntimeContext,
         describers: XoDescriber[],
