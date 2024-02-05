@@ -17,7 +17,7 @@
  */
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 
-import { coerceBoolean, retrieveFocusableElements } from '@zeta/base';
+import { coerceBoolean, retrieveFocusableElements, scrollToElement } from '@zeta/base';
 import { I18nService } from '@zeta/i18n';
 
 import { BehaviorSubject, combineLatest, Observable, of, Subject, Subscription } from 'rxjs';
@@ -168,14 +168,17 @@ export class XcStackComponent implements XcStackInterface, AfterViewInit, OnDest
     scrollToStackItem(idx: number) {
         const elementToScrollInto = this.itemList.find((_, index) => index === idx);
 
-        if (elementToScrollInto) {
-            elementToScrollInto.nativeElement.scrollIntoView({ behavior: 'smooth' });
-
-            // focus first focusable element inside the stack item
+        // focus first focusable element inside the stack item
+        const focusItem = () => {
             const focusable = retrieveFocusableElements(elementToScrollInto.nativeElement);
             if (focusable.length > 0 && focusable[0]) {
                 focusable[0].focus();
             }
+        };
+
+        if (elementToScrollInto) {
+            scrollToElement(elementToScrollInto.nativeElement).subscribe(() => focusItem());
+            elementToScrollInto.nativeElement.classList.add('new');
         }
     }
 

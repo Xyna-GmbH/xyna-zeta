@@ -796,6 +796,31 @@ export function retrieveFocusableElements(root: HTMLElement): Array<HTMLElement>
 }
 
 
+export function scrollToElement(element: Element, scrollBehavior: ScrollBehavior = 'smooth'): Observable<void> {
+    element.scrollIntoView({ behavior: scrollBehavior });
+
+    const scrollingEnded = new Subject<void>();
+    let scrollTimeout: any;
+    const checkIsScrolling = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            element.parentElement.removeEventListener('scroll', checkIsScrolling);
+            scrollingEnded.next();
+            scrollingEnded.complete();
+        }, 100);
+    };
+
+    if (element.parentElement) {
+        element.parentElement.addEventListener('scroll', checkIsScrolling);
+        checkIsScrolling();
+    } else {
+        scrollingEnded.next();
+        scrollingEnded.complete();
+    }
+    return scrollingEnded;
+}
+
+
 export function copyToClipboard(value: string): Observable<void> {
     return from(navigator.clipboard.writeText(value));
 }
