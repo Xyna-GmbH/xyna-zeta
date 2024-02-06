@@ -1,7 +1,7 @@
 {
     "name": "zeta",
     "title": "Zeta",
-    "version": "16.0.0",
+    "version": "16.0.2",
     "private": true,
     "engines": {
         "node": "^16.14.0 || ^18.10.0"
