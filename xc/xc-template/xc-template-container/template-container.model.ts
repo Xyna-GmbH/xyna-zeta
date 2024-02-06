@@ -45,6 +45,13 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
      */
     private readonly structureTemplates = new Map<XoStructureField, XcTemplate[]>();
 
+    /**
+     * Whether or not to cache templates for each structure.
+     * With cache used, the templates are only rebuilt when their structure changes.
+     * @default true
+     */
+    cacheTemplates = true;
+
     private invalidated = false;
     private readonly childTemplatesChangeSubject = new Subject<void>();
 
@@ -98,7 +105,9 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
                     let fieldTemplates = this.structureTemplates.get(field);
                     if (!fieldTemplates) {
                         fieldTemplates = this.createTemplatesForMember(field);
-                        this.structureTemplates.set(field, fieldTemplates);
+                        if (this.cacheTemplates) {
+                            this.structureTemplates.set(field, fieldTemplates);
+                        }
                     }
                     if (fieldTemplates.length === 0) {
                         console.log(`no rule to build a template for field "${field.path}"`);
