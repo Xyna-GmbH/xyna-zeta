@@ -36,17 +36,4 @@ export class AuthGuardService {
     }
 }
 
-export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => inject(AuthGuardService).canActivate(route, state);
-
-
-// @Injectable()
-// export class AuthGuard  {
-
-//     constructor(private readonly authService: AuthService) {
-//     }
-
-
-//     canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): Observable<boolean> {
-//         return this.authService.queryAuthentication(routerState.url);
-//     }
-// }
+export const AuthGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => inject(AuthGuardService).canActivate(route, state);

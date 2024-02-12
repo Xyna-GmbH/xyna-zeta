@@ -31,4 +31,4 @@ export class ConfirmGuardService  {
     }
 }
 
-export const ConfirmGuard: CanDeactivateFn<RouteComponent> = (component: RouteComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): Observable<boolean> => inject(ConfirmGuardService).canDeactivate(component, currentRoute, currentState, nextState);
+export const ConfirmGuardCanDeactivate: CanDeactivateFn<RouteComponent> = (component: RouteComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): Observable<boolean> => inject(ConfirmGuardService).canDeactivate(component, currentRoute, currentState, nextState);
