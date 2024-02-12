@@ -15,8 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injectable, InjectionToken } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Component, inject, Injectable, InjectionToken } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, CanDeactivateFn, Router, RouterStateSnapshot } from '@angular/router';
 
 import { XynaRoute } from './';
 
@@ -25,7 +25,7 @@ export const RedirectGuardConfigToken = new InjectionToken<string>('RedirectGuar
 
 
 @Injectable()
-export class RedirectGuard  {
+export class RedirectGuardService {
 
     /**
      * maps the last visited url to a unique project key
@@ -104,14 +104,18 @@ export class RedirectGuard  {
     }
 }
 
+export const RedirectGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RedirectGuardService).canActivate(route, state);
+
+export const RedirectGuardCanDeactivate: CanDeactivateFn<Component> = (component: Component, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot) => inject(RedirectGuardService).canDeactivate(component, currentRoute, currentState, nextState);
+
 
 export function RedirectGuardFactory(router: Router, defaultRedirectUrl: string) {
-    return new RedirectGuard(router /*, defaultRedirectUrl*/);
+    return new RedirectGuardService(router /*, defaultRedirectUrl*/);
 }
 
 
 export function RedirectGuardProvider() {
-    return { provide: RedirectGuard, useFactory: RedirectGuardFactory, deps: [Router, RedirectGuardConfigToken] };
+    return { provide: RedirectGuardService, useFactory: RedirectGuardFactory, deps: [Router, RedirectGuardConfigToken] };
 }
 
 
@@ -120,4 +124,4 @@ export function RedirectGuardConfigProvider(defaultRedirectUrl: string) {
 }
 
 
-export class RedirectComponent {}
+export class RedirectComponent { }
