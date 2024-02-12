@@ -104,9 +104,9 @@ export class RedirectGuardService {
     }
 }
 
-export const RedirectGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RedirectGuardService).canActivate(route, state);
+export const redirectGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RedirectGuardService).canActivate(route, state);
 
-export const RedirectGuardCanDeactivate: CanDeactivateFn<Component> = (component: Component, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot) => inject(RedirectGuardService).canDeactivate(component, currentRoute, currentState, nextState);
+export const redirectGuardCanDeactivate: CanDeactivateFn<Component> = (component: Component, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot) => inject(RedirectGuardService).canDeactivate(component, currentRoute, currentState, nextState);
 
 
 export function RedirectGuardFactory(router: Router, defaultRedirectUrl: string) {

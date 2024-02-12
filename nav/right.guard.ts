@@ -83,4 +83,4 @@ export class RightGuardService {
     }
 }
 
-export const RightGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RightGuardService).canActivate(route, state);
+export const rightGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RightGuardService).canActivate(route, state);
