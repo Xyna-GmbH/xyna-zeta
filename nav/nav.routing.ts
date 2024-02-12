@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
 
 import { XynaRoutes } from './';
 import { BrokenComponent } from './broken.component';
-import { ConfirmGuard } from './confirm.guard';
+import { ConfirmGuardService } from './confirm.guard';
 
 
 const root = '**';
@@ -36,5 +36,5 @@ export const NavRoutingModules = [
 
 
 export const NavRoutingProviders = [
-    ConfirmGuard
+    ConfirmGuardService
 ];

@@ -35,21 +35,12 @@ $xc-nav-list-item-height: unset !default;
 
 @import 'const';
 
-@each $key, $value in $color-map {
-    :host[color="#{$key}"] a.active {
-        border-color: $value;
-        xc-icon {
-            color: $value;
-        }
-    }
-}
-
 :host {
     flex-shrink: 0;
     margin: $xc-nav-list-item-margin;
 
     // the not-toggleable item (a) does not react on mouse nor touch events
-    &[toggleable="false"] > div > a {
+    &[toggleable="false"]>div>a {
         pointer-events: none;
         touch-action: none;
     }
@@ -73,41 +64,56 @@ $xc-nav-list-item-height: unset !default;
 
         &:not(.disabled) {
             border-color: $xc-nav-list-item-border-color-normal;
+
             xc-icon {
                 color: $xc-nav-list-item-color-normal;
             }
         }
+
         &:hover {
             border-color: $xc-nav-list-item-border-color-hover;
+
             xc-icon {
                 color: $xc-nav-list-item-color-hover;
             }
+
             &::ng-deep .mat-list-item-content {
                 background-color: $xc-nav-list-item-background-color-hover;
             }
         }
+
         &:focus {
             border-color: $xc-nav-list-item-border-color-focus;
+
             xc-icon {
                 color: $xc-nav-list-item-color-focus;
             }
+
             &::ng-deep .mat-list-item-content {
                 background-color: $xc-nav-list-item-background-color-focus;
             }
         }
-        &.active {
-            border-color: $xc-nav-list-item-border-color-active;
-            xc-icon {
-                color: $xc-nav-list-item-color-active;
-            }
-            &::ng-deep .mat-list-item-content {
-                background-color: $xc-nav-list-item-background-color-active;
+
+        @each $key, $value in $color-map {
+            [color="#{$key}"] &.active {
+                border-color: $value;
+
+                xc-icon {
+                    color: $value;
+                }
+
+                &::ng-deep .mat-list-item-content {
+                    background-color: $xc-nav-list-item-background-color-active;
+                }
             }
         }
-        &.disabled, &.active {
+
+        &.disabled,
+        &.active {
             pointer-events: none;
             touch-action: none;
         }
+
         // if it is disabled and a parent (usecase - purpose of grouping/structuring)
         // style it as normal
         &.disabled.parent ::ng-deep xc-icon {
