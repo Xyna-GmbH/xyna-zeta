@@ -35,10 +35,6 @@ $xc-tab-bar-content-background-color: unset !default;
 @import 'const';
 
 @each $key, $value in $color-map {
-
-    /*
- TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
- */
     :host[color="#{$key}"]::ng-deep .mat-mdc-tab-group .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-list .mat-mdc-tab-labels .mat-mdc-tab.mdc-tab--active {
         border-color: $value;
     }
@@ -59,17 +55,11 @@ $xc-tab-bar-content-background-color: unset !default;
                 background-color: $color-background-default;
                 min-height: 36px;
 
-                /*
- TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
- */
-                .mat-tab-header-pagination .mat-tab-header-pagination-chevron {
+                .mat-mdc-tab-header-pagination .mat-mdc-tab-header-pagination-chevron {
                     border-color: $color-normal;
                 }
 
-                /*
- TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
- */
-                .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+                .mat-mdc-tab-header-pagination-disabled .mat-mdc-tab-header-pagination-chevron {
                     border-color: $color-disabled;
                 }
 

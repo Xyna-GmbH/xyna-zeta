@@ -16,14 +16,14 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { NgModule } from '@angular/core';
-import { I18nModule } from '@zeta/i18n';
 
+import { I18nModule } from '@zeta/i18n';
 import { XcModule } from '@zeta/xc';
 
 import { BrokenComponent } from './broken.component';
 import { RuntimeContextSelectionComponent } from './modal/runtime-context-selection/runtime-context-selection.component';
-import { RedirectGuard } from './redirect.guard';
-import { RightGuard } from './right.guard';
+import { RedirectGuardService } from './redirect.guard';
+import { RightGuardService } from './right.guard';
 
 
 @NgModule({
@@ -36,8 +36,8 @@ import { RightGuard } from './right.guard';
         RuntimeContextSelectionComponent
     ],
     providers: [
-        RightGuard,
-        RedirectGuard
+        RightGuardService,
+        RedirectGuardService
     ]
 })
 export class NavModule {

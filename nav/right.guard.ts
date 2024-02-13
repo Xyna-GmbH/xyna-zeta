@@ -15,21 +15,21 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+
+import { inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 
 import { AuthService } from '../auth';
 import { XynaRoute } from './xyna-routes';
 
 
 @Injectable()
-export class RightGuard  {
+export class RightGuardService {
 
     constructor(private readonly authService: AuthService, private readonly router: Router) {
     }
 
-
-    canActivate(activatedRoute: ActivatedRouteSnapshot): boolean {
+    canActivate(activatedRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const data = (activatedRoute as XynaRoute).data;
         const right = data.right;
 
@@ -82,3 +82,5 @@ export class RightGuard  {
         return url;
     }
 }
+
+export const rightGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => inject(RightGuardService).canActivate(route, state);
