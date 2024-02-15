@@ -146,6 +146,7 @@ $xc-tab-bar-content-background-color: unset !default;
                                 width: 100%;
 
                                 .mdc-tab__text-label {
+                                    line-height: normal;
                                     padding: 0 12px;
 
                                     >xc-icon {
