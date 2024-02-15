@@ -56,6 +56,22 @@ $xc-table-body-border-color-focus: unset !default;
     background-color: $xc-table-background-color;
     overflow: auto;
 
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: $color-gray-3;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: $color-gray-3;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-gray-1;
+    }
+
+    // firefox
+    scrollbar-color: $color-gray-1 $color-gray-3;
+    scrollbar-width: thin;
+    
     &.refreshing {
         overflow-x: hidden;
     }
@@ -64,7 +80,7 @@ $xc-table-body-border-color-focus: unset !default;
         flex-shrink: 0;
     }
 
-    .mat-table {
+    .mat-mdc-table {
         width: 100%;
         border-collapse: collapse;
         position: relative;
@@ -77,8 +93,8 @@ $xc-table-body-border-color-focus: unset !default;
 
     &.allowselect {
         // hover and select row
-        &:not(.cellselect) .mat-row,
-        &.cellselect .mat-cell {
+        &:not(.cellselect) .mat-mdc-row,
+        &.cellselect .mat-mdc-cell {
             &:hover {
                 background-color: $xc-table-entry-background-color-hover;
 
@@ -124,8 +140,8 @@ $xc-table-body-border-color-focus: unset !default;
         }
 
         ::ng-deep tbody:focus {
-            &:not(.cellselect) .mat-row,
-            &.cellselect .mat-cell {
+            &:not(.cellselect) .mat-mdc-row,
+            &.cellselect .mat-mdc-cell {
                 &.focused {
                     outline: 0.5px solid $xc-table-body-border-color-focus;
                 }
@@ -133,16 +149,16 @@ $xc-table-body-border-color-focus: unset !default;
         }
     }
 
-    .mat-header-row, .mat-footer-row, .mat-row {
+    .mat-mdc-header-row, .mat-mdc-footer-row, .mat-mdc-row {
         color: $xc-table-entry-color;
         height: unset;
     }
 
-    .mat-header-row:first-child > th {
+    .mat-mdc-header-row:first-child > th {
         padding-top: 4px;
     }
 
-    .mat-row {
+    .mat-mdc-row {
         background-color: $xc-table-row-default-background-color;
         outline: none;
         cursor: pointer;
@@ -155,19 +171,20 @@ $xc-table-body-border-color-focus: unset !default;
             background-color: $xc-table-row-odd-background-color;
         }
 
-        &:first-child .mat-cell {
+        &:first-child .mat-mdc-cell {
             border-top-color: $xc-table-header-border-bottom-color;
         }
-        &:last-child .mat-cell {
+        &:last-child .mat-mdc-cell {
             border-bottom-color: transparent;
         }
     }
 
-    .mat-header-cell,
-    .mat-cell {
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
         font-size: $font-size-medium;
         overflow: hidden;
         color: $xc-table-entry-color;
+        padding: 0;
 
         &:first-child {
             border-left: none;
@@ -186,7 +203,7 @@ $xc-table-body-border-color-focus: unset !default;
         }
     }
 
-    .mat-header-cell, .mat-footer-cell {
+    .mat-mdc-header-cell, .mat-mdc-footer-cell {
         border: none;
         background-color: $xc-table-header-background-color;
 
@@ -198,7 +215,7 @@ $xc-table-body-border-color-focus: unset !default;
         }
     }
 
-    .mat-header-cell {
+    .mat-mdc-header-cell {
         &::ng-deep {
 
             .mat-sort-header {
@@ -244,7 +261,7 @@ $xc-table-body-border-color-focus: unset !default;
         }
     }
 
-    .mat-footer-cell {
+    .mat-mdc-footer-cell {
 
         &:not([no-data]) {
             height: $xc-table-footer-min-height;
@@ -266,7 +283,7 @@ $xc-table-body-border-color-focus: unset !default;
         }
     }
 
-    .mat-cell {
+    .mat-mdc-cell {
         position: relative;
         padding: $xc-table-cell-padding;
 
