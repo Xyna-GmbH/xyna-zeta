@@ -25,37 +25,58 @@ $xc-checkbox-checkmark-color-disabled: unset !default;
 $xc-checkbox-checkmark-color-disabled-invert: unset !default;
 $xc-checkbox-with-background: unset !default;
 
+
 @import 'const';
 
 @mixin base-color($value, $xc-checkbox-with-background: false) {
-    &.mat-checkbox-checked, &.mat-checkbox-indeterminate {
-        .mat-checkbox-background {
+
+    /*
+ TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+ */
+    /*
+ TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+ */
+    &.mat-checkbox-checked,
+    &.mat-checkbox-indeterminate {
+
+        /*
+ TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+ */
+        .mdc-checkbox__background {
             @if $xc-checkbox-with-background {
                 background-color: $value;
-            } @else {
+            }
+
+            @else {
                 background-color: unset;
             }
         }
     }
+
+    /*
+ TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+ */
     .mat-checkbox-frame {
         border-color: $value;
         border-width: 1px;
     }
-    .mat-checkbox-label {
+
+    .mdc-label {
         color: $value;
     }
 }
 
 @mixin mark-color($value) {
-    .mat-checkbox-checkmark-path {
+    .mdc-checkbox__checkmark-path {
         stroke: $value;
     }
-    .mat-checkbox-mixedmark {
+
+    .mdc-checkbox__mixedmark {
         background-color: $value;
     }
 }
 
-:host > div {
+:host>div {
 
     display: inherit;
 
@@ -65,18 +86,21 @@ $xc-checkbox-with-background: unset !default;
     }
 
     &::ng-deep {
-        .mat-checkbox-background,
-        .mat-checkbox-mixedmark,
-        .mat-checkbox-checkmark,
-        .mat-checkbox-checkmark-path {
+
+        .mdc-checkbox__background,
+        .mdc-checkbox__mixedmark,
+        .mdc-checkbox__checkmark,
+        .mdc-checkbox__checkmark-path {
             transition: none !important;
             animation: none !important;
         }
-        .mat-checkbox-mixedmark {
+
+        .mdc-checkbox__mixedmark {
             width: 4px;
             height: 4px;
         }
-        .mat-checkbox .mat-checkbox-ripple {
+
+        .mat-mdc-checkbox .mdc-checkbox__ripple {
             left: calc(50% - 20px);
             top: calc(50% - 20px);
             height: 40px;
@@ -87,14 +111,16 @@ $xc-checkbox-with-background: unset !default;
 
 @each $key, $value in $color-map {
     :host[color="#{$key}"]::ng-deep {
-        & { @include base-color($value, $xc-checkbox-with-background); }
+        & {
+            @include base-color($value, $xc-checkbox-with-background);
+        }
     }
 }
 
 :host[color]::ng-deep {
     @include mark-color($xc-checkbox-checkmark-color);
 
-    .mat-checkbox-disabled {
+    .mat-mdc-checkbox-disabled {
         @include base-color($xc-checkbox-color-disabled);
         @include mark-color($xc-checkbox-checkmark-color-disabled);
     }
@@ -104,7 +130,7 @@ $xc-checkbox-with-background: unset !default;
 :host[color="invert"]::ng-deep {
     @include mark-color($xc-checkbox-checkmark-color-invert);
 
-    .mat-checkbox-disabled {
+    .mat-mdc-checkbox-disabled {
         @include base-color($xc-checkbox-color-disabled-invert);
         @include mark-color($xc-checkbox-checkmark-color-disabled-invert);
     }
