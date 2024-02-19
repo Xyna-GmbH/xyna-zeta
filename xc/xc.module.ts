@@ -15,6 +15,7 @@ import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-m
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -113,7 +114,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatRippleModule,
         MatSidenavModule,
         MatSortModule,
-        MatTabsModule,
+        MatTableModule,
         MatTabsModule,
         MatTooltipModule,
         MatTreeModule,
