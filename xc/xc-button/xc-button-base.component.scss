@@ -23,13 +23,16 @@
 
     @each $key, $value in $color-map {
         &[color="#{$key}"] {
-            .mat-button, .mat-icon-button {
+
+            .mat-mdc-button,
+            .mat-mdc-icon-button {
                 color: $value;
             }
         }
     }
 
-    .mat-button, .mat-icon-button {
+    .mat-mdc-button,
+    .mat-mdc-icon-button {
 
         &:not([disabled]) {
             pointer-events: initial;
@@ -42,11 +45,11 @@
     }
 
     ::ng-deep {
-        .mat-button-wrapper {
+        .mat-mdc-button {
             margin: auto;
             font-weight: initial;
 
-            > * {
+            >* {
                 margin: auto;
             }
         }
