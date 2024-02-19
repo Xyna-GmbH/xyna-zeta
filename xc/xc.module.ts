@@ -18,11 +18,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSortModule } from '@angular/material/sort';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSortModule } from '@angular/material/sort';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 
@@ -96,6 +91,7 @@ import { XcReadonlyTreeComponent } from './xc-tree/xc-readonly-tree/xc-readonly-
 import { XcTreeItemComponent } from './xc-tree/xc-readonly-tree/xc-tree-item/xc-tree-item.component';
 import { XcTreeComponent } from './xc-tree/xc-tree.component';
 import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -117,7 +113,7 @@ import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
         MatRippleModule,
         MatSidenavModule,
         MatSortModule,
-        MatTableModule,
+        MatTabsModule,
         MatTabsModule,
         MatTooltipModule,
         MatTreeModule,
