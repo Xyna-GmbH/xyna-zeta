@@ -102,15 +102,9 @@ export class AuthService {
         private readonly http: HttpClient,
         private readonly router: Router,
         route: ActivatedRoute,
-        injector: Injector,
         apiService: ApiService,
-        i18n: I18nService,
-        a11y: A11yService,
-        @Inject(LOCALE_ID) localeId: LocaleId
+        a11y: A11yService
     ) {
-        // set i18n language from injected LOCALE_ID
-        i18n.language = localeId.toString() ?? LocaleService.EN_US;
-
         // refreshes sessionInfo every time when tab is set to active
         a11y.visibilityChange.pipe(
             filter(visible => visible),
