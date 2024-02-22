@@ -53,7 +53,7 @@ $xc-tab-bar-content-background-color: unset !default;
 
             .mat-mdc-tab-header {
                 background-color: $color-background-default;
-                min-height: 36px;
+                min-height: 32px;
 
                 .mat-mdc-tab-header-pagination .mat-mdc-tab-header-pagination-chevron {
                     border-color: $color-normal;
@@ -75,7 +75,7 @@ $xc-tab-bar-content-background-color: unset !default;
                         .mat-mdc-tab {
                             min-width: 120px;
                             // max-width: 360px;
-                            height: 36px;
+                            height: 32px;
                             opacity: 1;
                             padding: 0;
                             margin-left: 4px;
@@ -144,6 +144,7 @@ $xc-tab-bar-content-background-color: unset !default;
                                 min-width: 0;
                                 height: auto;
                                 width: 100%;
+                                border-bottom: 1px solid $xc-tab-bar-tab-background-color;;
 
                                 .mdc-tab__text-label {
                                     line-height: normal;
