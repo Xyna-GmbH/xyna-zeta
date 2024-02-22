@@ -33,6 +33,7 @@
 
     .mat-mdc-button,
     .mat-mdc-icon-button {
+        padding: 0;
 
         &:not([disabled]) {
             pointer-events: initial;
@@ -46,6 +47,7 @@
 
     ::ng-deep {
         .mat-mdc-button {
+            white-space: nowrap;
             margin: auto;
             font-weight: initial;
 
