@@ -34,9 +34,9 @@ $xc-icon-button-focus-overlay-invert: unset !default;
         display: flex;
         justify-content: center;
         align-items: center;
-        & > * {
-            flex: 1 1 auto;
-        }
+        // & > * {
+        //     flex: 1 1 auto;
+        // }
     }
 
     .mat-mdc-icon-button:not([disabled]):focus {
