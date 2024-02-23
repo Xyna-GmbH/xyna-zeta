@@ -17,7 +17,7 @@
  */
 import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
-import { MatLegacyInput as MatInput } from '@angular/material/legacy-input';
+import { MatInput } from '@angular/material/input';
 
 import { I18nService } from '@zeta/i18n';
 
