@@ -92,8 +92,10 @@ $xc-table-body-border-color-focus: unset !default;
                 }
             }
             &.selected {
-                background-color: $xc-table-selected-entry-background-color;
-                color: $xc-table-selected-entry-color;
+                .text-cell {
+                    background-color: $xc-table-selected-entry-background-color;
+                    color: $xc-table-selected-entry-color;
+                }
 
                 .action-elements::ng-deep {
                     xc-icon-button {
@@ -205,7 +207,7 @@ $xc-table-body-border-color-focus: unset !default;
                 .mat-sort-header-arrow {
                     color: $xc-table-entry-color;
                 }
-                
+
                 > .mat-sort-header-container {
                     padding: $xc-table-header-padding;
                     border-bottom: 0;
