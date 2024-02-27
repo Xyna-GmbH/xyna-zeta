@@ -52,7 +52,6 @@ $xc-form-base-input-changeindicator-color: unset !default;
 $xc-form-base-textarea-padding: unset !default;
 $xc-form-base-textarea-line-height: unset !default;
 $font-family-regular: unset !default;
-$color-warn: unset !default;
 
 /* exported consts such that other components can read */
 
@@ -172,8 +171,14 @@ $suffix-icon-height: 24px;
 
             textarea {
                 line-height: $xc-form-base-textarea-line-height;
+                margin-top: 16px;
                 padding: $xc-form-base-textarea-padding;
-                width: unset;
+                // width: unset;
+
+                &.mat-mdc-input-element {
+                    box-sizing: border-box;
+                    caret-color: $xc-form-base-input-color;
+                }
             }
 
             // non-editable-input, see: ZETA-7
@@ -244,12 +249,19 @@ $suffix-icon-height: 24px;
                 color: $xc-form-base-input-label-color;
                 padding: 0;
                 top: 20px;
-                letter-spacing: normal;
                 font-family: $font-family-regular;
                 font-size: $xc-form-base-input-font-size;
                 font-style: $xc-form-base-input-font-style;
-                text-transform: uppercase;
-                font-weight: bold;
+                text-transform: $xc-form-base-input-label-text-transform;
+                line-height: normal;
+
+                &:not(.mdc-floating-label--float-above) {
+                    top: 32px;
+                    font-size: $xc-form-base-input-font-size;
+                    font-style: $xc-form-base-input-font-style;
+                    padding: 0 8px;
+                    line-height: $xc-form-base-input-line-height
+                }
             }
         }
 
@@ -303,12 +315,42 @@ $suffix-icon-height: 24px;
             border-top: none;
             min-height: unset;
 
+            input {
+                margin-top: 0;
+            }
+
             // label is used as a placeholder, so set placeholder color for it
 
             .mat-mdc-floating-label {
                 color: $xc-form-base-input-placeholder-color;
             }
         }
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple {
+        &::before {
+            top: 0;
+            box-sizing: border-box;
+            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
+            border-radius: $xc-form-base-input-border-radius;
+            transition: none;
+        }
+
+        &::after {
+            top: 0;
+            box-sizing: border-box;
+            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
+            border-radius: $xc-form-base-input-border-radius;
+            transition: none;
+        }
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before,
+    .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before {
+        box-sizing: border-box;
+        border: $xc-form-base-input-border-width solid $color-focus-outline;
+        border-radius: $xc-form-base-input-border-radius;
+        transition: none;
     }
 }
 
@@ -378,17 +420,15 @@ xc-panel.compact :host {
 ::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-line-ripple {
 
     &::before {
-        height: 32px;
         box-sizing: border-box;
-        border: 1px solid $color-warn;
+        border: 1px solid $xc-form-base-input-error-color;
         border-radius: $xc-form-base-input-border-radius;
         transition: none;
     }
 
     &::after {
-        height: 32px;
         box-sizing: border-box;
-        border: 1px solid $color-warn;
+        border: 1px solid $xc-form-base-input-error-color;
         border-radius: $xc-form-base-input-border-radius;
         transition: none;
     }
@@ -404,7 +444,6 @@ xc-panel.compact :host {
 
     &.mdc-line-ripple--active:not(.mdc-line-ripple--deactivating) {
         &::before {
-            height: 32px;
             box-sizing: border-box;
             border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
             border-radius: $xc-form-base-input-border-radius;
@@ -412,7 +451,6 @@ xc-panel.compact :host {
         }
 
         &::after {
-            height: 32px;
             box-sizing: border-box;
             border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
             border-radius: $xc-form-base-input-border-radius;
@@ -421,7 +459,7 @@ xc-panel.compact :host {
     }
 
     &::before {
-        height: 32px;
+        top: 16px;
         box-sizing: border-box;
         border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
         border-radius: $xc-form-base-input-border-radius;
@@ -429,7 +467,7 @@ xc-panel.compact :host {
     }
 
     &::after {
-        height: 32px;
+        top: 16px;
         box-sizing: border-box;
         border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
         border-radius: $xc-form-base-input-border-radius;
@@ -439,7 +477,6 @@ xc-panel.compact :host {
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before,
 ::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before {
-    height: 32px;
     box-sizing: border-box;
     border: $xc-form-base-input-border-width solid $color-focus-outline;
     border-radius: $xc-form-base-input-border-radius;
