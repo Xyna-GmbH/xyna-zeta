@@ -92,8 +92,8 @@ $xc-table-body-border-color-focus: unset !default;
                 }
             }
             &.selected {
+                background-color: $xc-table-selected-entry-background-color;
                 .text-cell {
-                    background-color: $xc-table-selected-entry-background-color;
                     color: $xc-table-selected-entry-color;
                 }
 
