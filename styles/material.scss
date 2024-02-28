@@ -78,9 +78,9 @@ $xc-menu-item-arrow-color: unset !default;
 //  If you specify typography styles for the components you use elsewhere, you should delete this line.
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
+@include mat.core();
 
 $xyna-palette: mat-palette($mat-grey);
 $xyna-theme-dark: mat.define-dark-theme((
@@ -88,10 +88,10 @@ $xyna-theme-dark: mat.define-dark-theme((
         primary: $xyna-palette,
         accent: $xyna-palette
     ),
-    typography: mat.define-legacy-typography-config(),
+    typography: mat.define-typography-config(),
     density: 0
 ));
-@include mat.all-legacy-component-themes($xyna-theme-dark);
+@include mat.all-component-themes($xyna-theme-dark);
 
 
 // globally overwrite material styles
@@ -155,14 +155,14 @@ mat-dialog-container.mat-dialog-container {
     }
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
     min-height: unset !important;
     overflow: inherit !important;
     background-color: #1A1A1B;
     box-shadow: 0 0 16px #1A1A1B;
 
     &.with-arrow-x, &.with-arrow-y {
-        .mat-menu-content .mat-menu-item {
+        .mat-mdc-menu-content .mat-mdc-menu-item {
             &:first-child::before, &:last-child::before {
                 content: "";
                 display: flex;
@@ -175,15 +175,17 @@ mat-dialog-container.mat-dialog-container {
                 pointer-events: none;
             }
         }
+
         &.mat-menu-below {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:last-child:not(:first-child)::before {
                     content: none;
                 }
             }
         }
+
         &.mat-menu-above {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:first-child:not(:last-child)::before {
                     content: none;
                 }
@@ -193,7 +195,7 @@ mat-dialog-container.mat-dialog-container {
 
     &.with-arrow-x {
         &.mat-menu-after {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:first-child::before, &:last-child::before {
                     border-right: none;
                     border-bottom: none;
@@ -202,8 +204,9 @@ mat-dialog-container.mat-dialog-container {
                 }
             }
         }
+
         &.mat-menu-before {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:first-child::before, &:last-child::before {
                     border-left: none;
                     border-top: none;
@@ -212,13 +215,15 @@ mat-dialog-container.mat-dialog-container {
                 }
             }
         }
-        &.mat-menu-below .mat-menu-content .mat-menu-item {
+
+        &.mat-menu-below .mat-mdc-menu-content .mat-mdc-menu-item {
             &:first-child::before, &:last-child::before {
                 top: 15px;
                 bottom: unset;
             }
         }
-        &.mat-menu-above .mat-menu-content .mat-menu-item {
+
+        &.mat-menu-above .mat-mdc-menu-content .mat-mdc-menu-item {
             &:first-child::before, &:last-child::before {
                 top: unset;
                 bottom: 15px;
@@ -228,28 +233,31 @@ mat-dialog-container.mat-dialog-container {
 
     &.with-arrow-y {
         &.mat-menu-below {
-            .mat-menu-content .mat-menu-item:first-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item:first-child::before {
                 border-left: none;
                 border-bottom: none;
                 top: -10px;
                 bottom: unset;
             }
         }
+
         &.mat-menu-above {
-            .mat-menu-content .mat-menu-item:last-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item:last-child::before {
                 border-right: none;
                 border-top: none;
                 top: unset;
                 bottom: -10px;
             }
         }
-        &.mat-menu-after .mat-menu-content .mat-menu-item {
+
+        &.mat-menu-after .mat-mdc-menu-content .mat-mdc-menu-item {
             &:first-child::before, &:last-child::before {
                 left: 15px;
                 right: unset;
             }
         }
-        &.mat-menu-before .mat-menu-content .mat-menu-item {
+
+        &.mat-menu-before .mat-mdc-menu-content .mat-mdc-menu-item {
             &:first-child::before, &:last-child::before {
                 left: unset;
                 right: 15px;
@@ -257,12 +265,12 @@ mat-dialog-container.mat-dialog-container {
         }
     }
 
-    .mat-menu-content:not(:empty) {
+    .mat-mdc-menu-content:not(:empty) {
         padding-top: 0;
         padding-bottom: 0;
         border: 1px solid #000;
 
-        .mat-menu-item {
+        .mat-mdc-menu-item {
             display: flex;
             overflow: inherit;
             font-size: $font-size-medium;
@@ -283,7 +291,7 @@ mat-dialog-container.mat-dialog-container {
         }
 
         :not([disabled]) {
-            &.mat-menu-item:hover,
+            &.mat-mdc-menu-item:hover,
             &.mat-menu-item.cdk-program-focused,
             &.mat-menu-item.cdk-keyboard-focused,
             &.mat-menu-item-highlighted {
@@ -292,9 +300,13 @@ mat-dialog-container.mat-dialog-container {
                 }
             }
         }
+
+        [disabled] {
+            opacity: 1;
+        }
     }
 
-    .mat-menu-item-submenu-trigger {
+    .mat-mdc-menu-item-submenu-trigger {
         &::after {
             border-color: transparent transparent transparent $xc-menu-item-arrow-color;
         }
