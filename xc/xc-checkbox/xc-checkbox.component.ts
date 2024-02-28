@@ -111,14 +111,10 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
 
     @Input()
     set checked(value: boolean) {
-        console.log(value);
-        this._checked = value;
-
-
-        // value = coerceBoolean(value);
-        // if (this._checked !== value) {
-        //     this._checked = value;
-        // }
+        value = coerceBoolean(value);
+        if (this._checked !== value) {
+            this._checked = value;
+        }
     }
 
 
@@ -165,15 +161,5 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
     change(event: MatCheckboxChange) {
         this.checked = event.checked;
         this.checkedChange.emit(this.checked);
-    }
-
-
-    toggle(event: Event) {
-        // if (!this.disabled && !this.readonly) {
-        //     this.checked = !this.checked;
-        //     this.checkedChange.emit(this.checked);
-        // }
-        // event.stopPropagation();
-        // event.preventDefault();
     }
 }
