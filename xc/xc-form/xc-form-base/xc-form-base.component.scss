@@ -233,13 +233,6 @@ $suffix-icon-height: 24px;
                 }
             }
 
-            /*
- TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.
- */
-            .mat-mdc-form-field-underline {
-                display: none;
-            }
-
             .mat-mdc-form-field-wrapper {
                 padding: 0;
                 margin-bottom: $validator-message-height; // reserve space for validator message
@@ -250,10 +243,12 @@ $suffix-icon-height: 24px;
                 padding: 0;
                 top: 20px;
                 font-family: $font-family-regular;
-                font-size: $xc-form-base-input-font-size;
+                // font-size: $xc-form-base-input-font-size;
                 font-style: $xc-form-base-input-font-style;
                 text-transform: $xc-form-base-input-label-text-transform;
                 line-height: normal;
+                font-weight: unset;
+                letter-spacing: normal;
 
                 &:not(.mdc-floating-label--float-above) {
                     top: 32px;
@@ -413,7 +408,10 @@ xc-panel.compact :host {
 }
 
 ::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label,
-.mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above {
+::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above {
     color: $xc-form-base-input-label-color;
 }
 
