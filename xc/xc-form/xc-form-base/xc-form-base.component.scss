@@ -74,6 +74,10 @@ $suffix-icon-height: 24px;
         letter-spacing: normal;
         font-family: $font-family-regular;
 
+
+
+
+
         .mdc-text-field--filled:not(.mdc-text-field--disabled),
         .mdc-text-field--filled.mdc-text-field--disabled {
             background-color: transparent;
@@ -103,11 +107,10 @@ $suffix-icon-height: 24px;
                 font-style: $xc-form-base-input-font-style;
                 vertical-align: middle;
                 background-color: $xc-form-base-input-background-color-disabled;
-                // border-style: solid;
-                // border-width: $xc-form-base-input-border-width;
-                // border-color: $xc-form-base-input-border-color-disabled;
+                border-style: solid;
+                border-width: $xc-form-base-input-border-width;
+                border-color: $xc-form-base-input-border-color-disabled;
                 border-radius: $xc-form-base-input-border-radius;
-                border: none;
                 color: $xc-form-base-input-color-disabled;
                 font-family: $font-family-regular;
 
@@ -116,20 +119,24 @@ $suffix-icon-height: 24px;
                     color: $xc-form-base-input-color;
 
                     &:not(:focus) {
-                        // border-color: $xc-form-base-input-border-color;
+                        border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
                         background-color: $xc-form-base-input-background-color;
 
                         &:hover {
                             background-color: $xc-form-base-input-background-color-hover;
-                            // border-color: $xc-form-base-input-border-color-hover;
+                            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-hover;
                         }
                     }
                 }
 
                 &:focus {
                     background-color: $xc-form-base-input-background-color-focus;
-                    // border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
+                    border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
                     // box-shadow: inset 0 0 2px $color-focus-outline;
+                }
+
+                &:invalid {
+                    border: $xc-form-base-input-border-width solid $xc-form-base-input-error-color;
                 }
 
                 &::placeholder {
@@ -210,7 +217,7 @@ $suffix-icon-height: 24px;
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                height: 32px;
+                height: calc(100% - 16px);
                 width: 32px;
                 padding: 0;
                 // padding: math.div($xc-form-base-input-line-height + $xc-form-base-input-padding-top + $xc-form-base-input-padding-bottom + $xc-form-base-input-border-width*2 - $suffix-icon-height, 2) 4px;
@@ -227,15 +234,14 @@ $suffix-icon-height: 24px;
                     color: $xc-form-base-input-suffix-color-hover;
                 }
 
+        .mat-form-field-underline {
+            display: none;
+        }
+
                 >.mat-icon {
                     padding: 0;
                     font-size: $suffix-icon-height;
                 }
-            }
-
-            .mat-mdc-form-field-wrapper {
-                padding: 0;
-                margin-bottom: $validator-message-height; // reserve space for validator message
             }
 
             .mat-mdc-floating-label.mdc-floating-label {
@@ -257,6 +263,10 @@ $suffix-icon-height: 24px;
                     padding: 0 8px;
                     line-height: $xc-form-base-input-line-height
                 }
+            }
+
+            .mdc-line-ripple {
+                display: none;
             }
         }
 
@@ -310,7 +320,8 @@ $suffix-icon-height: 24px;
             border-top: none;
             min-height: unset;
 
-            input {
+            input,
+            textarea {
                 margin-top: 0;
             }
 
@@ -319,6 +330,10 @@ $suffix-icon-height: 24px;
             .mat-mdc-floating-label {
                 color: $xc-form-base-input-placeholder-color;
             }
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+            height: 100%;
         }
     }
 
@@ -411,72 +426,9 @@ xc-panel.compact :host {
 ::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above,
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above,
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above {
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+.mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+.mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above {
     color: $xc-form-base-input-label-color;
-}
-
-::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-line-ripple {
-
-    &::before {
-        box-sizing: border-box;
-        border: 1px solid $xc-form-base-input-error-color;
-        border-radius: $xc-form-base-input-border-radius;
-        transition: none;
-    }
-
-    &::after {
-        box-sizing: border-box;
-        border: 1px solid $xc-form-base-input-error-color;
-        border-radius: $xc-form-base-input-border-radius;
-        transition: none;
-    }
-
-    &:focus {
-        background-color: $xc-form-base-input-background-color-focus;
-        border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
-    }
-}
-
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple {
-
-
-    &.mdc-line-ripple--active:not(.mdc-line-ripple--deactivating) {
-        &::before {
-            box-sizing: border-box;
-            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
-            border-radius: $xc-form-base-input-border-radius;
-            transition: none;
-        }
-
-        &::after {
-            box-sizing: border-box;
-            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
-            border-radius: $xc-form-base-input-border-radius;
-            transition: none;
-        }
-    }
-
-    &::before {
-        top: 16px;
-        box-sizing: border-box;
-        border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
-        border-radius: $xc-form-base-input-border-radius;
-        transition: none;
-    }
-
-    &::after {
-        top: 16px;
-        box-sizing: border-box;
-        border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
-        border-radius: $xc-form-base-input-border-radius;
-        transition: none;
-    }
-}
-
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before,
-::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before {
-    box-sizing: border-box;
-    border: $xc-form-base-input-border-width solid $color-focus-outline;
-    border-radius: $xc-form-base-input-border-radius;
-    transition: none;
 }
