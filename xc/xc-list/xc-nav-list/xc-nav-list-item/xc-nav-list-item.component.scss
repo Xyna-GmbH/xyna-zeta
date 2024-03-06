@@ -68,6 +68,11 @@ $xc-nav-list-item-height: unset !default;
             position: relative;
             background-color: $xc-nav-list-item-background-color-normal;
             height: 100%;
+
+            .mdc-list-item__primary-text {
+                display: flex;
+                flex-direction: row;
+            }
         }
 
         &:not(.disabled) {
