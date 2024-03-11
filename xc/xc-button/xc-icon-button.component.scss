@@ -28,7 +28,7 @@ $xc-icon-button-focus-overlay-invert: unset !default;
 
     .mat-mdc-icon-button {
         overflow: hidden;
-        background: $xc-icon-button-background-color;
+        // background: $xc-icon-button-background-color;
         border: $xc-icon-button-border-width solid $xc-icon-button-border-color;
         line-height: unset;
         display: flex;
@@ -37,6 +37,14 @@ $xc-icon-button-focus-overlay-invert: unset !default;
         // & > * {
         //     flex: 1 1 auto;
         // }
+    }
+
+    ::ng-deep .mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before,
+    ::ng-deep .mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple::before,
+    ::ng-deep .mat-mdc-icon-button:active .mat-mdc-button-persistent-ripple::before {
+        opacity: 0;
+        background-color: unset;
+        content: "";
     }
 
     .mat-mdc-icon-button:not([disabled]):focus {
@@ -54,20 +62,48 @@ $xc-icon-button-focus-overlay-invert: unset !default;
     &[size="small"] .mat-mdc-icon-button {
         width: 24px;
         height: 24px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 24px;
+                height: 24px;
+            }
+        }
     }
 
     &[size="medium"] .mat-mdc-icon-button {
         width: 32px;
         height: 32px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 32px;
+                height: 32px;
+            }
+        }
     }
 
     &[size="large"] .mat-mdc-icon-button {
         width: 52px;
         height: 52px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 52px;
+                height: 52px;
+            }
+        }
     }
 
     &[size="extra-large"] .mat-mdc-icon-button {
         width: 68px;
         height: 68px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 68px;
+                height: 68px;
+            }
+        }
     }
 }
