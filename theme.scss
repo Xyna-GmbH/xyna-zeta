@@ -102,7 +102,7 @@
 
     $xc-checkbox-height: 32px;
 
-    $xc-checkbox-text-transform: uppercase;
+    $xc-checkbox-text-transform: none;
 
     $xc-checkbox-font-size: 12px;
 
@@ -137,7 +137,7 @@
     $xc-form-base-input-error-color: $color-warn;
     $xc-form-base-input-placeholder-color: $color-gray-3;
     $xc-form-base-input-label-font-size: $font-size-small;
-    $xc-form-base-input-label-text-transform: uppercase;
+    $xc-form-base-input-label-text-transform: none;
     $xc-form-base-input-changeindicator-color: $color-primary;
 
     $xc-form-base-textarea-padding: 8px;
@@ -146,7 +146,7 @@
     $xc-form-text-label-color: $color-normal;
     $xc-form-text-label-font-size: $font-size-medium;
     $xc-form-text-label-font-weight: bold;
-    $xc-form-text-label-transform: uppercase;
+    $xc-form-text-label-transform: none;
 
     $xc-form-text-color: $color-normal;
     $xc-form-text-font-size: $font-size-medium;
