@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { AfterContentInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatLegacyCheckbox as MatCheckbox, MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRipple } from '@angular/material/core';
 
 import { XcI18nTranslateDirective } from '@zeta/i18n/i18n.directive';
@@ -80,8 +80,6 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
         if (input) {
             input.tabIndex = -1;
         }
-
-
     }
 
 
@@ -163,15 +161,5 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
     change(event: MatCheckboxChange) {
         this.checked = event.checked;
         this.checkedChange.emit(this.checked);
-    }
-
-
-    toggle(event: Event) {
-        if (!this.disabled && !this.readonly) {
-            this.checked = !this.checked;
-            this.checkedChange.emit(this.checked);
-        }
-        event.stopPropagation();
-        event.preventDefault();
     }
 }

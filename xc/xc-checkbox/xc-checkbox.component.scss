@@ -15,97 +15,176 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-checkbox-color-disabled: unset !default;
-$xc-checkbox-color-disabled-invert: unset !default;
-
-$xc-checkbox-checkmark-color: unset !default;
-$xc-checkbox-checkmark-color-invert: unset !default;
-
-$xc-checkbox-checkmark-color-disabled: unset !default;
-$xc-checkbox-checkmark-color-disabled-invert: unset !default;
-$xc-checkbox-with-background: unset !default;
-
-@import 'const';
-
-@mixin base-color($value, $xc-checkbox-with-background: false) {
-    &.mat-checkbox-checked, &.mat-checkbox-indeterminate {
-        .mat-checkbox-background {
-            @if $xc-checkbox-with-background {
-                background-color: $value;
-            } @else {
-                background-color: unset;
-            }
-        }
-    }
-    .mat-checkbox-frame {
-        border-color: $value;
-        border-width: 1px;
-    }
-    .mat-checkbox-label {
-        color: $value;
-    }
-}
-
-@mixin mark-color($value) {
-    .mat-checkbox-checkmark-path {
-        stroke: $value;
-    }
-    .mat-checkbox-mixedmark {
-        background-color: $value;
-    }
-}
-
-:host > div {
-
-    display: inherit;
-
-    &:focus {
-        outline: $color-focus-outline solid 1px;
-        outline-offset: 2px;
-    }
-
-    &::ng-deep {
-        .mat-checkbox-background,
-        .mat-checkbox-mixedmark,
-        .mat-checkbox-checkmark,
-        .mat-checkbox-checkmark-path {
-            transition: none !important;
-            animation: none !important;
-        }
-        .mat-checkbox-mixedmark {
-            width: 4px;
-            height: 4px;
-        }
-        .mat-checkbox .mat-checkbox-ripple {
-            left: calc(50% - 20px);
-            top: calc(50% - 20px);
-            height: 40px;
-            width: 40px;
-        }
-    }
-}
-
-@each $key, $value in $color-map {
-    :host[color="#{$key}"]::ng-deep {
-        & { @include base-color($value, $xc-checkbox-with-background); }
-    }
-}
-
-:host[color]::ng-deep {
-    @include mark-color($xc-checkbox-checkmark-color);
-
-    .mat-checkbox-disabled {
-        @include base-color($xc-checkbox-color-disabled);
-        @include mark-color($xc-checkbox-checkmark-color-disabled);
-    }
-}
-
-:host::ng-deep,
-:host[color="invert"]::ng-deep {
-    @include mark-color($xc-checkbox-checkmark-color-invert);
-
-    .mat-checkbox-disabled {
-        @include base-color($xc-checkbox-color-disabled-invert);
-        @include mark-color($xc-checkbox-checkmark-color-disabled-invert);
-    }
-}
+ $xc-checkbox-color-disabled: unset !default;
+ $xc-checkbox-color-disabled-invert: unset !default;
+ 
+ $xc-checkbox-checkmark-color: unset !default;
+ $xc-checkbox-checkmark-color-invert: unset !default;
+ 
+ $xc-checkbox-checkmark-color-disabled: unset !default;
+ $xc-checkbox-checkmark-color-disabled-invert: unset !default;
+ $xc-checkbox-with-background: unset !default;
+ $font-family-regular: unset !default;
+ 
+ $xc-checkbox-height: unset !default;
+ 
+ $xc-checkbox-text-transform: unset !default;
+ 
+ $xc-checkbox-font-size: unset !default;
+ 
+ @import 'const';
+ 
+ @mixin base-color($value, $xc-checkbox-with-background: false) {
+ 
+     &.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+     .mdc-checkbox:not(:disabled):active .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+     .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background,
+     .mdc-checkbox:not(:disabled):active .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background {
+         border-color: $value;
+         border-width: 1px;
+ 
+         @if $xc-checkbox-with-background {
+             background-color: $value;
+         }
+ 
+         @else {
+             background-color: unset;
+         }
+     }
+ 
+     &.mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+         border-color: $value;
+         border-width: 1px;
+     }
+ 
+     ::ng-deep .mdc-checkbox:not(:disabled):active .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+         border-color: $value;
+     }
+ 
+     .mdc-label {
+         color: $value;
+     }
+ }
+ 
+ @mixin mark-color($value) {
+     .mdc-checkbox__checkmark-path {
+         stroke: $value;
+     }
+ 
+     .mdc-checkbox__mixedmark {
+         background-color: $value;
+     }
+ }
+ 
+ :host {
+ 
+     display: inherit;
+ 
+     &::ng-deep {
+ 
+         .mdc-checkbox__background,
+         .mdc-checkbox__mixedmark,
+         .mdc-checkbox__checkmark,
+         .mdc-checkbox__checkmark-path {
+             transition: none !important;
+             animation: none !important;
+         }
+ 
+         .mdc-checkbox__mixedmark {
+             width: 4px;
+             height: 4px;
+         }
+ 
+         .mat-mdc-checkbox {
+             // height: $xc-checkbox-height;
+             display: flex;
+             align-items: center;
+ 
+             .mdc-form-field .mdc-checkbox {
+                 padding: 0;
+                 margin: 0;
+                 height: $xc-checkbox-height;
+                 width: $xc-checkbox-height;
+                 flex: unset;
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 margin: 0 4px;
+ 
+                 .mat-mdc-checkbox-touch-target,
+                 input {
+                     height: 16px;
+                     width: 16px;
+                     top: 50%;
+                     left: 50%;
+                     transform: translate(-50%, -50%);
+                 }
+ 
+                 .mdc-checkbox__background {
+                     position: relative;
+                     top: unset;
+                     left: unset;
+                 }
+             }
+         }
+ 
+         .mat-mdc-checkbox .mdc-checkbox__ripple {
+             left: calc(50% - 14px);
+             top: calc(50% - 14px);
+             height: 28px;
+             width: 28px;
+         }
+ 
+         .mdc-checkbox:hover .mdc-checkbox__ripple,
+         .mdc-checkbox:hover .mdc-checkbox__native-control:checked~.mdc-checkbox__ripple,
+         .mdc-checkbox:hover .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background,
+         .mdc-checkbox:active .mdc-checkbox__native-control~.mdc-checkbox__ripple {
+             border: 1px solid $color-focus-outline;
+             background-color: transparent;
+             opacity: 1;
+         }
+     }
+ 
+     .xc-checkbox-label {
+         text-transform: $xc-checkbox-text-transform;
+         line-height: $xc-checkbox-height;
+         font-size: $xc-checkbox-font-size;
+         font-family: $font-family-regular;
+         white-space: nowrap;
+         letter-spacing: normal;
+     }
+ }
+ 
+ @each $key, $value in $color-map {
+     :host[color="#{$key}"]::ng-deep {
+         & {
+             @include base-color($value, $xc-checkbox-with-background);
+         }
+     }
+ }
+ 
+ :host[color]::ng-deep {
+     @include mark-color($xc-checkbox-checkmark-color);
+ 
+     .mat-mdc-checkbox-disabled {
+         @include base-color($xc-checkbox-color-disabled);
+         @include mark-color($xc-checkbox-checkmark-color-disabled);
+     }
+ }
+ 
+ :host::ng-deep,
+ :host[color="invert"]::ng-deep {
+     @include mark-color($xc-checkbox-checkmark-color-invert);
+ 
+     .mat-mdc-checkbox-disabled {
+         @include base-color($xc-checkbox-color-disabled-invert);
+         @include mark-color($xc-checkbox-checkmark-color-disabled-invert);
+     }
+ }
+ 
+ :host::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mdc-checkbox__ripple,
+ :host::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus~.mdc-checkbox__ripple {
+     border: 1px solid $color-focus-outline;
+     background-color: transparent;
+     opacity: 1;
+ }
