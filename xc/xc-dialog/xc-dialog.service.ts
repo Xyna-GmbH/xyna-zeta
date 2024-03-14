@@ -17,7 +17,7 @@
  */
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 import { filter, mapTo } from 'rxjs/operators';
 
@@ -66,7 +66,9 @@ export class XcDialogService {
             role: 'dialog',
             disableClose: true,
             autoFocus: true,
-            ariaLabel: ariaLabel
+            ariaLabel: ariaLabel,
+            enterAnimationDuration: '0',
+            exitAnimationDuration: '0'
             // width, height, ...
         };
 

@@ -36,7 +36,7 @@ $xc-button-transition: unset !default;
         box-shadow: inset 0 0 0 1px $color-focus-outline;
     }
 
-    .mat-button {
+    .mat-mdc-button {
         overflow: hidden;
         background: $xc-button-background-color;
         border: $xc-button-border-width solid $xc-button-border-color;
@@ -44,17 +44,24 @@ $xc-button-transition: unset !default;
         padding: $xc-button-padding;
         transition: $xc-button-transition;
         min-width: unset;
+        height: auto;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                background-color: $xc-button-focus-overlay;
+                height: 32px;
+                opacity: 0;
+            }
+        }
+
+        &[color="invert"] ::ng-deep {
+            .mat-mdc-button-touch-target {
+                background-color: $xc-button-focus-overlay-invert;
+            }
+        }
     }
 
-    ::ng-deep .mat-button-focus-overlay {
-        background-color: $xc-button-focus-overlay;
-    }
-
-    &[color="invert"] ::ng-deep .mat-button-focus-overlay {
-        background-color: $xc-button-focus-overlay-invert;
-    }
-
-    &[color="primary"] .mat-button:not([disabled="true"]) {
+    &[color="primary"] .mat-mdc-button:not([disabled="true"]) {
         background-color: $color-primary;
         color: $color-invert;
 
@@ -64,14 +71,17 @@ $xc-button-transition: unset !default;
     }
 
     ::ng-deep {
-        .mat-button-wrapper {
+        .mdc-button__label {
+            align-items: center;
+            
             &,
-            & > xc-icon > span {
+            &>xc-icon>span {
                 font-size: $xc-button-font-size;
                 font-style: $xc-button-font-style;
                 margin: $xc-button-text-margin;
                 line-height: $xc-button-line-height;
                 display: flex;
+                letter-spacing: normal;
             }
         }
     }

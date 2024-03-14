@@ -36,7 +36,6 @@ $xc-form-autocomplete-option-background-color-active: unset !default;
 
 $xc-dialog-border: unset !default;
 $xc-dialog-border-radius: unset !default;
-$xc-dialog-box-shadow: unset !default;
 
 $xc-menu-item-background-color: unset !default;
 $xc-menu-item-highlight-background-color: unset !default;
@@ -46,7 +45,7 @@ $xc-menu-item-arrow-color: unset !default;
 @use '@angular/material' as mat;
 
 @import 'const';
-@import '@angular/material/theming';
+// @import '@angular/material/theming';
 
 .mat-icon {
     display: flex !important;
@@ -73,7 +72,6 @@ $xc-menu-item-arrow-color: unset !default;
     font-feature-settings: 'liga';
 }
 
-@include mat.all-legacy-component-typographies();
 @include mat.all-component-typographies();
 @include mat.core();
 
@@ -91,11 +89,14 @@ html.cdk-global-scrollblock {
     overflow-y: unset;
 }
 
-mat-dialog-container.mat-dialog-container {
+.mat-mdc-dialog-container {
     padding: 0 !important;
     border: $xc-dialog-border;
     border-radius: $xc-dialog-border-radius;
-    box-shadow: $xc-dialog-box-shadow;
+
+    .mdc-dialog__surface {
+        box-shadow: none;
+    }
 }
 
 .cdk-overlay-pane {
