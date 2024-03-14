@@ -37,7 +37,7 @@ export class XcButtonComponent extends XcButtonBaseComponent implements OnInit, 
 
     ngOnInit() {
         super.ngOnInit();
-        this.element = this.elementRef.nativeElement.querySelector('.mat-button-wrapper');
+        this.element = this.elementRef.nativeElement.querySelector('.mdc-button__label');
         this._translate = Array.from(this.element.childNodes).some(childNode => childNode.nodeType === Node.TEXT_NODE);
     }
 

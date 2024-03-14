@@ -179,10 +179,12 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
     set _xc_tooltipClass(value: string | string[] | Set<string> | { [key: string]: any }) {
         let classes: string[] = [];
         switch (true) {
+            /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
             case (isString(value)): classes.push(value as string); break;
             case (isArray(value)): classes = (value as string[]).map<string>(str => isString(str) ? str : ''); break;
             case (value instanceof Set): (value as Set<string>).forEach(str => classes.push(str)); break;
             case (isObject(value)): Object.keys(value).forEach(key => classes.push(value[key])); break;
+            /* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
         }
 
         this._extraTooltipClasses = classes;
