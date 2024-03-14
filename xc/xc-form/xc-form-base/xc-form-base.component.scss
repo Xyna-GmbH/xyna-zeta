@@ -58,7 +58,7 @@ $xc-form-base-textarea-line-height: unset !default;
 $validator-message-height: 18px;
 $suffix-icon-height: 24px;
 
- 
+
 @use "sass:math";
 @import 'const';
 
@@ -81,7 +81,8 @@ $suffix-icon-height: 24px;
             pointer-events: initial;
         }
 
-        input, textarea {
+        input,
+        textarea {
             pointer-events: initial;
             margin: 0;
             padding-top: $xc-form-base-input-padding-top;
@@ -140,10 +141,11 @@ $suffix-icon-height: 24px;
         // non-editable-input, see: ZETA-7
         input:first-child {
 
-            &:read-only, &:disabled {
+            &:read-only,
+            &:disabled {
                 display: none;
 
-                & + .non-editable-input {
+                &+.non-editable-input {
                     display: block;
                     width: 100%;
                     text-overflow: ellipsis;
@@ -206,12 +208,12 @@ $suffix-icon-height: 24px;
 
         .mat-form-field-wrapper {
             padding: 0;
-            margin-bottom: $validator-message-height;   // reserve space for validator message
+            margin-bottom: $validator-message-height; // reserve space for validator message
         }
 
         .mat-form-field-label-wrapper {
             padding: 0;
-            position: unset;
+            position: revert;
             padding-bottom: 2px;
         }
 
@@ -245,11 +247,11 @@ $suffix-icon-height: 24px;
             margin-top: 4px;
             line-height: initial;
 
-            > div {
+            >div {
                 text-transform: uppercase;
                 font-size: 11px;
 
-                > .mat-error {
+                >.mat-error {
                     color: $xc-form-base-input-error-color;
                     text-transform: none; // DM - Error messages should be able to display small letters
                     white-space: nowrap;
@@ -325,7 +327,7 @@ xc-panel.compact :host {
 
 
 :host.indicatechanges::ng-deep {
-    .ng-dirty ~ .mat-form-field-label-wrapper::after {
+    .ng-dirty~.mat-form-field-label-wrapper::after {
         position: absolute;
         width: 0;
         height: 0;
@@ -343,8 +345,8 @@ xc-panel.compact :host {
         border-left: 8px solid transparent;
     }
 
-    .ng-dirty:hover ~ .mat-form-field-label-wrapper::after,
-    .ng-dirty:focus ~ .mat-form-field-label-wrapper::after {
+    .ng-dirty:hover~.mat-form-field-label-wrapper::after,
+    .ng-dirty:focus~.mat-form-field-label-wrapper::after {
         border-width: 0px;
         transition: all $transition-time-fast ease;
     }
