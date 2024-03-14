@@ -25,9 +25,9 @@ $xc-tab-bar-tab-background-color-active: unset !default;
 $xc-tab-bar-button-color: unset !default;
 $xc-tab-bar-button-color-active: unset !default;
 
-$xc-tab-bar-active-indicator-position: unset !default;   // possible values: top, bottom
+$xc-tab-bar-active-indicator-position: unset !default; // possible values: top, bottom
 
-$xc-tab-bar-content-position: unset !default;            // possible values: left, center, right
+$xc-tab-bar-content-position: unset !default; // possible values: left, center, right
 $xc-tab-bar-content-top-border-width: unset !default;
 $xc-tab-bar-content-top-border-color: unset !default;
 $xc-tab-bar-content-background-color: unset !default;
@@ -35,7 +35,7 @@ $xc-tab-bar-content-background-color: unset !default;
 @import 'const';
 
 @each $key, $value in $color-map {
-    :host[color="#{$key}"]::ng-deep .mat-tab-group .mat-tab-header .mat-tab-list .mat-tab-label.mat-tab-label-active {
+    :host[color="#{$key}"]::ng-deep .mat-mdc-tab-group .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-list .mat-mdc-tab-labels .mat-mdc-tab.mdc-tab--active {
         border-color: $value;
     }
 }
@@ -47,116 +47,140 @@ $xc-tab-bar-content-background-color: unset !default;
 
     ::ng-deep {
 
-        .mat-tab-group {
+        .mat-mdc-tab-group {
             min-width: 0;
             flex-grow: 1;
 
-            .mat-tab-header {
+            .mat-mdc-tab-header {
                 background-color: $color-background-default;
-                min-height: 36px;
+                min-height: 32px;
 
-                .mat-tab-header-pagination .mat-tab-header-pagination-chevron {
+                .mat-mdc-tab-header-pagination .mat-mdc-tab-header-pagination-chevron {
                     border-color: $color-normal;
                 }
 
-                .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+                .mat-mdc-tab-header-pagination-disabled .mat-mdc-tab-header-pagination-chevron {
                     border-color: $color-disabled;
                 }
 
-                .mat-tab-list {
-                    min-width: 0;
+                .mat-mdc-tab-label-container {
 
-                    .cdk-keyboard-focused {
-                        box-shadow: inset 0 -2px 0 $color-focus-outline;
-                    }
+                    .mat-mdc-tab-list {
+                        min-width: 0;
 
-                    .mat-tab-label {
-                        min-width: 120px;
-                        max-width: 360px;
-                        height: 36px;
-                        opacity: 1;
-                        padding: 0;
-                        margin-left: 4px;
-                        justify-content: $xc-tab-bar-content-position;
-                        background-color: $xc-tab-bar-tab-background-color;
-                        @if $xc-tab-bar-active-indicator-position == bottom {
-                            border-bottom: 4px solid $color-background-default;
-                        } @else {
-                            border-top: 4px solid $color-background-default;
-                        }
-                        font-family: $xc-tab-bar-font-family;
-                        font-size: $xc-tab-bar-font-size;
-                        user-select: none;
-
-                        &:first-child {
-                            margin-left: 0;
+                        .cdk-keyboard-focused {
+                            box-shadow: inset 0 -2px 0 $color-focus-outline;
                         }
 
-                        &[aria-labelledby="busy"] {
-                            background-color: unset !important;
-                            pointer-events: none;
-                            margin-left: 0;
-                            min-width: 36px;
-                            border: none;
-
-                            xc-spinner {
-                                zoom: 0.5;
-                            }
-                        }
-
-                        // show tab-close button on hover and on focus
-                        &:hover {
-                            border-color: $color-gray-4;
-
-                            .mat-tab-label-content xc-icon-button button {
-                                opacity: 1;
-                            }
-                        }
-                        & > .mat-tab-label-content xc-icon-button button:focus {
+                        .mat-mdc-tab {
+                            min-width: 120px;
+                            // max-width: 360px;
+                            height: 32px;
                             opacity: 1;
-                        }
+                            padding: 0;
+                            margin-left: 4px;
+                            // justify-content: $xc-tab-bar-content-position;
+                            background-color: $xc-tab-bar-tab-background-color;
 
-                        &.mat-tab-label-active {
-                            cursor: default;
-                            background-color: $xc-tab-bar-tab-background-color-active;
+                            @if $xc-tab-bar-active-indicator-position ==bottom {
+                                border-bottom: 4px solid $color-background-default;
+                            }
 
-                            .mat-tab-label-content xc-icon-button button {
-                                background-color: $xc-tab-bar-tab-background-color-active;
-                                box-shadow: -4px 0 4px $xc-tab-bar-tab-background-color-active;
+                            @else {
+                                border-top: 4px solid $color-background-default;
+                            }
 
-                                xc-icon {
-                                    color: $xc-tab-bar-button-color-active;
+                            font-family: $xc-tab-bar-font-family;
+                            font-size: $xc-tab-bar-font-size;
+                            user-select: none;
+
+                            &:first-child {
+                                margin-left: 0;
+                            }
+
+                            &[aria-labelledby="busy"] {
+                                background-color: unset !important;
+                                pointer-events: none;
+                                margin-left: 0;
+                                min-width: 36px;
+                                border: none;
+
+                                xc-spinner {
+                                    zoom: 0.5;
                                 }
                             }
-                        }
 
-                        .mat-tab-label-content {
-                            align-items: center;
-                            display: flex;
-                            min-width: 0;
+                            // show tab-close button on hover and on focus
+                            &:hover {
+                                border-color: $color-gray-4;
 
-                            > xc-icon {
-                                padding: 6px 12px;
-                                color: $xc-tab-bar-tab-color;
-                                overflow: hidden;
+
+                                .mdc-tab__content .mdc-tab__text-label xc-icon-button button {
+                                    opacity: 1;
+                                }
                             }
 
-                            xc-icon i {
-                                opacity: 0.6;
+                            &>.mdc-tab__content .mdc-tab__text-label xc-icon-button button:focus {
+                                opacity: 1;
                             }
 
-                            xc-icon-button {
-                                position: absolute;
-                                right: 4px;
+                            &.mdc-tab--active {
+                                cursor: default;
+                                background-color: $xc-tab-bar-tab-background-color-active;
 
-                                button {
-                                    opacity: 0;
-                                    background-color: $xc-tab-bar-tab-background-color;
-                                    box-shadow: -4px 0 4px $xc-tab-bar-tab-background-color;
+                                .mdc-tab__content .mdc-tab__text-label xc-icon-button button {
+                                    background-color: $xc-tab-bar-tab-background-color-active;
+                                    box-shadow: -4px 0 4px $xc-tab-bar-tab-background-color-active;
 
                                     xc-icon {
-                                        color: $xc-tab-bar-button-color;
+                                        color: $xc-tab-bar-button-color-active;
                                     }
+                                }
+                            }
+
+                            .mdc-tab__content {
+                                align-items: center;
+                                display: flex;
+                                min-width: 0;
+                                height: auto;
+                                width: 100%;
+                                border-bottom: 1px solid $xc-tab-bar-tab-background-color;;
+
+                                .mdc-tab__text-label {
+                                    line-height: normal;
+                                    padding: 0 12px;
+
+                                    >xc-icon {
+                                        // padding: 6px 12px;
+
+                                        color: $xc-tab-bar-tab-color;
+                                        overflow: hidden;
+                                    }
+
+                                    xc-icon i {
+                                        opacity: 0.6;
+                                    }
+
+                                    xc-icon-button {
+                                        position: absolute;
+                                        right: 12px;
+
+                                        button {
+                                            opacity: 0;
+                                            background-color: $xc-tab-bar-tab-background-color;
+                                            box-shadow: -4px 0 4px $xc-tab-bar-tab-background-color;
+
+                                            xc-icon {
+                                                color: $xc-tab-bar-button-color;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .mdc-tab-indicator {
+                                .mdc-tab-indicator__content {
+                                    border: none;
                                 }
                             }
                         }
@@ -164,15 +188,18 @@ $xc-tab-bar-content-background-color: unset !default;
                 }
             }
 
-            .mat-tab-body-wrapper {
+            .mat-mdc-tab-body-wrapper {
                 flex-grow: 1;
 
-                .mat-tab-body.mat-tab-body-active {
+                /*
+ TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+ */
+                .mat-mdc-tab-body.mat-mdc-tab-body-active {
                     // necessary fix for firefox
                     position: absolute;
                 }
 
-                .mat-tab-body-content {
+                .mat-mdc-tab-body-content {
                     overflow: unset;
                     display: flex;
                     border-top: $xc-tab-bar-content-top-border-width solid $xc-tab-bar-content-top-border-color;

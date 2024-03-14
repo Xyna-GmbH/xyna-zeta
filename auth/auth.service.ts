@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, Injector, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
@@ -24,7 +24,6 @@ import { catchError, filter, mapTo, switchMap, tap } from 'rxjs/operators';
 
 import { A11yService } from '../a11y';
 import { ApiService, RuntimeContext, XoConsistencyCheck, XoObject } from '../api';
-import { I18nService, LocaleId, LocaleService } from '../i18n';
 import { AuthEventService } from './auth-event.service';
 import { SessionInfo } from './auth-session';
 import { XoExternalCredentialsLoginRequest } from './xo/external-credentials-login-request.model';
@@ -102,15 +101,9 @@ export class AuthService {
         private readonly http: HttpClient,
         private readonly router: Router,
         route: ActivatedRoute,
-        injector: Injector,
         apiService: ApiService,
-        i18n: I18nService,
-        a11y: A11yService,
-        @Inject(LOCALE_ID) localeId: LocaleId
+        a11y: A11yService
     ) {
-        // set i18n language from injected LOCALE_ID
-        i18n.language = localeId.toString() ?? LocaleService.EN_US;
-
         // refreshes sessionInfo every time when tab is set to active
         a11y.visibilityChange.pipe(
             filter(visible => visible),

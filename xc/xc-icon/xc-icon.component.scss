@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-icon-disabled-color: unset !default;
+ $xc-icon-disabled-color: unset !default;
 
 @import 'const';
 
@@ -54,6 +54,7 @@ a.disabled, button[disabled], [aria-disabled="true"] {
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: $font-size-medium;
+        letter-spacing: normal;
         &:empty {
             display: none;
         }

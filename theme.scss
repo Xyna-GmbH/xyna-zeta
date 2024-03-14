@@ -81,12 +81,12 @@
     $xc-button-font-size: 14px;
     $xc-button-padding: 0 16px;
     $xc-button-text-margin: auto;
-    $xc-button-line-height: 32px;
+    $xc-button-line-height: 30px;
     $xc-button-font-style: normal;
     $xc-button-transition: initial;
     $xc-icon-button-background-color: transparent;
     $xc-icon-button-border-color: transparent;
-    $xc-icon-button-border-width: 0;
+    $xc-icon-button-border-width: 1px;
     $xc-icon-button-focus-overlay: $color-white-overlay;
     $xc-icon-button-focus-overlay-invert: $color-black-overlay;
 
@@ -99,6 +99,12 @@
 
     $xc-checkbox-checkmark-color-disabled: $color-disabled;
     $xc-checkbox-checkmark-color-disabled-invert: $color-disabled-invert;
+
+    $xc-checkbox-height: 32px;
+
+    $xc-checkbox-text-transform: none;
+
+    $xc-checkbox-font-size: 12px;
 
     // xc-form-base-input
     $xc-form-base-input-color: $color-normal;
@@ -131,7 +137,7 @@
     $xc-form-base-input-error-color: $color-warn;
     $xc-form-base-input-placeholder-color: $color-gray-3;
     $xc-form-base-input-label-font-size: $font-size-small;
-    $xc-form-base-input-label-text-transform: uppercase;
+    $xc-form-base-input-label-text-transform: none;
     $xc-form-base-input-changeindicator-color: $color-primary;
 
     $xc-form-base-textarea-padding: 8px;
@@ -140,7 +146,7 @@
     $xc-form-text-label-color: $color-normal;
     $xc-form-text-label-font-size: $font-size-medium;
     $xc-form-text-label-font-weight: bold;
-    $xc-form-text-label-transform: uppercase;
+    $xc-form-text-label-transform: none;
 
     $xc-form-text-color: $color-normal;
     $xc-form-text-font-size: $font-size-medium;
