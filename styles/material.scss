@@ -36,7 +36,6 @@ $xc-form-autocomplete-option-background-color-active: unset !default;
 
 $xc-dialog-border: unset !default;
 $xc-dialog-border-radius: unset !default;
-$xc-dialog-box-shadow: unset !default;
 
 $xc-menu-item-background-color: unset !default;
 $xc-menu-item-highlight-background-color: unset !default;
@@ -113,11 +112,14 @@ html.cdk-global-scrollblock {
     overflow-y: unset;
 }
 
-mat-dialog-container.mat-dialog-container {
+.mat-mdc-dialog-container {
     padding: 0 !important;
     border: $xc-dialog-border;
     border-radius: $xc-dialog-border-radius;
-    box-shadow: $xc-dialog-box-shadow;
+
+    .mdc-dialog__surface {
+        box-shadow: none;
+    }
 }
 
 .mat-autocomplete-panel {
