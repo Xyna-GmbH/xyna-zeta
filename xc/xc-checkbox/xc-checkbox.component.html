@@ -1,24 +1,13 @@
-<div
-    role="checkbox"
-    (keyup.enter)="toggle($event)"
-    (keyup.space)="toggle($event)"
-    (click)="toggle($event)"
-    [attr.aria-checked]="checked"
-    [tabIndex]="disabled ? '-1' : '0'"
->
     <mat-checkbox
         [disabled]="disabled || readonly"
         [checked]="checked"
         [indeterminate]="indeterminate"
         [aria-labelledby]="labelRef"
         (change)="change($event)"
-        tabindex="-1"
     >
-        <label
+        <mat-label
             *ngIf="label"
             [id]="labelRef"
             class="xc-checkbox-label"
-        >{{label}}</label>
+        >{{label}}</mat-label>
     </mat-checkbox>
-
-</div>

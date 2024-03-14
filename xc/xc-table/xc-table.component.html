@@ -59,7 +59,7 @@
                 </ng-container>
 
                 <!-- ngElse = displays cellData as text -->
-                <ng-template #textTemplate><span role="link">{{cellData}}</span></ng-template>
+                <ng-template #textTemplate><span role="link" class="text-cell">{{cellData}}</span></ng-template>
 
                 <!-- ngIf = displays the action elements only in the last column -->
                 <ng-container *ngIf="i === columns.length - 1">
