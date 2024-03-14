@@ -76,11 +76,14 @@ $xc-menu-item-arrow-color: unset !default;
 @include mat.core();
 
 $xyna-palette: mat-palette($mat-grey);
-$xyna-theme-dark: mat.define-dark-theme((color: (primary: $xyna-palette,
-                accent: $xyna-palette ),
-            typography: mat.define-typography-config(),
-            density: 0));
-
+$xyna-theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $xyna-palette,
+        accent: $xyna-palette
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+));
 @include mat.all-component-themes($xyna-theme-dark);
 
 // globally overwrite material styles
@@ -153,18 +156,15 @@ html.cdk-global-scrollblock {
     }
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
     min-height: unset !important;
     overflow: inherit !important;
     background-color: #1A1A1B;
     box-shadow: 0 0 16px #1A1A1B;
 
-    &.with-arrow-x,
-    &.with-arrow-y {
-        .mat-menu-content .mat-menu-item {
-
-            &:first-child::before,
-            &:last-child::before {
+    &.with-arrow-x, &.with-arrow-y {
+        .mat-mdc-menu-content .mat-mdc-menu-item {
+            &:first-child::before, &:last-child::before {
                 content: "";
                 display: flex;
                 background: $xc-menu-item-background-color;
@@ -178,7 +178,7 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-below {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:last-child:not(:first-child)::before {
                     content: none;
                 }
@@ -186,7 +186,7 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-above {
-            .mat-menu-content .mat-menu-item {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
                 &:first-child:not(:last-child)::before {
                     content: none;
                 }
@@ -196,10 +196,8 @@ html.cdk-global-scrollblock {
 
     &.with-arrow-x {
         &.mat-menu-after {
-            .mat-menu-content .mat-menu-item {
-
-                &:first-child::before,
-                &:last-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
+                &:first-child::before, &:last-child::before {
                     border-right: none;
                     border-bottom: none;
                     left: -10px;
@@ -209,10 +207,8 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-before {
-            .mat-menu-content .mat-menu-item {
-
-                &:first-child::before,
-                &:last-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item {
+                &:first-child::before, &:last-child::before {
                     border-left: none;
                     border-top: none;
                     left: unset;
@@ -221,19 +217,15 @@ html.cdk-global-scrollblock {
             }
         }
 
-        &.mat-menu-below .mat-menu-content .mat-menu-item {
-
-            &:first-child::before,
-            &:last-child::before {
+        &.mat-menu-below .mat-mdc-menu-content .mat-mdc-menu-item {
+            &:first-child::before, &:last-child::before {
                 top: 15px;
                 bottom: unset;
             }
         }
 
-        &.mat-menu-above .mat-menu-content .mat-menu-item {
-
-            &:first-child::before,
-            &:last-child::before {
+        &.mat-menu-above .mat-mdc-menu-content .mat-mdc-menu-item {
+            &:first-child::before, &:last-child::before {
                 top: unset;
                 bottom: 15px;
             }
@@ -242,7 +234,7 @@ html.cdk-global-scrollblock {
 
     &.with-arrow-y {
         &.mat-menu-below {
-            .mat-menu-content .mat-menu-item:first-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item:first-child::before {
                 border-left: none;
                 border-bottom: none;
                 top: -10px;
@@ -251,7 +243,7 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-above {
-            .mat-menu-content .mat-menu-item:last-child::before {
+            .mat-mdc-menu-content .mat-mdc-menu-item:last-child::before {
                 border-right: none;
                 border-top: none;
                 top: unset;
@@ -259,31 +251,27 @@ html.cdk-global-scrollblock {
             }
         }
 
-        &.mat-menu-after .mat-menu-content .mat-menu-item {
-
-            &:first-child::before,
-            &:last-child::before {
+        &.mat-menu-after .mat-mdc-menu-content .mat-mdc-menu-item {
+            &:first-child::before, &:last-child::before {
                 left: 15px;
                 right: unset;
             }
         }
 
-        &.mat-menu-before .mat-menu-content .mat-menu-item {
-
-            &:first-child::before,
-            &:last-child::before {
+        &.mat-menu-before .mat-mdc-menu-content .mat-mdc-menu-item {
+            &:first-child::before, &:last-child::before {
                 left: unset;
                 right: 15px;
             }
         }
     }
 
-    .mat-menu-content:not(:empty) {
+    .mat-mdc-menu-content:not(:empty) {
         padding-top: 0;
         padding-bottom: 0;
         border: 1px solid #000;
 
-        .mat-menu-item {
+        .mat-mdc-menu-item {
             display: flex;
             overflow: inherit;
             font-size: $font-size-medium;
@@ -305,8 +293,7 @@ html.cdk-global-scrollblock {
         }
 
         :not([disabled]) {
-
-            &.mat-menu-item:hover,
+            &.mat-mdc-menu-item:hover,
             &.mat-menu-item.cdk-program-focused,
             &.mat-menu-item.cdk-keyboard-focused,
             &.mat-menu-item-highlighted {
@@ -318,9 +305,13 @@ html.cdk-global-scrollblock {
                 }
             }
         }
+
+        [disabled] {
+            opacity: 1;
+        }
     }
 
-    .mat-menu-item-submenu-trigger {
+    .mat-mdc-menu-item-submenu-trigger {
         &::after {
             border-color: transparent transparent transparent $xc-menu-item-arrow-color;
         }
