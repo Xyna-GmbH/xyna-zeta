@@ -14,7 +14,7 @@
         [readonly]="readonly"
         [required]="required"
     >
-    <ng-container *ngIf="readonly || disabled">
+    <!-- <ng-container *ngIf="readonly || disabled">
         <input
             [type]="type"
             [ngModel]="value"
@@ -26,7 +26,7 @@
             [readonly]="readonly"
             [disabled]="disabled"
         >
-    </ng-container>
+    </ng-container> -->
 
     <mat-error
         *ngIf="errorVisible"

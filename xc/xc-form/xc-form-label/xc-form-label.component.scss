@@ -15,25 +15,29 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-form-base-input-label-color: unset !default;
-$xc-form-base-input-label-font-size: unset !default;
-$xc-form-base-input-label-text-transform: unset !default;
-
-
-@import 'const';
-
-
-:host {
-    text-transform: $xc-form-base-input-label-text-transform;
-    font-size: $xc-form-base-input-label-font-size;
-    color: $xc-form-base-input-label-color;
-    border: 1px solid transparent;
-    height: 18px;
-    display: flex;
-    flex: 0 0 auto;
-
-    &[required]::after {
-        content: '\a0*';
-        font-weight: bold;
-    }
-}
+ $xc-form-base-input-label-color: unset !default;
+ $xc-form-base-input-label-font-size: unset !default;
+ $xc-form-base-input-label-text-transform: unset !default;
+ 
+ 
+ @import 'const';
+ 
+ 
+ :host {
+     text-transform: $xc-form-base-input-label-text-transform;
+     font-size: $xc-form-base-input-label-font-size;
+     color: $xc-form-base-input-label-color;
+     font-family: $font-family-regular;
+     line-height: normal;
+     font-weight: unset;
+     letter-spacing: normal;
+     // border: 1px solid transparent;
+     // height: 18px;
+     display: flex;
+     flex: 0 0 auto;
+ 
+     &[required]::after {
+         content: '\a0*';
+         font-weight: bold;
+     }
+ }
