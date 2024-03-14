@@ -10,12 +10,28 @@ $xc-dialog-footer-background-color: unset !default;
 
 $xc-dialog-border-radius : unset !default;
 
+$xc-dialog-box-shadow : unset !default;
+
 $resizable: var(--resizable);
 
 @import 'const';
 
-::ng-deep mat-dialog-container.mat-dialog-container {
+::ng-deep mat-dialog-container.mat-mdc-dialog-container {
+    box-shadow: none;
     border: none;
+
+    .mdc-dialog__content {
+        font-size: 14px;
+    }
+
+    .mdc-dialog__surface {
+        box-shadow: $xc-dialog-box-shadow;
+        border: none;
+
+        &::before {
+            display: none;
+        }
+    }
 }
 
 :host {
@@ -25,7 +41,7 @@ $resizable: var(--resizable);
         top: 0;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 1px 3px rgb(0 0 0 / 75%);
+        box-shadow: $xc-dialog-box-shadow;
         min-width: 200px;
         min-height: 150px;
 
@@ -49,8 +65,9 @@ $resizable: var(--resizable);
             cursor: move;
         }
 
-        .mat-dialog-title {
+        .mat-mdc-dialog-title {
             margin: 0;
+            padding: 0;
             flex: 1 0 auto;
             font-size: 14px;
             line-height: 48px;
@@ -61,9 +78,13 @@ $resizable: var(--resizable);
                     margin-left: 16px;
                 }
             }
+
+            &::before {
+                height: unset;
+            }
         }
 
-        mat-dialog-content {
+        .mat-mdc-dialog-content {
             margin: 0;
             padding: 16px;
             color: $xc-dialog-content-color;
@@ -73,11 +94,11 @@ $resizable: var(--resizable);
             border-right: none;
             display: flex;
             height: 100%;
-            max-height: unset;
+            // max-height: unset;
+            line-height: unset;
         }
 
-
-        mat-dialog-actions {
+        .mat-mdc-dialog-actions {
             margin-bottom: 0;
             padding: 0 16px;
             height: 48px;
@@ -99,6 +120,8 @@ $resizable: var(--resizable);
     }
 
     .dialog {
+        box-shadow: $xc-dialog-box-shadow;
+
         .header {
             display: flex;
             align-items: baseline;
@@ -110,8 +133,9 @@ $resizable: var(--resizable);
             cursor: move;
         }
 
-        .mat-dialog-title {
+        .mat-mdc-dialog-title {
             margin: 0;
+            padding: 0;
             flex: 1 0 auto;
             font-size: 14px;
             line-height: 48px;
@@ -122,9 +146,13 @@ $resizable: var(--resizable);
                     margin-left: 16px;
                 }
             }
+
+            &::before {
+                height: unset;
+            }
         }
 
-        mat-dialog-content {
+        .mat-mdc-dialog-content {
             margin: 0;
             padding: 16px;
             min-width: 200px;
@@ -134,9 +162,11 @@ $resizable: var(--resizable);
             border-left: none;
             border-right: none;
             display: flex;
+            // max-height: unset;
+            line-height: unset;
         }
 
-        mat-dialog-actions {
+        .mat-mdc-dialog-actions {
             margin-bottom: 0;
             padding: 0 6px;
             height: 48px;
