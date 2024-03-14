@@ -75,12 +75,16 @@ $xc-menu-item-arrow-color: unset !default;
 @include mat.all-component-typographies();
 @include mat.core();
 
-$xyna-palette: mat-palette($mat-grey);
-$xyna-theme-dark: mat.define-dark-theme((color: (primary: $xyna-palette,
-                accent: $xyna-palette ),
-            typography: mat.define-typography-config(),
-            density: 0));
-
+// $xyna-palette: mat-palette($mat-grey);
+$xyna-palette: mat.define-palette(mat.$grey-palette);
+$xyna-theme-dark: mat.define-dark-theme((
+    color: (
+        primary: $xyna-palette,
+        accent: $xyna-palette
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+));
 @include mat.all-component-themes($xyna-theme-dark);
 
 // globally overwrite material styles
