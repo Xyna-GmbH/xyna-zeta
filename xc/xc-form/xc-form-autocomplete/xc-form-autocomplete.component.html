@@ -1,4 +1,4 @@
-<mat-form-field [floatLabel]="floatLabel">
+<mat-form-field [floatLabel]="floatLabel" hideRequiredMarker>
     <mat-label>{{label}}</mat-label>
     <input
         matInput
@@ -15,7 +15,7 @@
         [tabIndex]="(readonly || disabled) ? -1 : 0"
         [required]="required"
     >
-    <ng-container *ngIf="readonly || disabled">
+    <!-- <ng-container *ngIf="readonly || disabled">
         <input
             [type]="type"
             [value]="stringValue"
@@ -27,11 +27,12 @@
             [disabled]="disabled"
             class="non-editable-input"
         >
-    </ng-container>
+    </ng-container> -->
     <!-- screen reader (like JAWS) read fields, which are attributed with 'aria-live', aloud when their value changes -->
     <!-- this hidden-field is a fall-back to insure that screenreader read the currently active (!= selected) field aloud -->
     <div class="hidden-field" aria-live="polite" role="none">{{activeOption ? activeOption.name : ''}}</div>
     <mat-autocomplete
+        class="zeta-scrollbar"
         #auto="matAutocomplete"
         (optionSelected)="optionSelected($event.option)"
         [displayWith]="optionName"

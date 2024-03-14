@@ -51,14 +51,14 @@ $xc-form-base-input-changeindicator-color: unset !default;
 
 $xc-form-base-textarea-padding: unset !default;
 $xc-form-base-textarea-line-height: unset !default;
-
+$font-family-regular: unset !default;
 
 /* exported consts such that other components can read */
 
 $validator-message-height: 18px;
 $suffix-icon-height: 24px;
 
- 
+
 @use "sass:math";
 @import 'const';
 
@@ -68,195 +68,224 @@ $suffix-icon-height: 24px;
     pointer-events: none;
     width: 100%;
 
-    .mat-form-field {
-
+    .mat-mdc-form-field {
         display: unset;
         line-height: 0;
+        letter-spacing: normal;
+        font-family: $font-family-regular;
 
-        mat-label {
-            line-height: normal;
+        .mdc-text-field--filled:not(.mdc-text-field--disabled),
+        .mdc-text-field--filled.mdc-text-field--disabled {
+            background-color: transparent;
         }
 
-        button {
-            pointer-events: initial;
-        }
+        .mat-mdc-text-field-wrapper {
+            width: 100%;
+            padding: 0;
 
-        input, textarea {
-            pointer-events: initial;
-            margin: 0;
-            padding-top: $xc-form-base-input-padding-top;
-            padding-right: $xc-form-base-input-padding-right;
-            padding-bottom: $xc-form-base-input-padding-bottom;
-            padding-left: $xc-form-base-input-padding-left;
-            font-size: $xc-form-base-input-font-size;
-            font-style: $xc-form-base-input-font-style;
-            vertical-align: middle;
-            background-color: $xc-form-base-input-background-color-disabled;
-            border-style: solid;
-            border-width: $xc-form-base-input-border-width;
-            border-color: $xc-form-base-input-border-color-disabled;
-            border-radius: $xc-form-base-input-border-radius;
-            color: $xc-form-base-input-color-disabled;
+            .mat-mdc-form-field-focus-overlay {
+                background-color: transparent;
+            }
+
+            button {
+                pointer-events: initial;
+            }
+
+            input,
+            textarea {
+                pointer-events: initial;
+                margin: 0;
+                padding-top: $xc-form-base-input-padding-top;
+                padding-right: $xc-form-base-input-padding-right;
+                padding-bottom: $xc-form-base-input-padding-bottom;
+                padding-left: $xc-form-base-input-padding-left;
+                font-size: $xc-form-base-input-font-size;
+                font-style: $xc-form-base-input-font-style;
+                vertical-align: middle;
+                background-color: $xc-form-base-input-background-color-disabled;
+                border-style: solid;
+                border-width: $xc-form-base-input-border-width;
+                border-color: $xc-form-base-input-border-color-disabled;
+                border-radius: $xc-form-base-input-border-radius;
+                color: $xc-form-base-input-color-disabled;
+                font-family: $font-family-regular;
 
 
-            &:not(:disabled):not(:read-only) {
-                color: $xc-form-base-input-color;
+                &:not(:disabled):not(:read-only) {
+                    color: $xc-form-base-input-color;
 
-                &:not(:focus) {
-                    border-color: $xc-form-base-input-border-color;
-                    background-color: $xc-form-base-input-background-color;
+                    &:not(:focus) {
+                        border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
+                        background-color: $xc-form-base-input-background-color;
 
-                    &:hover {
-                        background-color: $xc-form-base-input-background-color-hover;
-                        border-color: $xc-form-base-input-border-color-hover;
+                        &:hover {
+                            background-color: $xc-form-base-input-background-color-hover;
+                            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-hover;
+                        }
                     }
                 }
-            }
 
-            &:focus {
-                background-color: $xc-form-base-input-background-color-focus;
-                border-color: $xc-form-base-input-border-color-focus;
-                box-shadow: inset 0 0 2px $color-focus-outline;
-            }
+                &:focus {
+                    background-color: $xc-form-base-input-background-color-focus;
+                    border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color-focus;
+                    // box-shadow: inset 0 0 2px $color-focus-outline;
+                }
 
-            &::placeholder {
-                user-select: none;
-                color: $xc-form-base-input-placeholder-color;
-                opacity: 1;
-            }
-        }
+                &:invalid {
+                    border: $xc-form-base-input-border-width solid $xc-form-base-input-error-color;
+                }
 
-        input {
-            line-height: $xc-form-base-input-line-height;
-            text-overflow: ellipsis;
-            font-family: inherit;
-
-            &.mat-input-element {
-                box-sizing: border-box;
-                caret-color: $xc-form-base-input-color;
-            }
-        }
-
-        // non-editable-input, see: ZETA-7
-        input:first-child {
-
-            &:read-only, &:disabled {
-                display: none;
-
-                & + .non-editable-input {
-                    display: block;
-                    width: 100%;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    word-break: break-all;
-                    white-space: nowrap;
+                &::placeholder {
+                    user-select: none;
+                    color: $xc-form-base-input-placeholder-color;
+                    opacity: 1;
                 }
             }
 
-        }
+            input {
+                line-height: $xc-form-base-input-line-height;
+                text-overflow: ellipsis;
+                font-family: inherit;
 
-        textarea {
-            line-height: $xc-form-base-textarea-line-height;
-            padding: $xc-form-base-textarea-padding;
-            width: unset;
-        }
-
-        // non-editable-input, see: ZETA-7
-        // textarea:first-child {
-
-        //     &:read-only, &:disabled {
-        //         display: none;
-
-        //         & + .non-editable-input {
-        //             resize: none;
-        //             display: flex;
-        //             flex: 1 1 auto;
-        //         }
-        //     }
-
-        // }
-
-        .mat-form-field-infix {
-            display: flex;
-            padding: 0;
-            width: unset;
-            border: none;
-            justify-content: space-between;
-            flex-direction: column-reverse;
-        }
-
-        .mat-form-field-suffix {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            padding: math.div($xc-form-base-input-line-height + $xc-form-base-input-padding-top + $xc-form-base-input-padding-bottom + $xc-form-base-input-border-width*2 - $suffix-icon-height, 2) 4px;
-            pointer-events: initial;
-            user-select: none;
-            color: $xc-form-base-input-suffix-color;
-            transition: all $transition-time-fast ease;
-
-            &:hover {
-                color: $xc-form-base-input-suffix-color-hover;
+                &.mat-mdc-input-element {
+                    box-sizing: border-box;
+                    caret-color: $xc-form-base-input-color;
+                }
             }
-        }
+
+            // non-editable-input, see: ZETA-7
+            // input:first-child {
+
+            //     &:read-only,
+            //     &:disabled {
+            //         display: none;
+
+            //         &+.non-editable-input {
+            //             display: block;
+            //             width: 100%;
+            //             text-overflow: ellipsis;
+            //             overflow: hidden;
+            //             word-break: break-all;
+            //             white-space: nowrap;
+            //         }
+            //     }
+
+            // }
+
+            textarea {
+                line-height: $xc-form-base-textarea-line-height;
+                margin-top: 16px;
+                padding: $xc-form-base-textarea-padding;
+                // width: unset;
+
+                &.mat-mdc-input-element {
+                    box-sizing: border-box;
+                    caret-color: $xc-form-base-input-color;
+                }
+            }
+
+            // non-editable-input, see: ZETA-7
+            // textarea:first-child {
+
+            //     &:read-only, &:disabled {
+            //         display: none;
+
+            //         & + .non-editable-input {
+            //             resize: none;
+            //             display: flex;
+            //             flex: 1 1 auto;
+            //         }
+            //     }
+
+            // }
+
+            .mat-mdc-form-field-infix {
+                display: flex;
+                width: unset;
+                border: none;
+                justify-content: space-between;
+                flex-direction: column-reverse;
+                padding: 0;
+                min-height: 48px;
+            }
+
+            .mat-mdc-form-field-icon-suffix {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: calc(100% - 16px);
+                width: 32px;
+                padding: 0;
+                // padding: math.div($xc-form-base-input-line-height + $xc-form-base-input-padding-top + $xc-form-base-input-padding-bottom + $xc-form-base-input-border-width*2 - $suffix-icon-height, 2) 4px;
+                pointer-events: initial;
+                user-select: none;
+                color: $xc-form-base-input-suffix-color;
+                transition: all $transition-time-fast ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: unset;
+
+                &:hover {
+                    color: $xc-form-base-input-suffix-color-hover;
+                }
 
         .mat-form-field-underline {
             display: none;
         }
+                >.mat-icon {
+                    padding: 0;
+                    font-size: $suffix-icon-height;
+                }
+            }
 
-        .mat-form-field-wrapper {
-            padding: 0;
-            margin-bottom: $validator-message-height;   // reserve space for validator message
-        }
-
-        .mat-form-field-label-wrapper {
-            padding: 0;
-            position: unset;
-            padding-bottom: 2px;
-        }
-
-        .mat-form-field-label {
-            border: 1px solid transparent;
-            text-transform: initial;
-            color: $xc-form-base-input-label-color;
-            font-size: $xc-form-base-input-label-font-size;
-            vertical-align: middle;
-            line-height: 34px;
-            width: calc(100% - 14px);
-            left: 12px;
-            top: auto;
-        }
-
-        &.mat-form-field-appearance-legacy.mat-form-field-should-float {
-
-            .mat-form-field-label {
+            .mat-mdc-floating-label.mdc-floating-label {
+                color: $xc-form-base-input-label-color;
+                padding: 0 2px;
+                top: 20px;
+                font-family: $font-family-regular;
+                // font-size: $xc-form-base-input-font-size;
+                font-style: $xc-form-base-input-font-style;
                 text-transform: $xc-form-base-input-label-text-transform;
-                font-size: $xc-form-base-input-label-font-size;
-                vertical-align: initial;
-                width: 100%;
-                line-height: unset;
-                transform: none;
-                position: unset;
+                line-height: normal;
+                font-weight: unset;
+                letter-spacing: normal;
+
+                &:not(.mdc-floating-label--float-above) {
+                    top: 32px;
+                    font-size: $xc-form-base-input-font-size;
+                    font-style: $xc-form-base-input-font-style;
+                    padding: 0 8px;
+                    line-height: $xc-form-base-input-line-height
+                }
+            }
+
+            .mdc-line-ripple {
+                display: none;
             }
         }
 
-        .mat-form-field-subscript-wrapper {
-            top: 100%;
-            margin-top: 4px;
+        .mat-mdc-form-field-subscript-wrapper {
             line-height: initial;
 
-            > div {
+            .mat-mdc-form-field-error-wrapper {
                 text-transform: uppercase;
                 font-size: 11px;
+                padding: 0;
 
-                > .mat-error {
+                .mat-mdc-form-field-error {
                     color: $xc-form-base-input-error-color;
                     text-transform: none; // DM - Error messages should be able to display small letters
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     overflow: hidden;
+                    letter-spacing: normal;
                 }
             }
+        }
+
+        .mat-mdc-form-field-bottom-align::before {
+            height: 12px;
         }
     }
 }
@@ -274,58 +303,96 @@ $suffix-icon-height: 24px;
     }
 }
 
-
 :host[suffix]:not([suffix=""])::ng-deep {
-    .mat-form-field input:first-child {
+    input {
         padding-right: 32px;
     }
 }
 
-
 :host.nolabel::ng-deep {
-    .mat-form-field {
-        .mat-form-field-infix {
+    .mat-mdc-form-field {
+        .mat-mdc-form-field-infix {
             border-top: none;
+            min-height: unset;
+
+            input,
+            textarea {
+                margin-top: 0;
+            }
 
             // label is used as a placeholder, so set placeholder color for it
-            .mat-form-field-label {
+
+            .mat-mdc-floating-label {
                 color: $xc-form-base-input-placeholder-color;
             }
         }
+
+        .mat-mdc-form-field-icon-suffix {
+            height: 100%;
+        }
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple {
+        &::before {
+            top: 0;
+            box-sizing: border-box;
+            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
+            border-radius: $xc-form-base-input-border-radius;
+            transition: none;
+        }
+
+        &::after {
+            top: 0;
+            box-sizing: border-box;
+            border: $xc-form-base-input-border-width solid $xc-form-base-input-border-color;
+            border-radius: $xc-form-base-input-border-radius;
+            transition: none;
+        }
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before,
+    .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before {
+        box-sizing: border-box;
+        border: $xc-form-base-input-border-width solid $color-focus-outline;
+        border-radius: $xc-form-base-input-border-radius;
+        transition: none;
     }
 }
 
 
 // A single form item can be set compact which only sets a bottom margin on error
 :host.compact.noerror::ng-deep {
-    .mat-form-field-wrapper {
+    .mat-mdc-text-field-wrapper {
         margin-bottom: 0;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+        display: none;
     }
 }
 
 
 // Form item inside a compact panel
 xc-panel.compact :host {
-    ::ng-deep .mat-form-field {
+    ::ng-deep .mat-mdc-form-field {
         input {
             line-height: $xc-form-base-input-line-height-compact;
         }
 
-        .mat-form-field-suffix {
-            padding: math.div($xc-form-base-input-line-height-compact + $xc-form-base-input-padding-top + $xc-form-base-input-padding-bottom + $xc-form-base-input-border-width*2 - $suffix-icon-height, 2) 4px;
-        }
+        // .mat-mdc-form-field-suffix {
+        //     padding: math.div($xc-form-base-input-line-height-compact + $xc-form-base-input-padding-top + $xc-form-base-input-padding-bottom + $xc-form-base-input-border-width*2 - $suffix-icon-height, 2) 4px;
+        // }
     }
 
     &.noerror {
-        ::ng-deep .mat-form-field-wrapper {
+        ::ng-deep .mat-mdc-text-field-wrapper {
             margin-bottom: 0;
         }
     }
 }
 
-
 :host.indicatechanges::ng-deep {
-    .ng-dirty ~ .mat-form-field-label-wrapper::after {
+    .ng-dirty~.mdc-floating-label::after {
         position: absolute;
         width: 0;
         height: 0;
@@ -343,9 +410,20 @@ xc-panel.compact :host {
         border-left: 8px solid transparent;
     }
 
-    .ng-dirty:hover ~ .mat-form-field-label-wrapper::after,
-    .ng-dirty:focus ~ .mat-form-field-label-wrapper::after {
+    .ng-dirty:hover~.mdc-floating-label::after,
+    .ng-dirty:focus~.mdc-floating-label::after {
         border-width: 0px;
         transition: all $transition-time-fast ease;
     }
+}
+
+::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label,
+::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+.mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above,
+::ng-deep .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label,
+.mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label--float-above {
+    color: $xc-form-base-input-label-color;
 }

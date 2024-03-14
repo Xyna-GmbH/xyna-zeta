@@ -55,13 +55,15 @@ $xc-panel-header-background-color: unset !default;
         .tab-bar-section {
             height: 232px;
 
-            ::ng-deep .mat-tab-header {
+            ::ng-deep .mat-mdc-tab-header {
                 background-color: $xc-panel-header-background-color;
             }
-            ::ng-deep .mat-tab-label {
+
+            ::ng-deep .mat-mdc-tab {
                 border-color: $xc-panel-header-background-color;
             }
-            ::ng-deep .mat-tab-body-content {
+
+            ::ng-deep .mat-mdc-tab-body-content {
                 background-color: unset;
             }
         }

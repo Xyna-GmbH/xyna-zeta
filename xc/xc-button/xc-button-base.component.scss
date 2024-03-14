@@ -15,40 +15,46 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@import 'const';
+ @import 'const';
 
-:host {
-    pointer-events: none;
-    touch-action: none;
-
-    @each $key, $value in $color-map {
-        &[color="#{$key}"] {
-            .mat-button, .mat-icon-button {
-                color: $value;
-            }
-        }
-    }
-
-    .mat-button, .mat-icon-button {
-
-        &:not([disabled]) {
-            pointer-events: initial;
-            touch-action: initial;
-        }
-
-        &[disabled] {
-            color: $color-disabled;
-        }
-    }
-
-    ::ng-deep {
-        .mat-button-wrapper {
-            margin: auto;
-            font-weight: initial;
-
-            > * {
-                margin: auto;
-            }
-        }
-    }
-}
+ :host {
+     pointer-events: none;
+     touch-action: none;
+ 
+     @each $key, $value in $color-map {
+         &[color="#{$key}"] {
+ 
+             .mat-mdc-button,
+             .mat-mdc-icon-button {
+                 color: $value;
+             }
+         }
+     }
+ 
+     .mat-mdc-button,
+     .mat-mdc-icon-button {
+         font-family: $font-family-regular;
+         padding: 0;
+ 
+         &:not([disabled]) {
+             pointer-events: initial;
+             touch-action: initial;
+         }
+ 
+         &[disabled] {
+             color: $color-disabled;
+         }
+     }
+ 
+     ::ng-deep {
+         .mat-mdc-button {
+             white-space: nowrap;
+             margin: auto;
+             font-weight: initial;
+ 
+             >* {
+                 margin: auto;
+             }
+         }
+     }
+ }

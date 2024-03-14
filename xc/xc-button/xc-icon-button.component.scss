@@ -26,46 +26,84 @@ $xc-icon-button-focus-overlay-invert: unset !default;
 :host {
     display: flex;
 
-    .mat-icon-button {
+    .mat-mdc-icon-button {
         overflow: hidden;
-        background: $xc-icon-button-background-color;
+        // background: $xc-icon-button-background-color;
         border: $xc-icon-button-border-width solid $xc-icon-button-border-color;
         line-height: unset;
         display: flex;
-        & > * {
-            flex: 1 1 auto;
-        }
+        justify-content: center;
+        align-items: center;
+        // & > * {
+        //     flex: 1 1 auto;
+        // }
     }
 
-    .mat-icon-button:not([disabled]):focus {
+    ::ng-deep .mat-mdc-icon-button .mat-mdc-button-persistent-ripple::before,
+    ::ng-deep .mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple::before,
+    ::ng-deep .mat-mdc-icon-button:active .mat-mdc-button-persistent-ripple::before {
+        opacity: 0;
+        background-color: unset;
+        content: "";
+    }
+
+    .mat-mdc-icon-button:not([disabled]):focus {
         border: 1px solid $color-focus-outline;
     }
 
-    .mat-icon-button:not([disabled]):hover {
+    .mat-mdc-icon-button:not([disabled]):hover {
         background-color: $xc-icon-button-focus-overlay;
     }
 
-    &[color="invert"] .mat-icon-button:not([disabled]):hover {
+    &[color="invert"] .mat-mdc-icon-button:not([disabled]):hover {
         background-color: $xc-icon-button-focus-overlay-invert;
     }
 
-    &[size="small"] .mat-icon-button {
+    &[size="small"] .mat-mdc-icon-button {
         width: 24px;
         height: 24px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 24px;
+                height: 24px;
+            }
+        }
     }
 
-    &[size="medium"] .mat-icon-button {
+    &[size="medium"] .mat-mdc-icon-button {
         width: 32px;
         height: 32px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 32px;
+                height: 32px;
+            }
+        }
     }
 
-    &[size="large"] .mat-icon-button {
+    &[size="large"] .mat-mdc-icon-button {
         width: 52px;
         height: 52px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 52px;
+                height: 52px;
+            }
+        }
     }
 
-    &[size="extra-large"] .mat-icon-button {
+    &[size="extra-large"] .mat-mdc-icon-button {
         width: 68px;
         height: 68px;
+
+        ::ng-deep {
+            .mat-mdc-button-touch-target {
+                width: 68px;
+                height: 68px;
+            }
+        }
     }
 }

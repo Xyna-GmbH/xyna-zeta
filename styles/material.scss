@@ -36,7 +36,6 @@ $xc-form-autocomplete-option-background-color-active: unset !default;
 
 $xc-dialog-border: unset !default;
 $xc-dialog-border-radius: unset !default;
-$xc-dialog-box-shadow: unset !default;
 
 $xc-menu-item-background-color: unset !default;
 $xc-menu-item-highlight-background-color: unset !default;
@@ -46,8 +45,11 @@ $xc-menu-item-arrow-color: unset !default;
 @use '@angular/material' as mat;
 
 @import 'const';
-@import '@angular/material/theming';
+// @import '@angular/material/theming';
 
+.mat-icon {
+    display: flex !important;
+}
 
 .material-icons {
     font-family: 'Material Icons';
@@ -70,15 +72,6 @@ $xc-menu-item-arrow-color: unset !default;
     font-feature-settings: 'liga';
 }
 
-
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
 @include mat.all-component-typographies();
 @include mat.core();
 
@@ -93,64 +86,72 @@ $xyna-theme-dark: mat.define-dark-theme((
 ));
 @include mat.all-component-themes($xyna-theme-dark);
 
-
 // globally overwrite material styles
 
 html.cdk-global-scrollblock {
     overflow-y: unset;
 }
 
-mat-dialog-container.mat-dialog-container {
+.mat-mdc-dialog-container {
     padding: 0 !important;
     border: $xc-dialog-border;
     border-radius: $xc-dialog-border-radius;
-    box-shadow: $xc-dialog-box-shadow;
+
+    .mdc-dialog__surface {
+        box-shadow: none;
+    }
 }
 
-.mat-autocomplete-panel {
-    margin-top: $xc-form-autocomplete-panel-margin-top;
-    background-color: $xc-form-autocomplete-panel-background-color;
-    border: $xc-form-autocomplete-panel-border-width solid $xc-form-autocomplete-panel-border-color;
-    border-radius: $xc-form-autocomplete-panel-border-radius;
+.cdk-overlay-pane {
+    .mat-mdc-autocomplete-panel {
+        margin-top: $xc-form-autocomplete-panel-margin-top;
+        background-color: $xc-form-autocomplete-panel-background-color;
+        border: $xc-form-autocomplete-panel-border-width solid $xc-form-autocomplete-panel-border-color;
+        border-radius: $xc-form-autocomplete-panel-border-radius;
+        padding: 0;
 
-    @if $xc-form-autocomplete-panel-shadow-hidden {
-        &.mat-autocomplete-visible:not([class*=mat-elevation-z]) {
+        @if $xc-form-autocomplete-panel-shadow-hidden {
+            &.mat--mdc-autocomplete-visible:not([class*=mat-elevation-z]) {
                 box-shadow: unset;
+            }
         }
-    }
 
-    .mat-option {
-        color: $xc-form-autocomplete-option-color;
-        background-color: $xc-form-autocomplete-option-background-color;
+        .mat-mdc-option {
+            color: $xc-form-autocomplete-option-color;
+            background-color: $xc-form-autocomplete-option-background-color;
+            min-height: 32px;
 
-        /**
+            /**
          * It's not possible to set custom height due to misalignment when scrolling using cursor keys.
          * See https://github.com/angular/material2/issues/7205 for reference.
          */
-        // height: 40px;
-        // line-height: 40px;
-        font-size: $font-size-medium;
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .mat-option-disabled {
-        color: $xc-form-autocomplete-option-color-disabled;
-        background-color: $xc-form-autocomplete-option-background-color-disabled;
-    }
-
-    .mat-option:not(.mat-option-disabled) {
-        &.mat-active {
-            color: $xc-form-autocomplete-option-color-active;
-            background-color: $xc-form-autocomplete-option-background-color-active;
+            // height: 40px;
+            // line-height: 40px;
+            font-size: $font-size-medium;
+            padding-left: 12px;
+            padding-right: 12px;
         }
-        &:hover {
-            color: $xc-form-autocomplete-option-color-hover;
-            background-color: $xc-form-autocomplete-option-background-color-hover;
+
+        .mdc-list-item--disabled {
+            color: $xc-form-autocomplete-option-color-disabled;
+            background-color: $xc-form-autocomplete-option-background-color-disabled;
         }
-        &:focus {
-            color: $xc-form-autocomplete-option-color-focus;
-            background-color: $xc-form-autocomplete-option-background-color-focus;
+
+        .mat-mdc-option:not(.mdc-list-item--disabled) {
+            &.mat-mdc-option-active {
+                color: $xc-form-autocomplete-option-color-active;
+                background-color: $xc-form-autocomplete-option-background-color-active;
+            }
+
+            &:hover {
+                color: $xc-form-autocomplete-option-color-hover;
+                background-color: $xc-form-autocomplete-option-background-color-hover;
+            }
+
+            &:focus {
+                color: $xc-form-autocomplete-option-color-focus;
+                background-color: $xc-form-autocomplete-option-background-color-focus;
+            }
         }
     }
 }
@@ -282,10 +283,11 @@ mat-dialog-container.mat-dialog-container {
                 color: $color-disabled;
             }
 
-            & > xc-icon {
+            &>xc-icon {
                 flex: 1 1 auto;
             }
-            & > label {
+
+            &>label {
                 flex: 0 0 auto;
             }
         }
@@ -295,7 +297,10 @@ mat-dialog-container.mat-dialog-container {
             &.mat-menu-item.cdk-program-focused,
             &.mat-menu-item.cdk-keyboard-focused,
             &.mat-menu-item-highlighted {
-                &, &:first-child::before, &:last-child::before {
+
+                &,
+                &:first-child::before,
+                &:last-child::before {
                     background: $xc-menu-item-highlight-background-color;
                 }
             }
@@ -313,7 +318,7 @@ mat-dialog-container.mat-dialog-container {
     }
 }
 
-                 .mat-ripple .mat-ripple-element,
+.mat-ripple .mat-ripple-element,
 [color="normal"] .mat-ripple .mat-ripple-element {
     background-color: rgba(255, 255, 255, 0.1);
 }
