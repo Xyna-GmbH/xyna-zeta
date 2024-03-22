@@ -81,6 +81,7 @@ $resizable: var(--resizable);
 
             &::before {
                 height: unset;
+                display: none;
             }
         }
 
@@ -149,6 +150,7 @@ $resizable: var(--resizable);
 
             &::before {
                 height: unset;
+                display: none;
             }
         }
 

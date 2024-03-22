@@ -77,14 +77,10 @@ $xc-menu-item-arrow-color: unset !default;
 
 // $xyna-palette: mat-palette($mat-grey);
 $xyna-palette: mat.define-palette(mat.$grey-palette);
-$xyna-theme-dark: mat.define-dark-theme((
-    color: (
-        primary: $xyna-palette,
-        accent: $xyna-palette
-    ),
-    typography: mat.define-typography-config(),
-    density: 0
-));
+$xyna-theme-dark: mat.define-dark-theme((color: (primary: $xyna-palette,
+                accent: $xyna-palette ),
+            typography: mat.define-typography-config(),
+            density: 0));
 @include mat.all-component-themes($xyna-theme-dark);
 
 // globally overwrite material styles
@@ -163,9 +159,12 @@ html.cdk-global-scrollblock {
     background-color: #1A1A1B;
     box-shadow: 0 0 16px #1A1A1B;
 
-    &.with-arrow-x, &.with-arrow-y {
+    &.with-arrow-x,
+    &.with-arrow-y {
         .mat-mdc-menu-content .mat-mdc-menu-item {
-            &:first-child::before, &:last-child::before {
+
+            &:first-child::before,
+            &:last-child::before {
                 content: "";
                 display: flex;
                 background: $xc-menu-item-background-color;
@@ -198,7 +197,9 @@ html.cdk-global-scrollblock {
     &.with-arrow-x {
         &.mat-menu-after {
             .mat-mdc-menu-content .mat-mdc-menu-item {
-                &:first-child::before, &:last-child::before {
+
+                &:first-child::before,
+                &:last-child::before {
                     border-right: none;
                     border-bottom: none;
                     left: -10px;
@@ -209,7 +210,9 @@ html.cdk-global-scrollblock {
 
         &.mat-menu-before {
             .mat-mdc-menu-content .mat-mdc-menu-item {
-                &:first-child::before, &:last-child::before {
+
+                &:first-child::before,
+                &:last-child::before {
                     border-left: none;
                     border-top: none;
                     left: unset;
@@ -219,14 +222,18 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-below .mat-mdc-menu-content .mat-mdc-menu-item {
-            &:first-child::before, &:last-child::before {
+
+            &:first-child::before,
+            &:last-child::before {
                 top: 15px;
                 bottom: unset;
             }
         }
 
         &.mat-menu-above .mat-mdc-menu-content .mat-mdc-menu-item {
-            &:first-child::before, &:last-child::before {
+
+            &:first-child::before,
+            &:last-child::before {
                 top: unset;
                 bottom: 15px;
             }
@@ -253,14 +260,18 @@ html.cdk-global-scrollblock {
         }
 
         &.mat-menu-after .mat-mdc-menu-content .mat-mdc-menu-item {
-            &:first-child::before, &:last-child::before {
+
+            &:first-child::before,
+            &:last-child::before {
                 left: 15px;
                 right: unset;
             }
         }
 
         &.mat-menu-before .mat-mdc-menu-content .mat-mdc-menu-item {
-            &:first-child::before, &:last-child::before {
+
+            &:first-child::before,
+            &:last-child::before {
                 left: unset;
                 right: 15px;
             }
@@ -273,27 +284,34 @@ html.cdk-global-scrollblock {
         border: 1px solid #000;
 
         .mat-mdc-menu-item {
-            display: flex;
             overflow: inherit;
-            font-size: $font-size-medium;
             background-color: $xc-menu-item-background-color;
             color: #fff;
             border-radius: 0;
+            min-height: 32px;
 
             &[disabled] {
                 color: $color-disabled;
             }
 
-            &>xc-icon {
-                flex: 1 1 auto;
-            }
+            .mat-mdc-menu-item-text {
+                display: flex;
+                font-size: $font-size-medium;
+                width: 100%;
 
-            &>label {
-                flex: 0 0 auto;
+                &>xc-icon {
+                    flex: 1 1 auto;
+                }
+
+                &>label {
+                    flex: 1;
+                    text-align: right; 
+                }
             }
         }
 
         :not([disabled]) {
+
             &.mat-mdc-menu-item:hover,
             &.mat-menu-item.cdk-program-focused,
             &.mat-menu-item.cdk-keyboard-focused,
