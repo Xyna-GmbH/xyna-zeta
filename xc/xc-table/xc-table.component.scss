@@ -134,6 +134,10 @@
              &.activated {
                  background-color: $xc-table-activated-entry-background-color;
  
+                 .text-cell {
+                    color: $xc-table-activated-entry-color;
+                }
+
                  td {
                      color: $xc-table-activated-entry-color;
                  }

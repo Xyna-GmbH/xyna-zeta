@@ -127,6 +127,10 @@ html.cdk-global-scrollblock {
             font-size: $font-size-medium;
             padding-left: 12px;
             padding-right: 12px;
+
+            .mdc-list-item__primary-text {
+                white-space: nowrap;
+            }
         }
 
         .mdc-list-item--disabled {
