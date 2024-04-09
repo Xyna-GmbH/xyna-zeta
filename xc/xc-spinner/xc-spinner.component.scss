@@ -20,20 +20,20 @@
 
 :host {
     @each $key, $value in $color-map {
-        &[color="#{$key}"] .mat-spinner {
+        &[color="#{$key}"] .mat-mdc-progress-spinner {
             ::ng-deep circle {
                 stroke: $value;
             }
         }
     }
 
-    .mat-spinner {
+    .mat-mdc-progress-spinner {
         position: absolute;
         left: calc(50% - 50px);
         top: calc(50% - 50px);
     }
 
-    .mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] {
+    .mdc-circular-progress--indeterminate[mode="indeterminate"] {
         // overwrite animation to allow scaling
         animation: xc-progress-spinner-linear-rotate 2s linear infinite;
     }

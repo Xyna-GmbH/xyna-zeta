@@ -15,317 +15,370 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-table-background-color: unset !default;
-$xc-table-header-background-color: unset !default;
-$xc-table-header-border-color: unset !default;
-$xc-table-header-border-bottom-color: unset !default;
-$xc-table-no-data-color: unset !default;
 
-$xc-table-header-padding: unset !default;
-$xc-table-header-font-family: unset !default;
-$xc-table-header-font-size: unset !default;
-
-$xc-table-row-default-background-color: unset !default;
-$xc-table-row-even-background-color: unset !default;
-$xc-table-row-odd-background-color: unset !default;
-
-$xc-table-footer-height: unset !default;
-$xc-table-footer-min-height: unset !default;
-$xc-table-footer-label-color: unset !default;
-
-$xc-table-cell-padding: unset !default;
-$xc-table-cell-horizontal-border-color: unset !default;
-$xc-table-cell-vertical-border-color: unset !default;
-
-$xc-table-entry-color: unset !default;
-$xc-table-entry-background-color-hover: unset !default;
-$xc-table-selected-entry-background-color: unset !default;
-$xc-table-selected-entry-color: unset !default;
-$xc-table-activated-entry-background-color: unset !default;
-$xc-table-activated-entry-color: unset !default;
-
-$xc-table-refresh-overlay-color: unset !default;
-$xc-table-body-border-color-focus: unset !default;
-
-@import 'const';
-
-
-:host {
-    display: flex;
-    flex-direction: column;
-    background-color: $xc-table-background-color;
-    overflow: auto;
-
-    &.refreshing {
-        overflow-x: hidden;
-    }
-
-    &.no-columns, &.no-rows {
-        flex-shrink: 0;
-    }
-
-    .mat-table {
-        width: 100%;
-        border-collapse: collapse;
-        position: relative;
-        background-color: $xc-table-background-color;
-    }
-
-    ::ng-deep tbody:focus {
-        outline: none;
-    }
-
-    &.allowselect {
-        // hover and select row
-        &:not(.cellselect) .mat-row,
-        &.cellselect .mat-cell {
-            &:hover {
-                background-color: $xc-table-entry-background-color-hover;
-
-                .action-elements::ng-deep {
-                    xc-icon-button {
-                        button {
-                            background-color: $xc-table-entry-background-color-hover;
-                            box-shadow: 0 0 4px 2px $xc-table-entry-background-color-hover;
-                        }
-                    }
-                }
-            }
-            &.selected {
-                background-color: $xc-table-selected-entry-background-color;
-                color: $xc-table-selected-entry-color;
-
-                .action-elements::ng-deep {
-                    xc-icon-button {
-                        button {
-                            background-color: $xc-table-selected-entry-background-color;
-                            box-shadow: 0 0 4px 2px $xc-table-selected-entry-background-color;
-                        }
-                    }
-                }
-            }
-
-            &.activated {
-                background-color: $xc-table-activated-entry-background-color;
-
-                td {
+ $xc-table-background-color: unset !default;
+ $xc-table-header-background-color: unset !default;
+ $xc-table-header-border-color: unset !default;
+ $xc-table-header-border-bottom-color: unset !default;
+ $xc-table-no-data-color: unset !default;
+ 
+ $xc-table-header-padding: unset !default;
+ $xc-table-header-font-family: unset !default;
+ $xc-table-header-font-size: unset !default;
+ 
+ $xc-table-row-default-background-color: unset !default;
+ $xc-table-row-even-background-color: unset !default;
+ $xc-table-row-odd-background-color: unset !default;
+ 
+ $xc-table-footer-height: unset !default;
+ $xc-table-footer-min-height: unset !default;
+ $xc-table-footer-label-color: unset !default;
+ 
+ $xc-table-cell-padding: unset !default;
+ $xc-table-cell-horizontal-border-color: unset !default;
+ $xc-table-cell-vertical-border-color: unset !default;
+ 
+ $xc-table-entry-color: unset !default;
+ $xc-table-entry-background-color-hover: unset !default;
+ $xc-table-selected-entry-background-color: unset !default;
+ $xc-table-selected-entry-color: unset !default;
+ $xc-table-activated-entry-background-color: unset !default;
+ $xc-table-activated-entry-color: unset !default;
+ 
+ $xc-table-refresh-overlay-color: unset !default;
+ $xc-table-body-border-color-focus: unset !default;
+ 
+ @import 'const';
+ 
+ 
+ :host {
+     display: flex;
+     flex-direction: column;
+     background-color: $xc-table-background-color;
+     overflow: auto;
+ 
+     &::-webkit-scrollbar {
+         width: 10px;
+         height: 10px;
+         background-color: $color-gray-3;
+     }
+ 
+     &::-webkit-scrollbar-corner {
+         background-color: $color-gray-3;
+     }
+ 
+     &::-webkit-scrollbar-thumb {
+         background-color: $color-gray-1;
+     }
+ 
+     // firefox
+     scrollbar-color: $color-gray-1 $color-gray-3;
+     scrollbar-width: thin;
+ 
+     &.refreshing {
+         overflow-x: hidden;
+     }
+ 
+     &.no-columns,
+     &.no-rows {
+         flex-shrink: 0;
+     }
+ 
+     .mat-mdc-table {
+         width: 100%;
+         border-collapse: collapse;
+         position: relative;
+         background-color: $xc-table-background-color;
+         white-space: nowrap;
+     }
+ 
+     ::ng-deep tbody:focus {
+         outline: none;
+     }
+ 
+     &.allowselect {
+ 
+         // hover and select row
+         &:not(.cellselect) .mat-mdc-row,
+         &.cellselect .mat-mdc-cell {
+             &:hover {
+                 background-color: $xc-table-entry-background-color-hover;
+ 
+                 .action-elements::ng-deep {
+                     xc-icon-button {
+                         button {
+                             background-color: $xc-table-entry-background-color-hover;
+                             box-shadow: 0 0 4px 2px $xc-table-entry-background-color-hover;
+                         }
+                     }
+                 }
+             }
+ 
+             &.selected {
+                 background-color: $xc-table-selected-entry-background-color;
+ 
+                 .text-cell {
+                     color: $xc-table-selected-entry-color;
+                 }
+ 
+                 .action-elements::ng-deep {
+                     xc-icon-button {
+                         button {
+                             background-color: $xc-table-selected-entry-background-color;
+                             box-shadow: 0 0 4px 2px $xc-table-selected-entry-background-color;
+                         }
+                     }
+                 }
+             }
+ 
+             &.activated {
+                 background-color: $xc-table-activated-entry-background-color;
+ 
+                 .text-cell {
                     color: $xc-table-activated-entry-color;
                 }
 
-                .action-elements::ng-deep {
-                    xc-icon-button {
-                        button {
-                            background-color: $xc-table-activated-entry-background-color;
-                            box-shadow: 0 0 4px 2px $xc-table-activated-entry-background-color;
-                        }
-                    }
-                }
-            }
-        }
-
-        ::ng-deep tbody:focus {
-            &:not(.cellselect) .mat-row,
-            &.cellselect .mat-cell {
-                &.focused {
-                    outline: 0.5px solid $xc-table-body-border-color-focus;
-                }
-            }
-        }
-    }
-
-    .mat-header-row, .mat-footer-row, .mat-row {
-        color: $xc-table-entry-color;
-        height: unset;
-    }
-
-    .mat-header-row:first-child > th {
-        padding-top: 4px;
-    }
-
-    .mat-row {
-        background-color: $xc-table-row-default-background-color;
-        outline: none;
-        cursor: pointer;
-
-        &:nth-child(even) {
-            background-color: $xc-table-row-even-background-color;
-        }
-
-        &:nth-child(odd) {
-            background-color: $xc-table-row-odd-background-color;
-        }
-
-        &:first-child .mat-cell {
-            border-top-color: $xc-table-header-border-bottom-color;
-        }
-        &:last-child .mat-cell {
-            border-bottom-color: transparent;
-        }
-    }
-
-    .mat-header-cell,
-    .mat-cell {
-        font-size: $font-size-medium;
-        overflow: hidden;
-        color: $xc-table-entry-color;
-
-        &:first-child {
-            border-left: none;
-        }
-        &:last-child {
-            border-right: none;
-        }
-        &.shrink {
-            width: 1px;
-        }
-        &.break {
-            word-break: break-word;
-        }
-        &.pre {
-            white-space: pre;
-        }
-    }
-
-    .mat-header-cell, .mat-footer-cell {
-        border: none;
-        background-color: $xc-table-header-background-color;
-
-        &:first-child {
-            padding-left: 0;
-        }
-        &:last-child {
-            padding-right: 0;
-        }
-    }
-
-    .mat-header-cell {
-        &::ng-deep {
-
-            .mat-sort-header {
-                .mat-sort-header-arrow {
-                    color: $xc-table-entry-color;
-                }
-                
-                > .mat-sort-header-container {
-                    padding: $xc-table-header-padding;
-                    border-bottom: 0;
-                }
-                &.cdk-keyboard-focused .mat-sort-header-content {
-                    outline: 1px solid $color-focus-outline;
-                    & + * {
-                        outline: 1px solid $color-focus-outline;
-                        outline-offset: 2px;
-                    }
-                }
-                .mat-sort-header-content {
-                    font-family: $xc-table-header-font-family;
-                    font-size: $xc-table-header-font-size;
-                    white-space: nowrap;
-                }
-                &[aria-sort="none"] .mat-sort-header-arrow {
-                    display: none;
-                }
-            }
-            .filter-container, .mat-sort-header-container {
-                border-right: 1px solid $xc-table-header-border-color;
-            }
-        }
-
-        &:last-child::ng-deep {
-            .filter-container, .mat-sort-header-container {
-                border-right: none;
-            }
-        }
-
-        xc-template {
-            display: flex;
-            padding: 0 6px;
-            padding-bottom: 6px;
-        }
-    }
-
-    .mat-footer-cell {
-
-        &:not([no-data]) {
-            height: $xc-table-footer-min-height;
-            > div {
-                display: flex;
-            }
-        }
-
-        > div {
-            display: none;
-            justify-content: space-between;
-
-            > label:not(:empty) {
-                line-height: $xc-table-footer-height;
-                align-self: center;
-                margin: 0 12px;
-                color: $xc-table-footer-label-color;
-            }
-        }
-    }
-
-    .mat-cell {
-        position: relative;
-        padding: $xc-table-cell-padding;
-
-        border-width: 1px;
-        border-style: solid;
-        border-top-color: $xc-table-cell-horizontal-border-color;
-        border-bottom-color: $xc-table-cell-horizontal-border-color;
-        border-left-color: $xc-table-cell-vertical-border-color;
-        border-right-color: $xc-table-cell-vertical-border-color;
-
-        .template-container {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-
-            xc-template {
-                display: flex;
-            }
-        }
-    }
-
-    label.no-data {
-        color: $xc-table-no-data-color;
-        padding: $xc-table-cell-padding;
-        margin: 1px auto;
-        text-align: center;
-    }
-
-    .overlay {
-        background-color: $xc-table-refresh-overlay-color;
-        position: absolute;
-        z-index: 100;
-        top: 4px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
-
-    tr .action-elements {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 6px;
-        height: 100%;
-        align-items: center;
-
-        > div {
-            margin-left: 4px;
-
-            &:first-child {
-                margin-left: 0;
-            }
-        }
-    }
-
-    tr:hover .action-elements,
-    tr.selected .action-elements,
-    tr.focused .action-elements,
-    tr.visibleactions .action-elements {
-        display: flex;
-    }
-}
+                 td {
+                     color: $xc-table-activated-entry-color;
+                 }
+ 
+                 .action-elements::ng-deep {
+                     xc-icon-button {
+                         button {
+                             background-color: $xc-table-activated-entry-background-color;
+                             box-shadow: 0 0 4px 2px $xc-table-activated-entry-background-color;
+                         }
+                     }
+                 }
+             }
+         }
+ 
+         ::ng-deep tbody:focus {
+ 
+             &:not(.cellselect) .mat-mdc-row,
+             &.cellselect .mat-mdc-cell {
+                 &.focused {
+                     outline: 0.5px solid $xc-table-body-border-color-focus;
+                 }
+             }
+         }
+     }
+ 
+     .mat-mdc-header-row,
+     .mat-mdc-footer-row,
+     .mat-mdc-row {
+         color: $xc-table-entry-color;
+         height: unset;
+     }
+ 
+     .mat-mdc-header-row:first-child>th {
+         padding-top: 4px;
+     }
+ 
+     .mat-mdc-row {
+         background-color: $xc-table-row-default-background-color;
+         outline: none;
+         cursor: pointer;
+ 
+         &:nth-child(even) {
+             background-color: $xc-table-row-even-background-color;
+         }
+ 
+         &:nth-child(odd) {
+             background-color: $xc-table-row-odd-background-color;
+         }
+ 
+         &:first-child .mat-mdc-cell {
+             border-top-color: $xc-table-header-border-bottom-color;
+         }
+ 
+         &:last-child .mat-mdc-cell {
+             border-bottom-color: transparent;
+         }
+     }
+ 
+     .mat-mdc-header-cell,
+     .mat-mdc-cell {
+         font-size: $font-size-medium;
+         line-height: normal;
+         font-family: $font-family-regular;
+         overflow: hidden;
+         color: $xc-table-entry-color;
+         padding: 0;
+         letter-spacing: normal;
+ 
+         &:first-child {
+             border-left: none;
+         }
+ 
+         &:last-child {
+             border-right: none;
+         }
+ 
+         &.shrink {
+             width: 1px;
+         }
+ 
+         &.break {
+             word-break: break-word;
+         }
+ 
+         &.pre {
+             white-space: pre;
+         }
+     }
+ 
+     .mat-mdc-header-cell,
+     .mat-mdc-footer-cell {
+         border: none;
+         background-color: $xc-table-header-background-color;
+ 
+         &:first-child {
+             padding-left: 0;
+         }
+ 
+         &:last-child {
+             padding-right: 0;
+         }
+     }
+ 
+     .mat-mdc-header-cell {
+         &::ng-deep {
+ 
+             .mat-sort-header {
+                 .mat-sort-header-arrow {
+                     color: $xc-table-entry-color;
+                 }
+ 
+                 >.mat-sort-header-container {
+                     padding: $xc-table-header-padding;
+                     border-bottom: 0;
+                 }
+ 
+                 &.cdk-keyboard-focused .mat-sort-header-content {
+                     outline: 1px solid $color-focus-outline;
+ 
+                     &+* {
+                         outline: 1px solid $color-focus-outline;
+                         outline-offset: 2px;
+                     }
+                 }
+ 
+                 .mat-sort-header-content {
+                     font-family: $xc-table-header-font-family;
+                     font-size: $xc-table-header-font-size;
+                     white-space: nowrap;
+                 }
+ 
+                 &[aria-sort="none"] .mat-sort-header-arrow {
+                     display: none;
+                 }
+             }
+ 
+             .filter-container,
+             .mat-sort-header-container {
+                 border-right: 1px solid $xc-table-header-border-color;
+             }
+         }
+ 
+         &:last-child::ng-deep {
+ 
+             .filter-container,
+             .mat-sort-header-container {
+                 border-right: none;
+             }
+         }
+ 
+         xc-template {
+             display: flex;
+             padding: 0 6px;
+             padding-bottom: 6px;
+         }
+     }
+ 
+     .mat-mdc-footer-cell {
+ 
+         &:not([no-data]) {
+             height: $xc-table-footer-min-height;
+ 
+             >div {
+                 display: flex;
+             }
+         }
+ 
+         >div {
+             display: none;
+             justify-content: space-between;
+ 
+             >label:not(:empty) {
+                 line-height: $xc-table-footer-height;
+                 align-self: center;
+                 margin: 0 12px;
+                 color: $xc-table-footer-label-color;
+             }
+         }
+     }
+ 
+     .mat-mdc-cell {
+         position: relative;
+         padding: $xc-table-cell-padding;
+ 
+         border-width: 1px;
+         border-style: solid;
+         border-top-color: $xc-table-cell-horizontal-border-color;
+         border-bottom-color: $xc-table-cell-horizontal-border-color;
+         border-left-color: $xc-table-cell-vertical-border-color;
+         border-right-color: $xc-table-cell-vertical-border-color;
+ 
+         .template-container {
+             display: flex;
+             align-items: baseline;
+             justify-content: space-between;
+ 
+             xc-template {
+                 display: flex;
+             }
+         }
+     }
+ 
+     label.no-data {
+         color: $xc-table-no-data-color;
+         padding: $xc-table-cell-padding;
+         margin: 1px auto;
+         text-align: center;
+     }
+ 
+     .overlay {
+         background-color: $xc-table-refresh-overlay-color;
+         position: absolute;
+         z-index: 100;
+         top: 4px;
+         bottom: 0;
+         left: 0;
+         right: 0;
+     }
+ 
+     tr .action-elements {
+         display: none;
+         position: absolute;
+         top: 0;
+         right: 6px;
+         height: 100%;
+         align-items: center;
+ 
+         >div {
+             margin-left: 4px;
+ 
+             &:first-child {
+                 margin-left: 0;
+             }
+         }
+     }
+ 
+     tr:hover .action-elements,
+     tr.selected .action-elements,
+     tr.focused .action-elements,
+     tr.visibleactions .action-elements {
+         display: flex;
+     }
+ }
