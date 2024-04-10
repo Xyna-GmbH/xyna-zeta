@@ -3,9 +3,9 @@
     [xc-drag-options]="dialogOptions.dragOptions" [xc-drag-event-target]="dragEventTarget">
     <div [ngClass]="{'draggable': draggable}" class="header" (mousedown)="initDrag($event)"
         (touchstart)="initDrag($event)">
-        <h1 mat-dialog-title aria-modal="true">
+        <h2 mat-dialog-title aria-modal="true">
             <ng-content select="[header]"></ng-content>
-        </h1>
+        </h2>
         <ng-content select="[aside]"></ng-content>
     </div>
     <mat-dialog-content>
