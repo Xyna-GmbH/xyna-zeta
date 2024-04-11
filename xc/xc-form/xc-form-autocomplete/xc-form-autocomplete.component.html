@@ -41,6 +41,7 @@
     >
         <mat-option
             *ngFor="let option of filteredOptions | async"
+            tabindex="0"
             [value]="option"
             [disabled]="option.disabled || readonly"
             [xc-tooltip]="option.showTooltip ? option.name : ''"
