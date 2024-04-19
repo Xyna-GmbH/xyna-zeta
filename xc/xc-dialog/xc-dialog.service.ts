@@ -31,6 +31,9 @@ import { XcDialogOptions } from './xc-dialog-wrapper.component';
 import { XcDialogComponent } from './xc-dialog.component';
 import { XcInfoDialogComponent } from './xc-info-dialog.component';
 import { XcMessageDialogComponent } from './xc-message-dialog.component';
+import { XoDefinition, XoDefinitionBundle } from '../xc-form/definitions/xo/base-definition.model';
+import { Xo } from '@zeta/api';
+import { XcDialogDefinitionComponent } from '../xc-form/definitions/xc-dialog-definition/xc-dialog-definition.component';
 
 
 @Injectable()
@@ -145,6 +148,15 @@ export class XcDialogService {
             resizable: resizable
         };
         return this.openDialog(XcAboutDialogComponent, config, ariaLabel, '', overrideConfig).componentInstance;
+    }
+
+
+    definition(definition: XoDefinition, data: Xo[], ariaLabel?: string): XcDialogDefinitionComponent {
+        const dialogData: XoDefinitionBundle = {
+            definition: definition,
+            data: data
+        };
+        return this.openDialog(XcDialogDefinitionComponent, dialogData, ariaLabel, '').componentInstance;
     }
 
 

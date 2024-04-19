@@ -93,6 +93,7 @@ import { XcReadonlyTreeComponent } from './xc-tree/xc-readonly-tree/xc-readonly-
 import { XcTreeItemComponent } from './xc-tree/xc-readonly-tree/xc-tree-item/xc-tree-item.component';
 import { XcTreeComponent } from './xc-tree/xc-tree.component';
 import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
+import { XcDialogDefinitionComponent } from './xc-form/definitions/xc-dialog-definition/xc-dialog-definition.component';
 
 
 @NgModule({
@@ -133,6 +134,7 @@ import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
         XcContentEditableDirective,
         XcDefinitionStackItemComponent,
         XcDefinitionStackMasterComponent,
+        XcDialogDefinitionComponent,
         XcDialogWrapperComponent,
         XcDragDirective,
         XcFormAutocompleteComponent,

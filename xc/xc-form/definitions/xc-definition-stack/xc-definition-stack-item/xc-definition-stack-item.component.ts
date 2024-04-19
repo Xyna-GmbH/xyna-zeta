@@ -24,11 +24,12 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { XoFormDefinition } from '../../xo/containers.model';
 import { ApiService, StartOrderOptionsBuilder, Xo, XoManagedFileID, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';
 import { XcStackItem, XcStackItemInterface, XcStackItemObserver } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
-import { XoBaseDefinition, XoCloseDefinitionData, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
+import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
 import { XcDialogService } from '../../../../xc-dialog/xc-dialog.service';
 import { I18nService } from '../../../../../i18n';
 import { XcComponentTemplate } from '../../../../xc-template/xc-template';
 import { XoStartOrderButtonDefinition } from '../../xo/item-definition.model';
+import { XcDialogDefinitionComponent } from '../../xc-dialog-definition/xc-dialog-definition.component';
 
 
 export interface DefinitionStackItemComponentData extends XcStackItemComponentData {
@@ -106,6 +107,11 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
             );
         }
         return openDetailsItem();
+    }
+
+
+    openDialog(definition: XoDefinition, data: Xo[]): Observable<Xo[]> {
+        return this.dialogs.custom(XcDialogDefinitionComponent, {definition: definition, data: data}).afterDismiss();
     }
 
 

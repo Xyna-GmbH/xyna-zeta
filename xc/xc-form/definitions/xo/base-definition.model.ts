@@ -69,6 +69,7 @@ export interface XoDefinitionObserver {
     getComponent?(componentName: string): XcDefinitionComponentTemplate<XoComponentDefinitionData>;
     getValidator?(validatorName: string): ValidatorFn;
     openDefinition?(definition: XoBaseDefinition, data: Xo[]): Observable<XcStackItemInterface>;
+    openDialog?(definition: XoBaseDefinition, data: Xo[]): Observable<Xo | Xo[]>;
     closeDefinition?(data?: XoCloseDefinitionData): Observable<boolean>;
     definitionClosed?(): Observable<XoCloseDefinitionData>;
     resolveDefinition?(definitionWorkflowRTC: XoXPRCRuntimeContext, definitionWorkflowFQN: string, data: Xo[]): Observable<XoDefinitionBundle>;
