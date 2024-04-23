@@ -426,6 +426,66 @@ export class XoOpenDetailsButtonDefinitionArray extends XoArray<XoOpenDetailsBut
 
 
 /***********************************************
+ * OPEN DIALOG-BUTTON
+ **********************************************/
+
+@XoObjectClass(XoButtonDefinition, 'xmcp.forms.datatypes', 'OpenDialogButtonDefinition')
+export class XoOpenDialogButtonDefinition extends XoButtonDefinition {
+
+    @XoProperty(XoDefinition)
+    dialogDefinitionReference: XoDefinition;
+
+
+    setParent(parent: XoBaseDefinition) {
+        // Only set parent to dialogDefinitionReference, if it is a true reference to a definition and not a definition itself
+        // Because the definition opened with Open-Dialog-Button starts a new data-path-hierarchy
+        if (this.dialogDefinitionReference instanceof XoDefinitionWorkflow) {
+            this.dialogDefinitionReference.setParent(parent);
+        }
+    }
+
+
+    setObserver(value: XoDefinitionObserver) {
+        super.setObserver(value);
+        if (this.dialogDefinitionReference) {
+            this.dialogDefinitionReference.setObserver(value);
+        }
+    }
+
+
+    getTemplate(data: Xo[]): Observable<XcTemplate> {
+        return super.getTemplate(data).pipe(tap((template: XcButtonBaseTemplate) => {
+            if (template) {
+                template.action = () => {
+                    /* Use passed definition or call detail-definition-workflow with resolved data of this button
+                     * The output is a new definition and maybe data.
+                     * This is passed to the definition observer to open the new definition
+                     */
+                    if (this.dialogDefinitionReference) {
+                        const resolvedData = this.resolveData(data);
+                        this.dialogDefinitionReference.resolveDefinition(resolvedData).subscribe({
+                            next: definitionBundle => {
+                                // open the resolved definition
+                                if (this.observer && this.observer.openDialog && definitionBundle.definition instanceof XoBaseDefinition) {
+                                    this.observer.openDialog(definitionBundle.definition, definitionBundle.data).subscribe();
+                                }
+                            }
+                        });
+                    }
+                };
+            }
+        }));
+    }
+}
+
+
+@XoArrayClass(XoOpenDialogButtonDefinition)
+export class XoOpenDialogButtonDefinitionArray extends XoArray<XoOpenDialogButtonDefinition> {
+}
+
+
+
+/***********************************************
  * START ORDER-BUTTON
  **********************************************/
 

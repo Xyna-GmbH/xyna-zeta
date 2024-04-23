@@ -1,0 +1,16 @@
+<xc-dialog-wrapper xc-form xc-i18n-context="definedUi.dialog">
+    <ng-container header><span xc-i18n>{{header}}</span></ng-container>
+
+    <section content>
+        <xc-definition-proxy
+            [xc-base-definition]="injectedData.definition"
+            [xc-base-definition-data]="injectedData.data"
+            [xc-definition-observer]="this"
+            (xc-definition-closed)="dismiss(injectedData.data)">
+        </xc-definition-proxy>
+    </section>
+
+    <ng-container footer>
+        <xc-button (click)="dismiss(injectedData.data)" xc-i18n>close</xc-button>
+    </ng-container>
+</xc-dialog-wrapper>

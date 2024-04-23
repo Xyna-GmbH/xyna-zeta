@@ -53,5 +53,8 @@ export const xcFormTranslations_deDE: I18nTranslation[] = [
     // Panel
     { key: 'Close', value: 'Schließen' },
     { key: 'Maximize', value: 'Maximieren' },
-    { key: 'Standard', value: 'Zurück auf Standardgröße' }
+    { key: 'Standard', value: 'Zurück auf Standardgröße' },
+
+    // Workflow defined UI Dialog
+    { key: 'definedUi.dialog.close', value: 'Schließen' }
 ];

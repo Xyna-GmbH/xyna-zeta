@@ -22,7 +22,7 @@ import { pack } from '../../../../../base';
 import { Xo } from '../../../../../api';
 import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionObserver, XoDefinitionWorkflow } from '../../xo/base-definition.model';
 import { XoDefinitionListDefinition, XoFormDefinition, XoFormPanelDefinition, XoPanelBoxDefinition, XoTablePanelDefinition, XoTreePanelDefinition } from '../../xo/containers.model';
-import { XoButtonDefinition, XoCheckboxDefinition, XoComponentDefinition, XoDefinitionListEntryDefinition, XoDropdownDefinition, XoItemDefinition, XoOpenDetailsButtonDefinition, XoPossibleValuesDefinition, XoStartOrderButtonDefinition, XoTextAreaDefinition, XoTextInputDefinition, XoTextItemDefinition } from '../../xo/item-definition.model';
+import { XoButtonDefinition, XoCheckboxDefinition, XoComponentDefinition, XoDefinitionListEntryDefinition, XoDropdownDefinition, XoItemDefinition, XoOpenDetailsButtonDefinition, XoOpenDialogButtonDefinition, XoPossibleValuesDefinition, XoStartOrderButtonDefinition, XoTextAreaDefinition, XoTextInputDefinition, XoTextItemDefinition } from '../../xo/item-definition.model';
 
 
 @Component({
@@ -60,6 +60,7 @@ export class XcBaseDefinitionComponent {
         const dropdown = new XoDropdownDefinition();
         const itemDefinition = new XoItemDefinition();
         const openDetailsButtonDefinition = new XoOpenDetailsButtonDefinition();
+        const openDialogButtonDefinition = new XoOpenDialogButtonDefinition();
         const possibleValues = new XoPossibleValuesDefinition();
         const startOrderButtonDefinition = new XoStartOrderButtonDefinition();
         const textAreaDefinition = new XoTextAreaDefinition();

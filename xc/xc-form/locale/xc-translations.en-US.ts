@@ -48,5 +48,8 @@ export const xcFormTranslations_enUS: I18nTranslation[] = [
     { key: 'zeta.xc-form-base.ipv4', value: 'VALUE IS NOT AN IPV4 ADDRESS' },
     { key: 'zeta.xc-form-base.ipv6', value: 'VALUE IS NOT AN IPV6 ADDRESS' },
     { key: 'zeta.xc-form-base.ip', value: 'VALUE IS NOT AN IP ADDRESS' },
-    { key: 'zeta.xc-form-base.message', value: 'NO MESSAGE DEFINED' }
+    { key: 'zeta.xc-form-base.message', value: 'NO MESSAGE DEFINED' },
+
+    // Workflow defined UI Dialog
+    { key: 'definedUi.dialog.close', value: 'Close' }
 ];

@@ -401,6 +401,11 @@ export class XcFormAutocompleteComponent extends XcFormBaseInputComponent implem
         }
     }
 
+    suffixMouseDown(event: MouseEvent) {
+        super.suffixMouseDown(event);
+        this.mousedown(event);
+    }
+
 
     onkeydown = (event: KeyboardEvent) => {
 
