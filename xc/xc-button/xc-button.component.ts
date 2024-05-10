@@ -31,10 +31,6 @@ export class XcButtonComponent extends XcButtonBaseComponent implements OnInit, 
 
     private element: HTMLElement;
 
-    protected setAriaLabel(value: string) {
-        super.setAriaLabel(value || (this.elementRef.nativeElement as HTMLElement).innerText);
-    }
-
     ngOnInit() {
         super.ngOnInit();
         this.element = this.elementRef.nativeElement.querySelector('.mdc-button__label');
