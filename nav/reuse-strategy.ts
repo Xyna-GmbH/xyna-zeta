@@ -76,7 +76,9 @@ export class RouteComponentReuseStrategy implements RouteReuseStrategy {
         const detachedRoute = this.handles.get(reuseKey);
         if (detachedRoute) {
             const component = this.getComponentRef(detachedRoute).instance;
-            if (component instanceof RouteComponent && component.initialized) {
+            // doesn't work in factory manager
+            // if (component instanceof RouteComponent && component.initialized && window.location.href.includes('/' + activatedRoute.data.reuse + '/')) {
+            if (component instanceof RouteComponent && component.initialized && activatedRoute.data.reuse.includes(window.location.href.split("/").pop())) {
                 component.onShow();
             }
         }
