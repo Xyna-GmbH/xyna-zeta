@@ -99,7 +99,7 @@ export class XcFormBaseInputComponent extends XcFormBaseComponent {
     }
 
 
-    suffixClick(event: any) {
+    suffixClick(event: MouseEvent | KeyboardEvent) {
         event.stopPropagation();
         if (!this.disabled && !this.readonly) {
             this.suffixToggled = !this.suffixToggled;
