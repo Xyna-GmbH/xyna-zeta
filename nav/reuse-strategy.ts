@@ -76,7 +76,9 @@ export class RouteComponentReuseStrategy implements RouteReuseStrategy {
         const detachedRoute = this.handles.get(reuseKey);
         if (detachedRoute) {
             const component = this.getComponentRef(detachedRoute).instance;
-            if (component instanceof RouteComponent && component.initialized) {
+            // doesn't work in factory manager
+            // if (component instanceof RouteComponent && component.initialized && window.location.href.includes('/' + activatedRoute.data.reuse + '/')) {
+            if (component instanceof RouteComponent && component.initialized && this.getLastPath(activatedRoute)) {
                 component.onShow();
             }
         }
@@ -93,5 +95,19 @@ export class RouteComponentReuseStrategy implements RouteReuseStrategy {
 
     shouldReuseRoute(currentActivatedRoute: ActivatedRouteSnapshot, futureActivatedRoute: ActivatedRouteSnapshot): boolean {
         return currentActivatedRoute.routeConfig === futureActivatedRoute.routeConfig;
+    }
+
+    getLastPath(activatedRoute: ActivatedRouteSnapshot): boolean {
+
+        const splittedPathname = window.location.pathname.split('/');
+        let lastPath: string;
+
+        if (splittedPathname[splittedPathname.length - 1] === '') {
+            lastPath = splittedPathname[splittedPathname.length - 2];
+        } else {
+            lastPath = splittedPathname.pop();
+        }
+
+        return activatedRoute.data.reuse.includes(lastPath);
     }
 }
