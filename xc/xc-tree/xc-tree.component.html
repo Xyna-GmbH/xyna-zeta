@@ -11,7 +11,7 @@
         [attr.aria-posinset]="getAriaPosinset(node)"
     >
         <div
-		    *ngIf="!node.parent || treeControl.isExpanded(node.parent)"
+            *ngIf="!node.parent || treeControl.isExpanded(node.parent)"
             class="mat-tree-node"
             (click)="selectNode(node, $event.ctrlKey || $event.metaKey)"
             [class.selected]="isNodeSelected(node)"
