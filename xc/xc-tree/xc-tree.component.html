@@ -11,6 +11,7 @@
         [attr.aria-posinset]="getAriaPosinset(node)"
     >
         <div
+		    *ngIf="!node.parent || treeControl.isExpanded(node.parent)"
             class="mat-tree-node"
             (click)="selectNode(node, $event.ctrlKey || $event.metaKey)"
             [class.selected]="isNodeSelected(node)"
@@ -72,7 +73,7 @@
                 ></xc-template>
             </div>
         </div>
-        <div class="parent" [class.fixed]="node.fixed" [class.hidden]="isNodeCollapsed(node)">
+        <div class="parent" [class.fixed]="node.fixed" *ngIf="isNodeExpanded(node)">
             <ng-container matTreeNodeOutlet></ng-container>
         </div>
     </mat-nested-tree-node>
