@@ -7,7 +7,7 @@
     <header>
         <ng-container *ngIf="definition?.label">
             <h1 *ngIf="!definition?.getParent()" class="items-left items-selectable">{{definition?.translate(definition?.label) | async}}</h1>
-            <h2 *ngIf="definition?.getParent()" class="items-left items-selectable">{{definition?.translate(definition?.label) | async}}</h2>
+            <h2 *ngIf="definition?.getParent()" class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h2>
         </ng-container>
         <div class="items-left">
             <xc-definition-proxy *ngFor="let child of definition?.header?.leftArea?.children"
