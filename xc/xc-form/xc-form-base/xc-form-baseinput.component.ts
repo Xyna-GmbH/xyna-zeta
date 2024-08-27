@@ -106,12 +106,13 @@ export class XcFormBaseInputComponent extends XcFormBaseComponent {
 
             if (this.suffix === 'clear') {
                 this.formControl.setValue('');
+                this.formControl.markAsDirty();
             } else if (this.suffix === 'nullify') {
                 this.formControl.setValue(null);
             } else if (this.suffix === 'password') {
                 this.type = this.suffixToggled ? 'text' : 'password';
             }
-            if (this.suffix === 'clear' || this.suffix === 'nullify') {
+            if (this.suffix === 'nullify') {
                 this.formControl.markAsDirty();
                 this.suffixClickChangedValue(this.suffixUnfocusedInput);
             }
