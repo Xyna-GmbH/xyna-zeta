@@ -35,9 +35,12 @@
 
     <mat-icon
         matSuffix
+        aria-label="{{suffixContent}}"
+        tabindex="0"
         *ngIf="suffixVisible"
         (mousedown)="suffixMouseDown($event)"
         (click)="suffixClick($event)"
+        (keydown.space)="suffixClick($event)"
         [attr.alt]="suffixContent"
         xc-tooltip="{{iconTooltip || (suffixContent | xcI18n)}}"
         xc-i18n
