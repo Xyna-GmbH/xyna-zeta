@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@if $theme == xyna {
+@if $theme ==xyna {
     $font-family-light: 'Open Sans Light', sans-serif;
     $font-family-regular: 'Open Sans Regular', sans-serif;
     $font-family-medium: 'Open Sans Regular', sans-serif;
@@ -43,7 +43,7 @@
 
     $color-gray-0: #1a1a1b;
     $color-gray-1: #2a2a2b;
-    $color-gray-2: #58585b;     // maximum light for WCAG AAA contrast with white text on it
+    $color-gray-2: #58585b; // maximum light for WCAG AAA contrast with white text on it
     $color-gray-3: #76767a;
     $color-gray-4: #babac0;
     $color-gray-5: #ededef;
@@ -281,11 +281,11 @@
     $xc-title-bar-title-font-family: unset;
     $xc-title-bar-title-font-style: unset;
     $xc-title-bar-title-font-size: 24px;
-    $xc-title-bar-title-text-transform:  unset;
+    $xc-title-bar-title-text-transform: unset;
     $xc-title-bar-title-margin: 0 16px;
     $xc-title-bar-title-padding: unset;
     $xc-title-bar-content-margin: unset;
-    $xc-title-bar-content-padding:  unset;
+    $xc-title-bar-content-padding: unset;
     $xc-title-bar-meta-nav-margin: unset;
     $xc-title-bar-meta-nav-padding: unset;
 
@@ -360,6 +360,10 @@
     $xc-stack-background-color: $color-gray-1;
     $xc-stack-breadcrumb-area-background-color: $color-gray-1;
     $xc-stack-breadcrumb-max-width: 160px;
+
+    // xc-scollbar
+    $xc-scrollbar-color: $color-gray-1;
+    $xc-scrollbar-background-color: $color-gray-3;
 
     $color-map: (
         normal: $color-normal,
