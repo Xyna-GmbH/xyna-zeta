@@ -57,7 +57,7 @@ $xc-nav-list-item-height: unset !default;
         font-size: unset;
         height: $xc-nav-list-item-height;
         padding: 0;
-
+        border-radius: 0;
 
         &::ng-deep .mdc-list-item__content {
             display: flex;
