@@ -15,11 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+$xc-scrollbar-color: unset !default;
+$xc-scrollbar-background-color: unset !default;
+
 @import 'const';
 @import '../xc/xc-tooltip/xc-tooltip.directive';
 
-$xc-scrollbar-color: unset !default;
-$xc-scrollbar-background-color: unset !default;
 
 //======================================================================
 // SCROLLBAR
