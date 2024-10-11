@@ -99,21 +99,19 @@ export class XcFormBaseInputComponent extends XcFormBaseComponent {
     }
 
 
-    suffixClick(event: MouseEvent) {
+    suffixClick(event: MouseEvent | KeyboardEvent) {
         event.stopPropagation();
         if (!this.disabled && !this.readonly) {
             this.suffixToggled = !this.suffixToggled;
 
             if (this.suffix === 'clear') {
                 this.formControl.setValue('');
+                this.formControl.markAsDirty();
             } else if (this.suffix === 'nullify') {
                 this.formControl.setValue(null);
+                this.formControl.markAsDirty();
             } else if (this.suffix === 'password') {
                 this.type = this.suffixToggled ? 'text' : 'password';
-            }
-            if (this.suffix === 'clear' || this.suffix === 'nullify') {
-                this.formControl.markAsDirty();
-                this.suffixClickChangedValue(this.suffixUnfocusedInput);
             }
         }
         this.suffixUnfocusedInput = false;

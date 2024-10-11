@@ -1,7 +1,7 @@
 {
     "name": "zeta",
     "title": "Zeta",
-    "version": "17.0.4",
+    "version": "17.0.7",
     "private": true,
     "engines": {
         "node": "^18.13.0 || ^20.9.0"
@@ -28,11 +28,11 @@
         "rxjs": "7.5.6",
         "three": "0.129.0",
         "tslib": "2.4.0",
-        "vite": "^4.5.2",
+        "vite": "^4.5.3",
         "zone.js": "0.14.3"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "17.3.3",
+        "@angular-devkit/build-angular": "^17.3.8",
         "@angular-eslint/eslint-plugin": "16.2.0",
         "@angular/cli": "17.3.3",
         "@angular/compiler-cli": "17.3.3",
