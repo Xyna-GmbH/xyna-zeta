@@ -23,10 +23,11 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, filter, finalize } from 'rxjs/operators';
 
 import { I18nParam, I18nService } from '../../i18n/i18n.service';
-import { XcDialogService, XcTabBarComponent } from '../../xc';
+import { XcDialogService, XcTabBarComponent, XcTabBarItem } from '../../xc';
 import { H5FilterError, H5FilterErrorCodes } from '../auth.interfaces';
 import { AuthService } from '../auth.service';
 import { CredentialsLoginTabComponent } from '../forms/credentials-login-tab.component';
+import { LDAPLoginTabComponent } from '../forms/ldap-login-tab.component';
 import { SmartCardLoginTabComponent } from '../forms/smart-card-login-tab.component';
 
 
@@ -74,49 +75,84 @@ export class AuthLoginComponent {
         }
     };
 
+    readonly lDAPTabItem: LoginTabItem = {
+        closable: false,
+        component: LDAPLoginTabComponent,
+        name: 'LDAP',
+        data: <LoginComponentData>{
+            username: '',
+            password: '',
+            onEnter: this.login.bind(this)
+        }
+    };
+
     @ViewChild(XcTabBarComponent, { static: false })
     tabBar: XcTabBarComponent;
 
     tabBarSelection = this.smartCardTabItem;
     smartCardDomain = '';
 
+    lDAPDomain = '';
+
     private _pending = false;
     privacyLinkDefined = !!environment.zeta.getPrivacyLink;
 
+    tabBarItems: Array<XcTabBarItem> = [];
 
     constructor(
-        private readonly authService: AuthService,
-        private readonly dialogService: XcDialogService,
-        private readonly i18n: I18nService
+        protected readonly authService: AuthService,
+        protected readonly dialogService: XcDialogService,
+        protected readonly i18n: I18nService
     ) {
+        if (this.useTabBar) {
+            if (this.useSmartCardLogin) {
+                this.tabBarItems.push(this.smartCardTabItem);
+            }
+
+            if (this.useCredentialsLogin) {
+                this.tabBarItems.push(this.credentialsTabItem);
+            }
+
+            if (this.useLDAPLogin) {
+                this.tabBarItems.push(this.lDAPTabItem);
+            }
+        }
+
         if (this.useSmartCardLogin) {
             this.smartCardInfo();
+        } else if (this.useLDAPLogin) {
+            this.lDAPInfo();
         }
     }
 
 
     get smartCardMethodUsed(): boolean {
-        return this.useSmartCardLogin && (this.tabBarSelection === this.smartCardTabItem || !this.useCredentialsLogin);
+        return this.useSmartCardLogin && (this.tabBarSelection === this.smartCardTabItem || (!this.useCredentialsLogin && !this.useLDAPLogin));
     }
-
 
     get credentialsMethodUsed(): boolean {
-        return this.useCredentialsLogin && (this.tabBarSelection === this.credentialsTabItem || !this.useSmartCardLogin);
+        return this.useCredentialsLogin && (this.tabBarSelection === this.credentialsTabItem || (!this.useSmartCardLogin && !this.useLDAPLogin));
     }
 
+    get lDAPMethodUsed(): boolean {
+        return this.useLDAPLogin && (this.tabBarSelection === this.lDAPTabItem || (!this.useSmartCardLogin && !this.useCredentialsLogin));
+    }
 
     get useSmartCardLogin(): boolean {
         return environment.zeta.auth ? environment.zeta.auth.smartCardLogin : false;
     }
 
-
     get useCredentialsLogin(): boolean {
         return environment.zeta.auth ? environment.zeta.auth.credentialsLogin : true;
     }
 
+    get useLDAPLogin(): boolean {
+        return environment.zeta.auth ? environment.zeta.auth.ldapOptions.lDAPLogin : false;
+    }
 
     get useTabBar(): boolean {
-        return this.useCredentialsLogin && this.useSmartCardLogin;
+        const conditions = [this.useCredentialsLogin, this.useSmartCardLogin, this.useLDAPLogin];
+        return conditions.filter(Boolean).length >= 2;
     }
 
 
@@ -125,6 +161,8 @@ export class AuthLoginComponent {
             this.smartCardLogin();
         } else if (this.credentialsMethodUsed) {
             this.credentialsLogin();
+        } else if (this.lDAPMethodUsed) {
+            this.lDAPLogin();
         }
     }
 
@@ -145,6 +183,10 @@ export class AuthLoginComponent {
             this.smartCardTabItem.data.username = info.username || '';
             this.smartCardDomain = (info.externaldomains || [])[0] || '';
         });
+    }
+
+    lDAPInfo() {
+        this.lDAPDomain = environment.zeta.auth?.ldapOptions.lDAPdomain;
     }
 
 
@@ -209,6 +251,32 @@ export class AuthLoginComponent {
         ).subscribe();
     }
 
+    lDAPLogin(force = false) {
+        this.pending = true;
+        const forcedLogin = force || !!(environment.zeta.auth && environment.zeta.auth.useTheForcedLogin);
+        this.authService.workflowLogin(this.lDAPTabItem.data.username, this.lDAPTabItem.data.password, this.lDAPDomain, forcedLogin).pipe(
+            catchError(loginError => {
+                // FIXME: Use Error-Datatype (ZETA-6)
+                const filterError = loginError as H5FilterError;
+                if (filterError && filterError.error) {
+                    const errorCode = filterError.error.error ? filterError.error.error.errorCode : (filterError.error as any).errorCode;
+                    if (errorCode === H5FilterErrorCodes.SESSION_EXISTS) {
+                        this.dialogService.confirm(
+                            this.i18n.translate('zeta.auth-login.duplicate-session-header'),
+                            this.i18n.translate('zeta.auth-login.duplicate-session-message', <I18nParam>{ key: '$username', value: this.lDAPTabItem.data.username })
+                        ).afterDismissResult(true).subscribe(() =>
+                            // login again with force
+                            this.lDAPLogin(true)
+                        );
+                        return EMPTY;
+                    }
+                }
+                return this.defaultErrorHandler();
+            }),
+            finalize(() => this.pending = false)
+        ).subscribe();
+    }
+
 
     get pending(): boolean {
         return this._pending;
@@ -220,5 +288,6 @@ export class AuthLoginComponent {
 
         this.smartCardTabItem.data.disabled = this.pending;
         this.credentialsTabItem.data.disabled = this.pending;
+        this.lDAPTabItem.data.disabled = this.pending;
     }
 }

@@ -34,6 +34,10 @@ export const authTranslations_enUS: I18nTranslation[] = [
         value: 'Authenticate with credentials'
     },
     {
+        key: 'zeta.auth-login.subtitle3',
+        value: 'Authenticate via LDAP'
+    },
+    {
         key: 'zeta.auth-login.login-button',
         value: 'Login'
     },
