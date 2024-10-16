@@ -30,15 +30,15 @@ export interface XynaOptions {
 }
 
 
-export interface LDAPOptions {
+export interface CredentialsWorkflowOptions {
     /**
-     * flag, which determines whether the user is able to login via ldap
+     * flag, which determines whether the user is able to login via workflow
      */
-    lDAPLogin: boolean;
+    credentialsWorkflowLogin: boolean;
     /**
-    * Domain through which the user logs in via ldap
+    * Domain through which the user logs in via workflow
     */
-    lDAPdomain: string;
+    credentialsWorkflowDomain: string;
 }
 
 
@@ -68,9 +68,9 @@ export interface AuthenticationOptions {
      */
     smartCardLogin: boolean;
     /**
-     * options, which determines whether the user is able to login via ldap
+     * options, which determines whether the user is able to login via workflow
      */
-    ldapOptions: LDAPOptions;
+    credentialsWorkflowOptions: CredentialsWorkflowOptions;
     /**
      * Array of languages, which can be selected by the user - dropdown will not be rendered if falsey
      */

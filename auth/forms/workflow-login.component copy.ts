@@ -15,28 +15,18 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Injector } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { I18nService } from '@zeta/i18n';
-
-import { XcTabComponent } from '../../xc';
 import { LoginComponentData } from '../login/auth-login.component';
 
 
 @Component({
-    templateUrl: './ldap-login.component.html',
-    styleUrls: ['./ldap-login.component.scss']
+    selector: 'workflow-login',
+    templateUrl: './workflow-login.component.html',
+    styleUrls: ['./workflow-login.component.scss']
 })
-export class LDAPLoginTabComponent extends XcTabComponent<void, LoginComponentData> {
+export class WorkflowLoginComponent {
 
-    data: LoginComponentData = {
-        username: '',
-        password: '',
-        onEnter: () => { }
-    };
-
-    constructor(injector: Injector, readonly i18n: I18nService) {
-        super(injector);
-        this.data = this.injectedData;
-    }
+    @Input()
+    data: LoginComponentData;
 }

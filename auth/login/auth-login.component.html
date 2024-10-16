@@ -11,7 +11,7 @@
                 <div class="subtitle" xc-i18n>subtitle2</div>
             }
 
-            @if (lDAPMethodUsed) {
+            @if (workflowMethodUsed) {
                 <div class="subtitle" xc-i18n>subtitle3</div>
             }
         </div>
@@ -34,10 +34,10 @@
             <section class="credentials-login">
                 <credentials-login [data]="credentialsTabItem.data"></credentials-login>
             </section>
-        } @else if (useLDAPLogin) {
-            <!-- Case 4 only use the ldap login method -->
-            <section class="ldap-login">
-                <ldap-login [data]="lDAPTabItem.data"></ldap-login>
+        } @else if (useWorkflowLogin) {
+            <!-- Case 4 only use the workflow login method -->
+            <section class="workflow-login">
+                <workflow-login [data]="workflowTabItem.data"></workflow-login>
             </section>
         }
     }

@@ -35,7 +35,7 @@ export const authTranslations_deDE: I18nTranslation[] = [
     },
     {
         key: 'zeta.auth-login.subtitle3',
-        value: 'LDAP-Anmeldung'
+        value: 'Workflow-Anmeldung'
     },
     {
         key: 'zeta.auth-login.login-button',

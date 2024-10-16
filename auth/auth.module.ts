@@ -28,10 +28,10 @@ import { AuthBackgroundComponent } from './background/auth-background.component'
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { CredentialsLoginTabComponent } from './forms/credentials-login-tab.component';
 import { CredentialsLoginComponent } from './forms/credentials-login.component';
-import { LDAPLoginTabComponent } from './forms/ldap-login-tab.component';
-import { LDAPLoginComponent } from './forms/ldap-login.component copy';
 import { SmartCardLoginTabComponent } from './forms/smart-card-login-tab.component';
 import { SmartCardLoginComponent } from './forms/smart-card-login.component';
+import { WorkflowLoginTabComponent } from './forms/workflow-login-tab.component';
+import { WorkflowLoginComponent } from './forms/workflow-login.component copy';
 import { AuthLoginComponent } from './login/auth-login.component';
 
 
@@ -50,8 +50,8 @@ import { AuthLoginComponent } from './login/auth-login.component';
         CredentialsLoginTabComponent,
         SmartCardLoginComponent,
         SmartCardLoginTabComponent,
-        LDAPLoginComponent,
-        LDAPLoginTabComponent
+        WorkflowLoginComponent,
+        WorkflowLoginTabComponent
     ],
     providers: [
         AuthService,
