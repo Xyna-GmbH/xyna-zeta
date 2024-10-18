@@ -110,6 +110,7 @@ $xc-nav-list-item-height: unset !default;
         @each $key, $value in $color-map {
             [color="#{$key}"] &.active {
                 border-color: $value;
+                border-radius: 0;
 
                 xc-icon {
                     color: $value;

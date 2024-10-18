@@ -30,6 +30,18 @@ export interface XynaOptions {
 }
 
 
+export interface CredentialsWorkflowOptions {
+    /**
+     * flag, which determines whether the user is able to login via workflow
+     */
+    credentialsWorkflowLogin: boolean;
+    /**
+    * Domain through which the user logs in via workflow
+    */
+    credentialsWorkflowDomain: string;
+}
+
+
 export interface SelectableLanguage {
     /**
      * string, whose translation will be displayed in the language dropdown
@@ -55,6 +67,10 @@ export interface AuthenticationOptions {
      * flag, which determines whether the user is able to login via smart card
      */
     smartCardLogin: boolean;
+    /**
+     * options, which determines whether the user is able to login via workflow
+     */
+    credentialsWorkflowOptions: CredentialsWorkflowOptions;
     /**
      * Array of languages, which can be selected by the user - dropdown will not be rendered if falsey
      */

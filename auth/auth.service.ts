@@ -245,8 +245,8 @@ export class AuthService {
     }
 
 
-    workflowLogin(username: string, password: string, force = false): Observable<SessionInfo> {
-        return this.customLogin('auth/externalCredentialsLogin', XoExternalCredentialsLoginRequest.withDomain(username, password, 'WORKFLOW', force));
+    workflowLogin(username: string, password: string, domain: string, force = false): Observable<SessionInfo> {
+        return this.customLogin('auth/externalCredentialsLogin', XoExternalCredentialsLoginRequest.withDomain(username, password, domain, force));
     }
 
 
@@ -288,7 +288,7 @@ export class AuthService {
      * Performs a request to change the user's password
      */
     changePassword(oldPassword: string, newPassword: string): Observable<void> {
-        return this.http.post<void>('auth/changepassword', {oldPassword, newPassword});
+        return this.http.post<void>('auth/changepassword', { oldPassword, newPassword });
     }
 
 
@@ -339,7 +339,7 @@ export class AuthService {
 
     hasStartOrderRight(orderType: string, rtc?: RuntimeContext): boolean {
         return (this.startOrderRights.length === 0 && this.startOrderRightFallback) ||
-               !!this.startOrderRights.find(right => right.matches(orderType, rtc));
+            !!this.startOrderRights.find(right => right.matches(orderType, rtc));
     }
 
 

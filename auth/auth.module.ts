@@ -30,6 +30,8 @@ import { CredentialsLoginTabComponent } from './forms/credentials-login-tab.comp
 import { CredentialsLoginComponent } from './forms/credentials-login.component';
 import { SmartCardLoginTabComponent } from './forms/smart-card-login-tab.component';
 import { SmartCardLoginComponent } from './forms/smart-card-login.component';
+import { WorkflowLoginTabComponent } from './forms/workflow-login-tab.component';
+import { WorkflowLoginComponent } from './forms/workflow-login.component copy';
 import { AuthLoginComponent } from './login/auth-login.component';
 
 
@@ -47,7 +49,9 @@ import { AuthLoginComponent } from './login/auth-login.component';
         CredentialsLoginComponent,
         CredentialsLoginTabComponent,
         SmartCardLoginComponent,
-        SmartCardLoginTabComponent
+        SmartCardLoginTabComponent,
+        WorkflowLoginComponent,
+        WorkflowLoginTabComponent
     ],
     providers: [
         AuthService,
