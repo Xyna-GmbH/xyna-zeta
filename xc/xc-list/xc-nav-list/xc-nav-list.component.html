@@ -1,13 +1,16 @@
 <mat-nav-list>
-    <ng-container *ngFor="let item of items">
-        <xc-nav-list-item
-            [item]="item"
-            [size]="size"
-            [depth]="0"
-            [color]="color"
-            [shrink]="shrink"
-            [orientation]="orientation"
-            (focusChange)="focusChange($event)"
-        >{{item.name}}</xc-nav-list-item>
-    </ng-container>
+    <ul [attr.aria-label]="'Menü  mit  ' + items.length + ' Elementen'">
+        <li *ngFor="let item of items">
+            <xc-nav-list-item
+                    [item]="item"
+                    [size]="size"
+                    [depth]="0"
+                    [color]="color"
+                    [shrink]="shrink"
+                    [orientation]="orientation"
+                    (focusChange)="focusChange($event)"
+            >{{item.name}}
+            </xc-nav-list-item>
+        </li>
+    </ul>
 </mat-nav-list>
