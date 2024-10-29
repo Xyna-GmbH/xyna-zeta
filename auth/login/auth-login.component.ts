@@ -147,7 +147,7 @@ export class AuthLoginComponent {
     }
 
     get useWorkflowLogin(): boolean {
-        return environment.zeta.auth ? environment.zeta.auth.credentialsWorkflowOptions.credentialsWorkflowLogin : false;
+        return (environment.zeta.auth && environment.zeta.auth.credentialsWorkflowOptions) ? environment.zeta.auth.credentialsWorkflowOptions.credentialsWorkflowLogin : false;
     }
 
     get useTabBar(): boolean {
@@ -186,7 +186,7 @@ export class AuthLoginComponent {
     }
 
     workflowInfo() {
-        this.workflowDomain = environment.zeta.auth?.credentialsWorkflowOptions.credentialsWorkflowDomain;
+        this.workflowDomain = environment.zeta.auth?.credentialsWorkflowOptions?.credentialsWorkflowDomain;
     }
 
 
