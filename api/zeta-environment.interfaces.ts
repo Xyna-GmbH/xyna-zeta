@@ -70,7 +70,7 @@ export interface AuthenticationOptions {
     /**
      * options, which determines whether the user is able to login via workflow
      */
-    credentialsWorkflowOptions: CredentialsWorkflowOptions;
+    credentialsWorkflowOptions?: CredentialsWorkflowOptions;
     /**
      * Array of languages, which can be selected by the user - dropdown will not be rendered if falsey
      */
