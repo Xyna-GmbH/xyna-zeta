@@ -31,7 +31,7 @@
     </ng-container>
     <!-- Container template view of a table body row -->
     <ng-container *ngFor="let column of columns; let i=index" [matColumnDef]="getColumnID(column)">
-        <th mat-header-cell *matHeaderCellDef attr.aria-label="{{i18n.translate(column.name) || column.name}}" scope="col">
+        <th mat-header-cell *matHeaderCellDef attr.aria-label="{{i18n.translate(column.name)}}" scope="col">
             <span mat-sort-header [disabled]="column.disableSort">{{i18n.translate(column.name) || '&nbsp;'}}</span>
             <div class="filter-container">
                 <xc-template
@@ -49,7 +49,7 @@
             [class.shrink]="column.shrink"
             [class.break]="column.break"
             [class.pre]="column.pre"
-            [attr.aria-label]="getCellData(row, column.path) ? (i18n.translate(column.name) || column.name ) : null"
+            [attr.aria-label]="getCellData(row, column.path) ? (i18n.translate(column.name)) : null"
         >
             <ng-container *xc-var="getCellData(row, column.path); let cellData">
 
