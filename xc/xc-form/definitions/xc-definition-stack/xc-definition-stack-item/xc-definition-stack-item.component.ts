@@ -15,21 +15,23 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { AfterViewInit, Component, Injector, OnDestroy } from '@angular/core';
-import { environment } from '@environments/environment';
-import { XcStackItemComponent, XcStackItemComponentData } from '../../../../xc-stack/xc-stack-item/xc-stack-item.component';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy } from '@angular/core';
 
-import { Observable, of, Subject, Subscription, throwError } from 'rxjs';
+import { environment } from '@environments/environment';
+
+import { Observable, of, Subscription, throwError } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { XoFormDefinition } from '../../xo/containers.model';
+
 import { ApiService, StartOrderOptionsBuilder, Xo, XoManagedFileID, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '../../../../../api';
-import { XcStackItem, XcStackItemInterface, XcStackItemObserver } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
-import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
-import { XcDialogService } from '../../../../xc-dialog/xc-dialog.service';
 import { I18nService } from '../../../../../i18n';
+import { XcDialogService } from '../../../../xc-dialog/xc-dialog.service';
+import { XcStackItem, XcStackItemInterface, XcStackItemObserver } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
+import { XcStackItemComponent, XcStackItemComponentData } from '../../../../xc-stack/xc-stack-item/xc-stack-item.component';
 import { XcComponentTemplate } from '../../../../xc-template/xc-template';
-import { XoStartOrderButtonDefinition } from '../../xo/item-definition.model';
 import { XcDialogDefinitionComponent } from '../../xc-dialog-definition/xc-dialog-definition.component';
+import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
+import { XoFormDefinition } from '../../xo/containers.model';
+import { XoStartOrderButtonDefinition } from '../../xo/item-definition.model';
 
 
 export interface DefinitionStackItemComponentData extends XcStackItemComponentData {
@@ -46,16 +48,22 @@ interface DefinitionStackItem {
 
 @Component({
     templateUrl: './xc-definition-stack-item.component.html',
-    styleUrls: ['./xc-definition-stack-item.component.scss']
+    styleUrls: ['./xc-definition-stack-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XcDefinitionStackItemComponent extends XcStackItemComponent<DefinitionStackItemComponentData> implements XoDefinitionObserver, AfterViewInit, OnDestroy {
 
     private detailsItem: DefinitionStackItem;
-    private readonly closedSubject = new Subject<XoCloseDefinitionData>();
     private readonly subscriptions: Subscription[] = [];
 
 
-    constructor(readonly injector: Injector, private readonly api: ApiService, private readonly dialogs: XcDialogService, private readonly i18n: I18nService) {
+    constructor(
+        readonly injector: Injector,
+        private readonly api: ApiService,
+        private readonly dialogs: XcDialogService,
+        private readonly i18n: I18nService,
+        private readonly cdr: ChangeDetectorRef
+    ) {
         super(injector);
     }
 
@@ -97,7 +105,8 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
                 XcDefinitionStackItemComponent,
                 <DefinitionStackItemComponentData>{ stackItem: this.detailsItem.item, definition: definition, data: data }
             ));
-            return this.stackItem.stack.open(this.detailsItem.item);
+            // markForCheck has to be called before stack.open to work propperly
+            return of(null).pipe(tap(() => this.cdr.markForCheck()), switchMap(() => this.stackItem.stack.open(this.detailsItem.item)));
         };
 
         // close current details item, if any
@@ -111,7 +120,7 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
 
 
     openDialog(definition: XoDefinition, data: Xo[]): Observable<Xo[]> {
-        return this.dialogs.custom(XcDialogDefinitionComponent, {definition: definition, data: data}).afterDismiss();
+        return this.dialogs.custom(XcDialogDefinitionComponent, { definition: definition, data: data }).afterDismiss();
     }
 
 
@@ -123,8 +132,7 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
         return this.stackItem.stack.close(this.stackItem).pipe(
             tap(closed => {
                 if (closed) {
-                    this.closedSubject.next(data);
-                    this.closedSubject.complete();
+                    this.cdr.markForCheck();
                 }
             })
         );
