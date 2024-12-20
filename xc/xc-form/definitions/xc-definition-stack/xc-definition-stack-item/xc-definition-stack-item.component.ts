@@ -54,7 +54,6 @@ interface DefinitionStackItem {
 export class XcDefinitionStackItemComponent extends XcStackItemComponent<DefinitionStackItemComponentData> implements XoDefinitionObserver, AfterViewInit, OnDestroy {
 
     private detailsItem: DefinitionStackItem;
-    private readonly closedSubject = new Subject<XoCloseDefinitionData>();
     private readonly subscriptions: Subscription[] = [];
 
 
@@ -106,7 +105,8 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
                 XcDefinitionStackItemComponent,
                 <DefinitionStackItemComponentData>{ stackItem: this.detailsItem.item, definition: definition, data: data }
             ));
-            return this.stackItem.stack.open(this.detailsItem.item);
+            // markForCheck has to be called before stack.open to work propperly
+            return of(null).pipe(tap(() => this.cdr.markForCheck()), switchMap(() => this.stackItem.stack.open(this.detailsItem.item)));
         };
 
         // close current details item, if any
@@ -120,7 +120,7 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
 
 
     openDialog(definition: XoDefinition, data: Xo[]): Observable<Xo[]> {
-        return this.dialogs.custom(XcDialogDefinitionComponent, {definition: definition, data: data}).afterDismiss();
+        return this.dialogs.custom(XcDialogDefinitionComponent, { definition: definition, data: data }).afterDismiss();
     }
 
 
@@ -132,8 +132,6 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
         return this.stackItem.stack.close(this.stackItem).pipe(
             tap(closed => {
                 if (closed) {
-                    this.closedSubject.next(data);
-                    this.closedSubject.complete();
                     this.cdr.markForCheck();
                 }
             })
@@ -167,7 +165,6 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
                     this.dialogs.error('No definition found in resolved definition-Workflow');
                     return false;
                 }
-                this.cdr.markForCheck();
                 return true;
             }),
             map(result => <XoDefinitionBundle>{
