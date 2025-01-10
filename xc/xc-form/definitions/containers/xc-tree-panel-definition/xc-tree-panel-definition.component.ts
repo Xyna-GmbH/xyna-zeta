@@ -65,7 +65,9 @@ export class XcTreePanelDefinitionComponent extends XcFormPanelDefinitionCompone
 
         // build up tree
         let rtc: RuntimeContext;
-        if (this.definition.observer && this.definition.observer.getDefaultRTC) {
+        if (this.treeDefinition.structureRTC) {
+            rtc = this.treeDefinition.structureRTC.toRuntimeContext();
+        } else if (this.definition.observer && this.definition.observer.getDefaultRTC) {
             rtc = this.definition.observer.getDefaultRTC().toRuntimeContext();
         } else {
             rtc = RuntimeContext.defaultWorkspace;

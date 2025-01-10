@@ -359,8 +359,13 @@ export class XoPredefinedTablePanelDefinitionArray extends XoArray<XoPredefinedT
 
 @XoObjectClass(XoFormPanelDefinition, 'xmcp.forms.datatypes', 'TreePanelDefinition')
 export class XoTreePanelDefinition extends XoFormPanelDefinition {
-}
 
+
+    @XoProperty(XoXPRCRuntimeContext)
+    structureRTC: XoXPRCRuntimeContext;
+
+
+}
 
 @XoArrayClass(XoTreePanelDefinition)
 export class XoTreePanelDefinitionArray extends XoArray<XoTreePanelDefinition> {
