@@ -41,6 +41,7 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
     private detailsDefinition: XoDefinition;
 
     private readonly subscriptions: Subscription[] = [];
+    private refreshEventSubscription: Subscription;
 
     tableInputFQN = '';
 
@@ -51,6 +52,7 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
 
     ngOnDestroy() {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
+        this.refreshEventSubscription?.unsubscribe();
     }
 
 
@@ -179,5 +181,12 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
             }
         });
         this.dataSource.refresh();
+
+        this.refreshEventSubscription?.unsubscribe();
+        if (this.tableDefinition.triggerRefresh?.eventId) {
+            this.refreshEventSubscription =
+            this.eventService.getDefinitionEventPayloadById(this.tableDefinition.triggerRefresh.eventId)
+                .subscribe(() => this.refresh());
+        }
     }
 }

@@ -25,6 +25,7 @@ import { XoTableColumnArray } from '../../../xc-table/xc-remote-table-data-sourc
 import { XcTableDataSource } from '../../../xc-table/xc-table-data-source';
 import { XoBaseDefinition, XoBaseDefinitionArray, XoDefinition, XoDefinitionObserver } from './base-definition.model';
 import { XoTextItemDefinition } from './item-definition.model';
+import { XoDefinitionEvent } from '../xc-definition-event.service';
 
 
 /***********************************************
@@ -36,6 +37,9 @@ export class XoContainerDefinition extends XoBaseDefinition {
 
     @XoProperty(XoBaseDefinitionArray)
     children: XoBaseDefinitionArray = new XoBaseDefinitionArray();
+
+    @XoProperty(XoDefinitionEvent)
+    triggerChangeChildren: XoDefinitionEvent;
 
 
     protected afterDecode() {
@@ -202,6 +206,9 @@ export class XoFormPanelDefinition extends XoFormDefinition {
     @XoProperty()
     compact = false;
 
+    @XoProperty(XoDefinitionEvent)
+    triggerClose: XoDefinitionEvent;
+
     @XoProperty(XoPanelBoxDefinition)
     header: XoPanelBoxDefinition;
 
@@ -260,6 +267,9 @@ export class XoTablePanelDefinition extends XoFormPanelDefinition {
 
     @XoProperty(XoDefinition)
     detailsDefinitionReference: XoDefinition;
+
+    @XoProperty(XoDefinitionEvent)
+    triggerRefresh: XoDefinitionEvent = new XoDefinitionEvent();
 
     @XoProperty()
     selectionDataPath = '';

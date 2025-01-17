@@ -15,10 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 import { Xo } from '../../../../../api';
 import { XoFormPanelDefinition } from '../../xo/containers.model';
+import { XcDefinitionEventService } from '../../xc-definition-event.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -29,6 +31,9 @@ import { XoFormPanelDefinition } from '../../xo/containers.model';
 export class XcFormGenericPanelComponent {
 
     private _definition: XoFormPanelDefinition;
+
+    private readonly eventService: XcDefinitionEventService = inject<XcDefinitionEventService>(XcDefinitionEventService);
+    private eventSubscription: Subscription;
 
     toolTip = 'maximize';
     areaValue = false;
@@ -45,6 +50,13 @@ export class XcFormGenericPanelComponent {
     set definition(value: XoFormPanelDefinition) {
         this._definition = value;
         this.classList = this.definition.style + (this.definition.compact ? ' compact' : '');
+
+        this.eventSubscription?.unsubscribe();
+        if (this.definition.closable && this.definition.triggerClose?.eventId) {
+            this.eventSubscription = this.eventService.getDefinitionEventPayloadById(this.definition.triggerClose?.eventId).subscribe(
+                () => this.closed.emit()
+            );
+        }
     }
 
 
