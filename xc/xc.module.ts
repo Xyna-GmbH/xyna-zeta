@@ -94,6 +94,7 @@ import { XcTreeItemComponent } from './xc-tree/xc-readonly-tree/xc-tree-item/xc-
 import { XcTreeComponent } from './xc-tree/xc-tree.component';
 import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
 import { XcDialogDefinitionComponent } from './xc-form/definitions/xc-dialog-definition/xc-dialog-definition.component';
+import { XcDefinitionEventService } from './xc-form/definitions/xc-definition-event.service';
 
 
 @NgModule({
@@ -289,6 +290,7 @@ import { XcDialogDefinitionComponent } from './xc-form/definitions/xc-dialog-def
         XcTreePanelDefinitionComponent
     ],
     providers: [
+        XcDefinitionEventService,
         XcDialogService,
         XcIconService,
         XcMenuService,

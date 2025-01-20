@@ -15,10 +15,13 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 
 import { XcBaseDefinitionComponent } from '../../shared/xc-base-definition/xc-base-definition.component';
 import { XoFormDefinition } from '../../xo/containers.model';
+import { XcDefinitionEventService } from '../../xc-definition-event.service';
+import { XoBaseDefinitionArray } from '../../xo/base-definition.model';
+import { filter, Subscription } from 'rxjs';
 
 
 @Component({
@@ -28,6 +31,9 @@ import { XoFormDefinition } from '../../xo/containers.model';
 })
 export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 
+    protected readonly eventService: XcDefinitionEventService = inject<XcDefinitionEventService>(XcDefinitionEventService);
+    private eventSubscription: Subscription;
+
     @Input('xc-form-definition')
     set formDefinition(value: XoFormDefinition) {
         this.definition = value;
@@ -36,5 +42,17 @@ export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 
     get formDefinition(): XoFormDefinition {
         return this.definition as XoFormDefinition;
+    }
+
+    protected afterUpdate() {
+        super.afterUpdate();
+        this.eventSubscription?.unsubscribe();
+        if (this.formDefinition.triggerChangeChildren?.eventId) {
+            this.eventSubscription = this.eventService.getDefinitionEventPayloadById(this.formDefinition.triggerChangeChildren?.eventId).pipe(filter(
+                payload => payload.length === 1 && payload[0] instanceof XoBaseDefinitionArray
+            )).subscribe(
+                payload => this.formDefinition.children = payload[0] as XoBaseDefinitionArray
+            );
+        }
     }
 }

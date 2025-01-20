@@ -28,6 +28,7 @@ import { XcOptionItem } from '../../../shared/xc-item';
 import { XcButtonTemplate, XcButtonBaseTemplate, XcCheckboxTemplate, XcFormAutocompleteTemplate, XcFormInputTemplate, XcFormTextAreaTemplate, XcTemplate, XcDefinitionListEntryTemplate, XcFormTextTemplate } from '../../../xc-template/xc-template';
 import { XcAutocompleteDataWrapper } from '../../xc-form-autocomplete/xc-form-autocomplete.component';
 import { XoBaseDefinition, XoDefinition, XoDefinitionObserver, XoDefinitionWorkflow } from './base-definition.model';
+import { XcDefinitionEventService, XoDefinitionEventArray } from '../xc-definition-event.service';
 
 
 /***********************************************
@@ -504,6 +505,9 @@ export class XoStartOrderButtonDefinition extends XoButtonDefinition {
     @XoProperty()
     showResult: boolean;
 
+    @XoProperty(XoDefinitionEventArray)
+    onStartorderResultEvent: XoDefinitionEventArray = new XoDefinitionEventArray();
+
 
     getTemplate(data: Xo[]): Observable<XcTemplate> {
         return super.getTemplate(data).pipe(tap((template: XcButtonBaseTemplate) => {
@@ -513,6 +517,11 @@ export class XoStartOrderButtonDefinition extends XoButtonDefinition {
                     if (this.observer && this.observer.startOrder) {
                         const resolvedData = this.resolveData(data);
                         this.observer.startOrder(this, resolvedData).subscribe({
+                            next: value => {
+                                if (this.onStartorderResultEvent?.data) {
+                                    XcDefinitionEventService.eventService.triggerEventById(this.onStartorderResultEvent.data.map(e => e.eventId), value);
+                                }
+                            },
                             complete() {
                                 template.busy = false;
                                 template.triggerMarkForCheck();
@@ -530,6 +539,38 @@ export class XoStartOrderButtonDefinition extends XoButtonDefinition {
 
 @XoArrayClass(XoStartOrderButtonDefinition)
 export class XoStartOrderButtonDefinitionArray extends XoArray<XoStartOrderButtonDefinition> {
+}
+
+
+
+/***********************************************
+ * DEFINITION EVENT-BUTTON
+ **********************************************/
+
+@XoObjectClass(XoButtonDefinition, 'xmcp.forms.datatypes', 'DefinitionEventButtonDefinition')
+export class XoDefinitionEventButtonDefinition extends XoButtonDefinition {
+
+    @XoProperty(XoDefinitionEventArray)
+    onClickEvent: XoDefinitionEventArray = new XoDefinitionEventArray();
+
+
+    getTemplate(data: Xo[]): Observable<XcTemplate> {
+        return super.getTemplate(data).pipe(tap((template: XcButtonBaseTemplate) => {
+            if (template) {
+                template.action = () => {
+                    if (this.onClickEvent?.data) {
+                        const resolvedData = this.resolveData(data);
+                        XcDefinitionEventService.eventService.triggerEventById(this.onClickEvent.data.map(e => e.eventId), resolvedData);
+                    }
+                };
+            }
+        }));
+    }
+}
+
+
+@XoArrayClass(XoDefinitionEventButtonDefinition)
+export class XoDefinitionEventButtonDefinitionArray extends XoArray<XoDefinitionEventButtonDefinition> {
 }
 
 
