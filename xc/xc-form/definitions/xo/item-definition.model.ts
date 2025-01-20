@@ -21,7 +21,7 @@ import { isArray } from '../../../../base';
 import { combineLatest, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
 
-import { Xo, XoArray, XoArrayClass, XoObjectClass, XoProperty, XoTransient } from '../../../../api';
+import { Xo, XoArray, XoArrayClass, XoObjectClass, XoProperty } from '../../../../api';
 import { XoXPRCRuntimeContext } from '../../../../api/xo/runtime-context.model';
 import { XcIdentityDataWrapper } from '../../../shared/xc-data-wrapper';
 import { XcOptionItem } from '../../../shared/xc-item';
@@ -29,7 +29,6 @@ import { XcButtonTemplate, XcButtonBaseTemplate, XcCheckboxTemplate, XcFormAutoc
 import { XcAutocompleteDataWrapper } from '../../xc-form-autocomplete/xc-form-autocomplete.component';
 import { XoBaseDefinition, XoDefinition, XoDefinitionObserver, XoDefinitionWorkflow } from './base-definition.model';
 import { XcDefinitionEventService, XoDefinitionEventArray } from '../xc-definition-event.service';
-import { inject, runInInjectionContext } from '@angular/core';
 
 
 /***********************************************
