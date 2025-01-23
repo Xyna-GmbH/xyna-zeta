@@ -95,18 +95,18 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
     }
 
 
-    @ViewChild(MatCheckbox, { static: false })
-    set checkbox(value: MatCheckbox) {
-        if (value?.ripple) {
-            // introduce property to force radius to be 20
-            defineAccessorProperty<MatRipple, number>(
-                value.ripple,
-                'radius',
-                () => 20,
-                () => { }
-            );
-        }
-    }
+    // @ViewChild(MatCheckbox, { static: false })
+    // set checkbox(value: MatCheckbox) {
+    //     if (value?.ripple) {
+    //         // introduce property to force radius to be 20
+    //         defineAccessorProperty<MatRipple, number>(
+    //             value.ripple,
+    //             'radius',
+    //             () => 20,
+    //             () => { }
+    //         );
+    //     }
+    // }
 
 
     @Input()

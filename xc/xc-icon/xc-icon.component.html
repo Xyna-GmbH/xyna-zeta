@@ -1,4 +1,4 @@
 <i *ngIf="!iconMaterial && !iconSvg && iconName" aria-hidden="true" [class]="iconClass"></i>
-<mat-icon *ngIf="iconMaterial && iconName" aria-hidden="true">{{iconName}}</mat-icon>
-<mat-icon *ngIf="iconSvg && iconName" aria-hidden="true" [svgIcon]="iconName"></mat-icon>
+<mat-icon *ngIf="iconMaterial && iconName" >{{iconName}}</mat-icon>
+<mat-icon *ngIf="iconSvg && iconName"  [svgIcon]="iconName"></mat-icon>
 <span><ng-content></ng-content></span>

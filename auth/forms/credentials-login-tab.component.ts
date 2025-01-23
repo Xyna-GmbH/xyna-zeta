@@ -24,6 +24,7 @@ import { LoginComponentData } from '../login/auth-login.component';
 
 
 @Component({
+    selector: 'credentials-login-tab',
     templateUrl: './credentials-login.component.html',
     styleUrls: ['./credentials-login.component.scss']
 })
