@@ -25,7 +25,8 @@ import { XcThemeableComponent } from '../shared/xc-themeable.component';
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class XcButtonBaseComponent extends XcThemeableComponent implements OnInit, AfterContentInit {
 

@@ -25,7 +25,8 @@ import { XcDynamicDismissableComponent } from '../shared/xc-dynamic-dismissable.
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export abstract class XcDialogComponent<R = void, D = void> extends XcDynamicDismissableComponent<R, D> {
 

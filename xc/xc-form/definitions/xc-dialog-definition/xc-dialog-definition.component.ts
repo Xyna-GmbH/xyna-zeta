@@ -27,7 +27,8 @@ import { XcDialogService } from '@zeta/xc/xc-dialog/xc-dialog.service';
 
 @Component({
     templateUrl: './xc-dialog-definition.component.html',
-    styleUrls: ['./xc-dialog-definition.component.scss']
+    styleUrls: ['./xc-dialog-definition.component.scss'],
+    standalone: false
 })
 export class XcDialogDefinitionComponent extends XcDialogComponent<Xo[], XoDefinitionBundle> implements XoDefinitionObserver {
 

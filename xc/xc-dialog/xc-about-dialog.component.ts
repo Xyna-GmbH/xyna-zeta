@@ -35,7 +35,8 @@ export interface XcAboutDialogConfig {
 
 @Component({
     templateUrl: './xc-about-dialog.component.html',
-    styleUrls: ['./xc-about-dialog.component.scss']
+    styleUrls: ['./xc-about-dialog.component.scss'],
+    standalone: false
 })
 export class XcAboutDialogComponent extends XcDialogComponent<void, XcAboutDialogConfig> {
 

@@ -35,7 +35,8 @@ import { runtimeContextSelection_translations_en_US } from './locale/runtime-con
 @Component({
     templateUrl: './runtime-context-selection.component.html',
     styleUrls: ['./runtime-context-selection.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class RuntimeContextSelectionComponent extends XcDialogComponent<RuntimeContext, RuntimeContextSelectionSettings> implements OnDestroy {
 

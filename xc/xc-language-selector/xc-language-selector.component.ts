@@ -49,7 +49,8 @@ class ComparableLanguage extends Comparable implements SelectableLanguage {
 @Component({
     selector: 'xc-language-selector',
     templateUrl: './xc-language-selector.component.html',
-    styleUrls: ['./xc-language-selector.component.scss']
+    styleUrls: ['./xc-language-selector.component.scss'],
+    standalone: false
 })
 export class XcLanguageSelectorComponent {
 

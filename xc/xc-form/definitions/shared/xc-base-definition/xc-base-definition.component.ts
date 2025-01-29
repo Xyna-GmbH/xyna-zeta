@@ -27,7 +27,8 @@ import { XoButtonDefinition, XoCheckboxDefinition, XoComponentDefinition, XoDefi
 
 @Component({
     template: '',
-    styleUrls: ['./xc-base-definition.component.scss']
+    styleUrls: ['./xc-base-definition.component.scss'],
+    standalone: false
 })
 export class XcBaseDefinitionComponent {
 

@@ -74,7 +74,8 @@ export interface XcMenu extends MatMenu, XcMenuOptions {
 @Component({
     selector: 'xc-menu',
     templateUrl: './xc-menu.component.html',
-    styleUrls: ['./xc-menu.component.scss']
+    styleUrls: ['./xc-menu.component.scss'],
+    standalone: false
 })
 export class XcMenuComponent {
 

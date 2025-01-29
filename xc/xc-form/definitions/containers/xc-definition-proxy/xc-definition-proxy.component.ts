@@ -27,7 +27,8 @@ import { XoDefinitionListDefinition, XoFormDefinition, XoFormPanelDefinition, Xo
 @Component({
     selector: 'xc-definition-proxy',
     templateUrl: './xc-definition-proxy.component.html',
-    styleUrls: ['./xc-definition-proxy.component.scss']
+    styleUrls: ['./xc-definition-proxy.component.scss'],
+    standalone: false
 })
 export class XcDefinitionProxyComponent extends XcBaseDefinitionComponent {
 

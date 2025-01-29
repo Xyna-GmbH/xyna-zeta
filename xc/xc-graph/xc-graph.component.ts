@@ -1387,7 +1387,8 @@ export class XcGraphScene {
 @Component({
     selector: 'xc-graph',
     templateUrl: './xc-graph.component.html',
-    styleUrls: ['./xc-graph.component.scss']
+    styleUrls: ['./xc-graph.component.scss'],
+    standalone: false
 })
 export class XcGraphComponent {
 

@@ -24,7 +24,8 @@ import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@ang
  * </ng-container>
  */
 @Directive({
-    selector: '[xc-var]'
+    selector: '[xc-var]',
+    standalone: false
 })
 export class XcVarDirective implements OnDestroy {
 

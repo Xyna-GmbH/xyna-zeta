@@ -21,7 +21,8 @@ import { Observable, of } from 'rxjs';
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class RouteComponent implements OnInit {
 

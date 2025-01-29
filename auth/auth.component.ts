@@ -24,7 +24,8 @@ import { authTranslations_enUS } from './locale/auth-translations.en-US';
 
 
 @Component({
-    templateUrl: './auth.component.html'
+    templateUrl: './auth.component.html',
+    standalone: false
 })
 export class AuthComponent {
 

@@ -35,7 +35,8 @@ import { XC_TAB_DATA, XcTabBarInterface, XcTabBarItem, XcTabComponent, XcTabRef 
 @Component({
     selector: 'xc-tab-bar',
     templateUrl: './xc-tab-bar.component.html',
-    styleUrls: ['./xc-tab-bar.component.scss']
+    styleUrls: ['./xc-tab-bar.component.scss'],
+    standalone: false
 })
 export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarInterface, AfterViewInit {
 

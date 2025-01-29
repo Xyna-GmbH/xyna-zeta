@@ -25,7 +25,8 @@ export interface XcDialogOptions {
 @Component({
     selector: 'xc-dialog-wrapper',
     templateUrl: './xc-dialog-wrapper.component.html',
-    styleUrls: ['./xc-dialog-wrapper.component.scss']
+    styleUrls: ['./xc-dialog-wrapper.component.scss'],
+    standalone: false
 })
 export class XcDialogWrapperComponent implements AfterViewInit {
 

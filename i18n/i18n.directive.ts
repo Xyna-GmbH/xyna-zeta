@@ -46,7 +46,8 @@ export abstract class XcI18nBase {
 
 
 @Directive({
-    selector: '[xc-i18n-context]'
+    selector: '[xc-i18n-context]',
+    standalone: false
 })
 export class XcI18nContextDirective extends XcI18nBase implements OnInit {
 
@@ -75,7 +76,8 @@ export class XcI18nContextDirective extends XcI18nBase implements OnInit {
 
 
 @Directive({
-    selector: '[xc-i18n]'
+    selector: '[xc-i18n]',
+    standalone: false
 })
 export class XcI18nTranslateDirective extends XcI18nBase implements OnInit {
 

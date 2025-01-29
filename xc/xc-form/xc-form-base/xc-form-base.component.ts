@@ -33,7 +33,8 @@ export enum FloatStyle {
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class XcFormComponent implements AfterContentInit {
 
@@ -131,7 +132,8 @@ export class XcFormComponent implements AfterContentInit {
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class XcFormBaseComponent extends XcFormComponent implements AfterContentInit {
 

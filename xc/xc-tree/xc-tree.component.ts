@@ -66,7 +66,8 @@ export interface XcTreeObserver {
     selector: 'xc-tree',
     templateUrl: './xc-tree.component.html',
     styleUrls: ['./xc-tree.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcTreeComponent implements OnDestroy {
 

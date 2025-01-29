@@ -24,7 +24,8 @@ import { XcUnwrapDirective } from '../../../../shared/xc-unwrap.directive';
  * Additionally wraps children into dt/dd, if they aren't such
  */
 @Directive({
-    selector: '[xc-dl-unwrap]'
+    selector: '[xc-dl-unwrap]',
+    standalone: false
 })
 export class XcDefinitionListUnwrapDirective extends XcUnwrapDirective {
 

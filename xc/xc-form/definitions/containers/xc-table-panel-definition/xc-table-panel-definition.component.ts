@@ -33,7 +33,8 @@ import { XcFormPanelDefinitionComponent } from '../xc-form-panel-definition/xc-f
 @Component({
     selector: 'xc-table-panel-definition',
     templateUrl: './xc-table-panel-definition.component.html',
-    styleUrls: ['./xc-table-panel-definition.component.scss']
+    styleUrls: ['./xc-table-panel-definition.component.scss'],
+    standalone: false
 })
 export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionComponent implements OnDestroy {
 

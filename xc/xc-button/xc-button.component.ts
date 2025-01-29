@@ -23,7 +23,8 @@ import { XcButtonBaseComponent } from './xc-button-base.component';
 @Component({
     selector: 'xc-button',
     templateUrl: './xc-button.component.html',
-    styleUrls: ['./xc-button-base.component.scss', './xc-button.component.scss']
+    styleUrls: ['./xc-button-base.component.scss', './xc-button.component.scss'],
+    standalone: false
 })
 export class XcButtonComponent extends XcButtonBaseComponent implements OnInit, AfterContentInit {
 

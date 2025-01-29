@@ -39,7 +39,8 @@ import { XcTableColumn, XcTableDataSource } from './xc-table-data-source';
     selector: 'xc-table',
     templateUrl: './xc-table.component.html',
     styleUrls: ['./xc-table.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcTableComponent implements AfterViewInit, OnDestroy {
 

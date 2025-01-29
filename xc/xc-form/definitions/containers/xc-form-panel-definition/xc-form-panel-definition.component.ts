@@ -24,7 +24,8 @@ import { XcFormDefinitionComponent } from '../xc-form-definition/xc-form-definit
 @Component({
     selector: 'xc-form-panel-definition',
     templateUrl: './xc-form-panel-definition.component.html',
-    styleUrls: ['./xc-form-panel-definition.component.scss']
+    styleUrls: ['./xc-form-panel-definition.component.scss'],
+    standalone: false
 })
 export class XcFormPanelDefinitionComponent extends XcFormDefinitionComponent {
 

@@ -46,7 +46,8 @@ type XcPreviousTooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before'
 
 
 @Directive({
-    selector: '[xc-tooltip]'
+    selector: '[xc-tooltip]',
+    standalone: false
 })
 export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
 

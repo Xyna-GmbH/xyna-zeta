@@ -48,7 +48,8 @@ export interface XcNavListItem extends XcItem {
             })),
             transition('* => *', animate('0ms ease-in'))
         ])
-    ]
+    ],
+    standalone: false
 })
 export class XcNavListItemComponent extends XcThemeableComponent implements OnInit {
 

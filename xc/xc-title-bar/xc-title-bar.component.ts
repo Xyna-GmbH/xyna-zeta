@@ -27,7 +27,8 @@ import packageInfo from '../../package.json';
 @Component({
     selector: 'xc-title-bar',
     templateUrl: './xc-title-bar.component.html',
-    styleUrls: ['./xc-title-bar.component.scss']
+    styleUrls: ['./xc-title-bar.component.scss'],
+    standalone: false
 })
 export class XcTitleBarComponent {
 

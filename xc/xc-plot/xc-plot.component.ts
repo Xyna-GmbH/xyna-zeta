@@ -29,7 +29,8 @@ import { XcPlotDataSource } from './xc-plot-data-source';
 @Component({
     selector: 'xc-plot',
     templateUrl: './xc-plot.component.html',
-    styleUrls: ['./xc-plot.component.scss']
+    styleUrls: ['./xc-plot.component.scss'],
+    standalone: false
 })
 export class XcPlotComponent implements OnDestroy, XcCanvasController, XcCanvasObserver {
 

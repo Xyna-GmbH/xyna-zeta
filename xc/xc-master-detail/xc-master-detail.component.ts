@@ -30,7 +30,8 @@ type XcMasterDetailPosition     = 'start' | 'end';
 @Component({
     selector: 'xc-master-detail',
     templateUrl: './xc-master-detail.component.html',
-    styleUrls: ['./xc-master-detail.component.scss']
+    styleUrls: ['./xc-master-detail.component.scss'],
+    standalone: false
 })
 export class XcMasterDetailComponent {
 

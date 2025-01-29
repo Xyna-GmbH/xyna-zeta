@@ -33,7 +33,8 @@ export interface XcStatusBarDialogData {
 
 @Component({
     templateUrl: './xc-status-bar-dialog.component.html',
-    styleUrls: ['./xc-status-bar-dialog.component.scss']
+    styleUrls: ['./xc-status-bar-dialog.component.scss'],
+    standalone: false
 })
 export class XcStatusBarDialogComponent extends XcDialogComponent<boolean, XcStatusBarDialogData> {
 

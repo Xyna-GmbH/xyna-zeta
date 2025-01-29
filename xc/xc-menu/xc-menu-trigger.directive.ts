@@ -23,7 +23,8 @@ import { XcMenu, XcMenuComponent } from './xc-menu.component';
 
 
 @Directive({
-    selector: '[xc-menu-trigger]'
+    selector: '[xc-menu-trigger]',
+    standalone: false
 })
 export class XcMenuTriggerDirective extends MatMenuTrigger {
 

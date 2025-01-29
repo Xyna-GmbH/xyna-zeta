@@ -28,7 +28,8 @@ import { XC_RICH_LIST_ITEM_DATA, XcRichListInterface, XcRichListItem, XcRichList
 @Component({
     selector: 'xc-rich-list',
     templateUrl: './xc-rich-list.component.html',
-    styleUrls: ['./xc-rich-list.component.scss']
+    styleUrls: ['./xc-rich-list.component.scss'],
+    standalone: false
 })
 export class XcRichListComponent extends XcThemeableComponent implements XcRichListInterface {
     private _componentOutlets: QueryList<NgComponentOutlet>;
