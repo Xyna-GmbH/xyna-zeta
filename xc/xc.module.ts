@@ -51,8 +51,10 @@ import { XcTablePanelDefinitionComponent } from './xc-form/definitions/container
 import { XcTreePanelDefinitionComponent } from './xc-form/definitions/containers/xc-tree-panel-definition/xc-tree-panel-definition.component';
 import { XcBaseDefinitionComponent } from './xc-form/definitions/shared/xc-base-definition/xc-base-definition.component';
 import { XcFormGenericPanelComponent } from './xc-form/definitions/shared/xc-form-generic-panel/xc-form-generic-panel.component';
+import { XcDefinitionEventService } from './xc-form/definitions/xc-definition-event.service';
 import { XcDefinitionStackItemComponent } from './xc-form/definitions/xc-definition-stack/xc-definition-stack-item/xc-definition-stack-item.component';
 import { XcDefinitionStackMasterComponent } from './xc-form/definitions/xc-definition-stack/xc-definition-stack-master/xc-definition-stack-master.component';
+import { XcDialogDefinitionComponent } from './xc-form/definitions/xc-dialog-definition/xc-dialog-definition.component';
 import { XcFormAutocompleteComponent } from './xc-form/xc-form-autocomplete/xc-form-autocomplete.component';
 import { XcFormBaseComponent, XcFormComponent } from './xc-form/xc-form-base/xc-form-base.component';
 import { XcFormBaseInputComponent } from './xc-form/xc-form-base/xc-form-baseinput.component';
@@ -93,8 +95,6 @@ import { XcReadonlyTreeComponent } from './xc-tree/xc-readonly-tree/xc-readonly-
 import { XcTreeItemComponent } from './xc-tree/xc-readonly-tree/xc-tree-item/xc-tree-item.component';
 import { XcTreeComponent } from './xc-tree/xc-tree.component';
 import { XcWebGLComponent } from './xc-webgl/xc-webgl.component';
-import { XcDialogDefinitionComponent } from './xc-form/definitions/xc-dialog-definition/xc-dialog-definition.component';
-import { XcDefinitionEventService } from './xc-form/definitions/xc-definition-event.service';
 
 
 @NgModule({
@@ -217,7 +217,6 @@ import { XcDefinitionEventService } from './xc-form/definitions/xc-definition-ev
         XcCheckboxComponent,
         XcConfirmDialogComponent,
         XcContentEditableDirective,
-        XcDefinitionListEntryComponent,
         XcDialogWrapperComponent,
         XcDragDirective,
         XcFormAutocompleteComponent,
@@ -281,6 +280,7 @@ import { XcDefinitionEventService } from './xc-form/definitions/xc-definition-ev
         // Workflow-defined UI
         XcBaseDefinitionComponent,
         XcDefinitionListDefinitionComponent,
+        XcDefinitionListEntryComponent,
         XcDefinitionListUnwrapDirective,
         XcDefinitionProxyComponent,
         XcFormDefinitionComponent,
