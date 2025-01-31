@@ -89,8 +89,7 @@ const rules = {
                                 message: 'The name of a class decorated by XoObjectClass must start with \'Xo\'.'
                             });
                         }
-                    }
-                    else if ((decorator = getDecorator(node, XO_ARRAY_DECORATOR_NAME))) {
+                    } else if ((decorator = getDecorator(node, XO_ARRAY_DECORATOR_NAME))) {
                         decoratorClass = XO_ARRAY_DECORATOR_NAME;
                         const superTypeParameter = node.superTypeParameters
                             ? node.superTypeParameters.params[0]
@@ -203,6 +202,6 @@ const rules = {
 
 
 // eslint-disable-next-line no-undef
-module.exports = {
+export default {
     rules
 };

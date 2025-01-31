@@ -518,7 +518,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
             document.addEventListener('pointerlockerror', lockErrFunc, false);
             document.addEventListener('pointerlockchange', lockedTestFunc);
 
-            this.canvas.requestPointerLock();
+            this.canvas.requestPointerLock().catch(lockErrFunc);
         } else {
             lockErrFunc();
         }
