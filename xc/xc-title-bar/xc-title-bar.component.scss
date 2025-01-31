@@ -43,7 +43,7 @@ $xc-title-bar-content-padding: unset !default;
 $xc-title-bar-meta-nav-margin: unset !default;
 $xc-title-bar-meta-nav-padding: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 :host {
     height: $xc-title-bar-height;

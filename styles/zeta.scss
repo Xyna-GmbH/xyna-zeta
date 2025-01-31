@@ -18,7 +18,7 @@
 $xc-scrollbar-color: unset !default;
 $xc-scrollbar-background-color: unset !default;
 
-@import '../const';
+@use '../const' as *;
 @import '../xc/xc-tooltip/xc-tooltip.directive';
 
 

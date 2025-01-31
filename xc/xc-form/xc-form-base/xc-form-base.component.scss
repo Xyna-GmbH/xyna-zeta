@@ -51,7 +51,6 @@ $xc-form-base-input-changeindicator-color: unset !default;
 
 $xc-form-base-textarea-padding: unset !default;
 $xc-form-base-textarea-line-height: unset !default;
-$font-family-regular: unset !default;
 
 /* exported consts such that other components can read */
 
@@ -60,7 +59,7 @@ $suffix-icon-height: 24px;
 
 
 @use "sass:math";
-@import 'const';
+@use '../../../const' as *;
 
 
 :host::ng-deep {

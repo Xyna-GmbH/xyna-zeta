@@ -23,7 +23,7 @@ $xc-nav-list-item-separation-space: unset !default;
 $xc-nav-list-item-horizontal-active-indicator-width: unset !default;
 $xc-nav-list-item-vertical-active-indicator-width: unset !default;
 
-@import 'const';
+@use '../../../const' as *;
 
 @each $key, $value in $color-map {
     :host[color="#{$key}"] a.active {

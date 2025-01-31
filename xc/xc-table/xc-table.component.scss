@@ -51,7 +51,7 @@ $xc-table-body-border-color-focus: unset !default;
 $xc-scrollbar-color: unset !default;
 $xc-scrollbar-background-color: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 
 :host {

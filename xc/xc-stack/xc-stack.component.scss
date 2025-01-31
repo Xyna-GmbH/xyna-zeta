@@ -19,7 +19,7 @@ $xc-stack-background-color: unset !default;
 $xc-stack-breadcrumb-area-background-color: unset !default;
 $xc-stack-breadcrumb-max-width: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 
 :host {

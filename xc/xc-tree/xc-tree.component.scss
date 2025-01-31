@@ -19,7 +19,7 @@ $xc-tree-label-color: unset !default;
 $xc-tree-label-color-disabled: unset !default;
 
 
-@import 'const';
+@use '../../const' as *;
 
 
 $template-width: 256px;

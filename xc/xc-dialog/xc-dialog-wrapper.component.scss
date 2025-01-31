@@ -14,7 +14,7 @@ $xc-dialog-box-shadow : unset !default;
 
 $resizable: var(--resizable);
 
-@import 'const';
+@use '../../const' as *;
 
 ::ng-deep mat-dialog-container.mat-mdc-dialog-container {
     box-shadow: none;

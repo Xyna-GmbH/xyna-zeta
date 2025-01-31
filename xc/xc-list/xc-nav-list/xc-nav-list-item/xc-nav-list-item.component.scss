@@ -33,7 +33,7 @@ $xc-nav-list-item-background-color-focus: unset !default;
 $xc-nav-list-item-margin: unset !default;
 $xc-nav-list-item-height: unset !default;
 
-@import 'const';
+@use '../../../../const' as *;
 
 :host {
     flex-shrink: 0;

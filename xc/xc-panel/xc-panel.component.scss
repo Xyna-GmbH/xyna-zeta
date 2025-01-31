@@ -45,7 +45,7 @@ $xc-sub-panel-padding: unset !default;
 $xc-sub-panel-color: unset !default;
 $xc-sub-panel-background-color: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 :host {
     display: flex;

@@ -28,7 +28,7 @@ $xc-button-line-height: unset !default;
 $xc-button-font-style: unset !default;
 $xc-button-transition: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 :host {
 

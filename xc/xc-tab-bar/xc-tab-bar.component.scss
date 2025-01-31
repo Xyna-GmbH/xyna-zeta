@@ -32,7 +32,7 @@ $xc-tab-bar-content-top-border-width: unset !default;
 $xc-tab-bar-content-top-border-color: unset !default;
 $xc-tab-bar-content-background-color: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 @each $key, $value in $color-map {
     :host[color="#{$key}"]::ng-deep .mat-mdc-tab-group .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-list .mat-mdc-tab-labels .mat-mdc-tab.mdc-tab--active {

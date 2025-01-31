@@ -20,7 +20,7 @@
  $xc-form-base-input-label-text-transform: unset !default;
  
  
- @import 'const';
+ @use '../../../const' as *;
  
  
  :host {
