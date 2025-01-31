@@ -44,7 +44,7 @@ $xc-menu-item-arrow-color: unset !default;
 
 @use '@angular/material' as mat;
 
-@import 'const';
+@import '../const';
 // @import '@angular/material/theming';
 
 .mat-icon {
