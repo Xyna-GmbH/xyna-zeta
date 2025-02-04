@@ -109,7 +109,7 @@ export class XcStructureTreeDataSource extends XcBaseStructureTreeDataSource {
             () => this.triggerMarkForChange()
         );
         templates.filter(template => template instanceof XcFormTemplate).forEach(template => {
-            (template as XcFormTemplate<any, any, any>).floatLabel = FloatStyle.always;
+            template.floatLabel = FloatStyle.always;
 
             /**
              * @todo fixme: With FloatStyle.never, the label is used as a placeholder.

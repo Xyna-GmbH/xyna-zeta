@@ -24,6 +24,7 @@ import { LoginComponentData } from '../login/auth-login.component';
 
 
 @Component({
+    selector: 'workflow-login',
     templateUrl: './workflow-login.component.html',
     styleUrls: ['./workflow-login.component.scss']
 })

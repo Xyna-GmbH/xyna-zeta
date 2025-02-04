@@ -15,13 +15,12 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { AfterContentInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MatRipple } from '@angular/material/core';
+import { AfterContentInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { XcI18nTranslateDirective } from '@zeta/i18n/i18n.directive';
 
-import { coerceBoolean, defineAccessorProperty } from '../../base';
+import { coerceBoolean } from '../../base';
 import { I18nService } from '../../i18n';
 import { ATTRIBUTE_LABEL } from '../shared/xc-i18n-attributes';
 import { XcThemeableComponent } from '../shared/xc-themeable.component';
@@ -92,20 +91,6 @@ export class XcCheckboxComponent extends XcThemeableComponent implements OnInit,
 
     get labelRef(): string {
         return this._labelRef;
-    }
-
-
-    @ViewChild(MatCheckbox, { static: false })
-    set checkbox(value: MatCheckbox) {
-        if (value?.ripple) {
-            // introduce property to force radius to be 20
-            defineAccessorProperty<MatRipple, number>(
-                value.ripple,
-                'radius',
-                () => 20,
-                () => { }
-            );
-        }
     }
 
 

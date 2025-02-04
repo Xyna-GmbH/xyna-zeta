@@ -17,21 +17,23 @@
  */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 
+import { Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
+
+import { ApiService, StartOrderOptionsBuilder } from '../../../../../api';
 import { RouteComponent } from '../../../../../nav/route.component';
 import { XcStackDataSource } from '../../../../xc-stack/xc-stack-data-source';
-import { ApiService, StartOrderOptionsBuilder } from '../../../../../api';
-import { XoFormDefinition } from '../../xo/containers.model';
 import { XcStackItem } from '../../../../xc-stack/xc-stack-item/xc-stack-item';
 import { XcComponentTemplate } from '../../../../xc-template/xc-template';
-import { XcDefinitionStackItemComponent, DefinitionStackItemComponentData } from '../xc-definition-stack-item/xc-definition-stack-item.component';
+import { XoFormDefinition } from '../../xo/containers.model';
+import { DefinitionStackItemComponentData, XcDefinitionStackItemComponent } from '../xc-definition-stack-item/xc-definition-stack-item.component';
 
 
 @Component({
+    selector: 'xc-definition-stack-master',
     templateUrl: './xc-definition-stack-master.component.html',
     styleUrls: ['./xc-definition-stack-master.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

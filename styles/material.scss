@@ -76,10 +76,10 @@ $xc-menu-item-arrow-color: unset !default;
 @include mat.core();
 
 // $xyna-palette: mat-palette($mat-grey);
-$xyna-palette: mat.define-palette(mat.$grey-palette);
-$xyna-theme-dark: mat.define-dark-theme((color: (primary: $xyna-palette,
+$xyna-palette: mat.m2-define-palette(mat.$m2-grey-palette);
+$xyna-theme-dark: mat.m2-define-dark-theme((color: (primary: $xyna-palette,
                 accent: $xyna-palette ),
-            typography: mat.define-typography-config(),
+            typography: mat.m2-define-typography-config(),
             density: 0));
 @include mat.all-component-themes($xyna-theme-dark);
 
