@@ -27,7 +27,7 @@
         <xc-icon [xc-icon-name]="item.icon" [xc-icon-style]="item.iconStyle" [xc-icon-size]="size">{{shrink ? '' : item.name}}</xc-icon>
     </a>
     <ul *ngIf="!shrink" [@toggleAnimation]="toggleAnimation" [attr.id]="uniquePanelId"
-        [attr.aria-label]="'Menü mit ' + item.children.length + ' Elementen'">
+        [attr.aria-label]="ariaLabel">
         <li *ngFor="let child of item.children; let i = index">
             <xc-nav-list-item
                     [attr.id]="'xc-nav-list-item-depth-' + (depth+1) + '-' + i"

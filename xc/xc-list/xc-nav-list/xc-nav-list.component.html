@@ -1,5 +1,5 @@
 <mat-nav-list>
-    <ul [attr.aria-label]="'Menü  mit  ' + items.length + ' Elementen'">
+    <ul [attr.aria-label]="ariaLabel">
         <li *ngFor="let item of items">
             <xc-nav-list-item
                     [item]="item"
