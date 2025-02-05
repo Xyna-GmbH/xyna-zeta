@@ -15,20 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-form-dropdown-border-width: unset !default;
-$xc-form-dropdown-border-color: unset !default;
-$xc-form-dropdown-border-color-focus: unset !default;
-$xc-form-dropdown-border-color-disabled: unset !default;
-$xc-form-dropdown-border-color-hover: unset !default;
-$xc-form-dropdown-border-color-active: unset !default;
 
-$xc-form-dropdown-background-color: unset !default;
-$xc-form-dropdown-background-color-focus: unset !default;
-$xc-form-dropdown-background-color-disabled: unset !default;
-$xc-form-dropdown-background-color-hover: unset !default;
-$xc-form-dropdown-background-color-active: unset !default;
-
-
+@use '../../../const' as *;
 @use '../xc-form-base/xc-form-base.component' as *;
 
 

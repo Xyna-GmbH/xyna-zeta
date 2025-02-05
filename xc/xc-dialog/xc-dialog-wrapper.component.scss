@@ -1,17 +1,3 @@
-$xc-dialog-title-color : unset !default;
-$xc-dialog-title-background-color: unset !default;
-
-$xc-dialog-content-color : unset !default;
-$xc-dialog-content-background-color: unset !default;
-$xc-dialog-content-border : unset !default;
-
-$xc-dialog-footer-color : unset !default;
-$xc-dialog-footer-background-color: unset !default;
-
-$xc-dialog-border-radius : unset !default;
-
-$xc-dialog-box-shadow : unset !default;
-
 $resizable: var(--resizable);
 
 @use '../../const' as *;

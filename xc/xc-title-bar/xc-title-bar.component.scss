@@ -15,33 +15,6 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-title-bar-box-shadow-color: unset !default;
-$xc-title-bar-box-shadow-visible: unset !default; // boolean
-$xc-title-bar-background-color: unset !default;
-$xc-title-bar-logo-background: unset !default;
-$xc-title-bar-logo-hidden: unset !default; // boolean
-$xc-title-bar-title-color: unset !default;
-
-$xc-title-bar-border-bottom-width: unset !default;
-$xc-title-bar-border-bottom-color: unset !default;
-$xc-title-bar-border-top-width: unset !default;
-$xc-title-bar-border-top-color: unset !default;
-$xc-title-bar-border-left-width: unset !default;
-$xc-title-bar-border-left-color: unset !default;
-$xc-title-bar-border-right-width: unset !default;
-$xc-title-bar-border-right-color: unset !default;
-$xc-title-bar-height: unset !default;
-$xc-title-bar-wrapper-width: unset !default;
-$xc-title-bar-title-font-family: unset !default;
-$xc-title-bar-title-font-style: unset !default;
-$xc-title-bar-title-font-size: unset !default;
-$xc-title-bar-title-text-transform: unset !default;
-$xc-title-bar-title-margin: unset !default;
-$xc-title-bar-title-padding: unset !default;
-$xc-title-bar-content-margin: unset !default;
-$xc-title-bar-content-padding: unset !default;
-$xc-title-bar-meta-nav-margin: unset !default;
-$xc-title-bar-meta-nav-padding: unset !default;
 
 @use '../../const' as *;
 

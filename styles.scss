@@ -15,6 +15,6 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@import 'styles/material';
-@import 'styles/reset';
-@import 'styles/zeta';
+@use 'styles/material' as *;
+@use 'styles/reset' as *;
+@use 'styles/zeta' as *;
