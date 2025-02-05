@@ -15,13 +15,14 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 
 import { XcBaseDefinitionComponent } from '../../shared/xc-base-definition/xc-base-definition.component';
 import { XoFormDefinition } from '../../xo/containers.model';
 import { XcDefinitionEventService } from '../../xc-definition-event.service';
-import { XoBaseDefinitionArray } from '../../xo/base-definition.model';
+import { XoBaseDefinition, XoBaseDefinitionArray } from '../../xo/base-definition.model';
 import { filter, Subscription } from 'rxjs';
+import { XoArray } from '@zeta/api';
 
 
 @Component({
@@ -32,6 +33,7 @@ import { filter, Subscription } from 'rxjs';
 export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 
     protected readonly eventService: XcDefinitionEventService = inject<XcDefinitionEventService>(XcDefinitionEventService);
+    protected readonly cdr: ChangeDetectorRef = inject<ChangeDetectorRef>(ChangeDetectorRef);
     private eventSubscription: Subscription;
 
     @Input('xc-form-definition')
@@ -49,9 +51,19 @@ export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
         this.eventSubscription?.unsubscribe();
         if (this.formDefinition.triggerChangeChildren?.eventId) {
             this.eventSubscription = this.eventService.getDefinitionEventPayloadById(this.formDefinition.triggerChangeChildren?.eventId).pipe(filter(
-                payload => payload.length === 1 && payload[0] instanceof XoBaseDefinitionArray
+                payload => payload && payload.length > 0
             )).subscribe(
-                payload => this.formDefinition.children = payload[0] as XoBaseDefinitionArray
+                payload => {
+                    if (payload[0] && payload[0] instanceof XoArray) {
+                        if (payload[0].data.every(value => value instanceof XoBaseDefinition)) {
+                            this.formDefinition.setChildren(payload[0].clone() as XoBaseDefinitionArray);
+                        }
+                    }
+                    if (payload.length > 1) {
+                        this.definitionDataUnpacked = payload.slice(1);
+                    }
+                    this.cdr.markForCheck();
+                }
             );
         }
     }

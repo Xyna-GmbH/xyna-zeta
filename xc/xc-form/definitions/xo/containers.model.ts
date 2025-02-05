@@ -50,6 +50,14 @@ export class XoContainerDefinition extends XoBaseDefinition {
         }
     }
 
+    setChildren(children: XoBaseDefinitionArray) {
+        this.clearChildren();
+        this.children = children;
+        if (this.children) {
+            this.children.data.forEach(child => child.setParent(this));
+        }
+    }
+
 
     setObserver(value: XoDefinitionObserver) {
         super.setObserver(value);
