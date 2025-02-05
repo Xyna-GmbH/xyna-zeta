@@ -18,15 +18,7 @@
 
 $theme: xyna;
 
-//======================================================================
-// Theme Variables (don't use within components!)
-//======================================================================
-
-$color-white: #fff;
-$color-black: #000;
-
-$color-white-overlay: rgba($color-white, .1);
-$color-black-overlay: rgba($color-black, .1);
+@use "theme-variables" as *;
 
 //======================================================================
 // Variables (use within components!)
