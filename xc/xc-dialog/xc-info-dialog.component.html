@@ -1,16 +1,17 @@
 <xc-dialog-wrapper [draggable]="draggable" [resizable]="resizable" [xc-dialog-options]="dialogOptions" xc-i18n-context="zeta.xc-dialog.info-dialog">
-    <ng-container header>{{ title }}</ng-container>
-    <section content>
-        <div id="xc-info-dialog-message-container">{{ message }}</div>
-        <xc-button
-            *ngIf="details"
-            class="show-details-button"
-            (click)="detailSection.hidden = !detailSection.hidden"
-            color="normal"
-        >{{(detailSection.hidden ? 'show-button' : 'hide-button') | xcI18n}}</xc-button>
-        <pre class="details zeta-scrollbar" #detailSection hidden="true">{{ details }}</pre>
-    </section>
-    <ng-container footer>
-        <xc-button xc-i18n (click)="dismiss()">ok-button</xc-button>
-    </ng-container>
+  <ng-container header>{{ title }}</ng-container>
+  <section content>
+    <div id="xc-info-dialog-message-container">{{ message }}</div>
+    @if (details) {
+      <xc-button
+        class="show-details-button"
+        (click)="detailSection.hidden = !detailSection.hidden"
+        color="normal"
+      >{{(detailSection.hidden ? 'show-button' : 'hide-button') | xcI18n}}</xc-button>
+    }
+    <pre class="details zeta-scrollbar" #detailSection hidden="true">{{ details }}</pre>
+  </section>
+  <ng-container footer>
+    <xc-button xc-i18n (click)="dismiss()">ok-button</xc-button>
+  </ng-container>
 </xc-dialog-wrapper>

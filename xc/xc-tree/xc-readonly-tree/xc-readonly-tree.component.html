@@ -1,7 +1,9 @@
-<xc-tree-item *ngFor="let node of dataSource.structureTreeData"
+@for (node of dataSource.structureTreeData; track node) {
+  <xc-tree-item
     [node]="node"
     (expand)="expandNode($event)"
     [xc-tree-item-keep-breaks]="keepBreaks"
     [firstColumnWidth]="firstColumnWidth"
     (widthChange)="widthChange($event)"
-></xc-tree-item>
+  ></xc-tree-item>
+}

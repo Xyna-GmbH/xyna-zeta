@@ -1,19 +1,25 @@
 <div class="path-row" xc-i18n-context="zeta.xc-path-browser">
-    <xc-button (click)="select(null)" xc-i18n>button-root</xc-button>
-    <xc-form-input [value]="currentPath" disabled xc-form-field-compact></xc-form-input>
+  <xc-button (click)="select(null)" xc-i18n>button-root</xc-button>
+  <xc-form-input [value]="currentPath" disabled xc-form-field-compact></xc-form-input>
 </div>
-<div *ngIf="currentItem" class="wrapper">
+@if (currentItem) {
+  <div class="wrapper">
     <div class="label-wrapper">
-        <label class="label">{{currentItem.name}}</label>
+      <label class="label">{{currentItem.name}}</label>
     </div>
     <div class="path-options">
-        <span *ngFor="let parent of parentsFromPath()"
-            (dblclick)="select(parent)"
-            class="option parent-option"
+      @for (parent of parentsFromPath(); track parent) {
+        <span
+          (dblclick)="select(parent)"
+          class="option parent-option"
         >.. ({{parent.name}})</span>
-        <span *ngFor="let child of currentItem.children"
-            (dblclick)="select(child)"
-            class="option child-option"
+      }
+      @for (child of currentItem.children; track child) {
+        <span
+          (dblclick)="select(child)"
+          class="option child-option"
         >{{child.name}}</span>
+      }
     </div>
-</div>
+  </div>
+}

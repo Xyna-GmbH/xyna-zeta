@@ -1,114 +1,130 @@
 <table mat-table [dataSource]="dataSource" matSort [matSortDisabled]="!allowSort" matSortDirection="asc" [attr.aria-rowcount]="dataSource?.rows.length + 3">
 
-    <!-- Here, container templates are being defined and used later in the actual inner template view of the table -->
-    <!-- matColumnDef of the ng-container defines the name which is referenced by *matHeaderRowDef, *matRowDef later on -->
+  <!-- Here, container templates are being defined and used later in the actual inner template view of the table -->
+  <!-- matColumnDef of the ng-container defines the name which is referenced by *matHeaderRowDef, *matRowDef later on -->
 
-    <!-- Rendering progress bar while refreshing -->
-    <ng-container matColumnDef="$progress">
-        <th mat-header-cell *matHeaderCellDef [attr.colspan]="columns.length">
-            <div style="position: absolute; top: 0; width: 100%; height: 4px; z-index: 100;">
-                <xc-progress-bar *ngIf="refreshing" color="primary"></xc-progress-bar>
-            </div>
-        </th>
-    </ng-container>
+  <!-- Rendering progress bar while refreshing -->
+  <ng-container matColumnDef="$progress">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="columns.length">
+      <div style="position: absolute; top: 0; width: 100%; height: 4px; z-index: 100;">
+        @if (refreshing) {
+          <xc-progress-bar color="primary"></xc-progress-bar>
+        }
+      </div>
+    </th>
+  </ng-container>
 
-    <!-- Rendering an overlay box while refreshing -->
-    <ng-container matColumnDef="$overlay">
-        <th #overlay role="presentation" mat-header-cell *matHeaderCellDef [attr.colspan]="columns.length">
-            <div *ngIf="refreshing" class="overlay" [style.width]="overlay.clientWidth + 'px'"></div>
-        </th>
-    </ng-container>
+  <!-- Rendering an overlay box while refreshing -->
+  <ng-container matColumnDef="$overlay">
+    <th #overlay role="presentation" mat-header-cell *matHeaderCellDef [attr.colspan]="columns.length">
+      @if (refreshing) {
+        <div class="overlay" [style.width]="overlay.clientWidth + 'px'"></div>
+      }
+    </th>
+  </ng-container>
 
-    <!-- Rendering footer -->
-    <ng-container matColumnDef="$more">
-        <td mat-footer-cell *matFooterCellDef [attr.no-data]="noData || undefined" [attr.colspan]="columns.length">
-            <div>
-                <label *ngIf="dataSource?.showFooterLabels" class="left">{{dataSource?.footerLabelLeft}}</label>
-                <xc-icon-button *ngIf="dataSource?.moreDataAvailable && !noData" xc-icon-name="arrowdown" (click)="loadMoreData()"></xc-icon-button>
-                <label *ngIf="dataSource?.showFooterLabels" class="right">{{dataSource?.footerLabelRight}}</label>
-            </div>
-        </td>
-    </ng-container>
-    <!-- Container template view of a table body row -->
-    <ng-container *ngFor="let column of columns; let i=index" [matColumnDef]="getColumnID(column)">
-        <th mat-header-cell *matHeaderCellDef attr.aria-label="{{i18n.translate(column.name)}}" scope="col">
-            <span mat-sort-header [disabled]="column.disableSort">{{i18n.translate(column.name) || '&nbsp;'}}</span>
-            <div class="filter-container">
-                <xc-template
-                    *ngIf="allowFilter"
-                    [xc-template-instance]="getColumnFilterTemplate(column)"
-                    [xc-template-aria-label]="getColumnFilterAriaLabel(column.name)"
-                ></xc-template>
-            </div>
-        </th>
-        <td mat-cell *matCellDef="let row;"
-            role="cell"
-            (click)="selectCell(row, column.path, $event.ctrlKey || $event.metaKey, $event.shiftKey)"
-            [ngClass]="getCellStyles(row, column.path)"
-            [class.selected]="isCellSelected(row, column.path)"
-            [class.shrink]="column.shrink"
-            [class.break]="column.break"
-            [class.pre]="column.pre"
-            [attr.aria-label]="getCellData(row, column.path) ? (i18n.translate(column.name)) : null"
+  <!-- Rendering footer -->
+  <ng-container matColumnDef="$more">
+    <td mat-footer-cell *matFooterCellDef [attr.no-data]="noData || undefined" [attr.colspan]="columns.length">
+      <div>
+        @if (dataSource?.showFooterLabels) {
+          <label class="left">{{dataSource?.footerLabelLeft}}</label>
+        }
+        @if (dataSource?.moreDataAvailable && !noData) {
+          <xc-icon-button xc-icon-name="arrowdown" (click)="loadMoreData()"></xc-icon-button>
+        }
+        @if (dataSource?.showFooterLabels) {
+          <label class="right">{{dataSource?.footerLabelRight}}</label>
+        }
+      </div>
+    </td>
+  </ng-container>
+  <!-- Container template view of a table body row -->
+  @for (column of columns; track column; let i = $index) {
+    <ng-container [matColumnDef]="getColumnID(column)">
+      <th mat-header-cell *matHeaderCellDef attr.aria-label="{{i18n.translate(column.name)}}" scope="col">
+        <span mat-sort-header [disabled]="column.disableSort">{{i18n.translate(column.name) || '&nbsp;'}}</span>
+        <div class="filter-container">
+          @if (allowFilter) {
+            <xc-template
+              [xc-template-instance]="getColumnFilterTemplate(column)"
+              [xc-template-aria-label]="getColumnFilterAriaLabel(column.name)"
+            ></xc-template>
+          }
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let row;"
+        role="cell"
+        (click)="selectCell(row, column.path, $event.ctrlKey || $event.metaKey, $event.shiftKey)"
+        [ngClass]="getCellStyles(row, column.path)"
+        [class.selected]="isCellSelected(row, column.path)"
+        [class.shrink]="column.shrink"
+        [class.break]="column.break"
+        [class.pre]="column.pre"
+        [attr.aria-label]="getCellData(row, column.path) ? (i18n.translate(column.name)) : null"
         >
-            <ng-container *xc-var="getCellData(row, column.path); let cellData">
-
-                <!-- ngIf = displays cellData xc-templates if it is an Array -->
-                <ng-container *ngIf="cellData?.constructor?.name === 'Array'; else textTemplate">
-                    <div class="template-container">
-                        <xc-template *ngFor="let template of cellData" [xc-template-instance]="template"></xc-template>
-                    </div>
-                </ng-container>
-
-                <!-- ngElse = displays cellData as text -->
-                <ng-template #textTemplate><span role="link" class="text-cell">{{cellData}}</span></ng-template>
-
-                <!-- ngIf = displays the action elements only in the last column -->
-                <ng-container *ngIf="i === columns.length - 1">
-
-                    <!-- action buttons in last column -->
-                    <div class="action-elements">
-                        <div *ngFor="let actionElement of dataSource?.actionElements">
-                            <!-- chrome bugfix: "&& !actionElement.disabled" is sometimes necessary to prevent click -->
-                            <xc-icon-button
-                                *ngIf="actionElement.onShow && actionElement.onShow(row) || !actionElement.onShow"
-                                (click)="actionElement.onAction && !actionElement.disabled && actionElement.onAction(row)"
-                                [class]="actionElement.class"
-                                [disabled]="actionElement.disabled"
-                                [xc-tooltip]="actionElement.tooltip"
-                                [xc-icon-name]="actionElement.iconName"
-                                [xc-icon-style]="actionElement.iconStyle"
-                                [xc-button-aria-label]="actionElement.ariaLabel ? actionElement.ariaLabel : undefined"
-                                xc-icon-size="small"
-                            ></xc-icon-button>
-                        </div>
-                    </div>
-                </ng-container>
-
-            </ng-container>
-        </td>
+        <ng-container *xc-var="getCellData(row, column.path); let cellData">
+          <!-- ngIf = displays cellData xc-templates if it is an Array -->
+          @if (cellData?.constructor?.name === 'Array') {
+            <div class="template-container">
+              @for (template of cellData; track template) {
+                <xc-template [xc-template-instance]="template"></xc-template>
+              }
+            </div>
+          } @else {
+            <span role="link" class="text-cell">{{cellData}}</span>
+          }
+          <!-- ngElse = displays cellData as text -->
+          <!-- ngIf = displays the action elements only in the last column -->
+          @if (i === columns.length - 1) {
+            <!-- action buttons in last column -->
+            <div class="action-elements">
+              @for (actionElement of dataSource?.actionElements; track actionElement) {
+                <div>
+                  <!-- chrome bugfix: "&& !actionElement.disabled" is sometimes necessary to prevent click -->
+                  @if (actionElement.onShow && actionElement.onShow(row) || !actionElement.onShow) {
+                    <xc-icon-button
+                      (click)="actionElement.onAction && !actionElement.disabled && actionElement.onAction(row)"
+                      [class]="actionElement.class"
+                      [disabled]="actionElement.disabled"
+                      [xc-tooltip]="actionElement.tooltip"
+                      [xc-icon-name]="actionElement.iconName"
+                      [xc-icon-style]="actionElement.iconStyle"
+                      [xc-button-aria-label]="actionElement.ariaLabel ? actionElement.ariaLabel : undefined"
+                      xc-icon-size="small"
+                    ></xc-icon-button>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </ng-container>
+      </td>
     </ng-container>
+  }
 
-    <!-- Here begins the actual inner template view of the xc-table using the containers defined above -->
-    <tr mat-header-row attr.aria-rowindex="1" *matHeaderRowDef="columnIds; sticky: true"></tr>
-    <tr mat-header-row attr.aria-rowindex="2" *matHeaderRowDef="['$progress']" role="presentation"></tr>
-    <tr mat-header-row attr.aria-rowindex="3" *matHeaderRowDef="['$overlay']" role="presentation"></tr>
-    <tr mat-footer-row *matFooterRowDef="['$more']"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnIds;"
-        (mousedown)="mouseDown($event)"
-        (dblclick)="doubleClickRow(row)"
-        (click)="selectRow(row, $event.ctrlKey || $event.metaKey, $event.shiftKey)"
-        [class.focused]="isRowFocused(row)"
-        [class.selected]="isRowSelected(row)"
-        [class.activated]="isRowActivated(row)"
-        [class.visibleactions]="visibleActions"
-        [attr.aria-selected]="isRowSelected(row)"
-        [attr.aria-rowindex]="getRowIndex(row) + 4"
-    ></tr>
-    <!--
-        [attr.aria-rowindex]="getRowIndex(row) + 4"
-        +1, because aria-rowindex starts with 1 not 0
-        +3, because there are three rows in the table header
-    -->
+  <!-- Here begins the actual inner template view of the xc-table using the containers defined above -->
+  <tr mat-header-row attr.aria-rowindex="1" *matHeaderRowDef="columnIds; sticky: true"></tr>
+  <tr mat-header-row attr.aria-rowindex="2" *matHeaderRowDef="['$progress']" role="presentation"></tr>
+  <tr mat-header-row attr.aria-rowindex="3" *matHeaderRowDef="['$overlay']" role="presentation"></tr>
+  <tr mat-footer-row *matFooterRowDef="['$more']"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnIds;"
+    (mousedown)="mouseDown($event)"
+    (dblclick)="doubleClickRow(row)"
+    (click)="selectRow(row, $event.ctrlKey || $event.metaKey, $event.shiftKey)"
+    [class.focused]="isRowFocused(row)"
+    [class.selected]="isRowSelected(row)"
+    [class.activated]="isRowActivated(row)"
+    [class.visibleactions]="visibleActions"
+    [attr.aria-selected]="isRowSelected(row)"
+    [attr.aria-rowindex]="getRowIndex(row) + 4"
+  ></tr>
+  <!--
+  [attr.aria-rowindex]="getRowIndex(row) + 4"
+  +1, because aria-rowindex starts with 1 not 0
+  +3, because there are three rows in the table header
+  -->
 </table>
-<label *ngIf="noData" class="no-data">{{noDataLabel}}</label>
+@if (noData) {
+  <label class="no-data">{{noDataLabel}}</label>
+}

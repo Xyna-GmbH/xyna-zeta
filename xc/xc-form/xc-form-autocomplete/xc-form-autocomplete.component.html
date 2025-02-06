@@ -1,71 +1,77 @@
 <mat-form-field [floatLabel]="floatLabel" hideRequiredMarker>
-    <mat-label>{{label}}</mat-label>
-    <input
-        matInput
-        autocomplete="off"
-        [type]="type"
-        [placeholder]="placeholder"
-        [formControl]="formControl"
-        [matAutocomplete]="auto"
-        (mousedown)="mousedown($event)"
-        (focus)="onfocus($event)"
-        (blur)="onblur($event)"
-        [readonly]="readonly"
-        [attr.aria-label]="ariaLabel"
-        [tabIndex]="(readonly || disabled) ? -1 : 0"
-        [required]="required"
+  <mat-label>{{label}}</mat-label>
+  <input
+    matInput
+    autocomplete="off"
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="formControl"
+    [matAutocomplete]="auto"
+    (mousedown)="mousedown($event)"
+    (focus)="onfocus($event)"
+    (blur)="onblur($event)"
+    [readonly]="readonly"
+    [attr.aria-label]="ariaLabel"
+    [tabIndex]="(readonly || disabled) ? -1 : 0"
+    [required]="required"
     >
     <!-- <ng-container *ngIf="readonly || disabled">
-        <input
-            [type]="type"
-            [value]="stringValue"
-            [attr.tabIndex]="readonly ? 0 : -1"
-            [attr.aria-label]="ariaLabel"
-            (focus)="focus.emit($event)"
-            (blur)="blur.emit($event)"
-            [readonly]="readonly"
-            [disabled]="disabled"
-            class="non-editable-input"
-        >
+    <input
+      [type]="type"
+      [value]="stringValue"
+      [attr.tabIndex]="readonly ? 0 : -1"
+      [attr.aria-label]="ariaLabel"
+      (focus)="focus.emit($event)"
+      (blur)="blur.emit($event)"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      class="non-editable-input"
+      >
     </ng-container> -->
     <!-- screen reader (like JAWS) read fields, which are attributed with 'aria-live', aloud when their value changes -->
     <!-- this hidden-field is a fall-back to insure that screenreader read the currently active (!= selected) field aloud -->
     <div class="hidden-field" aria-live="polite" role="none">{{activeOption ? activeOption.name : ''}}</div>
     <mat-autocomplete
-        class="zeta-scrollbar"
-        #auto="matAutocomplete"
-        (optionSelected)="optionSelected($event.option)"
-        [displayWith]="optionName"
-        (opened)="openedAutocomplete()"
-        (closed)="closedAutocomplete()"
-    >
+      class="zeta-scrollbar"
+      #auto="matAutocomplete"
+      (optionSelected)="optionSelected($event.option)"
+      [displayWith]="optionName"
+      (opened)="openedAutocomplete()"
+      (closed)="closedAutocomplete()"
+      >
+      @for (option of filteredOptions | async; track option) {
         <mat-option
-            *ngFor="let option of filteredOptions | async"
-            tabindex="0"
-            [value]="option"
-            [disabled]="option.disabled || readonly"
-            [xc-tooltip]="option.showTooltip ? option.name : ''"
-            [xc-tooltip-position]="['bottom-right', 'bottom-left', 'top-right', 'top-left']"
-        >
-            <xc-icon *ngIf="option.icon; else textTemplate" [xc-icon-name]="option.icon" xc-icon-size="small">{{option.name}}</xc-icon>
-            <ng-template #textTemplate>{{option.name}}</ng-template>
+          tabindex="0"
+          [value]="option"
+          [disabled]="option.disabled || readonly"
+          [xc-tooltip]="option.showTooltip ? option.name : ''"
+          [xc-tooltip-position]="['bottom-right', 'bottom-left', 'top-right', 'top-left']"
+          >
+          @if (option.icon) {
+            <xc-icon [xc-icon-name]="option.icon" xc-icon-size="small">{{option.name}}</xc-icon>
+          } @else {
+            {{option.name}}
+          }
         </mat-option>
+      }
     </mat-autocomplete>
 
-    <mat-error
-        *ngIf="errorVisible"
+    @if (errorVisible) {
+      <mat-error
         align="end"
-    >{{errorContent}}</mat-error>
+      >{{errorContent}}</mat-error>
+    }
 
-    <mat-icon
+    @if (suffixVisible && !readonly) {
+      <mat-icon
         matSuffix
         aria-label="{{suffixContent}}"
-        *ngIf="suffixVisible && !readonly"
         (mousedown)="suffixMouseDown($event)"
         (click)="suffixClick($event)"
         (keydown.space)="suffixClick($event)"
         [attr.alt]="suffixContent"
         xc-tooltip="{{iconTooltip || (suffixContent | xcI18n)}}"
         xc-i18n
-    >{{suffixContent}}</mat-icon>
-</mat-form-field>
+      >{{suffixContent}}</mat-icon>
+    }
+  </mat-form-field>
