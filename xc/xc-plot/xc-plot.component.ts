@@ -199,7 +199,7 @@ export class XcPlotComponent implements OnDestroy, XcCanvasController, XcCanvasO
         }
 
         if (e.type === MouseEventType.mouseup) {
-            this.controller.mouseup(e);
+            this.controller.mouseup();
         }
     }
 

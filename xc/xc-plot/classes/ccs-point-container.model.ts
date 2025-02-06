@@ -72,7 +72,7 @@ export class CCSPointsContainer {
         ds.pairs.forEach(p => p.update(ccs, ccs.x, ccs.y));
 
         if (this.pointConnectionType === XcPlotPointConnection.Bezier) {
-            this.curveControlPointsCache = BezierSplineHelper.getCurveControlPoints(ds.pairs.map(p => ({x: p.drawX, y: p.drawY})));
+            this.curveControlPointsCache = BezierSplineHelper.getCurveControlPoints(ds.pairs.map(p => ({ x: p.drawX, y: p.drawY })));
         }
 
         if (this.pointConnectionType === XcPlotPointConnection.Cardinal) {
@@ -93,7 +93,7 @@ export class CCSPointsContainer {
                 size: this.dataSourceRef.localPointsStyling?.size ?? this.dataSourceRef.styleHelper.CCS.points.size,
                 glow: {
                     selected: {
-                        color: this.dataSourceRef.localPointsStyling?.selected?.color ??  this.dataSourceRef.styleHelper.CCS.points.selected.color,
+                        color: this.dataSourceRef.localPointsStyling?.selected?.color ?? this.dataSourceRef.styleHelper.CCS.points.selected.color,
                         diameter: this.dataSourceRef.localPointsStyling?.selected?.circleDiameter ?? this.dataSourceRef.styleHelper.CCS.points.selected.circleDiameter
                     },
                     hover: {
@@ -214,8 +214,8 @@ export class CCSPointsContainer {
         let i: number;
         let p1: XcPlotDataPair;
         let p2: XcPlotDataPair;
-        let cp1: {x: number; y: number};
-        let cp2: {x: number; y: number};
+        let cp1: { x: number; y: number };
+        let cp2: { x: number; y: number };
         for (i = 0; i < this.curveControlPointsCache.first.length; i++) {
 
             p1 = ds.pairs[i];

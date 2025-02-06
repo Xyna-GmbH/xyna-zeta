@@ -150,11 +150,11 @@ export class XcFormBaseComponent extends XcFormComponent implements AfterContent
     readonly valueKeydown = new EventEmitter<KeyboardEvent>();
 
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
+     
     readonly focus = new EventEmitter<FocusEvent>();
 
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
+     
     readonly blur = new EventEmitter<FocusEvent>();
 
     @Input('xc-form-field-errorfunc')

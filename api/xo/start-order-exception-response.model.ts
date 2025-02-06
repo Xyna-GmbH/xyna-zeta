@@ -40,5 +40,5 @@ export class XoStartOrderExceptionResponseArray extends XoArray<XoStartOrderExce
 }
 
 
-// eslint-disable-next-line no-new
+ 
 new XoStartOrderExceptionResponse();

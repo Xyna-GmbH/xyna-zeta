@@ -42,7 +42,7 @@ export class XcPlotDataInfo {
         public yUnit?: string,
         public yUnitLabel?: string, // if i18n is used, translate label
         public bootstrap = false
-    ) {}
+    ) { }
 
     clone(): XcPlotDataInfo {
         return new XcPlotDataInfo(
@@ -80,7 +80,7 @@ export class XcPlotDataPair {
         return this.x + '/' + this.y;
     }
 
-    constructor(public x: number, public y: number) {}
+    constructor(public x: number, public y: number) { }
 
     update(ccs: CartasianCoordinateSystem, offsetX = 0, offsetY = 0) {
         if (typeof this.x === 'number' && typeof this.y === 'number') {
@@ -171,7 +171,7 @@ export class XcPlotDataSource extends XcDataSource<XcPlotDataPair> {
      */
     styleHelper = XcPlotStyleHelper;
 
-    localPointsStyling: CartasianCoordinateSystemPointsStyling = { selected: {}, hover: {}};
+    localPointsStyling: CartasianCoordinateSystemPointsStyling = { selected: {}, hover: {} };
     localConnectionStyling: CartasianCoordinateSystemConnectionStyling = {};
 
     get pairs(): XcPlotDataPair[] {
@@ -196,7 +196,6 @@ export class XcPlotDataSource extends XcDataSource<XcPlotDataPair> {
 
 
     refresh() {
-        // eslint-disable-next-line no-self-assign
         this.data = this.data;
         super.refresh();
     }
@@ -214,7 +213,7 @@ export class XcPlotDataSource extends XcDataSource<XcPlotDataPair> {
     }
 
     // provided from the data sources's data
-    getLocalExtrema(): {xMin: number; xMax: number; yMin: number; yMax: number} {
+    getLocalExtrema(): { xMin: number; xMax: number; yMin: number; yMax: number } {
 
         const allX = this.pairs.length ? this.pairs.map(dp => dp.x) : [this.defaultPlotDataInfo.xMin, this.defaultPlotDataInfo.xMax];
         const allY = this.pairs.length ? this.pairs.map(dp => dp.y) : [this.defaultPlotDataInfo.yMin, this.defaultPlotDataInfo.yMax];
@@ -250,7 +249,7 @@ export class XcPlotDataSource extends XcDataSource<XcPlotDataPair> {
             this.pointConnectionType = to;
         } else {
             const keys = Object.keys(XcPlotPointConnection);
-            const key =  keys.find(attr => this.pointConnectionType === XcPlotPointConnection[attr]);
+            const key = keys.find(attr => this.pointConnectionType === XcPlotPointConnection[attr]);
             const i = keys.indexOf(key);
             this.pointConnectionType = XcPlotPointConnection[keys[(i + 1) % keys.length]];
         }

@@ -56,7 +56,7 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
     private _dataSourceSubscriptions = new Array<Subscription>();
     private _matSort: MatSort;
 
-    private readonly filterTemplates = new Map<string, {template: XcFormTemplate<any, any>; component?: XcFormBaseComponent}>();
+    private readonly filterTemplates = new Map<string, { template: XcFormTemplate<any, any>; component?: XcFormBaseComponent }>();
     private readonly filterTemplateSubscriptions: Subscription[] = [];
 
     private tbody: HTMLTableSectionElement;
@@ -149,11 +149,11 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
                 this.matSort.active = this.getColumnID(column);
             }
             switch (this.dataSource.getSortDirection()) {
-                case XcSortDirection.asc: this.matSort.direction = 'asc';  break;
+                case XcSortDirection.asc: this.matSort.direction = 'asc'; break;
                 case XcSortDirection.dsc: this.matSort.direction = 'desc'; break;
                 default:
                     this.matSort.direction = '';
-                    this.matSort.active    = '';
+                    this.matSort.active = '';
             }
         }
     }
@@ -169,7 +169,7 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
     }
 
 
-    @ViewChild(MatSort, {static: false})
+    @ViewChild(MatSort, { static: false })
     set matSort(value: MatSort) {
         this._matSort = value;
         this.matSort.sortChange.subscribe(() => this.updateDataSourceSort());
@@ -343,7 +343,7 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
 
 
     getColumnFilterAriaLabel(name: string): string {
-        return this.i18n.translate('Input field for filtering of $0', {key: '$0', value: this.i18n.translate(name || 'this column')});
+        return this.i18n.translate('Input field for filtering of $0', { key: '$0', value: this.i18n.translate(name || 'this column') });
     }
 
 
@@ -360,12 +360,12 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
             let filter = this.filterTemplates.get(path);
             // create new template
             if (!filter) {
-                filter = {template: undefined};
+                filter = { template: undefined };
                 const filterEnum = this.dataSource.filterEnums.get(path);
                 if (filterEnum) {
                     // autocomplete template
                     filter.template = new XcFormAutocompleteTemplate(new XcAutocompleteDataWrapper(
-                        ()           => this.dataSource.getFilter(path),
+                        () => this.dataSource.getFilter(path),
                         (value: any) => this.dataSource.setFilter(path, value),
                         filterEnum
                     ));
@@ -381,14 +381,14 @@ export class XcTableComponent implements AfterViewInit, OnDestroy {
                     // forminput template
                     filter.template = new XcFormInputTemplate(
                         new XcIdentityDataWrapper(
-                            ()           => this.dataSource.getFilter(path),
+                            () => this.dataSource.getFilter(path),
                             (value: any) => this.dataSource.setFilter(path, value)
                         )
                     );
                 }
                 filter.template.disabled = column.disableFilter;
-                filter.template.compact  = true;
-                filter.template.tooltip  = column.filterTooltip;
+                filter.template.compact = true;
+                filter.template.tooltip = column.filterTooltip;
                 filter.template.callback = component => {
                     filter.component = component;
                     // set value and option of component because the datawrapper resets unknown options when autocomplete is used as input

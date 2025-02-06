@@ -65,12 +65,12 @@ export class RuntimeContextSelectionComponent extends XcDialogComponent<RuntimeC
         this.settings.preselectedRuntimeContext = this.settings.preselectedRuntimeContext || this.apiService.runtimeContext;
 
         // necessary to include these classes in a release build (see OP-2949)
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+         
         const a  = new XoApplication();
         const aa = new XoApplicationArray();
         const w  = new XoWorkspace();
         const wa = new XoWorkspaceArray();
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+         
 
         this.refresh(true);
     }

@@ -183,7 +183,6 @@ export class XcMenuComponent {
     items = new Array<XcMenuItem>();
 
     @Output('xc-menu-item-select')
-    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly select = new EventEmitter<XcMenuItem>();
 
     selectItem(item: XcMenuItem) {

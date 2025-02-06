@@ -158,9 +158,7 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
                                         this.detailsDefinition = definitionBundle.definition;
 
                                         // get notified when details close
-                                        let observerSubscription: Subscription;
-                                        // eslint-disable-next-line prefer-const
-                                        observerSubscription = this.detailsDefinition.observerChange
+                                        const observerSubscription = this.detailsDefinition.observerChange
                                             .pipe(filter(observer => !!observer))
                                             .subscribe(observer => {
                                                 observer.definitionClosed().pipe(first()).subscribe(data => {
@@ -186,8 +184,8 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
         this.refreshEventSubscription?.unsubscribe();
         if (this.tableDefinition.triggerRefresh?.eventId) {
             this.refreshEventSubscription =
-            this.eventService.getDefinitionEventPayloadById(this.tableDefinition.triggerRefresh.eventId)
-                .subscribe(() => this.refresh());
+                this.eventService.getDefinitionEventPayloadById(this.tableDefinition.triggerRefresh.eventId)
+                    .subscribe(() => this.refresh());
         }
     }
 }

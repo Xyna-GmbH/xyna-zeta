@@ -141,8 +141,8 @@ export function XoRemappingTableInfoClass<T extends XoObject>(baseClass: XoObjec
         protected remapColumn(srcPath: string, dstPath: string) {
             if (this.columns && srcPath && dstPath) {
                 this.columns.data
-                    .filter(column  => column.path === srcPath)
-                    .forEach(column => column.path =   dstPath);
+                    .filter(column => column.path === srcPath)
+                    .forEach(column => column.path = dstPath);
             }
         }
 
@@ -202,19 +202,19 @@ export function XoSplicingTableInfoClass<T extends XoObject>(baseClass: XoObject
             column.disableSort = accessor.items.disableSort;
             column.shrink = accessor.items.shrink;
         }
-        return { path: path, idx: idx, column: column, remove: !accessor.items};
+        return { path: path, idx: idx, column: column, remove: !accessor.items };
     });
 
     return class XoSplicingTableInfo extends baseClass {
 
-        protected spliceColumn(mapping: {path: string; idx: number; column: XoTableColumn}, remove: boolean, forEachIndex: number) {
+        protected spliceColumn(mapping: { path: string; idx: number; column: XoTableColumn }, remove: boolean, forEachIndex: number) {
             if (this.columns && mapping.path) {
                 if (!remove) {
                     this.columns.data.splice(mapping.idx >= 0 ? mapping.idx : this.columns.length, 0, mapping.column);
                 } else {
                     const idx = this.columns.data.findIndex(c => c.path === mapping.path);
                     if (idx >= 0) {
-                        mapping.idx    = idx + forEachIndex;
+                        mapping.idx = idx + forEachIndex;
                         mapping.column = this.columns.data.splice(idx, 1)[0];
                     }
                 }
@@ -333,7 +333,7 @@ export class XcRemoteTableDataSource<T extends XoObject = XoObject, O extends Xo
         // reset length, since it is solely determined by the server
         tableInfoInstance.length = undefined;
         // compile input and output start order
-        const input  = [tableInfoInstance,   ...pack(this.input)];
+        const input = [tableInfoInstance, ...pack(this.input)];
         const output = [this.tableInfoClass, ...pack(this.output)];
         // remember previous filters
         const previousFilters = new Map<string, string>(options.filter ? options.filter.map.entries() : undefined);
@@ -372,7 +372,7 @@ export class XcRemoteTableDataSource<T extends XoObject = XoObject, O extends Xo
                     ? this.tableData
                     // set new data
                     : {
-                        rows:    rows ?? [],
+                        rows: rows ?? [],
                         columns: this.lastTableInfo?.columns?.data.map(column => column.asXcTableColumn) ?? []
                     };
             })
@@ -443,6 +443,7 @@ export class XcRemoteTableDataSource<T extends XoObject = XoObject, O extends Xo
     }
 
 
+    // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
     resolve(row: T, path: string): XcTemplate[] | Object {
         return this.resolveXo(row, path);
     }

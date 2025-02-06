@@ -50,7 +50,7 @@ export class XcRichListComponent extends XcThemeableComponent implements XcRichL
         if (idx >= 0 && idx < this.componentOutlets.length) {
             const componentOutlet = this.componentOutlets.toArray()[idx];
             // necessary private access
-            // eslint-disable-next-line @typescript-eslint/dot-notation
+             
             const componentRef = componentOutlet['_componentRef'] as ComponentRef<XcRichListItemComponent>;
             return componentRef.instance;
         }

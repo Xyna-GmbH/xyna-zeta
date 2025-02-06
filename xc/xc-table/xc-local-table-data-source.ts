@@ -105,6 +105,7 @@ export class XcLocalTableDataSource<T extends Comparable = Comparable> extends X
     }
 
 
+    // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
     resolve(row: T, path: string): XcTemplate[] | Object {
         return row instanceof Xo
             ? this.resolveXo(row, path)

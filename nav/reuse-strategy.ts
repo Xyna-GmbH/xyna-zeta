@@ -26,7 +26,7 @@ export class RouteComponentReuseStrategy implements RouteReuseStrategy {
 
 
     private getComponentRef(detachedRoute: DetachedRouteHandle): any {
-        // eslint-disable-next-line @typescript-eslint/dot-notation
+         
         return detachedRoute['componentRef'];
     }
 

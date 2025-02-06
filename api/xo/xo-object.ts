@@ -381,11 +381,11 @@ export abstract class Xo extends Comparable implements XoDescriber {
      * @param recursively Determines whether to recursively resolve all but the last part of path (true), or just the first part of path (false)
      * @return Head string, tail string and value of data field of the path head or NULL, if path head could not be resolved
      */
-    resolveHead(path: string, recursively = true): {value: any; head: string; tail: string} {
+    resolveHead(path: string, recursively = true): { value: any; head: string; tail: string } {
         const idx = recursively ? path.lastIndexOf('.') : path.indexOf('.');
         const head = path.substring(0, idx);
         const tail = path.substring(idx + 1);
-        return {value: this.resolve(head), head: head, tail: tail};
+        return { value: this.resolve(head), head: head, tail: tail };
     }
 
     /**
@@ -558,9 +558,8 @@ export type XoAccessor<T extends XoObject, U = any> = (t: T) => U;
 
 
 export type XoAccessorMap<T extends XoObject = XoObject> = {
-    [K in TypeFilterOut<keyof T, keyof XoObject | TypePropertiesOf<T, Function>>]: T[K] extends XoObject
-        ? XoAccessorMap<T[K]>
-        : string
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+    [K in TypeFilterOut<keyof T, keyof XoObject | TypePropertiesOf<T, Function>>]: T[K] extends XoObject ? XoAccessorMap<T[K]> : string
 };
 
 
@@ -586,7 +585,7 @@ export interface XoPropertyBinding<T extends XoObject, U = any> {
 }
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+ 
 export function XoPropertyBinding<T extends XoObject, U = any>(instance: T, accessor: XoAccessor<T, U>): XoPropertyBinding<T, U> {
     return {
         instance: instance,
@@ -606,21 +605,21 @@ export interface XoPendingPropertyValue<U = any> {
 
 export class XoWrapper<C extends Native = any, M extends Native = any> {
     constructor(
-        readonly wrap:   (value: M) => C,
+        readonly wrap: (value: M) => C,
         readonly unwrap: (value: C) => M
     ) {
     }
 }
 
 
-export const XoUnboxedInteger = new XoWrapper<string, number>(unboxedNumberToString,   stringToUnboxedInteger);
-export const XoBoxedInteger   = new XoWrapper<string, number>(boxedNumberToString,     stringToBoxedInteger);
+export const XoUnboxedInteger = new XoWrapper<string, number>(unboxedNumberToString, stringToUnboxedInteger);
+export const XoBoxedInteger = new XoWrapper<string, number>(boxedNumberToString, stringToBoxedInteger);
 
-export const XoUnboxedFloat   = new XoWrapper<string, number>(unboxedNumberToString,   stringToUnboxedFloat);
-export const XoBoxedFloat     = new XoWrapper<string, number>(boxedNumberToString,     stringToBoxedFloat);
+export const XoUnboxedFloat = new XoWrapper<string, number>(unboxedNumberToString, stringToUnboxedFloat);
+export const XoBoxedFloat = new XoWrapper<string, number>(boxedNumberToString, stringToBoxedFloat);
 
 export const XoUnboxedBoolean = new XoWrapper<string, boolean>(unboxedBooleanToString, stringToUnboxedBoolean);
-export const XoBoxedBoolean   = new XoWrapper<string, boolean>(boxedBooleanToString,   stringToBoxedBoolean);
+export const XoBoxedBoolean = new XoWrapper<string, boolean>(boxedBooleanToString, stringToBoxedBoolean);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -757,9 +756,9 @@ export class XoObject extends Xo {
      */
     createPendingPropertyValue<U = any>(accessor: XoAccessor<this, U>, pendingValueCallback: (currentValue: U) => U): XoPendingPropertyValue<U> {
         const propertyPaths: any = this.decoratorClass.getAccessorMap();
-        const propertyPath:  any = accessor(propertyPaths);
+        const propertyPath: any = accessor(propertyPaths);
         const head = isObject(propertyPath)
-            ? {value: this, tail: propertyPath[XoAccessorMapPropertySeparator], head: ''}
+            ? { value: this, tail: propertyPath[XoAccessorMapPropertySeparator], head: '' }
             : this.resolveHead(propertyPath);
         if (head) {
             const propertyHost = head.value;
@@ -827,7 +826,7 @@ export class XoObject extends Xo {
      */
     get uniqueKey(): string {
         return Array.from(this.uniqueProperties.keys())
-            .map(key   => this[key])
+            .map(key => this[key])
             .map(value => value instanceof Comparable ? value.uniqueKey : value)
             .join(',');
     }
@@ -1109,7 +1108,7 @@ export class XoArray<T extends Xo = Xo> extends Xo {
  */
 (() => {
     Xo.XoObject = XoObject;
-    Xo.XoArray  = XoArray;
+    Xo.XoArray = XoArray;
 })();
 
 
@@ -1127,7 +1126,7 @@ export function XoDerivedClassInterfaceFrom(from: XoJson): XoObjectClassInterfac
     if (isObject(from) && isObject(from.$meta)) {
         return !isArray(from.$list)
             ? XoObject.instance.getDerivedClass(undefined, FullQualifiedName.decode(from.$meta.fqn)) as XoObjectClassInterface ?? XoObject
-            :  XoArray.instance.getDerivedClass(undefined, FullQualifiedName.decode(from.$meta.fqn)) as XoArrayClassInterface  ?? XoArray;
+            : XoArray.instance.getDerivedClass(undefined, FullQualifiedName.decode(from.$meta.fqn)) as XoArrayClassInterface ?? XoArray;
     }
     return null;
 }

@@ -33,15 +33,15 @@ export enum XcGraphType {
     VOID = 'void',
     LINE = 'line',
     AREA = 'area',
-    DOT  = 'dot',
-    BAR  = 'bar'
+    DOT = 'dot',
+    BAR = 'bar'
 }
 
 
 export enum XcGraphOption {
-    SIZE   = 'size',
-    WIDTH  = 'width',
-    PADDING_LEFT  = 'paddingLeft',
+    SIZE = 'size',
+    WIDTH = 'width',
+    PADDING_LEFT = 'paddingLeft',
     PADDING_RIGHT = 'paddingRight'
 }
 
@@ -87,7 +87,7 @@ export class XcGraphUtils {
      * @returns Time interval
      */
     static createTimeInterval(timeAt: number, timeTo: number, resolution: number): XcTimeInterval {
-        return {timeAt: floorBase(timeAt, resolution), timeTo: floorBase(timeTo, resolution)};
+        return { timeAt: floorBase(timeAt, resolution), timeTo: floorBase(timeTo, resolution) };
     }
 
 
@@ -98,7 +98,7 @@ export class XcGraphUtils {
      * @returns Shifted time interval
      */
     static shiftTimeInterval(interval: XcTimeInterval, offset: number): XcTimeInterval {
-        return {timeAt: interval.timeAt + offset, timeTo: interval.timeTo + offset};
+        return { timeAt: interval.timeAt + offset, timeTo: interval.timeTo + offset };
     }
 
 
@@ -144,7 +144,7 @@ export class XcGraphUtils {
      */
     static getSliceIndex(slices: XcGraphSlice[], interval: XcTimeInterval, resolution: number): number {
         return slices.findIndex(value =>
-            this.getSliceTimeTo(value, resolution) >  interval.timeAt &&
+            this.getSliceTimeTo(value, resolution) > interval.timeAt &&
             this.getSliceTimeAt(value, resolution) <= interval.timeTo
         );
     }
@@ -250,7 +250,7 @@ export class XcGraphUtils {
     }
 
 
-    static getSliceValuesPtr(slice: XcGraphSlice, interval: XcTimeInterval, resolution: number): {globalOff: number; localOff: number; len: number} {
+    static getSliceValuesPtr(slice: XcGraphSlice, interval: XcTimeInterval, resolution: number): { globalOff: number; localOff: number; len: number } {
         const intervalTimeAt = floorBase(interval.timeAt, resolution);
         const intervalTimeTo = floorBase(interval.timeTo, resolution) + resolution;
         const sliceTimeAt = this.getSliceTimeAt(slice, resolution);
@@ -258,16 +258,16 @@ export class XcGraphUtils {
         const sliceLength = slice.values.length;
         const off = (sliceTimeAt - intervalTimeAt) / resolution;
         // interval start is within slice
-        if (intervalTimeAt >= sliceTimeAt && intervalTimeAt <  sliceTimeTo) {
-            return { globalOff: 0,   localOff: -off, len: Math.min(sliceLength + off, (intervalTimeTo - intervalTimeAt) / resolution) };
+        if (intervalTimeAt >= sliceTimeAt && intervalTimeAt < sliceTimeTo) {
+            return { globalOff: 0, localOff: -off, len: Math.min(sliceLength + off, (intervalTimeTo - intervalTimeAt) / resolution) };
         }
         // interval end is within slice
-        if (intervalTimeTo >  sliceTimeAt && intervalTimeTo <= sliceTimeTo) {
-            return { globalOff: off, localOff: 0,    len: Math.min(sliceLength,       (intervalTimeTo - sliceTimeAt)    / resolution) };
+        if (intervalTimeTo > sliceTimeAt && intervalTimeTo <= sliceTimeTo) {
+            return { globalOff: off, localOff: 0, len: Math.min(sliceLength, (intervalTimeTo - sliceTimeAt) / resolution) };
         }
         // interval contains slice
-        if (intervalTimeAt <  sliceTimeAt && intervalTimeTo >  sliceTimeTo) {
-            return { globalOff: off, localOff: 0,    len: sliceLength };
+        if (intervalTimeAt < sliceTimeAt && intervalTimeTo > sliceTimeTo) {
+            return { globalOff: off, localOff: 0, len: sliceLength };
         }
     }
 }
@@ -278,7 +278,7 @@ export abstract class XcGraphDataSource extends XcDataSource<XcGraphData> {
     private _derivative = false;
     private _resolution = seconds(1);
     private _timeOffset = 0;
-    private _timeInterval: XcTimeInterval = {timeAt: 0, timeTo: 0};
+    private _timeInterval: XcTimeInterval = { timeAt: 0, timeTo: 0 };
 
     private readonly _graphRequest = new Subject<XcGraphDataRequestOptions>();
     private readonly _graphTimeSlices = new Array<XcGraphSlice>();
@@ -476,7 +476,7 @@ export abstract class XcGraphDataSource extends XcDataSource<XcGraphData> {
 
             // request missing intervals
             if (intervals.length > 0) {
-                this._graphRequest.next({resolution: this.resolution, intervals});
+                this._graphRequest.next({ resolution: this.resolution, intervals });
             }
 
             // graph must be updated

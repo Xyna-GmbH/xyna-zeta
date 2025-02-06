@@ -589,9 +589,7 @@ export class XcFormAutocompleteComponent extends XcFormBaseInputComponent implem
 
     get stringValue(): string {
         return (
-            isObject(this.value)
-                ? this.value.name
-                : this.value
+            isObject(this.value) ? this.value.name : this.value
         ) ?? '';
     }
 

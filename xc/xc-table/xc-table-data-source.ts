@@ -176,13 +176,14 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
     protected abstract request(options: XcTableDataRequestOptions): void;
 
 
+    // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
     protected resolveXo(row: Xo, path: string): XcTemplate[] | Object {
         // resolve and translate, if needed
         if (this.i18n) {
             const resolved = row.resolveHead(path);
             const value = resolved.value;
             if (value instanceof XoObject && value.i18nProperties.has(resolved.tail)) {
-                return this.i18n.translate(value.resolve(resolved.tail));
+                return [this.i18n.translate(value.resolve(resolved.tail))];
             }
         }
         // resolve raw value
@@ -190,6 +191,7 @@ export abstract class XcTableDataSource<T extends Comparable = Comparable> exten
     }
 
 
+    // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
     abstract resolve(row: T, path: string): XcTemplate[] | Object;
 
 

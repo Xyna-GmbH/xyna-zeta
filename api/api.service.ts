@@ -19,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
+import { XoEncryptionData } from '@zeta/api/xo/encryption-data.model';
 
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, filter, finalize, map, tap } from 'rxjs/operators';
@@ -34,11 +35,10 @@ import { XoManagedFileID } from './xo/xo-managed-file-id';
 import { Xo, XoArray, XoArrayClassInterface, XoClassInterface, XoClassInterfaceFrom, XoDerivedClassInterfaceFrom, XoJson, XoObject } from './xo/xo-object';
 import { XoRuntimeContext, XoRuntimeContextArray } from './xo/xo-runtime-context';
 import { XoStructureObject, XoStructureType } from './xo/xo-structure';
-import { XoEncryptionData } from '@zeta/api/xo/encryption-data.model';
 
 
 export type XynaMonitoringLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
-export type XynaPriority        =     1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type XynaPriority = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 
 export type CacheData<T> = Subject<T> | T;
@@ -135,11 +135,11 @@ export interface StartOrderOptions extends Options {
 export class StartOrderOptionsBuilder extends OptionsBuilder<StartOrderOptions> {
 
     static get defaultOptions(): StartOrderOptions {
-        return {async: false};
+        return { async: false };
     }
 
     static get defaultOptionsWithErrorMessage(): StartOrderOptions {
-        return {async: false, withErrorMessage: true};
+        return { async: false, withErrorMessage: true };
     }
 
     constructor(_options: StartOrderOptions = StartOrderOptionsBuilder.defaultOptions) {
@@ -197,7 +197,7 @@ export interface GenerateInputResult {
     customStringContainer?: string[];
     output?: Xo[];
     // on error
-    error?: {message: string; errorCode: string}; // TODO: unify api error structure with start order
+    error?: { message: string; errorCode: string }; // TODO: unify api error structure with start order
 }
 
 
@@ -226,7 +226,7 @@ export class FileResult {
         public status: FileUploadStatus,
         public fileId: XoManagedFileID = null,
         public fileName = ''
-    ) {}
+    ) { }
 }
 
 
@@ -247,10 +247,10 @@ export class ApiService {
 
     constructor(private readonly http: HttpClient) {
         // create dummy instances to prevent pruning during build
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+         
         const workspace = new XoWorkspace();
         const application = new XoApplication();
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+         
     }
 
 
@@ -407,7 +407,7 @@ export class ApiService {
 
 
     getRuntimeContexts(useCache = false): Observable<XoRuntimeContext[]> {
-        const rtc       = RuntimeContext.guiHttpApplication;
+        const rtc = RuntimeContext.guiHttpApplication;
         const orderType = 'xmcp.factorymanager.shared.GetRuntimeContexts';
 
         return useCache && this.runtimeContextCache.length > 0
@@ -437,13 +437,13 @@ export class ApiService {
 
         const url = 'runtimeContext/' + rtc.uniqueKey + '/startorder';
         const payload = {
-            'orderType'             : orderType,
-            'input'                 : pack(input).map(value => value ? value.encode() : null),
-            'async'                 : options.async,
-            'inputSourceId'         : options.inputSourceId,
-            'customStringContainer' : options.customStringContainer,
-            'monitoringLevel'       : options.monitoringLevel,
-            'priority'              : options.priority
+            'orderType': orderType,
+            'input': pack(input).map(value => value ? value.encode() : null),
+            'async': options.async,
+            'inputSourceId': options.inputSourceId,
+            'customStringContainer': options.customStringContainer,
+            'monitoringLevel': options.monitoringLevel,
+            'priority': options.priority
         };
 
         return this.http.post(url, payload).pipe(
@@ -516,7 +516,7 @@ export class ApiService {
         const options = StartOrderOptionsBuilder.defaultOptionsWithErrorMessage;
         return this.startOrder(rtc, orderType, input, output, options).pipe(
             map(result => result.output?.[0]),
-            map(xo     => xo instanceof output ? xo : (fallback !== undefined ? fallback : new output()))
+            map(xo => xo instanceof output ? xo : (fallback !== undefined ? fallback : new output()))
         );
     }
 
@@ -563,8 +563,8 @@ export class ApiService {
             // filter((data: any) =>
             //     !data.error || options.withErrorMessage
             // ),
-            map((data: any) =>
-                ({
+            map((data: any) => (
+                {
                     rtc: RuntimeContext.decode(data.rtc),
                     testCaseName: data.testCaseName,
                     documentation: data.documentation,
@@ -576,8 +576,8 @@ export class ApiService {
                     state: data.state,
                     tableName: data.tableName,
                     workstepWithSources: data.workstepWithSources
-                })
-            )
+                }
+            ))
         );
     }
 
@@ -591,8 +591,8 @@ export class ApiService {
             filter((data: any) =>
                 !data.error || options.withErrorMessage
             ),
-            map((data: any) =>
-                ({
+            map((data: any) => (
+                {
                     // on success
                     orderType: data.orderType,
                     inputSourceId: data.inputSourceId,
@@ -604,8 +604,8 @@ export class ApiService {
                     ),
                     // on error
                     error: data.error
-                })
-            )
+                }
+            ))
         );
     }
 
@@ -618,8 +618,8 @@ export class ApiService {
                 subj.next(result.fileId);
             }
         },
-        error => subj.error(error),
-        () => subj.complete()
+            error => subj.error(error),
+            () => subj.complete()
         );
 
         return subj.asObservable();
@@ -641,7 +641,7 @@ export class ApiService {
          * selected file was sucessfully uploaded and we start the workflow
          * @param {ProgressEvent} - EVENT
          */
-        const uploadHandler = function(event) {
+        const uploadHandler = event => {
             const result = event.currentTarget.responseText;
             const match = result.match(new RegExp('stored with id (\\d*)'));
             if (match && match.length > 1) {
@@ -659,7 +659,7 @@ export class ApiService {
         /**
          * error with the upload
          */
-        const uploadErrorHandler = function(event) {
+        const uploadErrorHandler = event => {
             subject.error('upload error');
             subject.complete();
         };
