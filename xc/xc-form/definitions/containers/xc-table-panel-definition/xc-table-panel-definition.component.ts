@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 import { pack } from '@zeta/base';
 
@@ -45,7 +45,7 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
 
     tableInputFQN = '';
 
-    constructor(private readonly api: ApiService, private readonly i18n: I18nService, private readonly cdr: ChangeDetectorRef) {
+    constructor(private readonly api: ApiService, private readonly i18n: I18nService) {
         super();
     }
 

@@ -519,7 +519,7 @@ export class XoStartOrderButtonDefinition extends XoButtonDefinition {
                         this.observer.startOrder(this, resolvedData).subscribe({
                             next: value => {
                                 if (this.onStartorderResultEvent?.data) {
-                                    XcDefinitionEventService.eventService.triggerEventById(this.onStartorderResultEvent.data.map(e => e.eventId), value);
+                                    XcDefinitionEventService.eventService?.triggerEventById(this.onStartorderResultEvent.data.map(e => e.eventId), value);
                                 }
                             },
                             complete() {
@@ -560,7 +560,7 @@ export class XoDefinitionEventButtonDefinition extends XoButtonDefinition {
                 template.action = () => {
                     if (this.onClickEvent?.data) {
                         const resolvedData = this.resolveData(data);
-                        XcDefinitionEventService.eventService.triggerEventById(this.onClickEvent.data.map(e => e.eventId), resolvedData);
+                        XcDefinitionEventService.eventService?.triggerEventById(this.onClickEvent.data.map(e => e.eventId), resolvedData);
                     }
                 };
             }
