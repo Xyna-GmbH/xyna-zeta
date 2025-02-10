@@ -6,8 +6,32 @@
 >
     <header>
         <ng-container *ngIf="definition?.label">
-            <h1 *ngIf="!definition?.getParent()" class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h1>
-            <h2 *ngIf="definition?.getParent()" class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h2>
+            <ng-template [ngIf]="!!definition.headersize" [ngIfElse]="elseBlock1">
+                @switch (definition.headersize) {
+                    @case (1) {
+                         <h1 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h1>
+                    }
+                    @case (2) {
+                         <h2 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h2>
+                    }
+                    @case (3) {
+                         <h3 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h3>
+                    }
+                    @case (4) {
+                         <h4 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h4>
+                    }
+                    @case (5) {
+                         <h5 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h5>
+                    }
+                    @case (6) {
+                         <h6 class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h6>
+                    }
+                }
+            </ng-template>
+            <ng-template #elseBlock1>
+                <h1 *ngIf="!definition?.getParent()" class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h1>
+                <h2 *ngIf="definition?.getParent()" class="items-left items-selectable" tabindex="0">{{definition?.translate(definition?.label) | async}}</h2>
+            </ng-template>
         </ng-container>
         <div class="items-left">
             <xc-definition-proxy *ngFor="let child of definition?.header?.leftArea?.children"

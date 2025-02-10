@@ -223,6 +223,8 @@ export class XoFormPanelDefinition extends XoFormDefinition {
     @XoProperty(XoPanelBoxDefinition)
     footer: XoPanelBoxDefinition;
 
+    @XoProperty()
+    headersize;
 
     protected afterDecode() {
         super.afterDecode();
