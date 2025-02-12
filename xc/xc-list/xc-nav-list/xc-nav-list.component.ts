@@ -24,6 +24,9 @@ import { Subscription } from 'rxjs';
 
 import { XcThemeableComponent } from '../../shared/xc-themeable.component';
 import { XcNavListItem } from './xc-nav-list-item/xc-nav-list-item.component';
+import {xcNavListTranslations_deDE} from "./locale/xc-translations.de-DE";
+import {I18nService, LocaleService} from "../../../i18n";
+import {xcNavListTranslations_enUS} from "./locale/xc-translations.en-US";
 
 
 export enum XcNavListOrientation {
@@ -87,9 +90,11 @@ export class XcNavListComponent extends XcThemeableComponent implements OnInit, 
     private _shrink = false;
 
 
-    constructor(private readonly router: Router, private readonly route: ActivatedRoute) {
+    constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly _i18n: I18nService) {
         super();
         this.color = 'primary';
+        _i18n.setTranslations(LocaleService.EN_US, xcNavListTranslations_enUS);
+        _i18n.setTranslations(LocaleService.DE_DE, xcNavListTranslations_deDE);
     }
 
 
@@ -117,6 +122,9 @@ export class XcNavListComponent extends XcThemeableComponent implements OnInit, 
         this._resetNavList();
     }
 
+    get ariaLabel(): string {
+        return this._i18n.translate('menu_with_elements', { key: '$0', value: this.items.length.toString() });
+    }
 
     get items(): XcNavListItem[] {
         return this._items;
