@@ -126,6 +126,13 @@ export class XoDefinition extends XoObject {
         this.postProcessPaths();
     }
 
+    protected clearChildren() {
+        this.clearDataChangeState();
+        while (this._children.length > 0) {
+            this._children.pop()._parent = undefined;
+        }
+    }
+
 
     protected addChild(child: XoDefinition) {
         if (this._children.indexOf(child) < 0) {

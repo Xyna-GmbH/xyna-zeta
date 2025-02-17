@@ -51,12 +51,14 @@ export class RouteComponentReuseStrategy implements RouteReuseStrategy {
         // console.log('store: ', activatedRoute.routeConfig);
         const reuseKey = this.getReuseKey(activatedRoute);
         if (reuseKey) {
-            this.handles.set(reuseKey, detachedRoute);
             if (detachedRoute) {
+                this.handles.set(reuseKey, detachedRoute);
                 const component = this.getComponentRef(detachedRoute).instance;
                 if (component instanceof RouteComponent) {
                     component.onHide();
                 }
+            } else {
+                this.handles.delete(reuseKey);
             }
         }
     }

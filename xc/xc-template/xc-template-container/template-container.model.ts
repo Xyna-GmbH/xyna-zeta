@@ -155,7 +155,7 @@ export class XcContainerTemplate extends XcContainerBaseTemplate<XoTemplateDefin
         if (this.childTemplates) {
             this.childTemplates
                 .filter(child => child instanceof XcContainerTemplate)
-                .forEach(child => (child).invalidateChildTemplates());
+                .forEach(child => child.invalidateChildTemplates());
         }
         this.invalidated = true;
         this.childTemplatesChangeSubject.next();
