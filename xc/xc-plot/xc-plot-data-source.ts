@@ -196,6 +196,7 @@ export class XcPlotDataSource extends XcDataSource<XcPlotDataPair> {
 
 
     refresh() {
+        // eslint-disable-next-line no-self-assign
         this.data = this.data;
         super.refresh();
     }
