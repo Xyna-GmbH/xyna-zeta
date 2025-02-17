@@ -19,7 +19,7 @@ import zetaPlugin from 'eslint-plugin-zeta';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    files: ["**/*.{js,mjs,cjs,ts}"]
+    files: ["**/*.{js,ts}"]
   },
   {
     languageOptions: {
