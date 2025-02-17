@@ -23,7 +23,6 @@ import { coerceBoolean, isNumber, timeString } from '../../base';
 import { CanvasHelperRecording, MouseEventType, ScreenInfo, XcCanvasHelper, XcCanvasMouseEventsOption } from './xc-canvas-helper.class';
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 interface ResizeObserverEntry {
     readonly target: Element;
     readonly contentRect: DOMRectReadOnly;
@@ -35,7 +34,6 @@ interface ResizeObserverEntry {
 /**
  * https://caniuse.com/#feat=resizeobserver
  */
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 declare class ResizeObserver {
     constructor(callback: (entries: ResizeObserverEntry[]) => void);
     /**
@@ -119,16 +117,17 @@ export interface XcCanvasObserver {
     selector: 'xc-canvas',
     templateUrl: './xc-canvas.component.html',
     styleUrls: ['./xc-canvas.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcCanvasComponent implements OnInit, OnDestroy {
 
     private static _num = 0;
     private readonly _uid = 'xc_canvas_with_unique_num' + ++XcCanvasComponent._num;
     private readonly _keyCodeSet = new Set<string>();
-    private readonly _oldDimensions = {width: 0, height: 0};
+    private readonly _oldDimensions = { width: 0, height: 0 };
     private _frameCount = 0;
-    private readonly _oldParentSize = {width: -1, height: -1};
+    private readonly _oldParentSize = { width: -1, height: -1 };
 
     private _lastTimestamp: number;
     private _lastStepTimestamp: number;
@@ -195,7 +194,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
 
     @Input('xc-canvas-mouseeventsoption')
     mouseEventsOption: XcCanvasMouseEventsOption = {
-        eventsListenTo:  Object.keys(MouseEventType).map<MouseEventType>(key => MouseEventType[key])
+        eventsListenTo: Object.keys(MouseEventType).map<MouseEventType>(key => MouseEventType[key])
     };
 
 
@@ -322,8 +321,8 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
             this.checkParent();
         }
 
-        processInFrame =    !isNumber(this.controller.keyboardInputEveryXFrame)
-                            || (this.controller.keyboardInputEveryXFrame && this._frameCount % this.controller.keyboardInputEveryXFrame === 0);
+        processInFrame = !isNumber(this.controller.keyboardInputEveryXFrame)
+            || (this.controller.keyboardInputEveryXFrame && this._frameCount % this.controller.keyboardInputEveryXFrame === 0);
         if (this.controller.keyboardInput && processInFrame) {
             deltaTimestamp = this._lastKeyboardInputTimestamp ? currentTimestamp - this._lastKeyboardInputTimestamp : 0;
             this.controller.keyboardInput(deltaTimestamp, this._keyboardEvent, this._keyCodeSet);
@@ -331,16 +330,16 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
         }
 
 
-        processInFrame =    !isNumber(this.controller.stepEveryXFrame)
-                            || (this.controller.stepEveryXFrame && this._frameCount % this.controller.stepEveryXFrame === 0);
+        processInFrame = !isNumber(this.controller.stepEveryXFrame)
+            || (this.controller.stepEveryXFrame && this._frameCount % this.controller.stepEveryXFrame === 0);
         if (this.controller.step && processInFrame) {
             deltaTimestamp = this._lastStepTimestamp ? currentTimestamp - this._lastStepTimestamp : 0;
             this.controller.step(deltaTimestamp);
             this._lastStepTimestamp = currentTimestamp;
         }
 
-        processInFrame =    !isNumber(this.controller.drawEveryXFrame)
-                            || (this.controller.drawEveryXFrame && this._frameCount % this.controller.drawEveryXFrame === 0);
+        processInFrame = !isNumber(this.controller.drawEveryXFrame)
+            || (this.controller.drawEveryXFrame && this._frameCount % this.controller.drawEveryXFrame === 0);
         if (this.controller.draw && processInFrame) {
             deltaTimestamp = this._lastDrawTimestamp ? currentTimestamp - this._lastDrawTimestamp : 0;
             this.controller.draw(this.context, deltaTimestamp);
@@ -365,7 +364,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
         }
     }
 
-    private getParentFitSize(): {width: number; height: number } {
+    private getParentFitSize(): { width: number; height: number } {
         const rect = this._parent.getBoundingClientRect();
         const cStyles = window.getComputedStyle(this._parent);
         const hbord = parseFloat(cStyles.borderLeftWidth || '0') + parseFloat(cStyles.borderRightWidth || '0');
@@ -374,7 +373,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
         const vpad = parseFloat(cStyles.paddingTop || '0') + parseFloat(cStyles.paddingBottom || '0');
         const width = rect.width - hpad - hbord;
         const height = rect.height - vpad - vbord;
-        return {width, height};
+        return { width, height };
     }
 
     endLoop() {
@@ -517,7 +516,7 @@ export class XcCanvasComponent implements OnInit, OnDestroy {
             document.addEventListener('pointerlockerror', lockErrFunc, false);
             document.addEventListener('pointerlockchange', lockedTestFunc);
 
-            this.canvas.requestPointerLock();
+            this.canvas.requestPointerLock().catch(lockErrFunc);
         } else {
             lockErrFunc();
         }

@@ -1,51 +1,71 @@
-<ng-container *ngIf="!hidden" [ngSwitch]="true">
-    <xc-predefined-table-panel-definition *ngSwitchCase="isType(PredefinedTablePanelDefinition)"
+@if (!hidden) {
+  @switch (true) {
+    @case (isType(PredefinedTablePanelDefinition)) {
+      <xc-predefined-table-panel-definition
         [xc-table-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-predefined-table-panel-definition>
-    <xc-table-panel-definition *ngSwitchCase="isType(TablePanelDefinition)"
+      ></xc-predefined-table-panel-definition>
+    }
+    @case (isType(TablePanelDefinition)) {
+      <xc-table-panel-definition
         [xc-table-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-table-panel-definition>
-    <xc-tree-panel-definition *ngSwitchCase="isType(TreePanelDefinition)"
+      ></xc-table-panel-definition>
+    }
+    @case (isType(TreePanelDefinition)) {
+      <xc-tree-panel-definition
         [xc-tree-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-tree-panel-definition>
-    <xc-form-panel-definition *ngSwitchCase="isType(PanelDefinition)"
+      ></xc-tree-panel-definition>
+    }
+    @case (isType(PanelDefinition)) {
+      <xc-form-panel-definition
         [xc-panel-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-form-panel-definition>
-    <xc-definition-list-definition *ngSwitchCase="isType(DefinitionListDefinition)"
+      ></xc-form-panel-definition>
+    }
+    @case (isType(DefinitionListDefinition)) {
+      <xc-definition-list-definition
         [xc-definition-list-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-definition-list-definition>
-    <xc-form-definition *ngSwitchCase="isType(FormDefinition)"
+      ></xc-definition-list-definition>
+    }
+    @case (isType(FormDefinition)) {
+      <xc-form-definition
         [xc-form-definition]="baseDefinition"
         [xc-base-definition-data]="definitionData"
         (xc-definition-closed)="closed.emit()"
         [class]="baseDefinition.style"
         class="container"
-    ></xc-form-definition>
-    <xc-template *ngSwitchCase="isTemplate()"
+      ></xc-form-definition>
+    }
+    @case (isTemplate()) {
+      <xc-template
         [xc-template-instance]="template"
         xc-unwrap
-    ></xc-template>
-    <span *ngSwitchDefault>
-        <ng-container *ngIf="baseDefinition">{{baseDefinition.translate('Cannot resolve definition') | async}}</ng-container>
-    </span>
-</ng-container>
+      ></xc-template>
+    }
+    @default {
+      <span>
+        @if (baseDefinition) {
+          {{baseDefinition.translate('Cannot resolve definition') | async}}
+        }
+      </span>
+    }
+  }
+}

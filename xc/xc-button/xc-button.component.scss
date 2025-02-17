@@ -15,20 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-button-background-color: unset !default;
-$xc-button-border-color: unset !default;
-$xc-button-border-width: unset !default;
-$xc-button-border-radius: unset !default;
-$xc-button-focus-overlay: unset !default;
-$xc-button-focus-overlay-invert: unset !default;
-$xc-button-font-size: unset !default;
-$xc-button-padding: unset !default;
-$xc-button-text-margin: unset !default;
-$xc-button-line-height: unset !default;
-$xc-button-font-style: unset !default;
-$xc-button-transition: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 :host {
 

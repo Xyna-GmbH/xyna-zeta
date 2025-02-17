@@ -27,7 +27,8 @@ import { XoTemplateDefinedBase } from './template-container-base.model';
 @Component({
     selector: 'xc-template-container',
     templateUrl: './xc-template-container.component.html',
-    styleUrls: ['./xc-template-container.component.scss']
+    styleUrls: ['./xc-template-container.component.scss'],
+    standalone: false
 })
 export class XcTemplateContainerComponent extends XcDynamicComponent<XoTemplateDefinedBase> implements OnDestroy {
 

@@ -1,19 +1,21 @@
 <mat-form-field [floatLabel]="floatLabel">
-    <mat-label>{{label}}</mat-label>
-    <textarea
-        class="zeta-scrollbar"
-        matInput
-        autocomplete="off"
-        [placeholder]="placeholder"
-        [formControl]="formControl"
-        [cdkAutosizeMinRows]="minLines"
-        [cdkAutosizeMaxRows]="maxLines"
-        [cdkTextareaAutosize]="textareaAutosize"
-        [readonly]="readonly"
-        (keydown)="onkeydown($event)"
-        (focus)="focus.emit($event)"
-        (blur)="blur.emit($event)"
-        [attr.aria-label]="ariaLabel"
-    ></textarea>
-    <mat-error *ngIf="errorVisible" align="end">{{errorContent}}</mat-error>
+  <mat-label>{{label}}</mat-label>
+  <textarea
+    class="zeta-scrollbar"
+    matInput
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [formControl]="formControl"
+    [cdkAutosizeMinRows]="minLines"
+    [cdkAutosizeMaxRows]="maxLines"
+    [cdkTextareaAutosize]="textareaAutosize"
+    [readonly]="readonly"
+    (keydown)="onkeydown($event)"
+    (focus)="focus.emit($event)"
+    (blur)="blur.emit($event)"
+    [attr.aria-label]="ariaLabel"
+  ></textarea>
+  @if (errorVisible) {
+    <mat-error align="end">{{errorContent}}</mat-error>
+  }
 </mat-form-field>

@@ -25,7 +25,8 @@ import { XcMenuService } from '../xc';
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class AppTitleComponent implements OnInit {
 

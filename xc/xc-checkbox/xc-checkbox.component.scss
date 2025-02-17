@@ -15,24 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
- $xc-checkbox-color-disabled: unset !default;
- $xc-checkbox-color-disabled-invert: unset !default;
- 
- $xc-checkbox-checkmark-color: unset !default;
- $xc-checkbox-checkmark-color-invert: unset !default;
- 
- $xc-checkbox-checkmark-color-disabled: unset !default;
- $xc-checkbox-checkmark-color-disabled-invert: unset !default;
- $xc-checkbox-with-background: unset !default;
- $font-family-regular: unset !default;
- 
- $xc-checkbox-height: unset !default;
- 
- $xc-checkbox-text-transform: unset !default;
- 
- $xc-checkbox-font-size: unset !default;
- 
- @import 'const';
+  
+ @use '../../const' as *;
  
  @mixin base-color($value, $xc-checkbox-with-background: false) {
  

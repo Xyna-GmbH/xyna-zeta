@@ -27,7 +27,8 @@ import { xcPanelTranslations_enUS } from './locale/xc-panel-translations.en-US';
 @Component({
     selector: 'xc-panel',
     templateUrl: './xc-panel.component.html',
-    styleUrls: ['./xc-panel.component.scss']
+    styleUrls: ['./xc-panel.component.scss'],
+    standalone: false
 })
 export class XcPanelComponent implements AfterViewInit, AfterContentInit, OnDestroy {
 

@@ -18,7 +18,8 @@
 import { Type } from '@angular/core';
 
 import { Observable, of, Subject } from 'rxjs';
-import * as THREE from 'three';
+import { Box2, BufferGeometry, Shape, Vector2 } from 'three';
+import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
 
 export enum XcWebGLFontAlignment {
@@ -30,11 +31,11 @@ export enum XcWebGLFontAlignment {
 
 export class XcWebGLFont {
 
-    protected static fontMap = new Map<string, THREE.Font>();
-    protected static fontLoader = new THREE.FontLoader();
+    protected static fontMap = new Map<string, Font>();
+    protected static fontLoader = new FontLoader();
 
     static load<T extends XcWebGLFont>(url: string, clazz?: Type<T>, ...args: any[]): Observable<T | XcWebGLFont> {
-        const createInstance = (font: THREE.Font): T | XcWebGLFont => clazz
+        const createInstance = (font: Font): T | XcWebGLFont => clazz
             ? new clazz(font, ...args)
             : new XcWebGLFont(font);
         // return font from cache
@@ -66,32 +67,33 @@ export class XcWebGLFont {
     }
 
 
-    constructor(protected font: THREE.Font) {
+    constructor(protected font: Font) {
     }
 
 
-    protected createShapes(text: string, size: number, alignment: XcWebGLFontAlignment, padding: number, boundingBox: THREE.Box2): THREE.Shape[] {
+    protected createShapes(text: string, size: number, alignment: XcWebGLFontAlignment, padding: number, boundingBox: Box2): Shape[] {
         const shapes = this.font.generateShapes(text, size);
         shapes.forEach(shape =>
             shape.getPoints().forEach(point => {
-                /* eslint-disable brace-style */
+                 
                 if (point.x < boundingBox.min.x) { boundingBox.min.x = point.x; }
                 if (point.x > boundingBox.max.x) { boundingBox.max.x = point.x; }
                 if (point.y < boundingBox.min.y) { boundingBox.min.y = point.y; }
                 if (point.y > boundingBox.max.y) { boundingBox.max.y = point.y; }
-                /* eslint-enable brace-style */
+                 
             })
         );
         return shapes;
     }
 
 
-    createGeometry(text: string, size: number, alignment = XcWebGLFontAlignment.CENTER, padding = 0): THREE.BufferGeometry {
-        const boundingBox = new THREE.Box2(
-            new THREE.Vector2(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
-            new THREE.Vector2(Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
+    createGeometry(text: string, size: number, alignment = XcWebGLFontAlignment.CENTER, padding = 0): BufferGeometry {
+        const boundingBox = new Box2(
+            new Vector2(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+            new Vector2(Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
         );
-        const geometry = new THREE.ShapeBufferGeometry(this.createShapes(text, size, alignment, padding, boundingBox));
+        const shapes = this.createShapes(text, size, alignment, padding, boundingBox);
+        const geometry = new BufferGeometry().setFromPoints(shapes.flatMap(shape => shape.getPoints()));
         geometry.computeBoundingBox();
         const width = boundingBox.max.x - boundingBox.min.x;
         const factor = XcWebGLFont.getAlignmentFactor(alignment);

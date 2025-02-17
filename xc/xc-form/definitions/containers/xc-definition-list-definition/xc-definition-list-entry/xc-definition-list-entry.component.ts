@@ -21,7 +21,8 @@ import { XcTemplate } from '../../../../../xc-template/xc-template';
 
 @Component({
     selector: 'xc-definition-list-entry',
-    templateUrl: './xc-definition-list-entry.component.html'
+    templateUrl: './xc-definition-list-entry.component.html',
+    standalone: false
 })
 export class XcDefinitionListEntryComponent {
 

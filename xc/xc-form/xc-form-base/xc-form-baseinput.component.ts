@@ -25,7 +25,8 @@ import { XcFormBaseComponent } from './xc-form-base.component';
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export class XcFormBaseInputComponent extends XcFormBaseComponent {
 

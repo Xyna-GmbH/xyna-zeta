@@ -15,9 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-tree-background-color: unset !default;
 
-@import 'const';
+@use '../../../../const' as *;
 
 $border-color: #aaa;
 

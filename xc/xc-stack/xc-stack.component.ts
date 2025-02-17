@@ -38,7 +38,8 @@ export interface XcStackInterface {
 @Component({
     selector: 'xc-stack',
     templateUrl: './xc-stack.component.html',
-    styleUrls: ['./xc-stack.component.scss']
+    styleUrls: ['./xc-stack.component.scss'],
+    standalone: false
 })
 export class XcStackComponent implements XcStackInterface, AfterViewInit, OnDestroy {
 

@@ -15,10 +15,10 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$auth-panel-box-shadow: unset !default;
-$xc-panel-header-background-color: unset !default;
 
-@import 'const';
+
+
+@use '../../const' as *;
 
 :host {
 

@@ -35,5 +35,5 @@ export class XoStartOrderSuccessResponseArray extends XoArray<XoStartOrderSucces
 }
 
 
-// eslint-disable-next-line no-new
+ 
 new XoStartOrderSuccessResponse();

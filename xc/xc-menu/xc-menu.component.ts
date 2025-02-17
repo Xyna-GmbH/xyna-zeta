@@ -74,7 +74,8 @@ export interface XcMenu extends MatMenu, XcMenuOptions {
 @Component({
     selector: 'xc-menu',
     templateUrl: './xc-menu.component.html',
-    styleUrls: ['./xc-menu.component.scss']
+    styleUrls: ['./xc-menu.component.scss'],
+    standalone: false
 })
 export class XcMenuComponent {
 
@@ -182,7 +183,6 @@ export class XcMenuComponent {
     items = new Array<XcMenuItem>();
 
     @Output('xc-menu-item-select')
-    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly select = new EventEmitter<XcMenuItem>();
 
     selectItem(item: XcMenuItem) {

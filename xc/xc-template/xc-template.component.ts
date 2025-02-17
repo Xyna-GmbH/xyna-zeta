@@ -27,7 +27,8 @@ import { XcButtonTemplate, XcCheckboxTemplate, XcComponentTemplate, XcDataTempla
 @Component({
     selector: 'xc-template',
     templateUrl: './xc-template.component.html',
-    styleUrls: ['./xc-template.component.scss']
+    styleUrls: ['./xc-template.component.scss'],
+    standalone: false
 })
 export class XcTemplateComponent {
 

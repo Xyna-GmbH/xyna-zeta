@@ -22,8 +22,8 @@ import { XoConsistencyCheck } from './xo-consistency';
 import { FullQualifiedName, RuntimeContext } from './xo-describer';
 import { XoAccessorMap, XoAccessorPropertyMap, XoArray, XoArrayClassInterface, XoObject, XoObjectClassInterface, XoSanitizePropertyKey, XoWrapper } from './xo-object';
 
-/* eslint-disable brace-style */
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 const ctorAsyncMap = new Map<Function, Map<string, Subject<any>>>();
 
 

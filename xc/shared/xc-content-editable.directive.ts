@@ -24,7 +24,8 @@ export type XcContentEditableMode = 'none' | 'mousedown' | 'dblclick';
 
 
 @Directive({
-    selector: '[xc-content-editable]'
+    selector: '[xc-content-editable]',
+    standalone: false
 })
 export class XcContentEditableDirective {
     private static readonly PLAINTEXT_ONLY = 'plaintext-only';

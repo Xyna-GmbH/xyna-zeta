@@ -15,27 +15,13 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, Input } from '@angular/core';
 
-import { XoFormPanelDefinition } from '../../xo/containers.model';
-import { XcFormDefinitionComponent } from '../xc-form-definition/xc-form-definition.component';
+//======================================================================
+// Theme Variables (don't use within components!)
+//======================================================================
 
+$color-white: #fff;
+$color-black: #000;
 
-@Component({
-    selector: 'xc-form-panel-definition',
-    templateUrl: './xc-form-panel-definition.component.html',
-    styleUrls: ['./xc-form-panel-definition.component.scss'],
-    standalone: false
-})
-export class XcFormPanelDefinitionComponent extends XcFormDefinitionComponent {
-
-    @Input('xc-panel-definition')
-    set panelDefinition(value: XoFormPanelDefinition) {
-        this.definition = value;
-    }
-
-
-    get panelDefinition(): XoFormPanelDefinition {
-        return this.definition as XoFormPanelDefinition;
-    }
-}
+$color-white-overlay: rgba($color-white, .1);
+$color-black-overlay: rgba($color-black, .1);

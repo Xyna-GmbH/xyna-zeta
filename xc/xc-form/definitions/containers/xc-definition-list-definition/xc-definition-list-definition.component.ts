@@ -24,7 +24,8 @@ import { XcFormDefinitionComponent } from '../xc-form-definition/xc-form-definit
 @Component({
     selector: 'xc-definition-list-definition',
     templateUrl: './xc-definition-list-definition.component.html',
-    styleUrls: ['./xc-definition-list-definition.component.scss']
+    styleUrls: ['./xc-definition-list-definition.component.scss'],
+    standalone: false
 })
 export class XcDefinitionListDefinitionComponent extends XcFormDefinitionComponent {
 

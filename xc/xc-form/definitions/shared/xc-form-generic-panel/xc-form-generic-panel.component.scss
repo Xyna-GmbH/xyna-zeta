@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@import "const";
+@use '../../../../../const' as *;
 
 :host::ng-deep {
     display: flex;
@@ -37,7 +37,7 @@
             header,
             footer {
                 xc-icon {
-                    color: $color-white;
+                    color: $color-normal;
                 }
             }
         }

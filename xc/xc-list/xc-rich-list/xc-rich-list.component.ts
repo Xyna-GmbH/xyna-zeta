@@ -28,7 +28,8 @@ import { XC_RICH_LIST_ITEM_DATA, XcRichListInterface, XcRichListItem, XcRichList
 @Component({
     selector: 'xc-rich-list',
     templateUrl: './xc-rich-list.component.html',
-    styleUrls: ['./xc-rich-list.component.scss']
+    styleUrls: ['./xc-rich-list.component.scss'],
+    standalone: false
 })
 export class XcRichListComponent extends XcThemeableComponent implements XcRichListInterface {
     private _componentOutlets: QueryList<NgComponentOutlet>;
@@ -49,7 +50,7 @@ export class XcRichListComponent extends XcThemeableComponent implements XcRichL
         if (idx >= 0 && idx < this.componentOutlets.length) {
             const componentOutlet = this.componentOutlets.toArray()[idx];
             // necessary private access
-            // eslint-disable-next-line @typescript-eslint/dot-notation
+             
             const componentRef = componentOutlet['_componentRef'] as ComponentRef<XcRichListItemComponent>;
             return componentRef.instance;
         }

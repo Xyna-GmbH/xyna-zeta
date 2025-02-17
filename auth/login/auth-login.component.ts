@@ -50,7 +50,8 @@ interface LoginTabItem {
 @Component({
     selector: 'auth-login',
     templateUrl: './auth-login.component.html',
-    styleUrls: ['./auth-login.component.scss']
+    styleUrls: ['./auth-login.component.scss'],
+    standalone: false
 })
 export class AuthLoginComponent {
 

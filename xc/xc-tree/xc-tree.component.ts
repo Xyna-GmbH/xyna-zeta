@@ -66,7 +66,8 @@ export interface XcTreeObserver {
     selector: 'xc-tree',
     templateUrl: './xc-tree.component.html',
     styleUrls: ['./xc-tree.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcTreeComponent implements OnDestroy {
 
@@ -335,7 +336,7 @@ export class XcTreeComponent implements OnDestroy {
     getAriaPosinset(node: XcTreeNode): number {
         let pos = 1;
         if (node.parent) {
-            // eslint-disable-next-line array-callback-return
+             
             node.parent.children.subscribe(children => children.some((child, i) => {
                 if (child.name === node.name) {
                     pos = i + 1;

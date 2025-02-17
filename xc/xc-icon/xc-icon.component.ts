@@ -26,7 +26,8 @@ import { XcThemeableComponent } from '../shared/xc-themeable.component';
 @Component({
     selector: 'xc-icon',
     templateUrl: './xc-icon.component.html',
-    styleUrls: ['./xc-icon.component.scss']
+    styleUrls: ['./xc-icon.component.scss'],
+    standalone: false
 })
 export class XcIconComponent extends XcThemeableComponent implements OnInit, AfterContentInit {
 

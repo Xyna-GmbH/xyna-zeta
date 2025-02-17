@@ -23,7 +23,8 @@ import { LoginComponentData } from '../login/auth-login.component';
 @Component({
     selector: 'credentials-login',
     templateUrl: './credentials-login.component.html',
-    styleUrls: ['./credentials-login.component.scss']
+    styleUrls: ['./credentials-login.component.scss'],
+    standalone: false
 })
 export class CredentialsLoginComponent {
 

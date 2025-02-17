@@ -33,7 +33,8 @@ export interface XcMasterDetailFocusCandidateObserver {
 
 
 @Directive({
-    selector: '[xc-master-detail-focus-candidate]'
+    selector: '[xc-master-detail-focus-candidate]',
+    standalone: false
 })
 export class XcMasterDetailFocusCandidateDirective implements OnInit {
 

@@ -30,7 +30,8 @@ import { XcFormPanelDefinitionComponent } from '../xc-form-panel-definition/xc-f
 @Component({
     selector: 'xc-predefined-table-panel-definition',
     templateUrl: './xc-predefined-table-panel-definition.component.html',
-    styleUrls: ['./xc-predefined-table-panel-definition.component.scss']
+    styleUrls: ['./xc-predefined-table-panel-definition.component.scss'],
+    standalone: false
 })
 export class XcPredefinedTablePanelDefinitionComponent extends XcFormPanelDefinitionComponent {
 

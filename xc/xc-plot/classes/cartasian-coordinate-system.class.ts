@@ -85,7 +85,7 @@ export class CartasianCoordinateSystem {
         return this.scaleMarkMapY;
     }
 
-    get scaleMarkPositions(): {axisX: number[]; axisY: number[]} {
+    get scaleMarkPositions(): { axisX: number[]; axisY: number[] } {
         return {
             axisX: this.scaleMarkPositionX,
             axisY: this.scaleMarkPositionY
@@ -103,19 +103,19 @@ export class CartasianCoordinateSystem {
     ) {
 
         this.subscription =
-        dataSourceContainerRefChange.subscribe(refs => {
-            // only the first datasource holds the information needed to draw the c. coordinate system
-            this.dataSourceRef = refs?.[0];
-            // this.dataSourceContainerRef = refs;
-            if (this.pointsContainer?.length) {
-                this.pointsContainer.forEach(c => c.clearSubscriptions());
-            }
-            this.pointsContainer = [];
-            refs?.forEach((ref, i) => {
-                this.pointsContainer.push(new CCSPointsContainer(dataSourceContainerRefChange, i));
-            });
+            dataSourceContainerRefChange.subscribe(refs => {
+                // only the first datasource holds the information needed to draw the c. coordinate system
+                this.dataSourceRef = refs?.[0];
+                // this.dataSourceContainerRef = refs;
+                if (this.pointsContainer?.length) {
+                    this.pointsContainer.forEach(c => c.clearSubscriptions());
+                }
+                this.pointsContainer = [];
+                refs?.forEach((ref, i) => {
+                    this.pointsContainer.push(new CCSPointsContainer(dataSourceContainerRefChange, i));
+                });
 
-        });
+            });
     }
 
     clearSubscriptions() {
@@ -319,14 +319,14 @@ export class CartasianCoordinateSystem {
      * @param x - x-coordinate of the own area, in which the ccs is displayed (same as the absolute x-value if this.x = 0)
      * @param y - y-coordinate of the own area, in which the ccs is displayed (same as the absolute y-value if this.y = 0)
      */
-    getValueCoordinate(x: number, y: number): {x: number; y: number} {
+    getValueCoordinate(x: number, y: number): { x: number; y: number } {
         const relX = x - this.nullpoint.x;
         const valX = relX * this.valuePerPixelX;
 
         const relY = this.nullpoint.y - y;
         const valY = relY * this.valuePerPixelY;
 
-        return {x: valX, y: valY};
+        return { x: valX, y: valY };
     }
 
     /**
@@ -334,7 +334,7 @@ export class CartasianCoordinateSystem {
      * @param x - x value that is represented by the ccs
      * @param y - y value that is represented by the ccs
      */
-    getOwnCoordinate(x: number, y: number): {x: number; y: number} {
+    getOwnCoordinate(x: number, y: number): { x: number; y: number } {
 
         const relX = x / this.valuePerPixelX;
         const absX = relX + this.nullpoint.x;
@@ -342,7 +342,7 @@ export class CartasianCoordinateSystem {
         const relY = y / this.valuePerPixelY;
         const absY = this.nullpoint.y - relY;
 
-        return {x: absX, y: absY};
+        return { x: absX, y: absY };
     }
 
 }

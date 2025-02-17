@@ -1,79 +1,85 @@
 <mat-tree
-    [dataSource]="dataSource"
-    [treeControl]="treeControl"
-    aria-life="polite"
-    aria-relevant="additions removals text all"
-    xc-i18n-context="zeta.xc-tree"
->
-    <mat-nested-tree-node *matTreeNodeDef="let node"
-        [attr.aria-level]="getAriaLevel(node)"
-        [attr.aria-setsize]="getAriaSetsize(node)"
-        [attr.aria-posinset]="getAriaPosinset(node)"
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  aria-life="polite"
+  aria-relevant="additions removals text all"
+  xc-i18n-context="zeta.xc-tree"
+  >
+  <mat-nested-tree-node *matTreeNodeDef="let node"
+    [attr.aria-level]="getAriaLevel(node)"
+    [attr.aria-setsize]="getAriaSetsize(node)"
+    [attr.aria-posinset]="getAriaPosinset(node)"
     >
-        <div
-            class="mat-tree-node"
-            (click)="selectNode(node, $event.ctrlKey || $event.metaKey)"
-            [class.selected]="isNodeSelected(node)"
-            [class.hidden]="isNodeHidden(node)"
-            [class.fixed]="node.fixed"
-        >{{visitNode(node)}}
-            <xc-icon-button
-                *ngIf="isNodeExpandable(node)"
-                class="toggle"
-                [color]="readonlyMode ? 'invert' : 'normal'"
-                [class.rotated]="isNodeExpanded(node)"
-                xc-icon-name="accordion"
-                xc-icon-size="small"
-                matTreeNodeToggle
-                [matTreeNodeToggleRecursive]="recursiveToggling"
-                [xc-button-aria-label]="i18n.translate('zeta.xc.tree.expand-collapse-arialabel') + ' ' + i18n.translate(node.name)"
-                [xc-tooltip]="i18n.translate('zeta.xc.tree.expand-collapse-tooltip')"
-                xc-tooltip-showdelay="1000"
-            ></xc-icon-button>
-            <xc-icon-button
-                *ngIf="isNodeLimit(node)"
-                (click)="unlimitNode(node)"
-                [color]="readonlyMode ? 'invert' : 'normal'"
-                xc-icon-name="accordion"
-                xc-icon-size="small"
-                [xc-button-aria-label]="i18n.translate('shows') + ' ' + i18n.translate(node.name)"
-                xc-tooltip="{{'tooltip-show' | xcI18n}}"
-                xc-tooltip-showdelay="500"
-            ></xc-icon-button>
-            <div class="child" [ngClass]="node.classes || []" [class.fixed]="node.fixed">
-                <!-- label -->
-                <label [class.disabled]="isNodeDisabled(node)" [class.truncated]="!!node.value">
-                    <span>{{i18n.translate(node.name)}}</span>
-                </label>
+    <div
+      class="mat-tree-node"
+      (click)="selectNode(node, $event.ctrlKey || $event.metaKey)"
+      [class.selected]="isNodeSelected(node)"
+      [class.hidden]="isNodeHidden(node)"
+      [class.fixed]="node.fixed"
+      >{{visitNode(node)}}
+      @if (isNodeExpandable(node)) {
+        <xc-icon-button
+          class="toggle"
+          [color]="readonlyMode ? 'invert' : 'normal'"
+          [class.rotated]="isNodeExpanded(node)"
+          xc-icon-name="accordion"
+          xc-icon-size="small"
+          matTreeNodeToggle
+          [matTreeNodeToggleRecursive]="recursiveToggling"
+          [xc-button-aria-label]="i18n.translate('zeta.xc.tree.expand-collapse-arialabel') + ' ' + i18n.translate(node.name)"
+          [xc-tooltip]="i18n.translate('zeta.xc.tree.expand-collapse-tooltip')"
+          xc-tooltip-showdelay="1000"
+        ></xc-icon-button>
+      }
+      @if (isNodeLimit(node)) {
+        <xc-icon-button
+          (click)="unlimitNode(node)"
+          [color]="readonlyMode ? 'invert' : 'normal'"
+          xc-icon-name="accordion"
+          xc-icon-size="small"
+          [xc-button-aria-label]="i18n.translate('shows') + ' ' + i18n.translate(node.name)"
+          xc-tooltip="{{'tooltip-show' | xcI18n}}"
+          xc-tooltip-showdelay="500"
+        ></xc-icon-button>
+      }
+      <div class="child" [ngClass]="node.classes || []" [class.fixed]="node.fixed">
+        <!-- label -->
+        <label [class.disabled]="isNodeDisabled(node)" [class.truncated]="!!node.value">
+          <span>{{i18n.translate(node.name)}}</span>
+        </label>
 
-                <!-- tooltip icon or padding -->
-                <xc-icon-button
-                    *ngIf="!!node.tooltip"
-                    class="tooltip"
-                    [xc-tooltip]="node.tooltip"
-                    xc-tooltip-position="before"
-                    [xc-tooltip-controller]="{autoDelegate: false}"
-                    xc-tooltip-islabel
-                    xc-tooltip-impolite
-                    xc-icon-name="info"
-                    xc-icon-size="small"
-                    disabled tabindex="0"
-                ></xc-icon-button>
-                <div
-                    *ngIf="!node.tooltip && !readonlyMode"
-                    class="padding"
-                ></div>
+        <!-- tooltip icon or padding -->
+        @if (!!node.tooltip) {
+          <xc-icon-button
+            class="tooltip"
+            [xc-tooltip]="node.tooltip"
+            xc-tooltip-position="before"
+            [xc-tooltip-controller]="{autoDelegate: false}"
+            xc-tooltip-islabel
+            xc-tooltip-impolite
+            xc-icon-name="info"
+            xc-icon-size="small"
+            disabled tabindex="0"
+          ></xc-icon-button>
+        }
+        @if (!node.tooltip && !readonlyMode) {
+          <div
+            class="padding"
+          ></div>
+        }
 
-                <!-- templates -->
-                <xc-template *ngFor="let template of node.value"
-                    [xc-template-instance]="template"
-                    [xc-template-disabled]="isNodeDisabled(node)"
-                    [xc-template-aria-label]="getTemplateAriaLabelByNode(node)"
-                ></xc-template>
-            </div>
-        </div>
-        <div class="parent" [class.fixed]="node.fixed" [class.hidden]="isNodeCollapsed(node)">
-            <ng-container matTreeNodeOutlet></ng-container>
-        </div>
-    </mat-nested-tree-node>
+        <!-- templates -->
+        @for (template of node.value; track template) {
+          <xc-template
+            [xc-template-instance]="template"
+            [xc-template-disabled]="isNodeDisabled(node)"
+            [xc-template-aria-label]="getTemplateAriaLabelByNode(node)"
+          ></xc-template>
+        }
+      </div>
+    </div>
+    <div class="parent" [class.fixed]="node.fixed" [class.hidden]="isNodeCollapsed(node)">
+      <ng-container matTreeNodeOutlet></ng-container>
+    </div>
+  </mat-nested-tree-node>
 </mat-tree>

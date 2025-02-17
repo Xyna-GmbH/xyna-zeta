@@ -30,7 +30,8 @@ import { ResizeEvent, XcTreeNodeComponent } from '../shared/xc-tree-node.compone
     selector: 'xc-tree-item',
     templateUrl: './xc-tree-item.component.html',
     styleUrls: ['./xc-tree-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcTreeItemComponent extends XcTreeNodeComponent implements AfterViewInit, OnDestroy {
 

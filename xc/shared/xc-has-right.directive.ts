@@ -22,7 +22,8 @@ import { isString } from '../../base';
 
 
 @Directive({
-    selector: '[xc-has-right]'
+    selector: '[xc-has-right]',
+    standalone: false
 })
 export class XcHasRightDirective {
 

@@ -25,7 +25,8 @@ import { I18nService } from './i18n.service';
  * @deprecated Use *XcI18nPipe* instead
  */
 @Pipe({
-    name: 'i18n'
+    name: 'i18n',
+    standalone: false
 })
 export class I18nPipe implements PipeTransform {
 
@@ -42,7 +43,8 @@ export class I18nPipe implements PipeTransform {
 
 
 @Pipe({
-    name: 'xcI18n'
+    name: 'xcI18n',
+    standalone: false
 })
 export class XcI18nPipe extends XcI18nBase implements PipeTransform {
 

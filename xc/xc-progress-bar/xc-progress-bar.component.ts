@@ -23,7 +23,8 @@ import { XcThemeableComponent } from '../shared/xc-themeable.component';
 @Component({
     selector: 'xc-progress-bar',
     templateUrl: './xc-progress-bar.component.html',
-    styleUrls: ['./xc-progress-bar.component.scss']
+    styleUrls: ['./xc-progress-bar.component.scss'],
+    standalone: false
 })
 export class XcProgressBarComponent extends XcThemeableComponent {
     constructor() {

@@ -182,7 +182,7 @@ export class I18nService {
 
         const translationMap = this._translations.get(this.language);
 
-        // eslint-disable-next-line eqeqeq
+         
         if (translationMap && key != undefined) {
 
             if (this.contextDismantlingSearch) {
@@ -218,7 +218,7 @@ export class I18nService {
             }
         }
 
-        // eslint-disable-next-line eqeqeq
+         
         return (translation != undefined) ? translation : this.fulfillNoTranslationFoundBehavior(key, cache);
     }
 

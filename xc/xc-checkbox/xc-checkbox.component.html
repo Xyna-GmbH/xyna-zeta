@@ -1,13 +1,14 @@
-    <mat-checkbox
-        [disabled]="disabled || readonly"
-        [checked]="checked"
-        [indeterminate]="indeterminate"
-        [aria-labelledby]="labelRef"
-        (change)="change($event)"
-    >
-        <mat-label
-            *ngIf="label"
-            [id]="labelRef"
-            class="xc-checkbox-label"
-        >{{label}}</mat-label>
-    </mat-checkbox>
+<mat-checkbox
+  [disabled]="disabled || readonly"
+  [checked]="checked"
+  [indeterminate]="indeterminate"
+  [aria-labelledby]="labelRef"
+  (change)="change($event)"
+  >
+  @if (label) {
+    <mat-label
+      [id]="labelRef"
+      class="xc-checkbox-label"
+    >{{label}}</mat-label>
+  }
+</mat-checkbox>

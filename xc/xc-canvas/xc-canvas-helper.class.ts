@@ -40,12 +40,10 @@ interface HTMLCanvasElementCapStream extends HTMLCanvasElement {
     captureStream: (framesPerSecond?: number) => MediaStream;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 class BlobEvent extends Event {
     data: any;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 declare class MediaRecorder {
 
     constructor(mediaStream: MediaStream);
@@ -98,7 +96,7 @@ export class CanvasHelperRecording {
 
     stop() {
         this.recorder.onstop = e => {
-            this.file = new Blob(this.chunks, {type: 'video/mp4'});
+            this.file = new Blob(this.chunks, { type: 'video/mp4' });
             this.filename = 'record_' + Date.now() + '.mp4';
             this.behaviorSubject.next(this);
         };
@@ -132,7 +130,6 @@ export function getMouseButton(e: MouseEvent): MouseButton {
     return e.button as MouseButton;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export enum CanvasFillRule {
     nonzero = 'nonzero',
     evenodd = 'evenodd'
@@ -143,7 +140,7 @@ export class ScreenInfo {
     get aspect(): number {
         return this.width / this.height;
     }
-    constructor(public width = 0, public height = 0) {}
+    constructor(public width = 0, public height = 0) { }
 }
 
 
@@ -320,19 +317,19 @@ export class XcCanvasHelper {
         const rightAngle = rad + (Math.PI / 2);
 
         const p = [];
-        p[0] = {x: x1, y: y1};
+        p[0] = { x: x1, y: y1 };
 
         // path from the start point to the arrow peak, going there from the left side
-        p[1] = {x: Math.cos(leftAngle) * bth + p[0].x, y: Math.sin(leftAngle) * bth + p[0].y};
-        p[2] = {x: p[1].x + Math.cos(rad) * blen, y: p[1].y + Math.sin(rad) * blen};
-        p[3] = {x: p[2].x + Math.cos(leftAngle) * hth, y: p[2].y + Math.sin(leftAngle) * hth};
+        p[1] = { x: Math.cos(leftAngle) * bth + p[0].x, y: Math.sin(leftAngle) * bth + p[0].y };
+        p[2] = { x: p[1].x + Math.cos(rad) * blen, y: p[1].y + Math.sin(rad) * blen };
+        p[3] = { x: p[2].x + Math.cos(leftAngle) * hth, y: p[2].y + Math.sin(leftAngle) * hth };
 
-        p[4] = {x: x2, y: y2}; // arrow peak
+        p[4] = { x: x2, y: y2 }; // arrow peak
 
         // path from the start point to the arrow peak, going there from the right side
-        p[7] = {x: Math.cos(rightAngle) * bth + p[0].x, y: Math.sin(rightAngle) * bth + p[0].y};
-        p[6] = {x: p[7].x + Math.cos(rad) * blen, y: p[7].y + Math.sin(rad) * blen};
-        p[5] = {x: p[6].x + Math.cos(rightAngle) * hth, y: p[6].y + Math.sin(rightAngle) * hth};
+        p[7] = { x: Math.cos(rightAngle) * bth + p[0].x, y: Math.sin(rightAngle) * bth + p[0].y };
+        p[6] = { x: p[7].x + Math.cos(rad) * blen, y: p[7].y + Math.sin(rad) * blen };
+        p[5] = { x: p[6].x + Math.cos(rightAngle) * hth, y: p[6].y + Math.sin(rightAngle) * hth };
 
         c.moveTo(p[0].x, p[0].y);
 
@@ -394,19 +391,19 @@ export class XcCanvasHelper {
         const rightAngle = rad + (Math.PI / 2);
 
         const p = [];
-        p[0] = {x: x1, y: y1};
+        p[0] = { x: x1, y: y1 };
 
         // path from the start point to the arrow peak, going there from the left side
-        p[1] = {x: Math.cos(leftAngle) * bth + p[0].x, y: Math.sin(leftAngle) * bth + p[0].y};
-        p[2] = {x: p[1].x + Math.cos(rad) * blen, y: p[1].y + Math.sin(rad) * blen};
-        p[3] = {x: p[2].x + Math.cos(leftAngle) * hth, y: p[2].y + Math.sin(leftAngle) * hth};
+        p[1] = { x: Math.cos(leftAngle) * bth + p[0].x, y: Math.sin(leftAngle) * bth + p[0].y };
+        p[2] = { x: p[1].x + Math.cos(rad) * blen, y: p[1].y + Math.sin(rad) * blen };
+        p[3] = { x: p[2].x + Math.cos(leftAngle) * hth, y: p[2].y + Math.sin(leftAngle) * hth };
 
-        p[4] = {x: x2, y: y2}; // arrow peak
+        p[4] = { x: x2, y: y2 }; // arrow peak
 
         // path from the start point to the arrow peak, going there from the right side
-        p[7] = {x: Math.cos(rightAngle) * bth + p[0].x, y: Math.sin(rightAngle) * bth + p[0].y};
-        p[6] = {x: p[7].x + Math.cos(rad) * blen, y: p[7].y + Math.sin(rad) * blen};
-        p[5] = {x: p[6].x + Math.cos(rightAngle) * hth, y: p[6].y + Math.sin(rightAngle) * hth};
+        p[7] = { x: Math.cos(rightAngle) * bth + p[0].x, y: Math.sin(rightAngle) * bth + p[0].y };
+        p[6] = { x: p[7].x + Math.cos(rad) * blen, y: p[7].y + Math.sin(rad) * blen };
+        p[5] = { x: p[6].x + Math.cos(rightAngle) * hth, y: p[6].y + Math.sin(rightAngle) * hth };
 
         c.moveTo(p[0].x, p[0].y);
 
@@ -504,7 +501,7 @@ export class XcCanvasHelper {
         c.drawImage(img, x, y, w, h);
         c.restore();
 
-        return {x, y, width: w, height: h};
+        return { x, y, width: w, height: h };
     }
 
     static reliefRect(c: CanvasRenderingContext2D, x: number, y: number, width: number, height?: number, borderWidth?: number, borderColors?: string[]) {
@@ -948,7 +945,7 @@ export class XcCanvasHelper {
 
         cache[++cachePtr] = 1;
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
+         
         const parse = (pts: number[], cache: Float32Array, l: number) => {
 
             for (let j = 2; j < l; j += 2) {
@@ -997,18 +994,18 @@ export class XcCanvasHelper {
         }
     }
 
-    static createScreenshot(canvas: HTMLCanvasElement): { data: string; timestamp: number} {
+    static createScreenshot(canvas: HTMLCanvasElement): { data: string; timestamp: number } {
         // type: string ['image/png' | 'image/jpeg', 'image/webp'] - default is 'image/png'
         // quality: number [0 - 1] - only regarded if type is jpeq or webp - default is 0.92
         return { data: canvas.toDataURL(), timestamp: Date.now() };
     }
 
-    static downloadScreenshot(screenshot: { data: string; timestamp: number}, filename: string) {
+    static downloadScreenshot(screenshot: { data: string; timestamp: number }, filename: string) {
         filename = filename || 'record_' + screenshot.timestamp + '.mp4';
         XcCanvasHelper.downloadFile(screenshot.data, filename);
     }
 
-    static printScreenshot(screenshot: { data: string; timestamp: number}) {
+    static printScreenshot(screenshot: { data: string; timestamp: number }) {
 
         const thisDoc = document;
         const iframe = thisDoc.createElement('iframe');

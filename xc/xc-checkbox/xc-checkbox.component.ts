@@ -30,7 +30,8 @@ import { XcThemeableComponent } from '../shared/xc-themeable.component';
     selector: 'xc-checkbox',
     templateUrl: './xc-checkbox.component.html',
     styleUrls: ['./xc-checkbox.component.scss'],
-    providers: [XcI18nTranslateDirective]
+    providers: [XcI18nTranslateDirective],
+    standalone: false
 })
 export class XcCheckboxComponent extends XcThemeableComponent implements OnInit, AfterContentInit {
 

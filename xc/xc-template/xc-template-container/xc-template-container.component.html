@@ -1,13 +1,15 @@
 <xc-panel [class]="stylename">
-    <header>
-        <label>{{injectedData.getLabel()}}</label>
-    </header>
+  <header>
+    <label>{{injectedData.getLabel()}}</label>
+  </header>
 
-    <section>
-        <xc-template *ngFor="let child of templates | async"
-            [xc-template-instance]="child"
-        ></xc-template>
-    </section>
+  <section>
+    @for (child of templates | async; track child) {
+      <xc-template
+        [xc-template-instance]="child"
+      ></xc-template>
+    }
+  </section>
 
-    <footer></footer>
+  <footer></footer>
 </xc-panel>

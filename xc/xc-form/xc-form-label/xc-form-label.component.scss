@@ -15,12 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
- $xc-form-base-input-label-color: unset !default;
- $xc-form-base-input-label-font-size: unset !default;
- $xc-form-base-input-label-text-transform: unset !default;
  
- 
- @import 'const';
+ @use '../../../const' as *;
  
  
  :host {

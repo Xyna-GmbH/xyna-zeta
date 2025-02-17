@@ -23,14 +23,14 @@ export type Native = number | string | boolean;
 export type NativeArray = Array<number> | Array<string> | Array<boolean>;
 
 export type TypeFilterOut<T, U> = T extends U ? never : T;
-export type TypePropertiesOf<T, U> = {[K in keyof T]: T[K] extends U ? K : never}[keyof T];
+export type TypePropertiesOf<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
 
 export type Constructor<T = any> = new (...args: any[]) => T;
 
-export const NOP = () => {};
+export const NOP = () => { };
 
 export const CACHE = Symbol();
-export type CachedFunction<T> = (() => T) & {[CACHE]: T};
+export type CachedFunction<T> = (() => T) & { [CACHE]: T };
 
 
 export interface IComparable {
@@ -95,6 +95,7 @@ export function uniquify<T>(array: T[], serializer: (value: T) => string): T[] {
 }
 
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function templateClassType<T>(clazz: Function) {
     return {
         clazz,
@@ -107,7 +108,7 @@ export function templateClassType<T>(clazz: Function) {
 export function defineAccessorProperty<T, R>(
     instance: T,
     propertyName: keyof T,
-    get?: ()         => R,
+    get?: () => R,
     set?: (value: R) => void
 ): R {
     const propertyDescriptor = Object.getOwnPropertyDescriptor(instance, propertyName);
@@ -130,7 +131,7 @@ export function defineAccessorProperty<T, R>(
  * @returns Repeated string
  */
 export function repeat(string: string, count: number): string {
-    return Array.prototype.join.call({length: count + 1}, string);
+    return Array.prototype.join.call({ length: count + 1 }, string);
 }
 
 
@@ -207,7 +208,7 @@ export function endsWith(string: string, substring: string): boolean {
  * @returns Number of digits
  */
 export function digits(value: number): number {
-    // eslint-disable-next-line no-bitwise
+     
     return (Math.log10((value ^ (value >> 31)) - (value >> 31)) | 0) + 1;
 }
 
@@ -287,14 +288,14 @@ export function factorMultiplicity(value: number, factor: number): number {
  * @returns Previous power of two or 0, if value is 0
  */
 export function prevPow2(value: number): number {
-    /* eslint-disable no-bitwise */
+     
     value |= (value >> 1);
     value |= (value >> 2);
     value |= (value >> 4);
     value |= (value >> 8);
     value |= (value >> 16);
     return value - (value >> 1);
-    /* eslint-enable no-bitwise */
+     
 }
 
 
@@ -304,7 +305,7 @@ export function prevPow2(value: number): number {
  * @returns Next power of two or 0, if value is 0
  */
 export function nextPow2(value: number): number {
-    /* eslint-disable no-bitwise */
+     
     value--;
     value |= value >> 1;
     value |= value >> 2;
@@ -312,7 +313,7 @@ export function nextPow2(value: number): number {
     value |= value >> 8;
     value |= value >> 16;
     return value + 1;
-    /* eslint-enable no-bitwise */
+     
 }
 
 
@@ -324,7 +325,7 @@ export function nextPow2(value: number): number {
  */
 export function log2(value: number): number {
     let result = 0;
-    // eslint-disable-next-line no-bitwise
+     
     while ((value >>= 1)) {
         result++;
     }
@@ -389,6 +390,7 @@ export function timezoneOffsetSTD(): number {
  * @return TRUE, if date is under daylight saving time, FALSE otherwise
  */
 export function timezoneDST(timestamp?: number): boolean {
+    // eslint-disable-next-line prefer-rest-params
     return (new (<Constructor<Date>>Date)(...arguments)).getTimezoneOffset() < timezoneOffsetSTD();
 }
 
@@ -409,7 +411,7 @@ export interface DateTimeFormatOptions {
  * @param options Formatting options
  * @returns Formatted time string
  */
-export function timeString(timestamp: number, format: string, options: DateTimeFormatOptions = {leadingZeroes: true, convertToUTC: false}): string {
+export function timeString(timestamp: number, format: string, options: DateTimeFormatOptions = { leadingZeroes: true, convertToUTC: false }): string {
     const date = new Date(timestamp);
     let hh = String(options.convertToUTC ? date.getUTCHours() : date.getHours());
     let mm = String(options.convertToUTC ? date.getUTCMinutes() : date.getMinutes());
@@ -433,7 +435,7 @@ export function timeString(timestamp: number, format: string, options: DateTimeF
  * @param options Formatting options
  * @returns Formatted date string
  */
-export function dateString(timestamp: number, format: string, options: DateTimeFormatOptions = {leadingZeroes: true, convertToUTC: false}): string {
+export function dateString(timestamp: number, format: string, options: DateTimeFormatOptions = { leadingZeroes: true, convertToUTC: false }): string {
     const date = new Date(timestamp);
     let mm = String(options.convertToUTC ? date.getUTCMonth() + 1 : date.getMonth() + 1);
     let dd = String(options.convertToUTC ? date.getUTCDate() : date.getDate());
@@ -494,6 +496,7 @@ export function isType(arg: any, type: string): boolean {
 }
 
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function isFunction(arg: any): arg is Function {
     return isType(arg, 'Function');
 }
@@ -504,6 +507,7 @@ export function isArray(arg: any): arg is Array<any> {
 }
 
 
+// eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
 export function isObject(arg: any): arg is Object {
     return isType(arg, 'Object');
 }
@@ -803,7 +807,7 @@ export function scrollToElement(element: Element, scrollBehavior: ScrollBehavior
     let scrollTimeout: any;
     const checkIsScrolling = () => {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(function() {
+        scrollTimeout = setTimeout(() => {
             element.parentElement.removeEventListener('scroll', checkIsScrolling);
             scrollingEnded.next();
             scrollingEnded.complete();

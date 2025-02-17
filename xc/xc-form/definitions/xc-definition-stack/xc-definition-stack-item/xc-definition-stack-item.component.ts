@@ -49,7 +49,8 @@ interface DefinitionStackItem {
 @Component({
     templateUrl: './xc-definition-stack-item.component.html',
     styleUrls: ['./xc-definition-stack-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcDefinitionStackItemComponent extends XcStackItemComponent<DefinitionStackItemComponentData> implements XoDefinitionObserver, AfterViewInit, OnDestroy {
 

@@ -52,7 +52,8 @@ export interface XcPathBrowserTemplateData {
 @Component({
     selector: 'xc-path-browser',
     templateUrl: './xc-path-browser.component.html',
-    styleUrls: ['./xc-path-browser.component.scss']
+    styleUrls: ['./xc-path-browser.component.scss'],
+    standalone: false
 })
 export class XcPathBrowserComponent extends XcDynamicComponent<XcPathBrowserTemplateData> {
 

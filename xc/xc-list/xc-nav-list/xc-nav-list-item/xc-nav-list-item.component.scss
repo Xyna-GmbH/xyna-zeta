@@ -15,25 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-nav-list-item-border-color-active: unset !default;
-$xc-nav-list-item-border-color-normal: unset !default;
-$xc-nav-list-item-border-color-hover: unset !default;
-$xc-nav-list-item-border-color-focus: unset !default;
 
-$xc-nav-list-item-color-normal: unset !default;
-$xc-nav-list-item-color-active: unset !default;
-$xc-nav-list-item-color-hover: unset !default;
-$xc-nav-list-item-color-focus: unset !default;
-
-$xc-nav-list-item-background-color-normal: unset !default;
-$xc-nav-list-item-background-color-active: unset !default;
-$xc-nav-list-item-background-color-hover: unset !default;
-$xc-nav-list-item-background-color-focus: unset !default;
-
-$xc-nav-list-item-margin: unset !default;
-$xc-nav-list-item-height: unset !default;
-
-@import 'const';
+@use '../../../../const' as *;
 
 :host {
     flex-shrink: 0;

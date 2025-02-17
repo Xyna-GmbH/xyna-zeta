@@ -29,7 +29,8 @@ export interface XcDragOptions {
 
 
 @Directive({
-    selector: '[xc-drag]'
+    selector: '[xc-drag]',
+    standalone: false
 })
 export class XcDragDirective implements OnChanges, OnDestroy {
 
