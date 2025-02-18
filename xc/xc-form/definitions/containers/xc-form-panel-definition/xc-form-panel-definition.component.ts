@@ -19,6 +19,7 @@ import { Component, Input } from '@angular/core';
 
 import { XoFormPanelDefinition } from '../../xo/containers.model';
 import { XcFormDefinitionComponent } from '../xc-form-definition/xc-form-definition.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -28,9 +29,18 @@ import { XcFormDefinitionComponent } from '../xc-form-definition/xc-form-definit
 })
 export class XcFormPanelDefinitionComponent extends XcFormDefinitionComponent {
 
+    private closeEventSubscription: Subscription;
+
     @Input('xc-panel-definition')
     set panelDefinition(value: XoFormPanelDefinition) {
         this.definition = value;
+
+        this.closeEventSubscription?.unsubscribe();
+        if (this.panelDefinition?.closable && this.panelDefinition.triggerClose?.eventId) {
+            this.closeEventSubscription = this.eventService.getDefinitionEventPayloadById(this.panelDefinition.triggerClose.eventId).subscribe(
+                () => this.closed.emit()
+            );
+        }
     }
 
 

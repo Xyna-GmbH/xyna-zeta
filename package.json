@@ -1,7 +1,7 @@
 {
     "name": "zeta",
     "title": "Zeta",
-    "version": "18.0.1",
+    "version": "18.0.2",
     "private": true,
     "engines": {
         "node": "^18.19.1 || ^20.11.1 || ^22.0.0"
