@@ -22,6 +22,7 @@ import { LoginComponentData } from '../login/auth-login.component';
 
 
 @Component({
+    selector: 'smart-card-login-tab',
     templateUrl: './smart-card-login.component.html',
     styleUrls: ['./smart-card-login.component.scss'],
     standalone: false
