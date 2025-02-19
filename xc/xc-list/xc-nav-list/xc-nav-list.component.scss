@@ -100,3 +100,9 @@ $xc-nav-list-item-vertical-active-indicator-width: unset !default;
         border-bottom-style: solid;
     }
 }
+
+ul, li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
