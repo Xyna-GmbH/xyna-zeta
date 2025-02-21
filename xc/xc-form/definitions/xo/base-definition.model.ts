@@ -27,6 +27,7 @@ import { XcTableDataSource } from '../../../xc-table/xc-table-data-source';
 import { XcTemplate } from '../../../xc-template/xc-template';
 import { XcDefinitionComponentTemplate } from '../shared/xc-definition-component-template.component';
 import { XoComponentDefinition, XoStartOrderButtonDefinition } from './item-definition.model';
+import { XoDefinitionEvent } from '../xc-definition-event.service';
 
 
 export interface XoDefinitionBundle {
@@ -92,6 +93,11 @@ export class XoDefinition extends XoObject {
     @XoProperty()
     dataPath = '';
 
+
+    @XoProperty(XoDefinitionEvent)
+    triggerClearDataChangeState: XoDefinitionEvent;
+
+
     private _parent: XoDefinition;
     private readonly _children: XoDefinition[] = [];
     private readonly _definitionObserverSubject = new BehaviorSubject<XoDefinitionObserver>(null);
@@ -125,6 +131,7 @@ export class XoDefinition extends XoObject {
         }
         this.postProcessPaths();
     }
+
 
     protected clearChildren() {
         this.clearDataChangeState();
