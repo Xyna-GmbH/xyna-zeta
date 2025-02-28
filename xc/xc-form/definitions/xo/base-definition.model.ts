@@ -28,6 +28,7 @@ import { XcTemplate } from '../../../xc-template/xc-template';
 import { XcDefinitionComponentTemplate } from '../shared/xc-definition-component-template.component';
 import { XoComponentDefinition, XoStartOrderButtonDefinition } from './item-definition.model';
 import { XoDefinitionEvent } from '../xc-definition-event.service';
+import { pack } from '@zeta/base';
 
 
 export interface XoDefinitionBundle {
@@ -257,23 +258,38 @@ export class XoDefinition extends XoObject {
 
 
     /**
-     * Assigns value for data object belonging to first data path
-     * @param data List of data to resolve assign first data paths for
-     * @param value Value to set along first data path
+     * Assigns value for data object belonging to first values.length data paths
+     * @param data List of data to resolve assign data paths for
+     * @param value Values to set along data path
      */
-    protected resolveAssignData(data: Xo[], value: any) {
+    resolveAssignData(data: Xo[], value: any | any[]): void {
         // don't consider "undefined -> ''" or "null -> undefined" as change
         const reduce = (v: any): any => v === null || v === undefined || v === '' ? undefined : v;
 
-        const resolvedPath = this.resolvePath(this.getDataPath());
-        if (resolvedPath && data.length > resolvedPath.index) {
-            if (reduce(this.resolveDataForFirstPath(data)) !== reduce(value)) {
-                data[resolvedPath.index].resolveAssign(resolvedPath.relativePath, value);
-                this.setDataChanged();
-            }
-        } else {
-            console.warn('XoBaseDefinition: Assigning value for invalid path: ' + this.getDataPath() + '\nvalue: ' + value);
+        let values = pack(value);
+
+        if (values.length > this.getDataPaths().length) {
+            values = values.slice(0, this.getDataPaths().length);
+            console.warn('XoBaseDefinition: Too many values for number of dataPath: ' + this.getDataPaths().length + '\nnumber of values: ' + values.length);
         }
+
+        const dataPathValuePairs = values.map((val, index: number) =>
+            ({resolvedPath: this.resolvePath(this.getDataPaths()[index]), value: val})
+        );
+
+        const resolvedData = this.resolveData(data);
+
+        dataPathValuePairs.
+            forEach((pair, index: number) => {
+                if (pair.resolvedPath && data.length > pair.resolvedPath.index) {
+                    if (reduce(resolvedData[index]) !== reduce(pair.value)) {
+                        data[pair.resolvedPath.index].resolveAssign(pair.resolvedPath.relativePath, pair.value);
+                        this.setDataChanged();
+                    }
+                } else {
+                    console.warn('XoBaseDefinition: Assigning value for invalid path: ' + this.getDataPath() + '\nvalue: ' + pair.value);
+                }
+            });
     }
 
 
