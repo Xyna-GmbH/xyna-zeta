@@ -508,6 +508,9 @@ export class XoStartOrderButtonDefinition extends XoButtonDefinition {
     @XoProperty(XoDefinitionEventArray)
     onStartorderResultEvent: XoDefinitionEventArray = new XoDefinitionEventArray();
 
+    @XoProperty()
+    encodeDataPath: string;
+
 
     getTemplate(data: Xo[]): Observable<XcTemplate> {
         return super.getTemplate(data).pipe(tap((template: XcButtonBaseTemplate) => {

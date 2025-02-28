@@ -32,6 +32,7 @@ import { XcDialogDefinitionComponent } from '../../xc-dialog-definition/xc-dialo
 import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../../xo/base-definition.model';
 import { XoFormDefinition } from '../../xo/containers.model';
 import { XoStartOrderButtonDefinition } from '../../xo/item-definition.model';
+import { pack } from '@zeta/base';
 
 
 export interface DefinitionStackItemComponentData extends XcStackItemComponentData {
@@ -186,13 +187,28 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
 
 
     startOrder(definition: XoStartOrderButtonDefinition, input: Xo | Xo[]): Observable<Xo | Xo[]> {
+        let preStartorder: Observable<string[]> = of();
+        if (definition.encodeDataPath) {
+            const encodeDefinition = new XoDefinition();
+            encodeDefinition.dataPath = definition.encodeDataPath;
+            encodeDefinition.setParent(definition);
+            const resolvedData = encodeDefinition.resolveData(pack(input));
+            preStartorder = this.api.encode(resolvedData).pipe(tap(
+                encodedValues => {
+                    for (let i = 0; i < encodedValues.length && i < encodeDefinition.getDataPaths.length; i++) {
+                        encodeDefinition.resolveAssign(encodeDefinition.getDataPaths[i], encodedValues[i]);
+                    }
+                }
+            ));
+        }
+
         const rtc = (definition.serviceRTC ? definition.serviceRTC : this.getDefaultRTC()).toRuntimeContext();
-        return this.api.startOrder(
+        return preStartorder.pipe(switchMap(() => this.api.startOrder(
             rtc,
             definition.serviceFQN,
             input, null,
             new StartOrderOptionsBuilder().withErrorMessage(true).async(!definition.synchronously).options
-        ).pipe(map(result => result.output));
+        )), map(result => result.output));
     }
 
     uploadFile?(host?: string): Observable<XoManagedFileID> {
