@@ -188,7 +188,7 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
 
     startOrder(definition: XoStartOrderButtonDefinition, input: Xo | Xo[]): Observable<Xo | Xo[]> {
         const packedInput = pack(input);
-        let preStartorder: Observable<string[]> = of();
+        let preStartorder: Observable<string[]> = of([]);
         if (definition.encodeDataPath) {
             const encodeDefinition = new XoDefinition();
             encodeDefinition.dataPath = definition.encodeDataPath;
