@@ -193,11 +193,10 @@ export class XcDefinitionStackItemComponent extends XcStackItemComponent<Definit
             const encodeDefinition = new XoDefinition();
             encodeDefinition.dataPath = definition.encodeDataPath;
             encodeDefinition.setParent(definition);
-            preStartorder = this.api.encode(encodeDefinition.resolveData(packedInput)).pipe(tap(
-                encodedValues => {
-                    encodeDefinition.resolveAssignData(packedInput, encodedValues);
-                }
-            ));
+            preStartorder = this.api.encode(encodeDefinition.resolveData(packedInput)).pipe(
+                filter(encodedValues => encodedValues.length > 0),
+                tap(encodedValues => encodeDefinition.resolveAssignData(packedInput, encodedValues))
+            );
         }
 
         const rtc = (definition.serviceRTC ? definition.serviceRTC : this.getDefaultRTC()).toRuntimeContext();
