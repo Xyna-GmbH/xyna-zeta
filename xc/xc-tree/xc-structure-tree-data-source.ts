@@ -99,7 +99,7 @@ export class XcStructureTreeDataSource extends XcBaseStructureTreeDataSource {
     }
 
 
-    protected getPrimitiveTemplates(field: XoStructurePrimitive): XcTemplate[] {
+    protected getPrimitiveTemplates(field: XoStructurePrimitive, _: XcTreeNode): XcTemplate[] {
         const templates = XcTemplateFactory.createTemplates(
             field,
             this.container,
@@ -391,7 +391,7 @@ export class XcStructureTreeDataSource extends XcBaseStructureTreeDataSource {
         // get templates array
         let templates: XcTemplate[] = [];
         if (field instanceof XoStructurePrimitive) {
-            templates = this.getPrimitiveTemplates(field);
+            templates = this.getPrimitiveTemplates(field, node);
         } else if (field instanceof XoStructureObject) {
             templates = this.getObjectTemplates(field, node);
         } else if (field instanceof XoStructureArray) {
