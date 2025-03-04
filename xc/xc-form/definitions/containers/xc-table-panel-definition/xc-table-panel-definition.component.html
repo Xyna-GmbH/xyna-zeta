@@ -2,8 +2,8 @@
   <xc-form-generic-panel
     [xc-definition]="panelDefinition"
     [xc-definition-data]="definitionData"
-    (closed)="closed.emit(panelDefinition)"
-    >
+    (closed)="closed.emit()"
+>
     <ng-container additionalHeaderItems>
       <xc-button
         (click)="clearFilters()"

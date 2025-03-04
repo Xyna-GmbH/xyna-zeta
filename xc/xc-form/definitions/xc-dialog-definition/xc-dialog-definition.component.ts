@@ -19,11 +19,12 @@ import { Component, Injector } from '@angular/core';
 import { ApiService, StartOrderOptionsBuilder, Xo, XoManagedFileID, XoXPRCRuntimeContext, XoXPRCRuntimeContextFromRuntimeContext } from '@zeta/api';
 import { I18nService } from '@zeta/i18n';
 import { XcDialogComponent } from '@zeta/xc/xc-dialog/xc-dialog.component';
-import { XoBaseDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../xo/base-definition.model';
-import { Observable, filter, map, throwError } from 'rxjs';
+import { XoBaseDefinition, XoDefinition, XoDefinitionBundle, XoDefinitionObserver } from '../xo/base-definition.model';
+import { Observable, filter, map, of, switchMap, tap, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
 import { XoStartOrderButtonDefinition } from '../xo/item-definition.model';
 import { XcDialogService } from '@zeta/xc/xc-dialog/xc-dialog.service';
+import { pack } from '@zeta/base';
 
 @Component({
     templateUrl: './xc-dialog-definition.component.html',
@@ -79,13 +80,25 @@ export class XcDialogDefinitionComponent extends XcDialogComponent<Xo[], XoDefin
 
 
     startOrder(definition: XoStartOrderButtonDefinition, input: Xo | Xo[]): Observable<Xo | Xo[]> {
+        const packedInput = pack(input);
+        let preStartorder: Observable<string[]> = of([]);
+        if (definition.encodeDataPath) {
+            const encodeDefinition = new XoDefinition();
+            encodeDefinition.dataPath = definition.encodeDataPath;
+            encodeDefinition.setParent(definition);
+            preStartorder = this.api.encode(encodeDefinition.resolveData(packedInput)).pipe(
+                filter(encodedValues => encodedValues.length > 0),
+                tap(encodedValues => encodeDefinition.resolveAssignData(packedInput, encodedValues))
+            );
+        }
+
         const rtc = (definition.serviceRTC ? definition.serviceRTC : this.getDefaultRTC()).toRuntimeContext();
-        return this.api.startOrder(
+        return preStartorder.pipe(switchMap(() => this.api.startOrder(
             rtc,
             definition.serviceFQN,
             input, null,
             new StartOrderOptionsBuilder().withErrorMessage(true).async(!definition.synchronously).options
-        ).pipe(map(result => result.output));
+        )), map(result => result.output));
     }
 
 

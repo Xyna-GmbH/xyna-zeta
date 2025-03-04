@@ -19,7 +19,6 @@ import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 
 import { XcBaseDefinitionComponent } from '../../shared/xc-base-definition/xc-base-definition.component';
 import { XoFormDefinition } from '../../xo/containers.model';
-import { XcDefinitionEventService } from '../../xc-definition-event.service';
 import { XoBaseDefinition, XoBaseDefinitionArray } from '../../xo/base-definition.model';
 import { filter, Subscription } from 'rxjs';
 import { XoArray } from '@zeta/api';
@@ -33,9 +32,8 @@ import { XoArray } from '@zeta/api';
 })
 export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 
-    protected readonly eventService: XcDefinitionEventService = inject<XcDefinitionEventService>(XcDefinitionEventService);
     protected readonly cdr: ChangeDetectorRef = inject<ChangeDetectorRef>(ChangeDetectorRef);
-    private eventSubscription: Subscription;
+    private changeChildrenEventSubscription: Subscription;
 
     @Input('xc-form-definition')
     set formDefinition(value: XoFormDefinition) {
@@ -49,9 +47,9 @@ export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 
     protected afterUpdate() {
         super.afterUpdate();
-        this.eventSubscription?.unsubscribe();
+        this.changeChildrenEventSubscription?.unsubscribe();
         if (this.formDefinition.triggerChangeChildren?.eventId) {
-            this.eventSubscription = this.eventService.getDefinitionEventPayloadById(this.formDefinition.triggerChangeChildren?.eventId).pipe(filter(
+            this.changeChildrenEventSubscription = this.eventService.getDefinitionEventPayloadById(this.formDefinition.triggerChangeChildren?.eventId).pipe(filter(
                 payload => payload && payload.length > 0
             )).subscribe(
                 payload => {

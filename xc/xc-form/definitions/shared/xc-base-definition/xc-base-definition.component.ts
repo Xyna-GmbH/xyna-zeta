@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 import { pack } from '../../../../../base';
 
@@ -23,6 +23,8 @@ import { Xo } from '../../../../../api';
 import { XoBaseDefinition, XoCloseDefinitionData, XoDefinition, XoDefinitionObserver, XoDefinitionWorkflow } from '../../xo/base-definition.model';
 import { XoDefinitionListDefinition, XoFormDefinition, XoFormPanelDefinition, XoPanelBoxDefinition, XoTablePanelDefinition, XoTreePanelDefinition } from '../../xo/containers.model';
 import { XoButtonDefinition, XoCheckboxDefinition, XoComponentDefinition, XoDefinitionListEntryDefinition, XoDropdownDefinition, XoItemDefinition, XoOpenDetailsButtonDefinition, XoOpenDialogButtonDefinition, XoPossibleValuesDefinition, XoStartOrderButtonDefinition, XoTextAreaDefinition, XoTextInputDefinition, XoTextItemDefinition } from '../../xo/item-definition.model';
+import { XcDefinitionEventService } from '../../xc-definition-event.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -31,6 +33,9 @@ import { XoButtonDefinition, XoCheckboxDefinition, XoComponentDefinition, XoDefi
     standalone: false
 })
 export class XcBaseDefinitionComponent {
+
+    protected readonly eventService: XcDefinitionEventService = inject<XcDefinitionEventService>(XcDefinitionEventService);
+    private clearDataChangedEventSubscription: Subscription;
 
     private _definition: XoBaseDefinition;
 
@@ -91,6 +96,14 @@ export class XcBaseDefinitionComponent {
         if (this.definition && this.definitionObserver) {
             this.definition.setObserver(this.definitionObserver);
         }
+
+        this.clearDataChangedEventSubscription?.unsubscribe();
+        if (this.definition?.triggerClearDataChangeState?.eventId) {
+            this.clearDataChangedEventSubscription = this.eventService.getDefinitionEventPayloadById(this.definition.triggerClearDataChangeState.eventId).subscribe(
+                () => this.definition.clearDataChangeState()
+            );
+        }
+
         this._afterUpdate();
     }
 
