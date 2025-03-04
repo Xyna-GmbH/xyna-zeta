@@ -26,17 +26,20 @@
         ></xc-icon>
         <xc-icon [xc-icon-name]="item.icon" [xc-icon-style]="item.iconStyle" [xc-icon-size]="size">{{shrink ? '' : item.name}}</xc-icon>
     </a>
-    <div *ngIf="!shrink" [@toggleAnimation]="toggleAnimation" [attr.id]="uniquePanelId">
-        <xc-nav-list-item *ngFor="let child of item.children; let i = index"
-            [attr.id]="'xc-nav-list-item-depth-' + (depth+1) + '-' + i"
-            [item]="child"
-            [size]="size"
-            [depth]="depth+1"
-            [orientation]="orientation"
-            [color]="color"
-            (focusChange)="focusChange.emit($event)"
-        ></xc-nav-list-item>
-    </div>
+    <ul *ngIf="!shrink" [@toggleAnimation]="toggleAnimation" [attr.id]="uniquePanelId"
+        [attr.aria-label]="ariaLabel">
+        <li *ngFor="let child of item.children; let i = index">
+            <xc-nav-list-item
+                    [attr.id]="'xc-nav-list-item-depth-' + (depth+1) + '-' + i"
+                    [item]="child"
+                    [size]="size"
+                    [depth]="depth+1"
+                    [orientation]="orientation"
+                    [color]="color"
+                    (focusChange)="focusChange.emit($event)"
+            ></xc-nav-list-item>
+        </li>
+    </ul>
 </div>
 <!-- Case 2: It's a leaf -- ergo NO children and NO sub navigation items -->
 <ng-template #leaf>

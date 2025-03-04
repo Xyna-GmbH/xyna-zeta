@@ -23,6 +23,9 @@ import { XcItem } from '../../../shared/xc-item';
 import { XcThemeableComponent } from '../../../shared/xc-themeable.component';
 import { XcTooltipPosition } from '../../../xc-tooltip/xc-tooltip.directive';
 import { XcNavListOrientation } from '../xc-nav-list.component';
+import {I18nService, LocaleService} from "../../../../i18n";
+import {xcNavListTranslations_enUS} from "../locale/xc-translations.en-US";
+import {xcNavListTranslations_deDE} from "../locale/xc-translations.de-DE";
 
 
 export interface XcNavListItem extends XcItem {
@@ -81,9 +84,11 @@ export class XcNavListItemComponent extends XcThemeableComponent implements OnIn
     readonly focusChange = new EventEmitter<XcNavListItem>();
 
 
-    constructor() {
+    constructor(private readonly _i18n: I18nService) {
         super();
         this.color = 'primary';
+        _i18n.setTranslations(LocaleService.EN_US, xcNavListTranslations_enUS);
+        _i18n.setTranslations(LocaleService.DE_DE, xcNavListTranslations_deDE);
     }
 
 
@@ -99,6 +104,9 @@ export class XcNavListItemComponent extends XcThemeableComponent implements OnIn
         this.item.collapsed = value;
     }
 
+    get ariaLabel(): string {
+        return this._i18n.translate('menu_with_elements', { key: '$0', value: this.item.children.length.toString() });
+    }
 
     ngOnInit() {
         this.collapsed = (this.item && isBoolean(this.item.collapsed))
