@@ -113,7 +113,6 @@ export class XoGraphData extends XoObject {
     @XoProperty()
     id: number;
 
-    // eslint-disable-next-line zeta/xo
     @XoProperty()
     type: XcGraphType;
 

@@ -15,9 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
- $xc-icon-disabled-color: unset !default;
 
-@import 'const';
+@use '../../const' as *;
 
 @each $key, $value in $color-map {
     :host[color="#{$key}"] {

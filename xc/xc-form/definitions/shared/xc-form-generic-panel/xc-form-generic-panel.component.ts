@@ -24,7 +24,8 @@ import { XoFormPanelDefinition } from '../../xo/containers.model';
 @Component({
     selector: 'xc-form-generic-panel',
     templateUrl: './xc-form-generic-panel.component.html',
-    styleUrls: ['./xc-form-generic-panel.component.scss']
+    styleUrls: ['./xc-form-generic-panel.component.scss'],
+    standalone: false
 })
 export class XcFormGenericPanelComponent {
 

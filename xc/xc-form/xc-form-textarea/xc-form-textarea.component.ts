@@ -26,7 +26,8 @@ import { XcFormBaseComponent } from '../xc-form-base/xc-form-base.component';
     selector: 'xc-form-textarea',
     templateUrl: './xc-form-textarea.component.html',
     styleUrls: ['../xc-form-base/xc-form-base.component.scss', './xc-form-textarea.component.scss'],
-    providers: [{ provide: XcFormBaseComponent, useExisting: forwardRef(() => XcFormTextareaComponent) }]
+    providers: [{ provide: XcFormBaseComponent, useExisting: forwardRef(() => XcFormTextareaComponent) }],
+    standalone: false
 })
 export class XcFormTextareaComponent extends XcFormBaseComponent {
 

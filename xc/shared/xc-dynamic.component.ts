@@ -22,7 +22,8 @@ export type XcDynamicComponentType<D> = new (...args: any[]) => XcDynamicCompone
 
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export abstract class XcDynamicComponent<D> {
 
@@ -32,7 +33,7 @@ export abstract class XcDynamicComponent<D> {
     constructor(@Optional() injector: Injector) {
         try {
             this.injectedData = injector.get(this.getToken());
-        } catch (_) {
+        } catch {
             // ignore exception
         }
     }

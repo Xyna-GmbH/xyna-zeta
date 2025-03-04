@@ -22,7 +22,8 @@ import { XcMessageDialogComponent } from './xc-message-dialog.component';
 
 @Component({
     templateUrl: './xc-confirm-dialog.component.html',
-    styleUrls: ['./xc-confirm-dialog.component.scss']
+    styleUrls: ['./xc-confirm-dialog.component.scss'],
+    standalone: false
 })
 export class XcConfirmDialogComponent extends XcMessageDialogComponent<boolean, void> {
 }

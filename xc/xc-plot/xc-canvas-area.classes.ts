@@ -45,7 +45,7 @@ export class XcCanvasArea {
         return this._plottableArea ? (this._plottableArea.width / this._plottableArea.height) : 1;
     }
 
-    protected calculatedPoints: {x: number; y: number}[] = [];
+    protected calculatedPoints: { x: number; y: number }[] = [];
     dots: XcDot[] = [];
 
     constructor(...dots: XcDot[]) {
@@ -107,7 +107,7 @@ export class XcCanvasArea {
         return false;
     }
 
-    draw(c: CanvasRenderingContext2D, dt: number) {}
+    draw(c: CanvasRenderingContext2D, dt: number) { }
 
     clearSubscriptions() {
         this.subscriptions?.unsubscribe();
@@ -120,7 +120,7 @@ export class XcCanvasRectangleArea extends XcCanvasArea {
 
     protected _mouseOver: boolean;
 
-    ownMousePosition = {x: 0, y: 0};
+    ownMousePosition = { x: 0, y: 0 };
 
     get mouseOver(): boolean {
         return this._mouseOver;
@@ -138,7 +138,7 @@ export class XcCanvasRectangleArea extends XcCanvasArea {
             : 0;
     }
 
-    get topLeftPoint(): {x: number; y: number} {
+    get topLeftPoint(): { x: number; y: number } {
         return this.calculatedPoints[0];
     }
 
@@ -150,15 +150,15 @@ export class XcCanvasRectangleArea extends XcCanvasArea {
         return this.topLeftPoint.y;
     }
 
-    get topRightPoint(): {x: number; y: number} {
+    get topRightPoint(): { x: number; y: number } {
         return this.calculatedPoints[1];
     }
 
-    get bottomRightPoint(): {x: number; y: number} {
+    get bottomRightPoint(): { x: number; y: number } {
         return this.calculatedPoints[2];
     }
 
-    get bottomLeftPoint(): {x: number; y: number} {
+    get bottomLeftPoint(): { x: number; y: number } {
         return this.calculatedPoints[3];
     }
 
@@ -210,7 +210,7 @@ export class XcCanvasCartasianCoordinateSystemArea extends XcCanvasPlotArea {
 
     private scaleAspect = 1;
 
-    private get comfPPS_Y(): {min: number; default: number; max: number} {
+    private get comfPPS_Y(): { min: number; default: number; max: number } {
         return {
             min: this.comfPPS_X.min / this.scaleAspect,
             default: this.comfPPS_X.default / this.scaleAspect,
@@ -218,8 +218,8 @@ export class XcCanvasCartasianCoordinateSystemArea extends XcCanvasPlotArea {
         };
     }
 
-    private xAxisRange = {min: 0, max: 0};
-    private yAxisRange = {min: 0, max: 0};
+    private xAxisRange = { min: 0, max: 0 };
+    private yAxisRange = { min: 0, max: 0 };
 
     ccs: CartasianCoordinateSystem;
     offsideScaleMarkRenderingX = CommonBorder.Bottom;
@@ -558,8 +558,8 @@ export class XcCanvasCartasianCoordinateSystemArea extends XcCanvasPlotArea {
     // }
 
     resetAxisRange() {
-        this.xAxisRange = {min: 0, max: 0};
-        this.yAxisRange = {min: 0, max: 0};
+        this.xAxisRange = { min: 0, max: 0 };
+        this.yAxisRange = { min: 0, max: 0 };
     }
 
     private findComfortableValuePerScale(minValue: number, maxValue: number, comfortablePixelPerScale: number, displayLength: number): number {
@@ -645,7 +645,7 @@ export class XcCanvasCartasianCoordinateSystemArea extends XcCanvasPlotArea {
      * @param x - x-coordinate of the own area, in which the ccs is displayed (same as the absolute x-value if this.x = 0)
      * @param y - y-coordinate of the own area, in which the ccs is displayed (same as the absolute y-value if this.y = 0)
      */
-    getValueCoordinate(x: number, y: number): {x: number; y: number} {
+    getValueCoordinate(x: number, y: number): { x: number; y: number } {
         return this.ccs.getValueCoordinate(x, y);
     }
 
@@ -654,7 +654,7 @@ export class XcCanvasCartasianCoordinateSystemArea extends XcCanvasPlotArea {
      * @param x - x value that is represented by the ccs
      * @param y - y value that is represented by the ccs
      */
-    getOwnCoordinate(x: number, y: number): {x: number; y: number} {
+    getOwnCoordinate(x: number, y: number): { x: number; y: number } {
         return this.ccs.getOwnCoordinate(x, y);
     }
 

@@ -27,7 +27,8 @@ import { XoArray } from '@zeta/api';
 @Component({
     selector: 'xc-form-definition',
     templateUrl: './xc-form-definition.component.html',
-    styleUrls: ['./xc-form-definition.component.scss']
+    styleUrls: ['./xc-form-definition.component.scss'],
+    standalone: false
 })
 export class XcFormDefinitionComponent extends XcBaseDefinitionComponent {
 

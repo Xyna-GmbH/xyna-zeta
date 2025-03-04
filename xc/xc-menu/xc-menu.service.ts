@@ -82,7 +82,8 @@ export class XcMenuService {
 
 
 @Directive({
-    selector: '[xc-menu-service]'
+    selector: '[xc-menu-service]',
+    standalone: false
 })
 export class XcMenuServiceDirective implements OnDestroy {
 

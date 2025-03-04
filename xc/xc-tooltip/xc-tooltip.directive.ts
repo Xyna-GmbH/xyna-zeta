@@ -46,7 +46,8 @@ type XcPreviousTooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before'
 
 
 @Directive({
-    selector: '[xc-tooltip]'
+    selector: '[xc-tooltip]',
+    standalone: false
 })
 export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
 
@@ -179,12 +180,12 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
     set _xc_tooltipClass(value: string | string[] | Set<string> | { [key: string]: any }) {
         let classes: string[] = [];
         switch (true) {
-            /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+             
             case (isString(value)): classes.push(value as string); break;
             case (isArray(value)): classes = (value as string[]).map<string>(str => isString(str) ? str : ''); break;
             case (value instanceof Set): (value as Set<string>).forEach(str => classes.push(str)); break;
             case (isObject(value)): Object.keys(value).forEach(key => classes.push(value[key])); break;
-            /* eslint-enable @typescript-eslint/no-unnecessary-type-assertion */
+             
         }
 
         this._extraTooltipClasses = classes;
@@ -209,16 +210,16 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
             XcTooltipDirective.tooltipKeyframesStyleElement = document.createElement('style');
 
             const fadeInRule = this.getKeyframesRule('tooltipFadeIn', [
-                {percent: 0, style: 'opacity: 0;'},
-                {percent: 100, style: 'opacity: 1;'}
+                { percent: 0, style: 'opacity: 0;' },
+                { percent: 100, style: 'opacity: 1;' }
             ]);
 
             const fadeInNode = document.createTextNode(fadeInRule);
             XcTooltipDirective.tooltipKeyframesStyleElement.appendChild(fadeInNode);
 
             const fadeOutRule = this.getKeyframesRule('tooltipFadeOut', [
-                {percent: 0, style: 'opacity: 1;'},
-                {percent: 100, style: 'opacity: 0;'}
+                { percent: 0, style: 'opacity: 1;' },
+                { percent: 100, style: 'opacity: 0;' }
             ]);
             const fadeOutNode = document.createTextNode(fadeOutRule);
             XcTooltipDirective.tooltipKeyframesStyleElement.appendChild(fadeOutNode);
@@ -234,7 +235,7 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    private getKeyframesRule(name: string, keyframes: {percent: number; style: string}[]): string {
+    private getKeyframesRule(name: string, keyframes: { percent: number; style: string }[]): string {
         const combinedKeyframes = keyframes.map<string>(f => f.percent + '% {' + f.style + ' }').join(' ');
         return `@keyframes ${name} {${combinedKeyframes}}`;
     }
@@ -517,9 +518,9 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
         origin: ClientRect | DOMRect,
         tmp: ClientRect | DOMRect,
         win: ClientRect | DOMRect
-    ): {x: number; y: number; pos: XcTooltipPosition} {
+    ): { x: number; y: number; pos: XcTooltipPosition } {
 
-        let thisFits: {x: number; y: number; pos: XcTooltipPosition } = null;
+        let thisFits: { x: number; y: number; pos: XcTooltipPosition } = null;
 
         const allPositions = [...XcTooltipDirective.positionSequence];
         if (this.preferedPosition) {
@@ -545,7 +546,7 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
         tmp: ClientRect | DOMRect,
         win: ClientRect | DOMRect,
         must = false
-    ): {x: number; y: number; pos: XcTooltipPosition} {
+    ): { x: number; y: number; pos: XcTooltipPosition } {
 
         const pointInBox = (px: number, py: number, box: ClientRect | DOMRect) => px >= box.left && px <= box.right && py >= box.top && py <= box.bottom;
 
@@ -553,56 +554,56 @@ export class XcTooltipDirective implements OnInit, AfterViewInit, OnDestroy {
             case XcTooltipPosition.bottom: {
                 const x1 = origin.left + (origin.width / 2) - (tmp.width / 2);
                 const y1 = origin.bottom + XcTooltipDirective.posOffsetY;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.top: {
                 const x1 = origin.left + (origin.width / 2) - (tmp.width / 2);
                 const y1 = origin.top - tmp.height - XcTooltipDirective.posOffsetY;
                 // const x2 = x1 + tmp.width;
                 // const y2 = y1 + tmp.height;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.left: {
                 const x1 = origin.left - tmp.width - XcTooltipDirective.posOffsetX;
                 const y1 = origin.top + (origin.height / 2) - (tmp.height / 2);
                 // const x2 = x1 + tmp.width;
                 // const y2 = y1 + tmp.height;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.right: {
                 const x1 = origin.right + XcTooltipDirective.posOffsetX;
                 const y1 = origin.top + (origin.height / 2) - (tmp.height / 2);
                 // const x2 = x1 + tmp.width;
                 // const y2 = y1 + tmp.height;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.bottomLeft: {
                 const x1 = origin.left - tmp.width - XcTooltipDirective.posOffsetX;
                 const y1 = origin.bottom + XcTooltipDirective.posOffsetY;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.bottomRight: {
                 const x1 = origin.right + XcTooltipDirective.posOffsetX;
                 const y1 = origin.bottom + XcTooltipDirective.posOffsetY;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.topLeft: {
                 const x1 = origin.left - tmp.width - XcTooltipDirective.posOffsetX;
                 const y1 = origin.top - tmp.height - XcTooltipDirective.posOffsetY;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             case XcTooltipPosition.topRight: {
                 const x1 = origin.right + XcTooltipDirective.posOffsetX;
                 const y1 = origin.top - tmp.height - XcTooltipDirective.posOffsetY;
-                return  (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
-                    ? {x: x1, y: y1, pos: position} : null;
+                return (must || (pointInBox(x1, y1, win) && pointInBox(x1 + tmp.width, y1 + tmp.height, win)))
+                    ? { x: x1, y: y1, pos: position } : null;
             }
             default: return null;
         }

@@ -125,7 +125,7 @@ export class XcCartasianCoordinateSystemController extends XcPlotController {
                             if (isHit && !already) {
                                 ds.hoverModel.select(p);
                                 // this.hoverPointImage = this.createPopupImageOfPoint(p, 'white');
-                                this.createPopupImageOfPoint(p, ds, 'white').then(img => this.hoverPointImage = img, _ => this.hoverPointImage = null);
+                                this.createPopupImageOfPoint(p, ds, 'white').then(img => this.hoverPointImage = img, () => this.hoverPointImage = null);
                             }
                             if (!isHit && already) {
                                 ds.hoverModel.deselect(p);
@@ -213,7 +213,7 @@ export class XcCartasianCoordinateSystemController extends XcPlotController {
                         if (isHit) {
                             ds.selectionModel.select(p);
                             // this.selectedPointImage = this.createPopupImageOfPoint(p);
-                            this.createPopupImageOfPoint(p, ds).then(img => this.selectedPointImage = img, _ => this.selectedPointImage = null);
+                            this.createPopupImageOfPoint(p, ds).then(img => this.selectedPointImage = img, () => this.selectedPointImage = null);
                         }
                     });
                 }
@@ -302,13 +302,13 @@ export class XcCartasianCoordinateSystemController extends XcPlotController {
             const img = document.createElement('img');
             img.width = width;
             img.height = height;
-            img.onload = e => resolve(img);
+            img.onload = () => resolve(img);
             img.onerror = e => reject(e);
             img.src = canvas.toDataURL();
         });
     }
 
-    mouseup(e: MouseEvent) {
+    mouseup() {
         // this.ccsArea.mouseleave(e);
         document.exitPointerLock();
     }

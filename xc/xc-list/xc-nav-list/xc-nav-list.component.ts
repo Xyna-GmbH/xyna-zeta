@@ -43,7 +43,8 @@ interface TwoWayNavListItem {
 @Component({
     selector: 'xc-nav-list',
     templateUrl: './xc-nav-list.component.html',
-    styleUrls: ['./xc-nav-list.component.scss']
+    styleUrls: ['./xc-nav-list.component.scss'],
+    standalone: false
 })
 export class XcNavListComponent extends XcThemeableComponent implements OnInit, OnDestroy {
 

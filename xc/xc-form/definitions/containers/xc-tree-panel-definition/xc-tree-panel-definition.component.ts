@@ -29,7 +29,8 @@ import { XcFormPanelDefinitionComponent } from '../xc-form-panel-definition/xc-f
 @Component({
     selector: 'xc-tree-panel-definition',
     templateUrl: './xc-tree-panel-definition.component.html',
-    styleUrls: ['./xc-tree-panel-definition.component.scss']
+    styleUrls: ['./xc-tree-panel-definition.component.scss'],
+    standalone: false
 })
 export class XcTreePanelDefinitionComponent extends XcFormPanelDefinitionComponent implements OnDestroy {
 

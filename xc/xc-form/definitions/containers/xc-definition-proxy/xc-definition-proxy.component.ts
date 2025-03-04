@@ -16,6 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Component, Input } from '@angular/core';
+
 import { first } from 'rxjs/operators';
 
 import { XcTemplate } from '../../../../xc-template/xc-template';
@@ -27,18 +28,19 @@ import { XoDefinitionListDefinition, XoFormDefinition, XoFormPanelDefinition, Xo
 @Component({
     selector: 'xc-definition-proxy',
     templateUrl: './xc-definition-proxy.component.html',
-    styleUrls: ['./xc-definition-proxy.component.scss']
+    styleUrls: ['./xc-definition-proxy.component.scss'],
+    standalone: false
 })
 export class XcDefinitionProxyComponent extends XcBaseDefinitionComponent {
 
     template: XcTemplate;
 
-    readonly PredefinedTablePanelDefinition: Function = XoPredefinedTablePanelDefinition;   // FIXME deprecated (see ZETA-177)
-    readonly TablePanelDefinition: Function = XoTablePanelDefinition;
-    readonly TreePanelDefinition: Function = XoTreePanelDefinition;
-    readonly PanelDefinition: Function = XoFormPanelDefinition;
-    readonly DefinitionListDefinition: Function = XoDefinitionListDefinition;
-    readonly FormDefinition: Function = XoFormDefinition;
+    readonly PredefinedTablePanelDefinition: typeof XoPredefinedTablePanelDefinition = XoPredefinedTablePanelDefinition;   // FIXME deprecated (see ZETA-177)
+    readonly TablePanelDefinition: typeof XoTablePanelDefinition = XoTablePanelDefinition;
+    readonly TreePanelDefinition: typeof XoTreePanelDefinition = XoTreePanelDefinition;
+    readonly PanelDefinition: typeof XoFormPanelDefinition = XoFormPanelDefinition;
+    readonly DefinitionListDefinition: typeof XoDefinitionListDefinition = XoDefinitionListDefinition;
+    readonly FormDefinition: typeof XoFormDefinition = XoFormDefinition;
 
     // REMARK: More specific types first (order is crucial)
     private readonly classes = [
@@ -73,6 +75,7 @@ export class XcDefinitionProxyComponent extends XcBaseDefinitionComponent {
     // Type Checks
     // ---------------------------------------------------------------------------
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     isType(definitionType: Function): boolean {
         // check top-down: definition is only of requested definitionType if it doesn't match any of the more specific types
         for (const type of this.classes) {

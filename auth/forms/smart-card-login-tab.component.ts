@@ -22,8 +22,10 @@ import { LoginComponentData } from '../login/auth-login.component';
 
 
 @Component({
+    selector: 'smart-card-login-tab',
     templateUrl: './smart-card-login.component.html',
-    styleUrls: ['./smart-card-login.component.scss']
+    styleUrls: ['./smart-card-login.component.scss'],
+    standalone: false
 })
 export class SmartCardLoginTabComponent extends XcTabComponent<void, LoginComponentData> {
 

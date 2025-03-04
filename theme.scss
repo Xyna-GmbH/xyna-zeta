@@ -15,363 +15,371 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-@if $theme ==xyna {
-    $font-family-light: 'Open Sans Light', sans-serif;
-    $font-family-regular: 'Open Sans Regular', sans-serif;
-    $font-family-medium: 'Open Sans Regular', sans-serif;
-    $font-family-bold: 'Open Sans Regular', sans-serif;
-    $font-family-bolder: sans-serif;
-    $font-family-code: 'Source Code Pro Regular', monospace;
 
-    $font-size-large: 22px;
-    $font-size-medium: 14px;
-    $font-size-small: 12px;
-    $font-size-tiny: 10px;
-    $font-size-code: 12px;
+$theme: xyna;
 
-    $font-size-h1: 15px;
-    $font-size-h2: 15px;
-    $font-size-h3: 13px;
-    $font-size-h4: 13px;
+@use "theme-variables" as *;
 
-    $color-normal: $color-white;
-    $color-invert: $color-black;
-    $color-primary: #fabb00;
-    $color-accent: #00dbff;
-    $color-warn: #ff3333;
-    $color-focus-outline: $color-primary;
+//======================================================================
+// Variables (use within components!)
+//======================================================================
 
-    $color-gray-0: #1a1a1b;
-    $color-gray-1: #2a2a2b;
-    $color-gray-2: #58585b; // maximum light for WCAG AAA contrast with white text on it
-    $color-gray-3: #76767a;
-    $color-gray-4: #babac0;
-    $color-gray-5: #ededef;
+$font-family-light: 'Open Sans Light', sans-serif;
+$font-family-regular: 'Open Sans Regular', sans-serif;
+$font-family-medium: 'Open Sans Regular', sans-serif;
+$font-family-bold: 'Open Sans Regular', sans-serif;
+$font-family-bolder: sans-serif;
+$font-family-code: 'Source Code Pro Regular', monospace;
 
-    $color-disabled: rgba($color-white, .3);
-    $color-disabled-invert: rgba($color-black, .3);
-    $color-background-default: #5a5a5d;
-    $color-background-bar: #2a2a2b;
-    $color-background-area: #424244;
-    $color-background-disabled: $color-gray-1;
-    $color-background-active: $color-invert;
-    $color-background-selected: $color-invert;
+$font-size-large: 22px;
+$font-size-medium: 14px;
+$font-size-small: 12px;
+$font-size-tiny: 10px;
+$font-size-code: 12px;
 
-    $color-background-text-area: $color-gray-1;
-    $color-background-text-area-focus: $color-invert;
-    $color-background-text-area-disabled: $color-background-disabled;
-    $color-background-text-area-hover: $color-invert;
+$font-size-h1: 15px;
+$font-size-h2: 15px;
+$font-size-h3: 13px;
+$font-size-h4: 13px;
+
+$color-normal: $color-white;
+$color-invert: $color-black;
+$color-primary: #fabb00;
+$color-accent: #00dbff;
+$color-warn: #ff3333;
+$color-focus-outline: $color-primary;
+
+$color-gray-0: #1a1a1b;
+$color-gray-1: #2a2a2b;
+$color-gray-2: #58585b; // maximum light for WCAG AAA contrast with white text on it
+$color-gray-3: #76767a;
+$color-gray-4: #babac0;
+$color-gray-5: #ededef;
+
+$color-disabled: rgba($color-white, .3);
+$color-disabled-invert: rgba($color-black, .3);
+$color-background-default: #5a5a5d;
+$color-background-bar: #2a2a2b;
+$color-background-area: #424244;
+$color-background-disabled: $color-gray-1;
+$color-background-active: $color-invert;
+$color-background-selected: $color-invert;
+
+$color-background-text-area: $color-gray-1;
+$color-background-text-area-focus: $color-invert;
+$color-background-text-area-disabled: $color-background-disabled;
+$color-background-text-area-hover: $color-invert;
 
 
-    //--------------------------
+//--------------------------
 
-    $color-table-black: #101011;
-    $color-box-shadow: rgba($color-black, .75);
+$color-table-black: #101011;
+$color-box-shadow: rgba($color-black, .75);
 
-    // auth component
-    $auth-panel-box-shadow: 0 0 0 1px $color-box-shadow, 0 0 8px 0 $color-box-shadow;
+// auth component
+$auth-panel-box-shadow: 0 0 0 1px $color-box-shadow, 0 0 8px 0 $color-box-shadow;
 
-    // xc-button
-    $xc-button-background-color: transparent;
-    $xc-button-border-color: transparent;
-    $xc-button-border-width: 1px;
-    $xc-button-border-radius: 2px;
-    $xc-button-focus-overlay: $color-white-overlay;
-    $xc-button-focus-overlay-invert: $color-black-overlay;
-    $xc-button-font-size: 14px;
-    $xc-button-padding: 0 16px;
-    $xc-button-text-margin: auto;
-    $xc-button-line-height: 30px;
-    $xc-button-font-style: normal;
-    $xc-button-transition: initial;
-    $xc-icon-button-background-color: transparent;
-    $xc-icon-button-border-color: transparent;
-    $xc-icon-button-border-width: 1px;
-    $xc-icon-button-focus-overlay: $color-white-overlay;
-    $xc-icon-button-focus-overlay-invert: $color-black-overlay;
+// xc-button
+$xc-button-background-color: transparent;
+$xc-button-border-color: transparent;
+$xc-button-border-width: 1px;
+$xc-button-border-radius: 2px;
+$xc-button-focus-overlay: $color-white-overlay;
+$xc-button-focus-overlay-invert: $color-black-overlay;
+$xc-button-font-size: 14px;
+$xc-button-padding: 0 16px;
+$xc-button-text-margin: auto;
+$xc-button-line-height: 30px;
+$xc-button-font-style: normal;
+$xc-button-transition: initial;
+$xc-icon-button-background-color: transparent;
+$xc-icon-button-border-color: transparent;
+$xc-icon-button-border-width: 1px;
+$xc-icon-button-focus-overlay: $color-white-overlay;
+$xc-icon-button-focus-overlay-invert: $color-black-overlay;
 
-    // xc-checkbox
-    $xc-checkbox-color-disabled: $color-disabled;
-    $xc-checkbox-color-disabled-invert: $color-disabled-invert;
+// xc-checkbox
+$xc-checkbox-with-background: true;
+$xc-checkbox-color-disabled: $color-disabled;
+$xc-checkbox-color-disabled-invert: $color-disabled-invert;
 
-    $xc-checkbox-checkmark-color: $color-black;
-    $xc-checkbox-checkmark-color-invert: $color-white;
+$xc-checkbox-checkmark-color: $color-black;
+$xc-checkbox-checkmark-color-invert: $color-white;
 
-    $xc-checkbox-checkmark-color-disabled: $color-disabled;
-    $xc-checkbox-checkmark-color-disabled-invert: $color-disabled-invert;
+$xc-checkbox-checkmark-color-disabled: $color-disabled;
+$xc-checkbox-checkmark-color-disabled-invert: $color-disabled-invert;
 
-    $xc-checkbox-height: 32px;
+$xc-checkbox-height: 32px;
 
-    $xc-checkbox-text-transform: none;
+$xc-checkbox-text-transform: none;
 
-    $xc-checkbox-font-size: 12px;
+$xc-checkbox-font-size: 12px;
 
-    // xc-form-base-input
-    $xc-form-base-input-color: $color-normal;
-    $xc-form-base-input-color-disabled: $color-disabled;
-    $xc-form-base-input-background-color: $color-gray-1;
-    $xc-form-base-input-background-color-focus: $color-invert;
-    $xc-form-base-input-background-color-disabled: $color-background-disabled;
-    $xc-form-base-input-background-color-hover: $color-invert;
+// xc-form-base-input
+$xc-form-base-input-color: $color-normal;
+$xc-form-base-input-color-disabled: $color-disabled;
+$xc-form-base-input-background-color: $color-gray-1;
+$xc-form-base-input-background-color-focus: $color-invert;
+$xc-form-base-input-background-color-disabled: $color-background-disabled;
+$xc-form-base-input-background-color-hover: $color-invert;
 
-    $xc-form-base-input-padding-top: 0;
-    $xc-form-base-input-padding-right: 8px;
-    $xc-form-base-input-padding-bottom: 0;
-    $xc-form-base-input-padding-left: 8px;
-    $xc-form-base-input-line-height: 32px;
-    $xc-form-base-input-line-height-compact: 24px;
+$xc-form-base-input-padding-top: 0;
+$xc-form-base-input-padding-right: 8px;
+$xc-form-base-input-padding-bottom: 0;
+$xc-form-base-input-padding-left: 8px;
+$xc-form-base-input-line-height: 32px;
+$xc-form-base-input-line-height-compact: 24px;
 
-    $xc-form-base-input-font-size: $font-size-medium;
-    $xc-form-base-input-font-style: normal;
+$xc-form-base-input-font-size: $font-size-medium;
+$xc-form-base-input-font-style: normal;
 
-    $xc-form-base-input-border-radius: 4px;
-    $xc-form-base-input-border-width: 1px;
-    $xc-form-base-input-border-color: $color-invert;
-    $xc-form-base-input-border-color-focus: $color-gray-5;
-    $xc-form-base-input-border-color-disabled: $color-gray-1;
-    $xc-form-base-input-border-color-hover: $color-gray-5;
+$xc-form-base-input-border-radius: 4px;
+$xc-form-base-input-border-width: 1px;
+$xc-form-base-input-border-color: $color-invert;
+$xc-form-base-input-border-color-focus: $color-gray-5;
+$xc-form-base-input-border-color-disabled: $color-gray-1;
+$xc-form-base-input-border-color-hover: $color-gray-5;
 
-    $xc-form-base-input-suffix-color: $color-gray-2;
-    $xc-form-base-input-suffix-color-hover: $color-normal;
-    $xc-form-base-input-label-color: $color-gray-5;
-    $xc-form-base-input-error-color: $color-warn;
-    $xc-form-base-input-placeholder-color: $color-gray-3;
-    $xc-form-base-input-label-font-size: $font-size-small;
-    $xc-form-base-input-label-text-transform: none;
-    $xc-form-base-input-changeindicator-color: $color-primary;
+$xc-form-base-input-suffix-color: $color-gray-2;
+$xc-form-base-input-suffix-color-hover: $color-normal;
+$xc-form-base-input-label-color: $color-gray-5;
+$xc-form-base-input-error-color: $color-warn;
+$xc-form-base-input-placeholder-color: $color-gray-3;
+$xc-form-base-input-label-font-size: $font-size-small;
+$xc-form-base-input-label-text-transform: none;
+$xc-form-base-input-changeindicator-color: $color-primary;
 
-    $xc-form-base-textarea-padding: 8px;
-    $xc-form-base-textarea-line-height: 19px;
+$xc-form-base-textarea-padding: 8px;
+$xc-form-base-textarea-line-height: 19px;
 
-    $xc-form-text-label-color: $color-normal;
-    $xc-form-text-label-font-size: $font-size-medium;
-    $xc-form-text-label-font-weight: bold;
-    $xc-form-text-label-transform: none;
+$xc-form-text-label-color: $color-normal;
+$xc-form-text-label-font-size: $font-size-medium;
+$xc-form-text-label-font-weight: bold;
+$xc-form-text-label-transform: none;
 
-    $xc-form-text-color: $color-normal;
-    $xc-form-text-font-size: $font-size-medium;
-    $xc-form-text-font-weight: normal;
-    $xc-form-text-transform: none;
+$xc-form-text-color: $color-normal;
+$xc-form-text-font-size: $font-size-medium;
+$xc-form-text-font-weight: normal;
+$xc-form-text-transform: none;
 
-    // xc-autocomplete (inside material.scss)
-    $xc-form-autocomplete-panel-margin-top: 0;
-    $xc-form-autocomplete-panel-background-color: $color-gray-0;
-    $xc-form-autocomplete-panel-shadow-hidden: false;
+// xc-autocomplete (inside material.scss)
+$xc-form-autocomplete-panel-margin-top: 0;
+$xc-form-autocomplete-panel-background-color: $color-gray-0;
+$xc-form-autocomplete-panel-shadow-hidden: false;
 
-    $xc-form-autocomplete-panel-border-width: 1px;
-    $xc-form-autocomplete-panel-border-color: $color-invert;
-    $xc-form-autocomplete-panel-border-radius: 0;
+$xc-form-autocomplete-panel-border-width: 1px;
+$xc-form-autocomplete-panel-border-color: $color-invert;
+$xc-form-autocomplete-panel-border-radius: 0;
 
-    $xc-form-autocomplete-option-color: $color-normal;
-    $xc-form-autocomplete-option-color-focus: $color-normal;
-    $xc-form-autocomplete-option-color-disabled: $color-disabled;
-    $xc-form-autocomplete-option-color-hover: $color-normal;
-    $xc-form-autocomplete-option-color-active: $color-normal;
-    $xc-form-autocomplete-option-background-color: transparent;
-    $xc-form-autocomplete-option-background-color-focus: $color-gray-2;
-    $xc-form-autocomplete-option-background-color-disabled: transparent;
-    $xc-form-autocomplete-option-background-color-hover: $color-gray-2;
-    $xc-form-autocomplete-option-background-color-active: $color-gray-1;
+$xc-form-autocomplete-option-color: $color-normal;
+$xc-form-autocomplete-option-color-focus: $color-normal;
+$xc-form-autocomplete-option-color-disabled: $color-disabled;
+$xc-form-autocomplete-option-color-hover: $color-normal;
+$xc-form-autocomplete-option-color-active: $color-normal;
+$xc-form-autocomplete-option-background-color: transparent;
+$xc-form-autocomplete-option-background-color-focus: $color-gray-2;
+$xc-form-autocomplete-option-background-color-disabled: transparent;
+$xc-form-autocomplete-option-background-color-hover: $color-gray-2;
+$xc-form-autocomplete-option-background-color-active: $color-gray-1;
 
-    // xc-autocomplete (as dropdown)
-    $xc-form-dropdown-border-width: 1px;
-    $xc-form-dropdown-border-color: $color-invert;
-    $xc-form-dropdown-border-color-focus: $color-gray-5;
-    $xc-form-dropdown-border-color-disabled: $color-gray-1;
-    $xc-form-dropdown-border-color-hover: $color-gray-5;
-    $xc-form-dropdown-border-color-active: $color-gray-5;
+// xc-autocomplete (as dropdown)
+$xc-form-dropdown-border-width: 1px;
+$xc-form-dropdown-border-color: $color-invert;
+$xc-form-dropdown-border-color-focus: $color-gray-5;
+$xc-form-dropdown-border-color-disabled: $color-gray-1;
+$xc-form-dropdown-border-color-hover: $color-gray-5;
+$xc-form-dropdown-border-color-active: $color-gray-5;
 
-    $xc-form-dropdown-background-color: $color-gray-1;
-    $xc-form-dropdown-background-color-focus: $color-invert;
-    $xc-form-dropdown-background-color-disabled: $color-background-disabled;
-    $xc-form-dropdown-background-color-hover: $color-invert;
-    $xc-form-dropdown-background-color-active: $color-background-active;
+$xc-form-dropdown-background-color: $color-gray-1;
+$xc-form-dropdown-background-color-focus: $color-invert;
+$xc-form-dropdown-background-color-disabled: $color-background-disabled;
+$xc-form-dropdown-background-color-hover: $color-invert;
+$xc-form-dropdown-background-color-active: $color-background-active;
 
-    // xc-nav-list
-    $xc-nav-list-background-bar-color: $color-gray-1;
-    $xc-nav-list-item-background-color-normal: $color-gray-1;
-    $xc-nav-list-item-background-color-active: $color-gray-0;
-    $xc-nav-list-item-background-color-hover: $color-gray-2;
-    $xc-nav-list-item-background-color-focus: $color-gray-2;
+// xc-nav-list
+$xc-nav-list-background-bar-color: $color-gray-1;
+$xc-nav-list-item-background-color-normal: $color-gray-1;
+$xc-nav-list-item-background-color-active: $color-gray-0;
+$xc-nav-list-item-background-color-hover: $color-gray-2;
+$xc-nav-list-item-background-color-focus: $color-gray-2;
 
-    $xc-nav-list-item-separation-space: 1px;
-    $xc-nav-list-item-horizontal-active-indicator-width: 4px;
-    $xc-nav-list-item-vertical-active-indicator-width: 8px;
+$xc-nav-list-item-separation-space: 1px;
+$xc-nav-list-item-horizontal-active-indicator-width: 4px;
+$xc-nav-list-item-vertical-active-indicator-width: 8px;
 
-    $xc-nav-list-item-separation-color: $color-black;
+$xc-nav-list-item-separation-color: $color-black;
 
-    $xc-nav-list-item-indentation: 24px; // same as indentation of xc-tree in testfactory/process modeller
-    $xc-nav-list-item-margin: 0;
-    $xc-nav-list-item-height: 48px;
+$xc-nav-list-item-indentation: 24px; // same as indentation of xc-tree in testfactory/process modeller
+$xc-nav-list-item-margin: 0;
+$xc-nav-list-item-height: 48px;
 
-    $xc-nav-list-item-color-active: $color-white;
-    $xc-nav-list-item-color-normal: $color-gray-4;
-    $xc-nav-list-item-color-hover: $color-white;
-    $xc-nav-list-item-color-focus: $color-white;
+$xc-nav-list-item-color-active: $color-white;
+$xc-nav-list-item-color-normal: $color-gray-4;
+$xc-nav-list-item-color-hover: $color-white;
+$xc-nav-list-item-color-focus: $color-white;
 
-    $xc-nav-list-item-border-color-active: $color-white;
-    $xc-nav-list-item-border-color-normal: $color-gray-1;
-    $xc-nav-list-item-border-color-hover: $color-gray-2;
-    $xc-nav-list-item-border-color-focus: $color-gray-2;
+$xc-nav-list-item-border-color-active: $color-white;
+$xc-nav-list-item-border-color-normal: $color-gray-1;
+$xc-nav-list-item-border-color-hover: $color-gray-2;
+$xc-nav-list-item-border-color-focus: $color-gray-2;
 
-    // xc-tree
-    $xc-tree-background-color: $color-white;
-    $xc-tree-label-color: $color-white;
-    $xc-tree-label-color-disabled: $color-disabled;
+// xc-tree
+$xc-tree-background-color: $color-white;
+$xc-tree-label-color: $color-white;
+$xc-tree-label-color-disabled: $color-disabled;
 
-    // xc-icon
-    $xc-icon-disabled-color: $color-disabled;
+// xc-icon
+$xc-icon-disabled-color: $color-disabled;
 
-    // xc-master-detail
-    $xc-master-detail-master-border-left: 4px solid $color-black;
-    $xc-master-detail-detail-border-left: 4px solid $color-black;
-    $xc-master-detail-detail-inactive-master-background: rgba(0, 0, 0, 0.5);
+// xc-master-detail
+$xc-master-detail-master-border-left: 4px solid $color-black;
+$xc-master-detail-detail-border-left: 4px solid $color-black;
+$xc-master-detail-detail-inactive-master-background: rgba(0, 0, 0, 0.5);
 
-    // xc-table
-    $xc-table-background-color: $color-gray-0;
-    $xc-table-header-background-color: $color-gray-1;
-    $xc-table-header-border-color: $color-table-black;
-    $xc-table-header-border-bottom-color: $color-table-black;
-    $xc-table-no-data-color: $color-disabled;
+// xc-table
+$xc-table-background-color: $color-gray-0;
+$xc-table-header-background-color: $color-gray-1;
+$xc-table-header-border-color: $color-table-black;
+$xc-table-header-border-bottom-color: $color-table-black;
+$xc-table-no-data-color: $color-disabled;
 
-    $xc-table-header-padding: 6px 12px;
-    $xc-table-header-font-family: inherit;
-    $xc-table-header-font-size: $font-size-medium;
+$xc-table-header-padding: 6px 12px;
+$xc-table-header-font-family: inherit;
+$xc-table-header-font-size: $font-size-medium;
 
-    $xc-table-row-default-background-color: $color-gray-0;
-    $xc-table-row-even-background-color: $color-gray-0;
-    $xc-table-row-odd-background-color: $color-gray-0;
+$xc-table-row-default-background-color: $color-gray-0;
+$xc-table-row-even-background-color: $color-gray-0;
+$xc-table-row-odd-background-color: $color-gray-0;
 
-    $xc-table-footer-height: 32px;
-    $xc-table-footer-min-height: 6px;
-    $xc-table-footer-label-color: $color-gray-4;
+$xc-table-footer-height: 32px;
+$xc-table-footer-min-height: 6px;
+$xc-table-footer-label-color: $color-gray-4;
 
-    $xc-table-cell-padding: 6px 12px;
-    $xc-table-cell-horizontal-border-color: $color-gray-1;
-    $xc-table-cell-vertical-border-color: $color-gray-1;
+$xc-table-cell-padding: 6px 12px;
+$xc-table-cell-horizontal-border-color: $color-gray-1;
+$xc-table-cell-vertical-border-color: $color-gray-1;
 
-    $xc-table-entry-color: $color-normal;
-    $xc-table-entry-background-color-hover: $color-table-black;
-    $xc-table-selected-entry-background-color: $color-black;
-    $xc-table-selected-entry-color: $color-primary;
-    $xc-table-activated-entry-background-color: $color-primary;
-    $xc-table-activated-entry-color: $color-black;
+$xc-table-entry-color: $color-normal;
+$xc-table-entry-background-color-hover: $color-table-black;
+$xc-table-selected-entry-background-color: $color-black;
+$xc-table-selected-entry-color: $color-primary;
+$xc-table-activated-entry-background-color: $color-primary;
+$xc-table-activated-entry-color: $color-black;
 
-    $xc-table-refresh-overlay-color: $color-disabled-invert;
-    $xc-table-body-border-color-focus: $color-gray-4;
+$xc-table-refresh-overlay-color: $color-disabled-invert;
+$xc-table-body-border-color-focus: $color-gray-4;
 
-    // xc-title-bar
-    $xc-title-bar-box-shadow-color: $color-box-shadow;
-    $xc-title-bar-box-shadow-visible: false;
-    $xc-title-bar-background-color: $color-background-bar;
-    $xc-title-bar-logo-background: $color-white;
-    $xc-title-bar-logo-hidden: false;
-    $xc-title-bar-title-color: $color-white;
+// xc-title-bar
+$xc-title-bar-box-shadow-color: $color-box-shadow;
+$xc-title-bar-box-shadow-visible: false;
+$xc-title-bar-background-color: $color-background-bar;
+$xc-title-bar-logo-background: $color-white;
+$xc-title-bar-logo-hidden: false;
+$xc-title-bar-title-color: $color-white;
 
-    $xc-title-bar-border-top-width: unset;
-    $xc-title-bar-border-top-color: unset;
-    $xc-title-bar-border-right-width: unset;
-    $xc-title-bar-border-right-color: unset;
-    $xc-title-bar-border-bottom-width: 0;
-    $xc-title-bar-border-bottom-color: transparent;
-    $xc-title-bar-border-left-width: unset;
-    $xc-title-bar-border-left-color: unset;
-    $xc-title-bar-height: unset;
-    $xc-title-bar-wrapper-width: unset;
-    $xc-title-bar-title-font-family: unset;
-    $xc-title-bar-title-font-style: unset;
-    $xc-title-bar-title-font-size: 24px;
-    $xc-title-bar-title-text-transform: unset;
-    $xc-title-bar-title-margin: 0 16px;
-    $xc-title-bar-title-padding: unset;
-    $xc-title-bar-content-margin: unset;
-    $xc-title-bar-content-padding: unset;
-    $xc-title-bar-meta-nav-margin: unset;
-    $xc-title-bar-meta-nav-padding: unset;
+$xc-title-bar-border-top-width: unset;
+$xc-title-bar-border-top-color: unset;
+$xc-title-bar-border-right-width: unset;
+$xc-title-bar-border-right-color: unset;
+$xc-title-bar-border-bottom-width: 0;
+$xc-title-bar-border-bottom-color: transparent;
+$xc-title-bar-border-left-width: unset;
+$xc-title-bar-border-left-color: unset;
+$xc-title-bar-height: unset;
+$xc-title-bar-wrapper-width: unset;
+$xc-title-bar-title-font-family: unset;
+$xc-title-bar-title-font-style: unset;
+$xc-title-bar-title-font-size: 24px;
+$xc-title-bar-title-text-transform: unset;
+$xc-title-bar-title-margin: 0 16px;
+$xc-title-bar-title-padding: unset;
+$xc-title-bar-content-margin: unset;
+$xc-title-bar-content-padding: unset;
+$xc-title-bar-meta-nav-margin: unset;
+$xc-title-bar-meta-nav-padding: unset;
 
-    // xc-tab-bar
-    $xc-tab-bar-font-family: $font-family-medium;
-    $xc-tab-bar-font-size: inherit;
+// xc-tab-bar
+$xc-tab-bar-font-family: $font-family-medium;
+$xc-tab-bar-font-size: inherit;
 
-    $xc-tab-bar-tab-color: $color-invert;
-    $xc-tab-bar-tab-background-color: $color-gray-4;
-    $xc-tab-bar-tab-background-color-active: $color-gray-5;
+$xc-tab-bar-tab-color: $color-invert;
+$xc-tab-bar-tab-background-color: $color-gray-4;
+$xc-tab-bar-tab-background-color-active: $color-gray-5;
 
-    $xc-tab-bar-button-color: $color-gray-0;
-    $xc-tab-bar-button-color-active: $color-gray-0;
+$xc-tab-bar-button-color: $color-gray-0;
+$xc-tab-bar-button-color-active: $color-gray-0;
 
-    $xc-tab-bar-active-indicator-position: top;
+$xc-tab-bar-active-indicator-position: top;
 
-    $xc-tab-bar-content-position: left;
-    $xc-tab-bar-content-top-border-width: 4px;
-    $xc-tab-bar-content-top-border-color: $color-gray-5;
-    $xc-tab-bar-content-background-color: $color-gray-5;
+$xc-tab-bar-content-position: left;
+$xc-tab-bar-content-top-border-width: 4px;
+$xc-tab-bar-content-top-border-color: $color-gray-5;
+$xc-tab-bar-content-background-color: $color-gray-5;
 
-    // xc-panel
-    $xc-panel-header-min-height: 40px;
-    $xc-panel-footer-min-height: 40px;
-    $xc-panel-header-background-color: $color-gray-1;
-    $xc-panel-footer-background-color: $color-gray-1;
-    $xc-panel-header-padding: 0 2px;
-    $xc-panel-footer-padding: 0 2px;
-    $xc-panel-header-bottom-border-color: transparent;
-    $xc-panel-header-bottom-border-width: 0;
-    $xc-panel-footer-top-border-color: transparent;
-    $xc-panel-footer-top-border-width: 0;
+// xc-panel
+$xc-panel-header-min-height: 40px;
+$xc-panel-footer-min-height: 40px;
+$xc-panel-header-background-color: $color-gray-1;
+$xc-panel-footer-background-color: $color-gray-1;
+$xc-panel-header-padding: 0 2px;
+$xc-panel-footer-padding: 0 2px;
+$xc-panel-header-bottom-border-color: transparent;
+$xc-panel-header-bottom-border-width: 0;
+$xc-panel-footer-top-border-color: transparent;
+$xc-panel-footer-top-border-width: 0;
 
-    $xc-panel-header-label-padding: 0 10px;
-    $xc-panel-header-label-color: $color-normal;
-    $xc-panel-header-label-font-size: $font-size-medium;
-    $xc-panel-header-label-font-weight: normal;
-    $xc-panel-header-label-uppercase: false;
+$xc-panel-header-label-padding: 0 10px;
+$xc-panel-header-label-color: $color-normal;
+$xc-panel-header-label-font-size: $font-size-medium;
+$xc-panel-header-label-font-weight: normal;
+$xc-panel-header-label-uppercase: false;
 
-    $xc-panel-color: $color-normal;
-    $xc-panel-background-color: $color-gray-2;
-    $xc-panel-padding: 12px;
-    $xc-panel-border: none;
-    $xc-panel-border-radius: 0;
+$xc-panel-color: $color-normal;
+$xc-panel-background-color: $color-gray-2;
+$xc-panel-padding: 12px;
+$xc-panel-border: none;
+$xc-panel-border-radius: 0;
 
-    $xc-sub-panel-border-color: $color-gray-0;
-    $xc-sub-panel-border-width: 2px;
-    $xc-sub-panel-border-radius: 0;
-    $xc-sub-panel-padding: 12px;
-    $xc-sub-panel-color: $color-normal;
-    $xc-sub-panel-background-color: $color-background-area;
+$xc-sub-panel-border-color: $color-gray-0;
+$xc-sub-panel-border-width: 2px;
+$xc-sub-panel-border-radius: 0;
+$xc-sub-panel-padding: 12px;
+$xc-sub-panel-color: $color-normal;
+$xc-sub-panel-background-color: $color-background-area;
 
-    // xc-dialog
-    $xc-dialog-border: 1px solid $color-black;
-    $xc-dialog-border-radius: 2px;
-    $xc-dialog-box-shadow: 0 1px 3px $color-box-shadow;
+// xc-dialog
+$xc-dialog-border: 1px solid $color-black;
+$xc-dialog-border-radius: 2px;
+$xc-dialog-box-shadow: 0 1px 3px $color-box-shadow;
 
-    $xc-dialog-title-color: $color-normal;
-    $xc-dialog-title-background-color: $color-gray-1;
-    $xc-dialog-content-color: $color-normal;
-    $xc-dialog-content-background-color: $color-background-area;
-    $xc-dialog-content-border: none;
-    $xc-dialog-footer-color: $color-normal;
-    $xc-dialog-footer-background-color: $color-gray-1;
+$xc-dialog-title-color: $color-normal;
+$xc-dialog-title-background-color: $color-gray-1;
+$xc-dialog-content-color: $color-normal;
+$xc-dialog-content-background-color: $color-background-area;
+$xc-dialog-content-border: none;
+$xc-dialog-footer-color: $color-normal;
+$xc-dialog-footer-background-color: $color-gray-1;
 
-    // xc-menu
-    $xc-menu-item-background-color: $color-gray-1;
-    $xc-menu-item-highlight-background-color: $color-black;
-    $xc-menu-item-arrow-color: $color-white;
+// xc-menu
+$xc-menu-item-background-color: $color-gray-1;
+$xc-menu-item-highlight-background-color: $color-black;
+$xc-menu-item-arrow-color: $color-white;
 
-    // xc-stack
-    $xc-stack-background-color: $color-gray-1;
-    $xc-stack-breadcrumb-area-background-color: $color-gray-1;
-    $xc-stack-breadcrumb-max-width: 160px;
+// xc-stack
+$xc-stack-background-color: $color-gray-1;
+$xc-stack-breadcrumb-area-background-color: $color-gray-1;
+$xc-stack-breadcrumb-max-width: 160px;
 
-    // xc-scollbar
-    $xc-scrollbar-color: $color-gray-1;
-    $xc-scrollbar-background-color: $color-gray-3;
+// xc-scollbar
+$xc-scrollbar-color: $color-gray-1;
+$xc-scrollbar-background-color: $color-gray-3;
 
-    $color-map: (
-        normal: $color-normal,
-        invert: $color-invert,
-        primary: $color-primary,
-        accent: $color-accent,
-        warn: $color-warn,
-        color-black: $color-black,
-        color-white: $color-white
-    );
-}
+$color-map: (
+    normal: $color-normal,
+    invert: $color-invert,
+    primary: $color-primary,
+    accent: $color-accent,
+    warn: $color-warn,
+    color-black: $color-black,
+    color-white: $color-white
+);

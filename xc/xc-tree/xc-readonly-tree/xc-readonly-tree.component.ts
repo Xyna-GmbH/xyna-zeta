@@ -33,7 +33,8 @@ import { XcTreeItemComponent } from './xc-tree-item/xc-tree-item.component';
     selector: 'xc-readonly-tree',
     templateUrl: './xc-readonly-tree.component.html',
     styleUrls: ['./xc-readonly-tree.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcReadonlyTreeComponent extends XcTreeNodeComponent implements OnDestroy {
 

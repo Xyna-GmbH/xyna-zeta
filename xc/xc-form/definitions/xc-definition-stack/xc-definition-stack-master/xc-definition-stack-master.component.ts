@@ -36,7 +36,8 @@ import { DefinitionStackItemComponentData, XcDefinitionStackItemComponent } from
     selector: 'xc-definition-stack-master',
     templateUrl: './xc-definition-stack-master.component.html',
     styleUrls: ['./xc-definition-stack-master.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class XcDefinitionStackMasterComponent extends RouteComponent implements OnDestroy {
 

@@ -35,7 +35,8 @@ import { XC_TAB_DATA, XcTabBarInterface, XcTabBarItem, XcTabComponent, XcTabRef 
 @Component({
     selector: 'xc-tab-bar',
     templateUrl: './xc-tab-bar.component.html',
-    styleUrls: ['./xc-tab-bar.component.scss']
+    styleUrls: ['./xc-tab-bar.component.scss'],
+    standalone: false
 })
 export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarInterface, AfterViewInit {
 
@@ -74,7 +75,7 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
 
     private _getComponentInstance(item: XcTabBarItem): XcTabComponent | null {
         return this.componentOutlets.map(outlet =>
-            // eslint-disable-next-line @typescript-eslint/dot-notation
+             
             (outlet['_componentRef'] as ComponentRef<XcTabComponent>).instance
         ).find(instance =>
             instance.tabBarItem === item
@@ -100,7 +101,7 @@ export class XcTabBarComponent extends XcThemeableComponent implements XcTabBarI
 
 
     private resetSelectionIndex() {
-        // eslint-disable-next-line @typescript-eslint/dot-notation
+         
         this.tabGroup['_selectedIndex'] = undefined;
     }
 

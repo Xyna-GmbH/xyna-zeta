@@ -16,42 +16,8 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 
-$xc-table-background-color: unset !default;
-$xc-table-header-background-color: unset !default;
-$xc-table-header-border-color: unset !default;
-$xc-table-header-border-bottom-color: unset !default;
-$xc-table-no-data-color: unset !default;
 
-$xc-table-header-padding: unset !default;
-$xc-table-header-font-family: unset !default;
-$xc-table-header-font-size: unset !default;
-
-$xc-table-row-default-background-color: unset !default;
-$xc-table-row-even-background-color: unset !default;
-$xc-table-row-odd-background-color: unset !default;
-
-$xc-table-footer-height: unset !default;
-$xc-table-footer-min-height: unset !default;
-$xc-table-footer-label-color: unset !default;
-
-$xc-table-cell-padding: unset !default;
-$xc-table-cell-horizontal-border-color: unset !default;
-$xc-table-cell-vertical-border-color: unset !default;
-
-$xc-table-entry-color: unset !default;
-$xc-table-entry-background-color-hover: unset !default;
-$xc-table-selected-entry-background-color: unset !default;
-$xc-table-selected-entry-color: unset !default;
-$xc-table-activated-entry-background-color: unset !default;
-$xc-table-activated-entry-color: unset !default;
-
-$xc-table-refresh-overlay-color: unset !default;
-$xc-table-body-border-color-focus: unset !default;
-
-$xc-scrollbar-color: unset !default;
-$xc-scrollbar-background-color: unset !default;
-
-@import 'const';
+@use '../../const' as *;
 
 
 :host {

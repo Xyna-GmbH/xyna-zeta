@@ -1,9 +1,11 @@
-<xc-form-generic-panel *ngIf="!hidden"
+@if (!hidden) {
+  <xc-form-generic-panel
     [xc-definition]="panelDefinition"
     [xc-definition-data]="definitionData"
     (closed)="closed.emit()"
 >
     <section additionalContentItems class="stretch scroll">
-        <xc-tree [xc-tree-datasource]="dataSource" xc-tree-autoexpand="first"></xc-tree>
+      <xc-tree [xc-tree-datasource]="dataSource" xc-tree-autoexpand="first"></xc-tree>
     </section>
-</xc-form-generic-panel>
+  </xc-form-generic-panel>
+}

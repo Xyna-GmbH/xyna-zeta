@@ -1,14 +1,18 @@
 <div class="stack-items" >
-    <div *ngFor="let stackItem of dataSource.stackItems" class="item" #items>
-        <xc-template [xc-template-instance]="stackItem.getTemplate()">
-        </xc-template>
+  @for (stackItem of dataSource.stackItems; track stackItem) {
+    <div class="item" #items>
+      <xc-template [xc-template-instance]="stackItem.getTemplate()">
+      </xc-template>
     </div>
+  }
 </div>
 <div class="breadcrumb-overview">
-    <xc-button *ngFor="let stackItem of dataSource.stackItems; let i = index"
-        [xc-tooltip]="breadcrumbLabels.get(stackItem)"
-        [xc-button-aria-label]="ariaBreadcrumbLabel(stackItem)"
-        class="breadcrumb"
-        (click)="scrollToStackItem(i)"
+  @for (stackItem of dataSource.stackItems; track stackItem; let i = $index) {
+    <xc-button
+      [xc-tooltip]="breadcrumbLabels.get(stackItem)"
+      [xc-button-aria-label]="ariaBreadcrumbLabel(stackItem)"
+      class="breadcrumb"
+      (click)="scrollToStackItem(i)"
     >{{breadcrumbLabels.get(stackItem)}}</xc-button>
+  }
 </div>

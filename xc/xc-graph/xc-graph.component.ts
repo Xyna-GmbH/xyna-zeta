@@ -67,8 +67,8 @@ class XcShaderMaterial extends THREE.RawShaderMaterial {
             vertexShader: XcShaderMaterial.vertexShader,
             fragmentShader: XcShaderMaterial.fragmentShader,
             uniforms: {
-                color: {value: new THREE.Vector3(1, 1, 1)},
-                style: {value: 0}
+                color: { value: new THREE.Vector3(1, 1, 1) },
+                style: { value: 0 }
             }
         });
     }
@@ -77,11 +77,11 @@ class XcShaderMaterial extends THREE.RawShaderMaterial {
     setUniformColor(color: number) {
         this.uniformsNeedUpdate = true;
         this.uniforms.color.value.set(
-            /* eslint-disable no-bitwise */
+             
             ((color & 0xff0000) >> 16) / 256,
-            ((color & 0x00ff00) >>  8) / 256,
-            ((color & 0x0000ff) >>  0) / 256
-            /* eslint-enable no-bitwise */
+            ((color & 0x00ff00) >> 8) / 256,
+            ((color & 0x0000ff) >> 0) / 256
+             
         );
     }
 
@@ -120,7 +120,7 @@ export class XcShaderObject extends XcWebGLObject<XcShaderMesh, XcShaderMaterial
 
 class XcGraph extends XcShaderObject {
 
-    readonly timeValues: {time: number; value: number}[] = [];
+    readonly timeValues: { time: number; value: number }[] = [];
 
 
     constructor(
@@ -145,7 +145,7 @@ class XcGraph extends XcShaderObject {
         const positionData = [];
         let idx: number;
         if ((idx = XcGraphUtils.getSliceIndex(slices, interval, resolution)) >= 0) {
-            let slice: XcGraphSlice, ptr: {globalOff: number; localOff: number; len: number};
+            let slice: XcGraphSlice, ptr: { globalOff: number; localOff: number; len: number };
             while ((slice = slices[idx++]) && (ptr = XcGraphUtils.getSliceValuesPtr(slice, interval, resolution))) {
                 // compute vertices off all values to render
                 let first = true;
@@ -160,7 +160,7 @@ class XcGraph extends XcShaderObject {
                     off++;
                     // store time value pairs
                     this.timeValues.push({
-                        time:  slice.time + resolution * valueIdx,
+                        time: slice.time + resolution * valueIdx,
                         value: slice.values[valueIdx]
                     });
                 }
@@ -178,7 +178,7 @@ abstract class XcNormalGraph extends XcGraph {
 
     protected getNormalVector(v0: THREE.Vector2, v1: THREE.Vector2): THREE.Vector2 {
         const tangent = new THREE.Vector2(v1.x - v0.x, this.valueToPixelsTransform.perform(v1.y - v0.y)).normalize();
-        const normal  = new THREE.Vector2(tangent.y,   this.valueToPixelsTransform.inverse(-tangent.x));
+        const normal = new THREE.Vector2(tangent.y, this.valueToPixelsTransform.inverse(-tangent.x));
         return normal;
     }
 
@@ -268,12 +268,12 @@ class XcDotGraph extends XcGraph {
 
 class XcBarGraph extends XcGraph {
 
-    protected static readonly PADDING_LEFT  = 0;
+    protected static readonly PADDING_LEFT = 0;
     protected static readonly PADDING_RIGHT = 1;
 
 
     protected updatePositionData(x0: number, x1: number, y: number, z: number): number[] {
-        const paddingLeft  = this.options[XcGraphOption.PADDING_LEFT]  ?? XcBarGraph.PADDING_LEFT;
+        const paddingLeft = this.options[XcGraphOption.PADDING_LEFT] ?? XcBarGraph.PADDING_LEFT;
         const paddingRight = this.options[XcGraphOption.PADDING_RIGHT] ?? XcBarGraph.PADDING_RIGHT;
         return getQuadTriangles3raw(x0 + paddingLeft, Math.min(y, 0), x1 - paddingRight, Math.max(y, 0), z);
     }
@@ -329,8 +329,8 @@ class XcGraphValuestampFont extends XcGraphStampFont {
         const h2 = this.lineHeight / 2;
         return new THREE.Shape([
             new THREE.Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y - h2),
-            new THREE.Vector2(offset - this.offset.x,                  -this.offset.y - h2),
-            new THREE.Vector2(offset - this.offset.x,                  -this.offset.y + h2),
+            new THREE.Vector2(offset - this.offset.x, -this.offset.y - h2),
+            new THREE.Vector2(offset - this.offset.x, -this.offset.y + h2),
             new THREE.Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y + h2)
         ]);
     }
@@ -534,8 +534,8 @@ export class XcGraphScene {
                 case XcGraphType.VOID: clazz = XcVoidGraph; break;
                 case XcGraphType.LINE: clazz = XcLineGraph; break;
                 case XcGraphType.AREA: clazz = XcAreaGraph; break;
-                case XcGraphType.DOT:  clazz = XcDotGraph;  break;
-                case XcGraphType.BAR:  clazz = XcBarGraph;  break;
+                case XcGraphType.DOT: clazz = XcDotGraph; break;
+                case XcGraphType.BAR: clazz = XcBarGraph; break;
                 default:
                     clazz = XcGraph;
                     console.warn('[XC-GRAPH] unknown graph type! (' + type + ')');
@@ -691,13 +691,13 @@ export class XcGraphScene {
 
     private timeToString(time: number): string {
         return this.resolution >= minute
-            ? timeString(time, this.dataSource.timestampMinuteFormat, {leadingZeroes: this.dataSource.timestampLeadingZeroes})
-            : timeString(time, this.dataSource.timestampSecondFormat, {leadingZeroes: this.dataSource.timestampLeadingZeroes});
+            ? timeString(time, this.dataSource.timestampMinuteFormat, { leadingZeroes: this.dataSource.timestampLeadingZeroes })
+            : timeString(time, this.dataSource.timestampSecondFormat, { leadingZeroes: this.dataSource.timestampLeadingZeroes });
     }
 
 
     private dateToString(time: number): string {
-        return dateString(time, this.dataSource.datestampFormat, {leadingZeroes: this.dataSource.datestampLeadingZeroes});
+        return dateString(time, this.dataSource.datestampFormat, { leadingZeroes: this.dataSource.datestampLeadingZeroes });
     }
 
 
@@ -860,7 +860,7 @@ export class XcGraphScene {
                 this.deltaValue = 0;
             }
             // update camera
-            this.graphCamera.top    = this.maxValue;
+            this.graphCamera.top = this.maxValue;
             this.graphCamera.bottom = this.minValue;
             this.graphCamera.updateProjectionMatrix();
         }
@@ -900,9 +900,7 @@ export class XcGraphScene {
         const max = floorBase(this.timeInterval.timeTo - timezoneOffsetDelta, delta) + timezoneOffsetDelta + delta;
         // remove meshes outside of time interval (or after timezone has changed)
         this.removeMeshes(
-            meshes, !this.timezoneOffset || this.timezoneOffset === timezoneOffset
-                ? value => (value < min) || (value > max)
-                : undefined
+            meshes, !this.timezoneOffset || this.timezoneOffset === timezoneOffset ? value => (value < min) || (value > max) : undefined
         );
         // create and update meshes within time interval
         this.updateStamps(
@@ -913,8 +911,8 @@ export class XcGraphScene {
             createMesh,
             (value, mesh) => {
                 updateFont();
-                const valueOffset = value      - this.timeInterval.timeAt;
-                const nowOffset   = this.now() - this.timeInterval.timeTo;
+                const valueOffset = value - this.timeInterval.timeAt;
+                const nowOffset = this.now() - this.timeInterval.timeTo;
                 mesh.position.set(
                     meshOffset.x + this.timeToPixels(valueOffset - nowOffset) - this.sampleFraction + alignmentOffset,
                     meshOffset.y,
@@ -931,8 +929,8 @@ export class XcGraphScene {
                 updateFont = NOP;
                 this.datestampFont.lineWidth = this.dataSource.datestampLineThickness;
                 switch (this.dataSource.datestampLineStyle) {
-                    case XcGraphLineStyle.NONE:  this.datestampFont.lineHeight = 0; break;
-                    case XcGraphLineStyle.AXIS:  this.datestampFont.lineHeight = XcGraphScene.DATE_AXIS_SIZE - XcGraphScene.DATE_AXIS_OFFSET; break;
+                    case XcGraphLineStyle.NONE: this.datestampFont.lineHeight = 0; break;
+                    case XcGraphLineStyle.AXIS: this.datestampFont.lineHeight = XcGraphScene.DATE_AXIS_SIZE - XcGraphScene.DATE_AXIS_OFFSET; break;
                     case XcGraphLineStyle.GRAPH: this.datestampFont.lineHeight = XcGraphScene.DATE_AXIS_SIZE + XcGraphScene.TIME_AXIS_SIZE + this.graphViewportSize.height; break;
                 }
             };
@@ -966,8 +964,8 @@ export class XcGraphScene {
                 updateFont = NOP;
                 this.timestampFont.lineWidth = this.dataSource.timestampLineThickness;
                 switch (this.dataSource.timestampLineStyle) {
-                    case XcGraphLineStyle.NONE:  this.timestampFont.lineHeight = 0; break;
-                    case XcGraphLineStyle.AXIS:  this.timestampFont.lineHeight = XcGraphScene.TIME_AXIS_SIZE - XcGraphScene.TIME_AXIS_OFFSET; break;
+                    case XcGraphLineStyle.NONE: this.timestampFont.lineHeight = 0; break;
+                    case XcGraphLineStyle.AXIS: this.timestampFont.lineHeight = XcGraphScene.TIME_AXIS_SIZE - XcGraphScene.TIME_AXIS_OFFSET; break;
                     case XcGraphLineStyle.GRAPH: this.timestampFont.lineHeight = XcGraphScene.TIME_AXIS_SIZE + this.graphViewportSize.height; break;
                 }
             };
@@ -1001,8 +999,8 @@ export class XcGraphScene {
                 updateFont = NOP;
                 this.valuestampFont.lineHeight = this.dataSource.valuestampLineThickness;
                 switch (this.dataSource.valuestampLineStyle) {
-                    case XcGraphLineStyle.NONE:  this.valuestampFont.lineWidth = 0; break;
-                    case XcGraphLineStyle.AXIS:  this.valuestampFont.lineWidth = XcGraphScene.VALUE_AXIS_SIZE - XcGraphScene.VALUE_AXIS_OFFSET; break;
+                    case XcGraphLineStyle.NONE: this.valuestampFont.lineWidth = 0; break;
+                    case XcGraphLineStyle.AXIS: this.valuestampFont.lineWidth = XcGraphScene.VALUE_AXIS_SIZE - XcGraphScene.VALUE_AXIS_OFFSET; break;
                     case XcGraphLineStyle.GRAPH: this.valuestampFont.lineWidth = XcGraphScene.VALUE_AXIS_SIZE + this.graphViewportSize.width; break;
                 }
             };
@@ -1090,7 +1088,7 @@ export class XcGraphScene {
     private updateTimeInterval() {
         const timeTo = floorBase(this.now(), this.resolution);
         const timeAt = floorBase(timeTo - this.pixelsToTime(this.graphViewportSize.width), this.resolution);
-        this.timeInterval = {timeAt, timeTo};
+        this.timeInterval = { timeAt, timeTo };
     }
 
 
@@ -1203,34 +1201,34 @@ export class XcGraphScene {
 
     resize(left: number, bottom: number, width: number, height: number) {
         // dimensions
-        this.x      = left;
-        this.y      = bottom;
-        this.width  = width;
+        this.x = left;
+        this.y = bottom;
+        this.width = width;
         this.height = height;
 
         // root viewport
-        this.rootViewportPosition.x  = this.x;
-        this.rootViewportPosition.y  = this.y;
-        this.rootViewportSize.width  = this.width;
+        this.rootViewportPosition.x = this.x;
+        this.rootViewportPosition.y = this.y;
+        this.rootViewportSize.width = this.width;
         this.rootViewportSize.height = this.height;
 
         // root camera
-        this.rootCamera.left   = 0;
-        this.rootCamera.right  = this.rootViewportSize.width;
-        this.rootCamera.top    = this.rootViewportSize.height;
+        this.rootCamera.left = 0;
+        this.rootCamera.right = this.rootViewportSize.width;
+        this.rootCamera.top = this.rootViewportSize.height;
         this.rootCamera.bottom = 0;
         this.rootCamera.updateProjectionMatrix();
 
         // graph viewport
-        this.graphViewportPosition.x  = this.x;
-        this.graphViewportPosition.y  = this.y      + XcGraphScene.DATE_AXIS_SIZE + XcGraphScene.TIME_AXIS_SIZE;
-        this.graphViewportSize.width  = this.width  - XcGraphScene.VALUE_AXIS_SIZE;
+        this.graphViewportPosition.x = this.x;
+        this.graphViewportPosition.y = this.y + XcGraphScene.DATE_AXIS_SIZE + XcGraphScene.TIME_AXIS_SIZE;
+        this.graphViewportSize.width = this.width - XcGraphScene.VALUE_AXIS_SIZE;
         this.graphViewportSize.height = this.height - XcGraphScene.HEAD_SIZE - XcGraphScene.DATE_AXIS_SIZE - XcGraphScene.TIME_AXIS_SIZE;
 
         // graph camera
-        this.graphCamera.left   = 0;
-        this.graphCamera.right  = this.graphViewportSize.width;
-        this.graphCamera.top    = this.maxValue;
+        this.graphCamera.left = 0;
+        this.graphCamera.right = this.graphViewportSize.width;
+        this.graphCamera.top = this.maxValue;
         this.graphCamera.bottom = this.minValue;
         this.graphCamera.updateProjectionMatrix();
 
@@ -1292,7 +1290,7 @@ export class XcGraphScene {
                     this.hoveringId,
                     XcGraphType.AREA
                 ).update(
-                    interaction.mouse.leave ? [] : [{time: timeAt, values: [Number.MAX_SAFE_INTEGER]}],
+                    interaction.mouse.leave ? [] : [{ time: timeAt, values: [Number.MAX_SAFE_INTEGER] }],
                     this.timeInterval,
                     this.resolution,
                     this.sampleWidth,
@@ -1303,13 +1301,13 @@ export class XcGraphScene {
     }
 
 
-    getRootViewport(): {position: THREE.Vector2; size: THREE.Vector2} {
-        return {position: this.rootViewportPosition, size: this.rootViewportSize};
+    getRootViewport(): { position: THREE.Vector2; size: THREE.Vector2 } {
+        return { position: this.rootViewportPosition, size: this.rootViewportSize };
     }
 
 
-    getGraphViewport(): {position: THREE.Vector2; size: THREE.Vector2} {
-        return {position: this.graphViewportPosition, size: this.graphViewportSize};
+    getGraphViewport(): { position: THREE.Vector2; size: THREE.Vector2 } {
+        return { position: this.graphViewportPosition, size: this.graphViewportSize };
     }
 
 
@@ -1387,7 +1385,8 @@ export class XcGraphScene {
 @Component({
     selector: 'xc-graph',
     templateUrl: './xc-graph.component.html',
-    styleUrls: ['./xc-graph.component.scss']
+    styleUrls: ['./xc-graph.component.scss'],
+    standalone: false
 })
 export class XcGraphComponent {
 
@@ -1403,13 +1402,13 @@ export class XcGraphComponent {
     private _resized = false;
     private _initialized = false;
 
-    @ViewChild(XcWebGLComponent, {static: true})
+    @ViewChild(XcWebGLComponent, { static: true })
     webGL: XcWebGLComponent;
 
     @Output('xc-graph-resize')
     readonly resizeEmitter = new EventEmitter<any>();
 
-    initFunction    = this.init.bind(this);
+    initFunction = this.init.bind(this);
     destroyFunction = this.destroy.bind(this);
 
 
@@ -1452,20 +1451,20 @@ export class XcGraphComponent {
     resize() {
         if (this.webGL.width && this.webGL.height) {
             this._resized = true;
-            const count        = this.graphScenes.length;
-            const colGap       = XcGraphComponent.COL_GAP;
-            const cols         = this._columns;
-            const cols1        = cols - 1;
-            const colWidth     = (this.webGL.width - cols1 * colGap) / cols;
-            const colWidthGap  = colWidth + colGap;
-            const rowGap       = XcGraphComponent.ROW_GAP;
-            const rows         = Math.ceil(count / cols);
-            const rows1        = rows - 1;
-            const rowHeight    = (this.webGL.height - rows1 * rowGap) / rows;
+            const count = this.graphScenes.length;
+            const colGap = XcGraphComponent.COL_GAP;
+            const cols = this._columns;
+            const cols1 = cols - 1;
+            const colWidth = (this.webGL.width - cols1 * colGap) / cols;
+            const colWidthGap = colWidth + colGap;
+            const rowGap = XcGraphComponent.ROW_GAP;
+            const rows = Math.ceil(count / cols);
+            const rows1 = rows - 1;
+            const rowHeight = (this.webGL.height - rows1 * rowGap) / rows;
             const rowHeightGap = rowHeight + rowGap;
 
             this.graphScenes.forEach((graphScene, idx) => {
-                const x = colWidthGap  *                    (idx % cols);
+                const x = colWidthGap * (idx % cols);
                 const y = rowHeightGap * (rows1 - Math.floor(idx / cols));
                 graphScene.resize(x, y, colWidth, rowHeight);
             });

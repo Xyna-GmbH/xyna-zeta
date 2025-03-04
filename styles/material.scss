@@ -15,37 +15,11 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-form-autocomplete-panel-margin-top: unset !default;
-$xc-form-autocomplete-panel-background-color: unset !default;
-$xc-form-autocomplete-panel-shadow-hidden: unset !default;
-
-$xc-form-autocomplete-panel-border-width: unset !default;
-$xc-form-autocomplete-panel-border-color: unset !default;
-$xc-form-autocomplete-panel-border-radius: unset !default;
-
-$xc-form-autocomplete-option-color: unset !default;
-$xc-form-autocomplete-option-color-focus: unset !default;
-$xc-form-autocomplete-option-color-disabled: unset !default;
-$xc-form-autocomplete-option-color-hover: unset !default;
-$xc-form-autocomplete-option-color-active: unset !default;
-$xc-form-autocomplete-option-background-color: unset !default;
-$xc-form-autocomplete-option-background-color-focus: unset !default;
-$xc-form-autocomplete-option-background-color-disabled: unset !default;
-$xc-form-autocomplete-option-background-color-hover: unset !default;
-$xc-form-autocomplete-option-background-color-active: unset !default;
-
-$xc-dialog-border: unset !default;
-$xc-dialog-border-radius: unset !default;
-
-$xc-menu-item-background-color: unset !default;
-$xc-menu-item-highlight-background-color: unset !default;
-$xc-menu-item-arrow-color: unset !default;
-
 
 @use '@angular/material' as mat;
 
-@import 'const';
-// @import '@angular/material/theming';
+@use '../const' as *;
+// @use '@angular/material/theming';
 
 .mat-icon {
     display: flex !important;
@@ -73,7 +47,8 @@ $xc-menu-item-arrow-color: unset !default;
 }
 
 @include mat.all-component-typographies();
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // $xyna-palette: mat-palette($mat-grey);
 $xyna-palette: mat.m2-define-palette(mat.$m2-grey-palette);

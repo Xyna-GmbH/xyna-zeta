@@ -25,7 +25,8 @@ import { XcStatusBarEntry, XcStatusBarEntryType, XcStatusBarService } from './xc
 @Component({
     selector: 'xc-status-bar',
     templateUrl: './xc-status-bar.component.html',
-    styleUrls: ['./xc-status-bar.component.scss']
+    styleUrls: ['./xc-status-bar.component.scss'],
+    standalone: false
 })
 export class XcStatusBarComponent {
 

@@ -25,7 +25,8 @@ import { XcFormComponent } from '../xc-form-base/xc-form-base.component';
 @Component({
     selector: 'xc-form-text',
     templateUrl: './xc-form-text.component.html',
-    styleUrls: ['./xc-form-text.component.scss']
+    styleUrls: ['./xc-form-text.component.scss'],
+    standalone: false
 })
 export class XcFormTextComponent extends XcFormComponent implements AfterContentInit {
 

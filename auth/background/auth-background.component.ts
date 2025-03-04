@@ -20,7 +20,8 @@ import { Component } from '@angular/core';
 
 @Component({
     templateUrl: './auth-background.component.html',
-    styleUrls: ['./auth-background.component.scss']
+    styleUrls: ['./auth-background.component.scss'],
+    standalone: false
 })
 export class AuthBackgroundComponent {
 

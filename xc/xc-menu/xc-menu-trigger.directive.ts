@@ -23,7 +23,8 @@ import { XcMenu, XcMenuComponent } from './xc-menu.component';
 
 
 @Directive({
-    selector: '[xc-menu-trigger]'
+    selector: '[xc-menu-trigger]',
+    standalone: false
 })
 export class XcMenuTriggerDirective extends MatMenuTrigger {
 
@@ -82,7 +83,7 @@ export class XcMenuTriggerDirective extends MatMenuTrigger {
     // override private function
     [(() => '_setPosition')()](menu: MatMenu, positionStrategy: FlexibleConnectedPositionStrategy) {
         // super call
-        // eslint-disable-next-line @typescript-eslint/dot-notation
+         
         super['_setPosition'].call(this, menu, positionStrategy);
 
         if (this.triggersSubmenu()) {
@@ -94,7 +95,7 @@ export class XcMenuTriggerDirective extends MatMenuTrigger {
             });
         } else {
             // affects root menus only
-            // eslint-disable-next-line @typescript-eslint/dot-notation
+             
             const rect = (this['_element'] as ElementRef).nativeElement.getBoundingClientRect();
             positionStrategy._preferredPositions.forEach(preferredPosition => preferredPosition.offsetX = 0);
             // adjust menu's offset-x for the width of the trigger's element

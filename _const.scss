@@ -15,6 +15,9 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
+
+@forward "../const";
+
 //======================================================================
 // Component variables which _CAN_ be overwritten by theme
 //======================================================================
@@ -22,72 +25,3 @@
 $transition-time-fast: 0.15s !default;
 $transition-time-normal: 0.3s !default;
 $transition-time-slow: 0.6s !default;
-
-
-//======================================================================
-// Component variables which _MUST_ be overwritten by theme
-//======================================================================
-
-$color-map: unset !default;
-
-$font-family-light: unset !default;
-$font-family-regular: unset !default;
-$font-family-medium: unset !default;
-$font-family-bold: unset !default;
-$font-family-bolder: unset !default;
-$font-family-code: unset !default;
-
-$font-size-large: unset !default;
-$font-size-medium: unset !default;
-$font-size-small: unset !default;
-$font-size-tiny: unset !default;
-$font-size-code: unset !default;
-
-$font-size-h1: unset !default;
-$font-size-h2: unset !default;
-$font-size-h3: unset !default;
-$font-size-h4: unset !default;
-
-$color-normal: unset !default;
-$color-invert: unset !default;
-$color-primary: unset !default;
-$color-accent: unset !default;
-$color-warn: unset !default;
-$color-focus-outline: unset !default;
-
-$color-gray-0: unset !default;
-$color-gray-1: unset !default;
-$color-gray-2: unset !default;
-$color-gray-3: unset !default;
-$color-gray-4: unset !default;
-$color-gray-5: unset !default;
-
-$color-disabled: unset !default;
-$color-disabled-invert: unset !default;
-$color-background-default: unset !default;
-$color-background-bar: unset !default;
-$color-background-area: unset !default;
-
-$color-background-text-area: unset !default;
-$color-background-text-area-focus: unset !default;
-$color-background-text-area-disabled: unset !default;
-$color-background-text-area-hover: unset !default;
-
-
-//======================================================================
-// Theme Variables (don't use within components!)
-//======================================================================
-
-$color-white: #fff;
-$color-black: #000;
-
-$color-white-overlay: rgba($color-white, .1);
-$color-black-overlay: rgba($color-black, .1);
-
-
-//======================================================================
-// IMPORT THEME (disabled, when $theme != xyna before importing const)
-//======================================================================
-
-$theme: xyna !default;
-@import 'theme';

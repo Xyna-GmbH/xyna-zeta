@@ -23,7 +23,8 @@ import { XcThemeableComponent } from '../shared/xc-themeable.component';
 @Component({
     selector: 'xc-spinner',
     templateUrl: './xc-spinner.component.html',
-    styleUrls: ['./xc-spinner.component.scss']
+    styleUrls: ['./xc-spinner.component.scss'],
+    standalone: false
 })
 export class XcSpinnerComponent extends XcThemeableComponent {
     constructor() {

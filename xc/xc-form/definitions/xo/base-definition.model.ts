@@ -46,9 +46,9 @@ export class EncodableDefinitionBundle implements XoDefinitionBundle {
         const definitionJSON = JSON.stringify(this.definition.encode());
         const resolvedDataJSON = JSON.stringify((this.data[0] ?? new XoObject()).encode());
         return '{' +
-                `"definition":${definitionJSON}` +
-                `,"data":${resolvedDataJSON}` +
-                (this.constraintId ? `,"constraint":"${this.constraintId}"` : '') +
+            `"definition":${definitionJSON}` +
+            `,"data":${resolvedDataJSON}` +
+            (this.constraintId ? `,"constraint":"${this.constraintId}"` : '') +
             '}';
     }
 }
@@ -198,7 +198,7 @@ export class XoDefinition extends XoObject {
     }
 
 
-    private resolvePath(path: string): {index: number; relativePath: string} {
+    private resolvePath(path: string): { index: number; relativePath: string } {
         const pathGroups = /^%(\d+)%(?:\.(.*))*/.exec(path);
         if (pathGroups && pathGroups.length > 2) {
             return { index: +pathGroups[1], relativePath: pathGroups[2] || '' };

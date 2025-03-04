@@ -1,5 +1,5 @@
-<xc-form-autocomplete
-    *ngIf="hasLanguages"
+@if (hasLanguages) {
+  <xc-form-autocomplete
     label="select-language-label"
     class="language"
     [(xc-form-autocomplete-option)]="selectLanguageDataWrapper.value"
@@ -7,4 +7,5 @@
     xc-form-autocomplete-asdropdown
     xc-form-field-compact
     xc-i18n
-></xc-form-autocomplete>
+  ></xc-form-autocomplete>
+}

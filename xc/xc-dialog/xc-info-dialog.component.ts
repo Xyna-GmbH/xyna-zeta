@@ -22,7 +22,8 @@ import { XcMessageDialogComponent } from './xc-message-dialog.component';
 
 @Component({
     templateUrl: './xc-info-dialog.component.html',
-    styleUrls: ['./xc-info-dialog.component.scss']
+    styleUrls: ['./xc-info-dialog.component.scss'],
+    standalone: false
 })
 export class XcInfoDialogComponent extends XcMessageDialogComponent<void, void> {
 }

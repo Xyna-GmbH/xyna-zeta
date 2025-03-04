@@ -15,37 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-$xc-panel-header-min-height: unset !default;
-$xc-panel-footer-min-height: unset !default;
-$xc-panel-header-background-color: unset !default;
-$xc-panel-footer-background-color: unset !default;
-$xc-panel-header-padding: unset !default;
-$xc-panel-footer-padding: unset !default;
-$xc-panel-header-bottom-border-color: unset !default;
-$xc-panel-header-bottom-border-width: unset !default;
-$xc-panel-footer-top-border-color: unset !default;
-$xc-panel-footer-top-border-width: unset !default;
 
-$xc-panel-header-label-padding: unset !default;
-$xc-panel-header-label-color: unset !default;
-$xc-panel-header-label-font-size: unset !default;
-$xc-panel-header-label-font-weight: unset !default;
-$xc-panel-header-label-uppercase: unset !default;
-
-$xc-panel-color: unset !default;
-$xc-panel-background-color: unset !default;
-$xc-panel-padding: unset !default;
-$xc-panel-border: unset !default;
-$xc-panel-border-radius: unset !default;
-
-$xc-sub-panel-border-color: unset !default;
-$xc-sub-panel-border-width: unset !default;
-$xc-sub-panel-border-radius: unset !default;
-$xc-sub-panel-padding: unset !default;
-$xc-sub-panel-color: unset !default;
-$xc-sub-panel-background-color: unset !default;
-
-@import 'const';
+@use '../../const' as *;
 
 :host {
     display: flex;

@@ -33,7 +33,8 @@ import { XcFormPanelDefinitionComponent } from '../xc-form-panel-definition/xc-f
 @Component({
     selector: 'xc-table-panel-definition',
     templateUrl: './xc-table-panel-definition.component.html',
-    styleUrls: ['./xc-table-panel-definition.component.scss']
+    styleUrls: ['./xc-table-panel-definition.component.scss'],
+    standalone: false
 })
 export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionComponent implements OnDestroy {
 
@@ -157,9 +158,7 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
                                         this.detailsDefinition = definitionBundle.definition;
 
                                         // get notified when details close
-                                        let observerSubscription: Subscription;
-                                        // eslint-disable-next-line prefer-const
-                                        observerSubscription = this.detailsDefinition.observerChange
+                                        const observerSubscription = this.detailsDefinition.observerChange
                                             .pipe(filter(observer => !!observer))
                                             .subscribe(observer => {
                                                 observer.definitionClosed().pipe(first()).subscribe(data => {
@@ -185,8 +184,8 @@ export class XcTablePanelDefinitionComponent extends XcFormPanelDefinitionCompon
         this.refreshEventSubscription?.unsubscribe();
         if (this.tableDefinition.triggerRefresh?.eventId) {
             this.refreshEventSubscription =
-            this.eventService.getDefinitionEventPayloadById(this.tableDefinition.triggerRefresh.eventId)
-                .subscribe(() => this.refresh());
+                this.eventService.getDefinitionEventPayloadById(this.tableDefinition.triggerRefresh.eventId)
+                    .subscribe(() => this.refresh());
         }
     }
 }

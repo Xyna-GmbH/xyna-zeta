@@ -36,8 +36,7 @@ class ComparableDescriber extends Comparable implements XoDescriber {
     }
 
     get uniqueKey(): string {
-        return (this.rtc ? this.rtc.uniqueKey : '<no RTC>') + '/' +
-               (this.fqn ? this.fqn.uniqueKey : '<no FQN>');
+        return (this.rtc ? this.rtc.uniqueKey : '<no RTC>') + '/' + (this.fqn ? this.fqn.uniqueKey : '<no FQN>');
     }
 }
 
@@ -80,7 +79,7 @@ export class XcStructureTreeDataSource extends XcBaseStructureTreeDataSource {
             const getter = dataTemplate.dataWrapper.getter;
             const dataChangeSetter = (value: any): void => {
                 // explicitly don't match with triple-equals to not consider string -> number (>>"123" -> 123<<) as change
-                // eslint-disable-next-line eqeqeq
+
                 const change = getter() != value;
                 setter(value);
                 if (change) {
@@ -286,8 +285,8 @@ export class XcStructureTreeDataSource extends XcBaseStructureTreeDataSource {
                         // function to update the child node's name and value
                         const updateChildNode = () => {
                             const from = node.limit;
-                            const to   = node.limit + insertionLength() - 1;
-                            childNode.name  = '[' + from + ']' + (to > from ? ' - [' + to + ']' : '');
+                            const to = node.limit + insertionLength() - 1;
+                            childNode.name = '[' + from + ']' + (to > from ? ' - [' + to + ']' : '');
                             childNode.value = ['{+ ' + remainingLength() + '}'];
                         };
                         // set limit to -1 for the child node to be easily distinguished between its ordinary siblings

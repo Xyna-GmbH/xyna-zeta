@@ -25,7 +25,8 @@ import { XcFormBaseInputComponent } from '../xc-form-base/xc-form-baseinput.comp
     selector: 'xc-form-input',
     templateUrl: './xc-form-input.component.html',
     styleUrls: ['../xc-form-base/xc-form-base.component.scss', './xc-form-input.component.scss'],
-    providers: [{ provide: XcFormBaseComponent, useExisting: forwardRef(() => XcFormInputComponent) }]
+    providers: [{ provide: XcFormBaseComponent, useExisting: forwardRef(() => XcFormInputComponent) }],
+    standalone: false
 })
 export class XcFormInputComponent extends XcFormBaseInputComponent {
 }

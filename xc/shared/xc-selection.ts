@@ -20,7 +20,7 @@ import { Observable, Subject } from 'rxjs';
 
 export class XcSelectionModel<T> {
 
-    private readonly _focusedSubject   = new Subject<XcSelectionModel<T>>();
+    private readonly _focusedSubject = new Subject<XcSelectionModel<T>>();
     private readonly _activatedSubject = new Subject<XcSelectionModel<T>>();
     private readonly _selectionSubject = new Subject<XcSelectionModel<T>>();
     private _selectionSet = new Set<T>();
@@ -270,10 +270,10 @@ export class XcSelectionModel<T> {
     }
 
 
-    protected searchRange<U>(pool: U[], value1: U, value2: U): {minIdx: number; maxIdx: number} {
+    protected searchRange<U>(pool: U[], value1: U, value2: U): { minIdx: number; maxIdx: number } {
         const idx1 = pool.indexOf(value1);
         const idx2 = pool.indexOf(value2);
-        return {minIdx: Math.min(idx1, idx2), maxIdx: Math.max(idx1, idx2)};
+        return { minIdx: Math.min(idx1, idx2), maxIdx: Math.max(idx1, idx2) };
     }
 }
 

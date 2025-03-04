@@ -15,25 +15,13 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { XoStartOrderResponse } from './start-order-response.model';
-import { XoArrayClass, XoObjectClass, XoProperty } from './xo-decorators';
-import { Xo, XoArray } from './xo-object';
 
+//======================================================================
+// Theme Variables (don't use within components!)
+//======================================================================
 
-@XoObjectClass(XoStartOrderResponse, 'xmcp.xact.startorder', 'StartOrderSuccessResponse')
-export class XoStartOrderSuccessResponse extends XoStartOrderResponse {
+$color-white: #fff;
+$color-black: #000;
 
-    // for compatibility with original the start order result interface,
-    // pretend the output is an array of xo's instead of an XoArray<Anytype>
-    @XoProperty()
-    output: Xo[];
-}
-
-
-@XoArrayClass(XoStartOrderSuccessResponse)
-export class XoStartOrderSuccessResponseArray extends XoArray<XoStartOrderSuccessResponse> {
-}
-
-
- 
-new XoStartOrderSuccessResponse();
+$color-white-overlay: rgba($color-white, .1);
+$color-black-overlay: rgba($color-black, .1);

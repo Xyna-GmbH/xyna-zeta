@@ -29,7 +29,8 @@ import { Subscription } from 'rxjs';
 
 @Component({
     template: '',
-    styleUrls: ['./xc-base-definition.component.scss']
+    styleUrls: ['./xc-base-definition.component.scss'],
+    standalone: false
 })
 export class XcBaseDefinitionComponent {
 
@@ -56,7 +57,7 @@ export class XcBaseDefinitionComponent {
 
     constructor() {
         // create dummy-instances such that files with definitions won't be pruned during release-build
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+         
         const baseDefinition = new XoBaseDefinition();
         const buttonDefinition = new XoButtonDefinition();
         const checkboxDefinition = new XoCheckboxDefinition();
@@ -81,7 +82,7 @@ export class XcBaseDefinitionComponent {
         const definitionListDefinition = new XoDefinitionListDefinition();
 
         const definitionWorkflow = new XoDefinitionWorkflow();
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+         
     }
 
 

@@ -25,7 +25,8 @@ import { XcButtonBaseComponent } from './xc-button-base.component';
 @Component({
     selector: 'xc-icon-button',
     templateUrl: './xc-icon-button.component.html',
-    styleUrls: ['./xc-button-base.component.scss', './xc-icon-button.component.scss']
+    styleUrls: ['./xc-button-base.component.scss', './xc-icon-button.component.scss'],
+    standalone: false
 })
 export class XcIconButtonComponent extends XcButtonBaseComponent {
 

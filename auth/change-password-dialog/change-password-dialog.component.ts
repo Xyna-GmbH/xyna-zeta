@@ -32,7 +32,8 @@ import { changePassword_translations_en_US } from './locale/change-password-tran
 
 @Component({
     templateUrl: './change-password-dialog.component.html',
-    styleUrls: ['./change-password-dialog.component.scss']
+    styleUrls: ['./change-password-dialog.component.scss'],
+    standalone: false
 })
 export class ChangePasswordDialogComponent extends XcDialogComponent {
 
