@@ -20,7 +20,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { downloadFile, MimeTypes, NOP } from '@zeta/base';
 
 import { Observable } from 'rxjs';
-import * as THREE from 'three';
+import { Color, WebGLRenderer } from 'three';
 
 
 export interface XcWebGLInteraction {
@@ -54,7 +54,7 @@ export class XcWebGLComponent implements AfterViewInit, OnDestroy {
     private _fps = 0;
     private _dt = 0;
 
-    private _renderer: THREE.WebGLRenderer;
+    private _renderer: WebGLRenderer;
     private _width: number;
     private _height: number;
 
@@ -77,7 +77,7 @@ export class XcWebGLComponent implements AfterViewInit, OnDestroy {
 
 
     ngAfterViewInit() {
-        this._renderer = new THREE.WebGLRenderer({
+        this._renderer = new WebGLRenderer({
             alpha: true,
             antialias: true,
             preserveDrawingBuffer: true
@@ -85,7 +85,7 @@ export class XcWebGLComponent implements AfterViewInit, OnDestroy {
 
         this.renderer.autoClear = false;
         this.renderer.setPixelRatio(devicePixelRatio);
-        this.renderer.setClearColor(new THREE.Color(0), 1);
+        this.renderer.setClearColor(new Color(0), 1);
 
         this.elementRef.nativeElement.appendChild(this.renderer.domElement);
         this.init();
@@ -131,7 +131,7 @@ export class XcWebGLComponent implements AfterViewInit, OnDestroy {
     }
 
 
-    get renderer(): THREE.WebGLRenderer {
+    get renderer(): WebGLRenderer {
         return this._renderer;
     }
 

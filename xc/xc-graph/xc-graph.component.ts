@@ -18,7 +18,7 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
-import * as THREE from 'three';
+import { Box2, BufferGeometry, Color, Mesh, Object3D, OrthographicCamera, RawShaderMaterial, Scene, Shape, Vector2, Vector3, WebGLRenderer } from 'three';
 
 import { AuthService } from '../../auth/auth.service';
 import { ceilBase, Constructor, dateString, dateTimeString, days, digits, downloadFile, factorMultiplicity, floorBase, fpint, MimeTypes, minutes, NOP, seconds, timeString } from '../../base';
@@ -35,7 +35,7 @@ interface Transform<S> {
 }
 
 
-class XcShaderMaterial extends THREE.RawShaderMaterial {
+class XcShaderMaterial extends RawShaderMaterial {
 
     private static readonly vertexShader = `
         precision highp float;
@@ -67,7 +67,7 @@ class XcShaderMaterial extends THREE.RawShaderMaterial {
             vertexShader: XcShaderMaterial.vertexShader,
             fragmentShader: XcShaderMaterial.fragmentShader,
             uniforms: {
-                color: { value: new THREE.Vector3(1, 1, 1) },
+                color: { value: new Vector3(1, 1, 1) },
                 style: { value: 0 }
             }
         });
@@ -93,9 +93,9 @@ class XcShaderMaterial extends THREE.RawShaderMaterial {
 }
 
 
-export class XcShaderMesh extends THREE.Mesh<THREE.BufferGeometry, XcShaderMaterial> {
+export class XcShaderMesh extends Mesh<BufferGeometry, XcShaderMaterial> {
 
-    constructor(geometry: THREE.BufferGeometry, material: XcShaderMaterial, public color?: number, public style?: number) {
+    constructor(geometry: BufferGeometry, material: XcShaderMaterial, public color?: number, public style?: number) {
         super(geometry, material);
         this.onBeforeRender = () => this.beforeRender();
     }
@@ -110,7 +110,7 @@ export class XcShaderMesh extends THREE.Mesh<THREE.BufferGeometry, XcShaderMater
 
 export class XcShaderObject extends XcWebGLObject<XcShaderMesh, XcShaderMaterial> {
 
-    constructor(material: XcShaderMaterial, parent: THREE.Object3D, color?: number, style?: number) {
+    constructor(material: XcShaderMaterial, parent: Object3D, color?: number, style?: number) {
         super(XcShaderMesh, material, parent, [XcWebGLObject.getPositionAttribute(Float32Array, 3)]);
         this.object.color = color;
         this.object.style = style;
@@ -126,7 +126,7 @@ class XcGraph extends XcShaderObject {
     constructor(
         readonly valueToPixelsTransform: Transform<number>,
         material: XcShaderMaterial,
-        parent: THREE.Object3D,
+        parent: Object3D,
         color: number,
         style: number,
         protected options: XcGraphOptions
@@ -173,12 +173,12 @@ class XcGraph extends XcShaderObject {
 
 abstract class XcNormalGraph extends XcGraph {
 
-    private v0: THREE.Vector2;
+    private v0: Vector2;
 
 
-    protected getNormalVector(v0: THREE.Vector2, v1: THREE.Vector2): THREE.Vector2 {
-        const tangent = new THREE.Vector2(v1.x - v0.x, this.valueToPixelsTransform.perform(v1.y - v0.y)).normalize();
-        const normal = new THREE.Vector2(tangent.y, this.valueToPixelsTransform.inverse(-tangent.x));
+    protected getNormalVector(v0: Vector2, v1: Vector2): Vector2 {
+        const tangent = new Vector2(v1.x - v0.x, this.valueToPixelsTransform.perform(v1.y - v0.y)).normalize();
+        const normal = new Vector2(tangent.y, this.valueToPixelsTransform.inverse(-tangent.x));
         return normal;
     }
 
@@ -186,37 +186,37 @@ abstract class XcNormalGraph extends XcGraph {
     protected updatePositionData(x0: number, x1: number, y: number, z: number, first: boolean, last: boolean): number[] {
         if (first && last) {
             return this.updatePositionDataDifference(
-                new THREE.Vector2(x0, y),
-                new THREE.Vector2(x1, y),
+                new Vector2(x0, y),
+                new Vector2(x1, y),
                 z
             );
         }
         if (first) {
-            this.v0 = new THREE.Vector2(x0, y);
+            this.v0 = new Vector2(x0, y);
             return [];
         }
         if (last) {
             return this.updatePositionDataDifference(
                 this.v0,
-                new THREE.Vector2(x1, y),
+                new Vector2(x1, y),
                 z
             );
         }
         return this.updatePositionDataDifference(
             (this.v0.clone()),
-            (this.v0 = new THREE.Vector2(x0 + (x1 - x0) / 2, y)),
+            (this.v0 = new Vector2(x0 + (x1 - x0) / 2, y)),
             z
         );
     }
 
 
-    protected abstract updatePositionDataDifference(v0: THREE.Vector2, v1: THREE.Vector2, z: number): number[];
+    protected abstract updatePositionDataDifference(v0: Vector2, v1: Vector2, z: number): number[];
 }
 
 
 class XcVoidGraph extends XcNormalGraph {
 
-    protected updatePositionDataDifference(v0: THREE.Vector2, v1: THREE.Vector2, z: number): number[] {
+    protected updatePositionDataDifference(v0: Vector2, v1: Vector2, z: number): number[] {
         return [
             ...getQuadTriangles3raw(v0.x, -Number.MAX_SAFE_INTEGER, v1.x, 0, z),
             ...getQuadTriangles3raw(v0.x, 0, v1.x, Number.MAX_SAFE_INTEGER, z)
@@ -230,7 +230,7 @@ class XcLineGraph extends XcNormalGraph {
     protected static readonly WIDTH = 2;
 
 
-    protected updatePositionDataDifference(v0: THREE.Vector2, v1: THREE.Vector2, z: number): number[] {
+    protected updatePositionDataDifference(v0: Vector2, v1: Vector2, z: number): number[] {
         const width = this.options[XcGraphOption.WIDTH] ?? XcLineGraph.WIDTH;
         const normal = this.getNormalVector(v0, v1).multiplyScalar(width / 2);
         return [
@@ -247,7 +247,7 @@ class XcLineGraph extends XcNormalGraph {
 
 class XcAreaGraph extends XcNormalGraph {
 
-    protected updatePositionDataDifference(v0: THREE.Vector2, v1: THREE.Vector2, z: number): number[] {
+    protected updatePositionDataDifference(v0: Vector2, v1: Vector2, z: number): number[] {
         return getQuadTriangles3raw(v0.x, Math.min(v0.y, 0), v1.x, Math.abs(v1.y), z);
     }
 }
@@ -282,15 +282,15 @@ class XcBarGraph extends XcGraph {
 
 abstract class XcGraphStampFont extends XcWebGLFont {
 
-    offset: THREE.Vector2;
+    offset: Vector2;
     lineWidth: number;
     lineHeight: number;
 
 
-    protected abstract createLineShape(offset: number): THREE.Shape;
+    protected abstract createLineShape(offset: number): Shape;
 
 
-    protected createShapes(text: string, size: number, alignment: XcWebGLFontAlignment, padding: number, boundingBox: THREE.Box2): THREE.Shape[] {
+    protected createShapes(text: string, size: number, alignment: XcWebGLFontAlignment, padding: number, boundingBox: Box2): Shape[] {
         const factor = XcWebGLFont.getAlignmentFactor(alignment);
         return super.createShapes(text, size, alignment, padding, boundingBox).concat(
             this.lineWidth && this.lineHeight
@@ -303,7 +303,7 @@ abstract class XcGraphStampFont extends XcWebGLFont {
     }
 
 
-    createGeometry(text: string, size: number, alignment = XcWebGLFontAlignment.CENTER, padding = 0): THREE.BufferGeometry {
+    createGeometry(text: string, size: number, alignment = XcWebGLFontAlignment.CENTER, padding = 0): BufferGeometry {
         return super.createGeometry(text, size, alignment, padding).translate(this.offset.x, this.offset.y, 0);
     }
 }
@@ -311,13 +311,13 @@ abstract class XcGraphStampFont extends XcWebGLFont {
 
 class XcGraphTimestampFont extends XcGraphStampFont {
 
-    protected createLineShape(offset: number): THREE.Shape {
+    protected createLineShape(offset: number): Shape {
         const w2 = this.lineWidth / 2;
-        return new THREE.Shape([
-            new THREE.Vector2(offset + this.offset.x - w2, -this.offset.y),
-            new THREE.Vector2(offset + this.offset.x + w2, -this.offset.y),
-            new THREE.Vector2(offset + this.offset.x + w2, -this.offset.y + this.lineHeight),
-            new THREE.Vector2(offset + this.offset.x - w2, -this.offset.y + this.lineHeight)
+        return new Shape([
+            new Vector2(offset + this.offset.x - w2, -this.offset.y),
+            new Vector2(offset + this.offset.x + w2, -this.offset.y),
+            new Vector2(offset + this.offset.x + w2, -this.offset.y + this.lineHeight),
+            new Vector2(offset + this.offset.x - w2, -this.offset.y + this.lineHeight)
         ]);
     }
 }
@@ -325,13 +325,13 @@ class XcGraphTimestampFont extends XcGraphStampFont {
 
 class XcGraphValuestampFont extends XcGraphStampFont {
 
-    protected createLineShape(offset: number): THREE.Shape {
+    protected createLineShape(offset: number): Shape {
         const h2 = this.lineHeight / 2;
-        return new THREE.Shape([
-            new THREE.Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y - h2),
-            new THREE.Vector2(offset - this.offset.x, -this.offset.y - h2),
-            new THREE.Vector2(offset - this.offset.x, -this.offset.y + h2),
-            new THREE.Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y + h2)
+        return new Shape([
+            new Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y - h2),
+            new Vector2(offset - this.offset.x, -this.offset.y - h2),
+            new Vector2(offset - this.offset.x, -this.offset.y + h2),
+            new Vector2(offset - this.offset.x - this.lineWidth, -this.offset.y + h2)
         ]);
     }
 }
@@ -415,16 +415,16 @@ export class XcGraphScene {
     private subscription: Subscription;
     private resources: XcGraphResources;
 
-    private rootViewportPosition: THREE.Vector2;
-    private rootViewportSize: THREE.Vector2;
-    private rootCamera: THREE.OrthographicCamera;
-    private rootScene: THREE.Scene;
+    private rootViewportPosition: Vector2;
+    private rootViewportSize: Vector2;
+    private rootCamera: OrthographicCamera;
+    private rootScene: Scene;
 
-    private graphViewportPosition: THREE.Vector2;
-    private graphViewportSize: THREE.Vector2;
-    private graphCamera: THREE.OrthographicCamera;
-    private graphScene: THREE.Scene;
-    private graphAnchor: THREE.Object3D;
+    private graphViewportPosition: Vector2;
+    private graphViewportSize: Vector2;
+    private graphCamera: OrthographicCamera;
+    private graphScene: Scene;
+    private graphAnchor: Object3D;
 
     private textFont: XcWebGLFont;
     private name: string;
@@ -623,13 +623,13 @@ export class XcGraphScene {
     }
 
 
-    private addMesh(mesh: THREE.Mesh, parent: THREE.Object3D): THREE.Mesh {
+    private addMesh(mesh: Mesh, parent: Object3D): Mesh {
         parent.add(mesh);
         return mesh;
     }
 
 
-    private removeMesh(mesh: THREE.Mesh): THREE.Mesh {
+    private removeMesh(mesh: Mesh): Mesh {
         if (mesh) {
             mesh.parent.remove(mesh);
             mesh.geometry.dispose();
@@ -638,7 +638,7 @@ export class XcGraphScene {
     }
 
 
-    private removeMeshes(map: Map<number, THREE.Mesh>, filter?: (value: number) => boolean) {
+    private removeMeshes(map: Map<number, Mesh>, filter?: (value: number) => boolean) {
         map.forEach((mesh, value) => {
             if (!filter || filter(value)) {
                 this.removeMesh(mesh);
@@ -867,7 +867,7 @@ export class XcGraphScene {
     }
 
 
-    private updateStamps(meshes: Map<number, THREE.Mesh>, min: number, max: number, delta: number, createMesh: (value: number) => THREE.Mesh, updateMesh: (value: number, mesh: THREE.Mesh) => void) {
+    private updateStamps(meshes: Map<number, Mesh>, min: number, max: number, delta: number, createMesh: (value: number) => Mesh, updateMesh: (value: number, mesh: Mesh) => void) {
         let value = min;
         while (value <= max) {
             updateMesh(
@@ -885,7 +885,7 @@ export class XcGraphScene {
     }
 
 
-    private updateTemporalStamps(meshes: Map<number, THREE.Mesh>, meshOffset: THREE.Vector2, delta: number, alignment: XcWebGLFontAlignment, timezoneOffset: number, createMesh: (value: number) => THREE.Mesh) {
+    private updateTemporalStamps(meshes: Map<number, Mesh>, meshOffset: Vector2, delta: number, alignment: XcWebGLFontAlignment, timezoneOffset: number, createMesh: (value: number) => Mesh) {
         let alignmentOffset: number;
         let updateFont = () => {
             updateFont = NOP;
@@ -936,7 +936,7 @@ export class XcGraphScene {
             };
             this.updateTemporalStamps(
                 this.datestampMeshes,
-                new THREE.Vector2(),
+                new Vector2(),
                 Math.max(this.deltaTime, day),
                 this.dataSource.datestampAlignment,
                 timezoneOffset,
@@ -971,7 +971,7 @@ export class XcGraphScene {
             };
             this.updateTemporalStamps(
                 this.timestampMeshes,
-                new THREE.Vector2(0, XcGraphScene.DATE_AXIS_SIZE),
+                new Vector2(0, XcGraphScene.DATE_AXIS_SIZE),
                 this.deltaTime,
                 this.dataSource.timestampAlignment,
                 timezoneOffset,
@@ -1092,7 +1092,7 @@ export class XcGraphScene {
     }
 
 
-    render(renderer: THREE.WebGLRenderer) {
+    render(renderer: WebGLRenderer) {
         // root scene
         renderer.setViewport(this.rootViewportPosition.x, this.rootViewportPosition.y, this.rootViewportSize.width, this.rootViewportSize.height);
         renderer.render(this.rootScene, this.rootCamera);
@@ -1131,18 +1131,18 @@ export class XcGraphScene {
             const Z_FAR = 128;
 
             // prepare graph scene
-            this.graphViewportPosition = new THREE.Vector2();
-            this.graphViewportSize = new THREE.Vector2();
-            this.graphCamera = new THREE.OrthographicCamera(0, 1, 1, 0, Z_NEAR, Z_FAR);
-            this.graphScene = new THREE.Scene();
-            this.graphAnchor = new THREE.Object3D();
+            this.graphViewportPosition = new Vector2();
+            this.graphViewportSize = new Vector2();
+            this.graphCamera = new OrthographicCamera(0, 1, 1, 0, Z_NEAR, Z_FAR);
+            this.graphScene = new Scene();
+            this.graphAnchor = new Object3D();
             this.graphScene.add(this.graphAnchor);
 
             // prepare view scene
-            this.rootViewportPosition = new THREE.Vector2();
-            this.rootViewportSize = new THREE.Vector2();
-            this.rootCamera = new THREE.OrthographicCamera(0, 1, 1, 0, Z_NEAR, Z_FAR);
-            this.rootScene = new THREE.Scene();
+            this.rootViewportPosition = new Vector2();
+            this.rootViewportSize = new Vector2();
+            this.rootCamera = new OrthographicCamera(0, 1, 1, 0, Z_NEAR, Z_FAR);
+            this.rootScene = new Scene();
             this.liveOffsetObject = new XcShaderObject(this.resources.shaderMaterial, this.rootScene, this.resources.liveOffsetColor);
             this.headObject = new XcShaderObject(this.resources.shaderMaterial, this.rootScene, this.resources.headColor);
             this.axesObject = new XcShaderObject(this.resources.shaderMaterial, this.rootScene, this.resources.axesColor);
@@ -1156,19 +1156,19 @@ export class XcGraphScene {
             // load datestamp font
             XcWebGLFont.load(this.resources.font, XcGraphTimestampFont).subscribe((font: XcGraphTimestampFont) => {
                 this.datestampFont = font;
-                this.datestampFont.offset = new THREE.Vector2(0, 5);
+                this.datestampFont.offset = new Vector2(0, 5);
             });
 
             // load timestamp font
             XcWebGLFont.load(this.resources.font, XcGraphTimestampFont).subscribe((font: XcGraphTimestampFont) => {
                 this.timestampFont = font;
-                this.timestampFont.offset = new THREE.Vector2(0, 5);
+                this.timestampFont.offset = new Vector2(0, 5);
             });
 
             // load valuestamp font
             XcWebGLFont.load(this.resources.font, XcGraphValuestampFont).subscribe((font: XcGraphValuestampFont) => {
                 this.valuestampFont = font;
-                this.valuestampFont.offset = new THREE.Vector2(-XcGraphScene.VALUE_AXIS_SIZE + XcGraphScene.VALUE_AXIS_OFFSET, 5);
+                this.valuestampFont.offset = new Vector2(-XcGraphScene.VALUE_AXIS_SIZE + XcGraphScene.VALUE_AXIS_OFFSET, 5);
             });
         }
     }
@@ -1301,12 +1301,12 @@ export class XcGraphScene {
     }
 
 
-    getRootViewport(): { position: THREE.Vector2; size: THREE.Vector2 } {
+    getRootViewport(): { position: Vector2; size: Vector2 } {
         return { position: this.rootViewportPosition, size: this.rootViewportSize };
     }
 
 
-    getGraphViewport(): { position: THREE.Vector2; size: THREE.Vector2 } {
+    getGraphViewport(): { position: Vector2; size: Vector2 } {
         return { position: this.graphViewportPosition, size: this.graphViewportSize };
     }
 
@@ -1434,7 +1434,7 @@ export class XcGraphComponent {
 
     private init() {
         this._initialized = true;
-        this.webGL.renderer.setClearColor(new THREE.Color(0), 0);
+        this.webGL.renderer.setClearColor(new Color(0), 0);
         this.graphResources = new XcGraphResources(0x88888d, 0x2a2a2d, 0x2a2a2d, 0x1a1a1d, 0x002c33, 0xeaeaed, 0x88888d, 0x88888d, 0x88888d, 'assets/zeta/opensans-regular.json');
         this.graphScenes.forEach(graphScene => graphScene.init(this.graphResources, this.authService.serverTimeOffset));
         this.start();
