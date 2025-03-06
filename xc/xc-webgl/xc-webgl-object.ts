@@ -15,7 +15,7 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import * as THREE from 'three';
+import { BufferAttribute, BufferGeometry, Line, Material, Mesh, Object3D, Points } from 'three';
 
 import { Constructor } from '../../base';
 
@@ -40,22 +40,22 @@ export type XcWebGLObjectAttributeType =
 
 
 export interface XcWebGLObjectAttribute {
-    attr: THREE.BufferAttribute;
+    attr: BufferAttribute;
     name: XcWebGLObjectAttributeName;
     type: XcWebGLObjectAttributeType;
     size: number;
 }
 
 
-export class XcWebGLObject<S extends THREE.Points | THREE.Line | THREE.Mesh, R extends THREE.Material> {
+export class XcWebGLObject<S extends Points | Line | Mesh, R extends Material> {
     private readonly _object: S;
     private readonly _material: R;
-    private readonly _parent: THREE.Object3D;
+    private readonly _parent: Object3D;
     private readonly _attributes = new Map<XcWebGLObjectAttributeName, XcWebGLObjectAttribute>();
 
 
     static getAttribute(name: XcWebGLObjectAttributeName, type: XcWebGLObjectAttributeType, size: number, data?: any): XcWebGLObjectAttribute {
-        return {name, type, size, attr: new THREE.BufferAttribute(new type(data), size)};
+        return {name, type, size, attr: new BufferAttribute(new type(data), size)};
     }
 
 
@@ -74,12 +74,12 @@ export class XcWebGLObject<S extends THREE.Points | THREE.Line | THREE.Mesh, R e
     }
 
 
-    constructor(clazz: Constructor<S>, material: R, parent: THREE.Object3D, attributes: XcWebGLObjectAttribute[]) {
+    constructor(clazz: Constructor<S>, material: R, parent: Object3D, attributes: XcWebGLObjectAttribute[]) {
         if (clazz) {
             this._material = material;
             this._parent = parent;
             // create mesh
-            this._object = new clazz(new THREE.BufferGeometry(), material);
+            this._object = new clazz(new BufferGeometry(), material);
             this._object.matrixAutoUpdate = false;
             this.show();
             // set attributes
@@ -103,12 +103,12 @@ export class XcWebGLObject<S extends THREE.Points | THREE.Line | THREE.Mesh, R e
     }
 
 
-    get parent(): THREE.Object3D {
+    get parent(): Object3D {
         return this._parent;
     }
 
 
-    get geometry(): THREE.BufferGeometry {
+    get geometry(): BufferGeometry {
         return this.object.geometry;
     }
 
